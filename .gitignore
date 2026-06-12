@@ -36,6 +36,8 @@
 
 # Visual Studio cache directory
 .vs/
+# Rider (for sym43)
+.idea/
 
 # Gradle cache directory
 .gradle/

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 업그레이드에 들어가는 광물의 재료량을 의미.<br/>
+/// 업그레이드에 들어가는 광물의 재료량을 의미.<br/><br/>
 /// 예시)<br/>
 /// [업그레이드]<br/>
 /// 채굴 속도 + 1<br/>

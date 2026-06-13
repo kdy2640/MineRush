@@ -10,7 +10,6 @@ public enum StatType
     
     CriticalChance,
     CriticalMultiplier,
-    MoveSpeed,
 }
 /// <summary>
 /// 스탯이 더하기인지 곱하기인지 나타냄.

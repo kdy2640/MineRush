@@ -8,8 +8,7 @@ public class RuntimeStat
     public float MiningPower { get; private set; } = 1;
     public float MiningSpeed { get; private set; } = 1;
     public float CriticalChance { get; private set; } = 0;
-    public float CriticalMultiplier { get; private set; } = 1.5f;
-    public float MoveSpeed { get; private set; } = 1;
+    public float CriticalMultiplier { get; private set; } = 2f;
     // 여기에 base값이 박혀있는 이유.
     // 어차피 계산기에서 객체 생성하고 값 뱉어주고 객체 없앰.
     // TODO 나중에 곡갱이 종류를 추가해서 base 값을 바꾸고 싶으면 고치기
@@ -34,10 +33,6 @@ public class RuntimeStat
 
             case StatType.CriticalMultiplier:
                 CriticalMultiplier = ApplyValue(CriticalMultiplier, modifier.modifierType, amount);
-                break;
-
-            case StatType.MoveSpeed:
-                MoveSpeed = ApplyValue(MoveSpeed, modifier.modifierType, amount);
                 break;
         }
     }

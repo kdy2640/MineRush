@@ -4,12 +4,18 @@ using UnityEngine;
 /// 게임 루프에서 실제로 사용하는 최종 스탯.
 /// StatCalculator가 업그레이드 효과를 적용한 결과값이다.
 /// </summary>
+[System.Serializable]
 public class RuntimeStat
 {
-    public float MiningPower { get; private set; } = 1;
-    public float MiningSpeed { get; private set; } = 1;
-    public float CriticalChance { get; private set; } = 0;
-    public float CriticalMultiplier { get; private set; } = 2f;
+    [SerializeField] private float miningPower = 1;
+    [SerializeField] private float miningSpeed = 1;
+    [SerializeField] private float criticalChance = 0;
+    [SerializeField] private float criticalMultiplier = 2f;
+
+    public float MiningPower => miningPower;
+    public float MiningSpeed => miningSpeed;
+    public float CriticalChance => criticalChance;
+    public float CriticalMultiplier => criticalMultiplier;
 
     // 현재는 기본 스탯 값을 RuntimeStat 내부에 고정해 둔다.
     // 나중에 곡괭이 종류별 기본 스탯이 필요해지면 생성자나 별도 데이터로 기본값을 주입하도록 수정한다.
@@ -20,19 +26,19 @@ public class RuntimeStat
         switch (modifier.statType)
         {
             case StatType.MiningPower:
-                MiningPower = ApplyValue(MiningPower, modifier.modifierType, amount);
+                miningPower = ApplyValue(miningPower, modifier.modifierType, amount);
                 break;
 
             case StatType.MiningSpeed:
-                MiningSpeed = ApplyValue(MiningSpeed, modifier.modifierType, amount);
+                miningSpeed = ApplyValue(miningSpeed, modifier.modifierType, amount);
                 break;
 
             case StatType.CriticalChance:
-                CriticalChance = ApplyValue(CriticalChance, modifier.modifierType, amount);
+                criticalChance = ApplyValue(criticalChance, modifier.modifierType, amount);
                 break;
 
             case StatType.CriticalMultiplier:
-                CriticalMultiplier = ApplyValue(CriticalMultiplier, modifier.modifierType, amount);
+                criticalMultiplier = ApplyValue(criticalMultiplier, modifier.modifierType, amount);
                 break;
         }
     }

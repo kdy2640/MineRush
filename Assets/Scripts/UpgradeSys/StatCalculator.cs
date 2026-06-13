@@ -10,8 +10,19 @@ public class StatCalculator
     public RuntimeStat Calculate(List<UpgradeState> upgradeStates)
     {
         RuntimeStat calculatedStat = new RuntimeStat();
+
+        if (upgradeStates == null)
+        {
+            return calculatedStat;
+        }
+
         foreach (UpgradeState state in upgradeStates)
         {
+            if (state?.data?.statModifiers == null)
+            {
+                continue;
+            }
+
             foreach (StatModifier modifier in state.data.statModifiers)
             {
                 calculatedStat.Apply(modifier, state.level);

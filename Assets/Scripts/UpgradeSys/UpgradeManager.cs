@@ -5,8 +5,8 @@ public class UpgradeManager : MonoBehaviour
 {
     // 현재 보유한 업그레이드 상태 목록.
     // UI에서 직접 보여줘야 한다면 public으로 열기보다 읽기 전용 프로퍼티를 추가하는 쪽을 우선 고려한다.
-    private List<UpgradeState> upgradeStates;
-    private RuntimeStat runtimeStat;
+    [SerializeField] private List<UpgradeState> upgradeStates = new();
+    [SerializeField] private RuntimeStat runtimeStat;
     private StatCalculator statCalculator;
 
     private void Awake()
@@ -21,8 +21,19 @@ public class UpgradeManager : MonoBehaviour
         return runtimeStat;
     }
 
+    [ContextMenu("Recalculate Runtime Stat")]
+    private void RecalculateRuntimeStatForTest()
+    {
+        RecalculateRuntimeStat();
+    }
+
     private void RecalculateRuntimeStat()
     {
+        if (statCalculator == null)
+        {
+            statCalculator = new StatCalculator();
+        }
+
         runtimeStat = statCalculator.Calculate(upgradeStates);
     }
 

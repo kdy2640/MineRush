@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4426279140747652789}
   - component: {fileID: 231126474726518927}
+  - component: {fileID: 4563848326302898993}
   - component: {fileID: 3968251603436049950}
+  - component: {fileID: 9083949984633655817}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -45,6 +47,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ced73dad9655049ba090937b10a1fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+--- !u!114 &4563848326302898993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4075179859343089073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30ad574be450f214aa380ed4da4f0d42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OreManager
+  debugOres: []
 --- !u!114 &3968251603436049950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,3 +72,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af4c9c37f29a12b4e9ebc29b16ab1fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneController
+--- !u!114 &9083949984633655817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4075179859343089073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 399d9a6783748b248b7cc11b134092e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeManager
+  upgradeStates:
+  - data: {fileID: 11400000, guid: 9571adb7993bc4b498c68ba939f72013, type: 2}
+    level: 0
+  runtimeStat:
+    miningPower: 1
+    miningSpeed: 1
+    criticalChance: 0
+    criticalMultiplier: 2

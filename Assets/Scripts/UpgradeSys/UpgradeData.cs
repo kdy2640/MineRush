@@ -33,7 +33,7 @@ public class UpgradeData : ScriptableObject
                 oreAmount.amount * Mathf.Pow(amountMultiplier, level)
             );
 
-            //result.Add(new OreAmount(oreAmount.oreType, scaledAmount));
+            result.Add(new OreAmount(oreAmount.oreType, scaledAmount));
         }
         return result;
     }

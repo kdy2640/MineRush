@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1729209109783467696}
   - component: {fileID: 6314816021404195759}
   m_Layer: 5
-  m_Name: UI_OreVisualizer
+  m_Name: UI_OreAmountVisualizer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

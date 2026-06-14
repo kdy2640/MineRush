@@ -9,6 +9,8 @@ public enum SceneType
     Upgrade,
     GameLoop
 }
+// 씬을 전환하기 위한 메소드
+// GameManager.Instance.Scene.ChangeScene(SceneType)을 통해 실행해주세요.
 public class SceneController : MonoBehaviour
 {
     private Dictionary<SceneType, SceneBase> scenes;

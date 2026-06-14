@@ -28,7 +28,7 @@ public class UI_OrePanel : MonoBehaviour
         for (int i = 0; i < oreTypeCount; i++)
         {
             OreType oreType = (OreType)i;
-            int nowAmount = manager.oreManager.GetAmount(oreType);
+            int nowAmount = manager.OreManager.GetAmount(oreType);
 
             oreUIs[i].gameObject.SetActive(true);
             oreUIs[i].SetOre(new OreAmount(oreType, nowAmount));

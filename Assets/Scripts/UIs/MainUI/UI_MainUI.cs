@@ -11,12 +11,12 @@ public class UI_MainUI : MonoBehaviour
     void Start()
     {
         manager = GameManager.Instance;
-        manager.oreManager.SubscribeOreChange(UpdateOre);
+        manager.OreManager.SubscribeOreChange(UpdateOre);
         UpdateOre();
     }
     private void OnDestroy()
     {
-        manager.oreManager.UnSubscribeOreChange(UpdateOre);
+        manager.OreManager.UnSubscribeOreChange(UpdateOre);
     }
     public void UpdateOre()
     {

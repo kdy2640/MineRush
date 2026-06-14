@@ -655,6 +655,18 @@ PrefabInstance:
       propertyPath: m_Spacing.x
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 1930631731924804526, guid: 52caabc04f183d04ca409382700fb568, type: 3}
+      propertyPath: m_CellSize.x
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 1930631731924804526, guid: 52caabc04f183d04ca409382700fb568, type: 3}
+      propertyPath: m_CellSize.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 1930631731924804526, guid: 52caabc04f183d04ca409382700fb568, type: 3}
+      propertyPath: m_Padding.m_Left
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 1787779133571255523, guid: 52caabc04f183d04ca409382700fb568, type: 3}

@@ -7,15 +7,42 @@ using UnityEngine;
 [System.Serializable]
 public class RuntimeStat
 {
-    [SerializeField] private float miningPower = 1;
-    [SerializeField] private float miningSpeed = 1;
-    [SerializeField] private float criticalChance = 0;
+    // 광석 최대 티어. 내부 계산은 float로 하지만, 실제 사용 시에는 정수 티어로 변환. 
+    [SerializeField] private float maxOreTier = 1f;
+
+    // 1회 채굴/공격 시 적용되는 기본 채굴력. 
+    [SerializeField] private float miningPower = 1f;
+
+    // 1초에 공격할 횟수
+    [SerializeField] private float miningSpeed = 1f;
+
+    // 채굴 범위.   1~
+    [SerializeField] private float miningRadius = 1f;
+
+    // 치명타 확률.범위 [0,1]
+    // 예: 0.1 = 10%, 0.25 = 25%, 1 = 100%.
+    [SerializeField] private float criticalChance = 0f;
+
+    // 치명타 대미지 배율.
+    // 예 : 2 = 200% 대미지, 1.5 = 150% 대미지.
     [SerializeField] private float criticalMultiplier = 2f;
 
+    // 추가 지속시간.
+    // 예: 1.5 = 지속시간 1.5초 증가.
+    [SerializeField] private float extraDuration = 0f;
+
+    // 보상 배율.
+    // 예: 1 = 기본 보상, 1.5 = 보상 150%, 2 = 보상 200%.
+    [SerializeField] private float rewardMultiplier = 1f;
+
+    public int MaxOreTier => Mathf.Max(1, Mathf.RoundToInt(maxOreTier));
     public float MiningPower => miningPower;
     public float MiningSpeed => miningSpeed;
+    public float MiningRadius => miningRadius;
     public float CriticalChance => criticalChance;
     public float CriticalMultiplier => criticalMultiplier;
+    public float ExtraDuration => extraDuration;
+    public float RewardMultiplier => rewardMultiplier;
 
     // 현재는 기본 스탯 값을 RuntimeStat 내부에 고정해 둔다.
     // 나중에 곡괭이 종류별 기본 스탯이 필요해지면 생성자나 별도 데이터로 기본값을 주입하도록 수정한다.
@@ -25,12 +52,20 @@ public class RuntimeStat
 
         switch (modifier.statType)
         {
+            case StatType.MaxOreTier:
+                maxOreTier = ApplyValue(maxOreTier, modifier.modifierType, amount);
+                break;
+
             case StatType.MiningPower:
                 miningPower = ApplyValue(miningPower, modifier.modifierType, amount);
                 break;
 
             case StatType.MiningSpeed:
                 miningSpeed = ApplyValue(miningSpeed, modifier.modifierType, amount);
+                break;
+
+            case StatType.MiningRadius:
+                miningRadius = ApplyValue(miningRadius, modifier.modifierType, amount);
                 break;
 
             case StatType.CriticalChance:
@@ -40,6 +75,14 @@ public class RuntimeStat
             case StatType.CriticalMultiplier:
                 criticalMultiplier = ApplyValue(criticalMultiplier, modifier.modifierType, amount);
                 break;
+
+            case StatType.ExtraDuration:
+                extraDuration = ApplyValue(extraDuration, modifier.modifierType, amount);
+                break;
+
+            case StatType.RewardMultiplier:
+                rewardMultiplier = ApplyValue(rewardMultiplier, modifier.modifierType, amount);
+                break;
         }
     }
 
@@ -48,7 +91,10 @@ public class RuntimeStat
         return type switch
         {
             ModifierType.Add => current + amount,
-            ModifierType.Multiply => current * amount,
+
+            // 주의: value = 0.1f, level = 3이면 current * 1.3f
+            ModifierType.Multiply => current * (1f + amount),
+
             _ => current
         };
     }

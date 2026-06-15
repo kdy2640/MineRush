@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public OreManager OreManager { get; private set; }
     public SceneController Scene { get; private set; }
     public UpgradeManager Upgrade { get; private set; }
+    public GameLoopManager GameLoop { get; private set; }
 
     private void Awake()
     {
@@ -26,5 +27,6 @@ public class GameManager : MonoBehaviour
         OreManager = GetComponent<OreManager>();
         Scene = GetComponent<SceneController>();
         Upgrade = GetComponent<UpgradeManager>();
+        GameLoop = GetComponent<GameLoopManager>();
     }
 }

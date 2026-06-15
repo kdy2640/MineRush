@@ -4,7 +4,8 @@ public enum OreType
     None = -1,
     Copper,
     Iron,
-    Tin,
+    Gold,
+    Diamond,
     Length
 }
 

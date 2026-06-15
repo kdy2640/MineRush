@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class MiningInput : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
-    [SerializeField] private GameObject rangeIndicatorPrefab;
+    [SerializeField] private RangeIndicator rangeIndicator;
 
     [Header("테스트용 범위")]
     [SerializeField] private float miningRange = 1f;
@@ -19,30 +19,20 @@ public class MiningInput : MonoBehaviour
     }
     private void Update()
     {
-        if (!Mouse.current.leftButton.wasPressedThisFrame)
-            return;
-
         Vector2 worldPos =
             mainCamera.ScreenToWorldPoint(
                 Mouse.current.position.ReadValue());
 
-        ShowRange(worldPos);
+        rangeIndicator.transform.position = worldPos;
 
-        DetectOre(worldPos);
+        rangeIndicator.Initialize(miningRange);
+
+        if (Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            DetectOre(worldPos);
+        }
     }
 
-    private void ShowRange(Vector2 position)
-    {
-        GameObject obj = Instantiate(
-            rangeIndicatorPrefab,
-            position,
-            Quaternion.identity);
-
-        RangeIndicator indicator =
-            obj.GetComponent<RangeIndicator>();
-
-        indicator.Initialize(miningRange);
-    }
     private void DetectOre(Vector2 position)
     {
         Collider2D[] hits =
@@ -55,7 +45,7 @@ public class MiningInput : MonoBehaviour
 
         foreach (Collider2D hit in hits)
         {
-            Debug.Log($"광석 감지 : {hit.name}");
+            Debug.Log(hit.name);
         }
     }
 

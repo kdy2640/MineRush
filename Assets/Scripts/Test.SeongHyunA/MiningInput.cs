@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,7 @@ public class MiningInput : MonoBehaviour
     [Header("광석 레이어")]
     [SerializeField] private LayerMask oreLayer;
 
+    [SerializeField] private StageRewardPanel stageRewardPanel;
     private void Awake()
     {
         if (mainCamera == null)
@@ -24,7 +26,6 @@ public class MiningInput : MonoBehaviour
                 Mouse.current.position.ReadValue());
 
         rangeIndicator.transform.position = worldPos;
-
         rangeIndicator.Initialize(miningRange);
 
         if (Mouse.current.leftButton.wasPressedThisFrame)
@@ -43,10 +44,20 @@ public class MiningInput : MonoBehaviour
 
         Debug.Log($"감지된 광석 수 : {hits.Length}");
 
+        List<OreAmount> rewards = new();
+
         foreach (Collider2D hit in hits)
         {
-            Debug.Log(hit.name);
-        }
-    }
+            Ore ore = hit.GetComponent<Ore>();
 
+            if (ore == null) continue;
+
+            ore.PlayBreakWeen();
+
+            rewards.Add(new OreAmount(ore.OreType, 1));
+           
+        }
+        GameManager.Instance.OreManager.AddRange(rewards);
+
+    }
 }

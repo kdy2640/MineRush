@@ -19,6 +19,6 @@ MonoBehaviour:
     amount: 15
   amountMultiplier: 1.2
   statModifiers:
-  - statType: 0
+  - statType: 4
     modifierType: 0
     value: 0.4

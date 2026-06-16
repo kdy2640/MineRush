@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3968251603436049950}
   - component: {fileID: 9083949984633655817}
   - component: {fileID: 5262340494953791802}
+  - component: {fileID: -7716375607518359727}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -111,3 +112,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManagerScene
   spawnerPrefab: {fileID: 5450302403108949330, guid: d31dbf36f761b184f9217be623bae0f8, type: 3}
   loopDuration: 30
+--- !u!114 &-7716375607518359727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4075179859343089073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5eea2c5ade66424696f8ce9b3fd0d51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillManager

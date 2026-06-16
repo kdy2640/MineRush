@@ -104,7 +104,21 @@ public class UpgradeManager : MonoBehaviour
     
         state.level++;
         RecalculateRuntimeStat();
+        if (state.data.skill != null)
+        {
+            GameManager.Instance.SkillManager.SetSkillLevel(state.data.skill.id, state.level);
+        }
     
         return true;
+    }
+
+    /// <summary>
+    /// 노드에서 새로운 노드가 열렸을 때 그게 스킬 업그레이드면 스킬매니저에 등록 및 스폰하는 함수
+    /// 만약 그런방식이 아니라 처음부터 노드가 싹 다 열려있는거면 그냥 모든 스킬 스킬매니저에 0레벨로 등록하면 됨.
+    /// </summary>
+    public void RegisterSkillWhenUnlockNode(UpgradeState state)
+    {
+        GameManager.Instance.SkillManager.RegisterSkill(state.data.skill);
+        GameManager.Instance.SkillManager.SetSkillLevel(state.data.skill.id, 0);
     }
 }

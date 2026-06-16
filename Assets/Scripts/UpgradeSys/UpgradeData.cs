@@ -17,6 +17,7 @@ public class UpgradeData : ScriptableObject
     public float amountMultiplier = 1.2f;
 
     public List<StatModifier> statModifiers;
+    public SkillBase skill;
 
     /// <summary>
     /// 다음 레벨에 따라 필요한 재료량을 뱉어주는 함수.

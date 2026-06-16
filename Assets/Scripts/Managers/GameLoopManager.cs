@@ -8,13 +8,17 @@ public class GameLoopManager : MonoBehaviour
     [SerializeField] private float loopDuration = 30f;
 
     private StoneSpawner spawner;
+    private GameLoopEventManager eventManager;
     private float timer;
     private bool isRunning;
 
     public float Timer { get { return timer; } }
+    public bool IsRunning => isRunning;
+    public IGameLoopEventSubscribable Events => eventManager;
 
     private void Awake()
     { 
+        eventManager = new GameLoopEventManager();
     } 
 
     public void StartLoop()

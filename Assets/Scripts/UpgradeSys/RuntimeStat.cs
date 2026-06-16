@@ -92,7 +92,7 @@ public class RuntimeStat
         {
             ModifierType.Add => current + amount,
 
-            // 주의: value = 0.1f, level = 3이면 current * 1.3f
+            // amount 0.2 -> 1.2배
             ModifierType.Multiply => current * (1f + amount),
 
             _ => current

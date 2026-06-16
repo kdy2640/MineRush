@@ -6,11 +6,14 @@ using UnityEngine;
 /// </summary>
 public enum StatType
 {
-    MiningPower,
-    MiningSpeed,
-
-    CriticalChance,
-    CriticalMultiplier,
+    MaxOreTier, 
+    MiningPower, 
+    MiningSpeed, 
+    MiningRadius, 
+    CriticalChance, 
+    CriticalMultiplier, 
+    ExtraDuration, 
+    RewardMultiplier, 
 }
 
 /// <summary>

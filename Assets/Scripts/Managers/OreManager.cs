@@ -56,7 +56,7 @@ public class OreManager : MonoBehaviour
         ores[type] += amount;
     }
 
-    public void AddRange(List<OreAmount> rewards)
+    public void AddRange(IReadOnlyList<OreAmount> rewards)
     {
         foreach (var reward in rewards)
         {

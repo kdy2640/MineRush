@@ -6,10 +6,11 @@ public class GameLoopScene : SceneBase
     public override void Enter()
     {
         // RuntimeStat 준비
+        //
+        GameManager.Instance.GameLoop.StartLoop();
     }
 
     public override void Exit()
-    {
-        // 게임 결과 정산
+    { 
     }
 }

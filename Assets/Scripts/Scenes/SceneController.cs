@@ -16,6 +16,7 @@ public class SceneController : MonoBehaviour
     private Dictionary<SceneType, SceneBase> scenes;
     private SceneBase currentScene;
 
+    public SceneType currenSceneType => currentScene.SceneType;
     private void Awake()
     {
         scenes = new Dictionary<SceneType, SceneBase>

@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 4563848326302898993}
   - component: {fileID: 3968251603436049950}
   - component: {fileID: 9083949984633655817}
+  - component: {fileID: 5262340494953791802}
+  - component: {fileID: -7716375607518359727}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -88,7 +90,37 @@ MonoBehaviour:
   - data: {fileID: 11400000, guid: 9571adb7993bc4b498c68ba939f72013, type: 2}
     level: 0
   runtimeStat:
+    maxOreTier: 1.1
     miningPower: 1
     miningSpeed: 1
+    miningRadius: 1
     criticalChance: 0
     criticalMultiplier: 2
+    extraDuration: 0
+    rewardMultiplier: 1
+--- !u!114 &5262340494953791802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4075179859343089073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8653f44969cb2342ba1914e04e9142e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManagerScene
+  spawnerPrefab: {fileID: 5450302403108949330, guid: d31dbf36f761b184f9217be623bae0f8, type: 3}
+  loopDuration: 30
+--- !u!114 &-7716375607518359727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4075179859343089073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5eea2c5ade66424696f8ce9b3fd0d51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillManager

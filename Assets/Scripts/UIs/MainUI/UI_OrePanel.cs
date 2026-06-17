@@ -8,7 +8,7 @@ public class UI_OrePanel : MonoBehaviour
     private GameManager manager;
     private readonly List<UI_OreAmountVisualizer> oreUIs = new();
 
-    private void Awake()
+    private void Start()
     {
         manager = GameManager.Instance;
     }

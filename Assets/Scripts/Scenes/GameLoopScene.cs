@@ -5,12 +5,14 @@ public class GameLoopScene : SceneBase
 
     public override void Enter()
     {
-        // RuntimeStat ¡ÿ∫Ò
+        // RuntimeStat ???
         //
+        GameManager.Instance.SkillManager.ApplySkillsBeforeLoopSceneStart();
         GameManager.Instance.GameLoop.StartLoop();
     }
 
     public override void Exit()
     { 
+        GameManager.Instance.SkillManager.DeactivateSkillsBeforeLoopSceneExit();
     }
 }

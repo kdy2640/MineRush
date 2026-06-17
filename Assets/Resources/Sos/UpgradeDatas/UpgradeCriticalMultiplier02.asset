@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f17ab4c7a91bd145af47ff207404d92, type: 3}
-  m_Name: UpgradeCriticalMultiplier01
+  m_Name: UpgradeCriticalMultiplier02
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
-  id: UpgradeCriticalMultiplier01
-  displayName: "\uD06C\uB9AC\uD2F0\uCEEC \uACF5\uACA9 \uBC30\uC728 \uC99D\uAC00 I"
+  id: UpgradeCriticalMultiplier02
+  displayName: "\uD06C\uB9AC\uD2F0\uCEEC \uACF5\uACA9 \uBC30\uC728 \uC99D\uAC00 II"
   baseOreAmounts:
   - oreType: 0
-    amount: 30
-  amountMultiplier: 1.3
+    amount: 15
+  - oreType: 1
+    amount: 25
+  amountMultiplier: 1.2
   statModifiers:
-  - statType: 3
+  - statType: 5
     modifierType: 1
-    value: 1.05
+    value: 0.1

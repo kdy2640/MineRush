@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f17ab4c7a91bd145af47ff207404d92, type: 3}
-  m_Name: UpgradeMiningPower02
+  m_Name: UpgradeCriticalChance02
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
-  id: UpgradeMiningPower02
-  displayName: "\uCC44\uAD74 \uACF5\uACA9\uB825 \uC99D\uAC00 II"
+  id: UpgradeCriticalChance02
+  displayName: "\uD06C\uB9AC\uD2F0\uCEEC \uD655\uB960 \uC99D\uAC00 II"
   baseOreAmounts:
   - oreType: 1
     amount: 15
   amountMultiplier: 1.2
   statModifiers:
-  - statType: 0
+  - statType: 4
     modifierType: 0
-    value: 1.2
+    value: 0.4

@@ -44,7 +44,7 @@ public class MiningInput : MonoBehaviour
 
         Debug.Log($"감지된 광석 수 : {hits.Length}");
 
-        List<OreAmount> rewards = new();
+        List<OreAmount> rewards = new List<OreAmount>();
 
         foreach (Collider2D hit in hits)
         {
@@ -52,12 +52,12 @@ public class MiningInput : MonoBehaviour
 
             if (ore == null) continue;
 
+            stageRewardPanel.AddReward(ore.OreType, 1);
+
             ore.PlayBreakWeen();
 
-            rewards.Add(new OreAmount(ore.OreType, 1));
-           
         }
-        GameManager.Instance.OreManager.AddRange(rewards);
+        
 
     }
 }

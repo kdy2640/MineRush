@@ -12,9 +12,18 @@ public class StoneActor : MonoBehaviour
     public StoneDataSO DataSO => dataSo;
 
     private GameManager manager;
+    private HPHandler hpHandler;
     private void Awake()
     {
         manager = GameManager.Instance;
+        hpHandler = GetComponent<HPHandler>();
+        hpHandler.SubscribeHPUpdate(Mine);
+        hpHandler.SubscribeDying(Die);
+    }
+    private void OnDestroy()
+    {
+        hpHandler.UnSubscribeHPUpdate(Mine);
+        hpHandler.UnSubscribeDying(Die); 
     }
     public void SetData(StoneDataSO data, Vector2Int gridPos)
     {
@@ -26,10 +35,11 @@ public class StoneActor : MonoBehaviour
     {
         GameObject go = GameObject.Instantiate(dataSo.SolidStonePrefab,transform);
         go.transform.localPosition = Vector3.zero;
+        hpHandler.SetMaxHealth(dataSo.MaxHealth);
     } 
-    public void Mine(float damage)
+    public void Mine(float nowHP)
     {
-        Die();
+        Debug.Log($"Stone Mined : Name[{gameObject.name}], nowHP[{nowHP}]"); 
     }
 
     private void Die()

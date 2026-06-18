@@ -6,14 +6,17 @@ using UnityEngine;
 /// </summary>
 public enum StatType
 {
-    MaxOreTier, 
     MiningPower, 
     MiningSpeed, 
     MiningRadius, 
     CriticalChance, 
     CriticalMultiplier, 
     ExtraDuration, 
-    RewardMultiplier, 
+    RewardMultiplier,
+    MaxOreTier,
+    StoneCount,
+    FragChance,
+    PureChance 
 }
 
 /// <summary>
@@ -42,4 +45,5 @@ public class StatModifier
     public StatType statType;
     public ModifierType modifierType;
     public float value;
-}
+    public OreType oreType;
+} 

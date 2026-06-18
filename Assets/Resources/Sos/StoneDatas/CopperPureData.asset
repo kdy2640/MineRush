@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d58b24700aa45664baff33112d1e3a6a, type: 3}
+  m_Name: CopperPureData
+  m_EditorClassIdentifier: Assembly-CSharp::StoneDataSO
+  id: 2
+  tier: 1
+  maxHealth: 10
+  stoneType: 2
+  oreType: 0
+  rewardList:
+  - oreType: 0
+    amount: 5
+  solidStonePrefab: {fileID: 8830104387258239869, guid: 228975ba3e109314891f74fd1d904313, type: 3}

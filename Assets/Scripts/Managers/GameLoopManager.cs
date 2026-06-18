@@ -2,19 +2,23 @@ using UnityEngine;
 
 public class GameLoopManager : MonoBehaviour
 {
-    private bool IsGameLoopScene => GameManager.Instance.Scene.currenSceneType == SceneType.GameLoop;
-    [SerializeField] private StoneSpawner spawnerPrefab; 
-
-    [SerializeField] private float loopDuration = 30f;
-
-    private StoneSpawner spawner;
+    private bool IsGameLoopScene => GameManager.Instance.Scene.currenSceneType == SceneType.GameLoop; 
+    [SerializeField] private float loopDuration = 20f;
+     
+    private GameLoopEventManager eventManager;
+    private MiningCalculator calculator;
     private float timer;
     private bool isRunning;
 
     public float Timer { get { return timer; } }
+    public bool IsRunning => isRunning;
+    public IGameLoopEventSubscribable Events => eventManager;
+    public MiningCalculator MiningCalculator => calculator;
 
     private void Awake()
     { 
+        eventManager = new GameLoopEventManager();
+        calculator = new MiningCalculator();
     } 
 
     public void StartLoop()
@@ -23,9 +27,7 @@ public class GameLoopManager : MonoBehaviour
         timer = loopDuration;
         isRunning = true;
 
-        spawner = GameObject.Instantiate(spawnerPrefab);
-        spawner.transform.position = Vector3.zero;
-        spawner.RandomSpawn(10);
+        eventManager.Invoke(GameLoopEventType.LoopStarted);
     }
 
     private void Update()

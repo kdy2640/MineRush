@@ -39,3 +39,4 @@ public class UpgradeData : ScriptableObject
         return result;
     }
 }
+ 

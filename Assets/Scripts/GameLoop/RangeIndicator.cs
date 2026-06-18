@@ -5,8 +5,7 @@ public class RangeIndicator : MonoBehaviour
 {
     public void Initialize(float range)
     {
-        transform.localScale =
-            Vector3.one * range * 2f;
+        transform.localScale = Vector3.one * range * 2f;
     }
 
 }

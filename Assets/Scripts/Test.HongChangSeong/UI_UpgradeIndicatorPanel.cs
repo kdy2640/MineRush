@@ -18,6 +18,10 @@ using UnityEngine;
 
 //없으면 없는 걸로 출력하고, 있으면 스킬이라는 뜻이므로 스킬 방식으로 출력하게 한다?
 
+//0619 : 작업사항 기록용으로 남겨두고 일단 잠정보류. 프로퍼티 제공용 스크립트는 UpgradePanelIndicator 스크립트로 이전함.
+
+//솔직히 근데, 굳이 프로퍼티로 했어야 했을까? 그냥 일반 필드로 했어도 됐을 것 같은데...
+
 public class UI_UpgradeIndicatorPanel : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI upgradeNameText;
@@ -27,17 +31,6 @@ public class UI_UpgradeIndicatorPanel : MonoBehaviour
 
     //[SerializeField] private UpgradeData upgradeData;
 
-
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     //챗gpt가 알려준 버전은 메서드가 총 3개 있다.
     //1. SetData : SO Assest에서 이름이랑 레벨 정보를 뽑아와서 텍스트 칸에 전달.
@@ -119,7 +112,7 @@ public class UI_UpgradeIndicatorPanel : MonoBehaviour
     {
         //위와 대체로 비슷하나, statModifier에서 스탯종류와 값을 추출해야 한다.
 
-
+        int temp = 1;
 
     }
 }

@@ -121,4 +121,20 @@ public class UpgradeManager : MonoBehaviour
         GameManager.Instance.SkillManager.RegisterSkill(state.data.skill);
         GameManager.Instance.SkillManager.SetSkillLevel(state.data.skill.id, 0);
     }
+    
+    public bool HasState(UpgradeData data)
+    {
+        if (data == null)
+        {
+            Debug.Log("전달받은 데이터so가 비어있음.");
+            return false;
+        }
+
+        if (string.IsNullOrEmpty(data.id))
+        {
+            Debug.Log("전달받은 데이터so의 id가 비어있음");
+            return false;
+        }
+        return upgradeStateMap.ContainsKey(data.id);
+    }
 }

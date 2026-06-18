@@ -7,7 +7,25 @@ using UnityEngine;
 [System.Serializable]
 public class RuntimeStat
 {
+    public RuntimeStat()
+    {
+        Initialize();
+    }
 
+    private void Initialize()
+    {
+        miningPower = 1f;
+        miningSpeed = 1f;
+        miningRadius = 1f;
+        criticalChance = 0f;
+        criticalMultiplier = 2f;
+        extraDuration = 0f;
+        rewardMultiplier = 1f;
+        maxOreTier = 0f;
+        stoneCount = 0f;
+        OreFragmentChanceArr = new float[(int)OreType.Length];
+        OrePureChanceArr = new float[(int)OreType.Length];
+    }
     [Header("채굴 스탯")]
     // 1회 채굴/공격 시 적용되는 기본 채굴력. 
     [SerializeField] private float miningPower = 1f;
@@ -38,7 +56,7 @@ public class RuntimeStat
 
     [Header("광석 스탯")]
     // 광석 최대 티어. 내부 계산은 float로 하지만, 실제 사용 시에는 정수 티어로 변환. 
-    [SerializeField] private float maxOreTier = 1f;
+    [SerializeField] private float maxOreTier = 0f;
 
     // 광석 최대 개수. 내부 계산은 float로 하지만, 실제 사용 시에는 정수 티어로 변환. 
     [SerializeField] private float stoneCount = 10f;

@@ -1,3 +1,4 @@
+using System.Text;
 using TMPro;
 using UnityEngine;
 
@@ -47,18 +48,78 @@ public class UI_UpgradeIndicatorPanel : MonoBehaviour
 
     //
 
-    public void SetData(UpgradeData data) //UpgradeData SO 에셋을 매개변수로 받게 한다?
+    public void SetData(UpgradeData data, int currentLevel, int maxLevel) //UpgradeData SO 에셋을 매개변수로 받게 한다?
     {
+        //여기에서 그냥 if (data.skill == none) 이런 식으로 하면 스킬인지 아닌지 구분할 수 있을 것.
+
         upgradeNameText.text = data.displayName; //데이터 안에 들어있는 displayName을 전달받아 텍스트를 바꾼다.
+
+        SetCostText(data, currentLevel); //광물 종류와 현재 레벨에 맞는 광물량 텍스트를 바꾼다.
+
+        //설명 텍스트는 아마 프리팹에 있었던 것 같은데.
+
+        upgradeLevelText.text = $"{currentLevel} / {maxLevel}"; //현재레벨과 최대 레벨을 바꾼다.
 
 
         //광물종류가 2개라면 여기서 for문을 돌리는데, 기존 텍스트를 띄우고 아랫칸에 쓰게 하던가
         //아예 게임 오브젝트를 하나 새로 생성해서 거기에다가 적던가 할 것인데, 이건 내가 할 수 있는 영역은 아닌 것 같음.
 
 
+        //보니까... 스킬과 같은 경우에는 Description이 프리팹에 붙어있고, 그냥 스탯 업그레이드에는 Desciptrion이 따로 없음.
+        //여기서 if else를 통한 하드코딩을 해서
+        //스킬이 아닌 경우에는 안에 표기된 statModifier를 가져오는데, 
+        //계산 방식은 필요없고, 스탯종류와 값만 가져오면 됨.
+
+
+
+        //그니까, UpgradeNodePanelController에 
+
+        //메서드를 넣는 게 아니라 여기 {}안에 있는 코드를 넣게 되는 느낌으로...
+
+        //스킬인 경우에는 Description이 있으니까....
+        //그냥 설명은 SO에 다시 고쳐보신다고 하심.
+
+        //일단은... if(data.skill == none)이 맞았긴 한데, 조금 바뀌어야 될 상황이 생김.
+
+    }
+
+    private void SetCostText(UpgradeData data, int currentLevel)
+    {
+        //StringBuilder sb = new StringBuilder();
+
+        ////var costs = data.GetCosts(currentLevel);
+
+        //foreach (var cost in costs)
+        //{
+        //    sb.AppendLine($"{cost.oreType} : {cost.amount}"); //나중에는 아마도 string이 아니라 이미지 등으로 교체될 건데 이 부분은 어떡하지.
+
+        //}
+        ////현재 시점에선 필요한 자원과 필요 수량을 한 곳에 띄우지만,
+        ////나중에는 필요한 자원은 이미지 영역 하나 만들어서 거기다 띄우고, 수량은 그대로 텍스트로 띄우고 이렇게 될 것 같은데.
+
+        //upgradeCostText.text = sb.ToString();
+
+
+        //데이터에 직접 접근해서 GetCosts를 쓰지말고
+        //UpgradeState를 경유하여 GetCurrentCost를 해야하고,
+
+        //거기에 넣을 현재 레벨은 UpgradeManager가 갖고 있음.
+        //UpgradeState 하나가 노드 데이터 그 자체라고 보면 된다.
+
+        //gpt에게 upgradeManager와 UpgradeState, UpgradeData, OreAmount 넣어서 분석 요청하기.
+
+        //현재레벨을 불러오려면 게임매니저 - 인스턴스 - 업그레이드 - 그다음 GetState해서 level을 해야 '현재 레벨'을 가져온다.
 
 
     }
 
+    //그냥 업그레이드의 경우에는, 레벨에 따라서 효과가 변동하지 않는다.
+    //그러니 매개변수로 data만 받으면 될 것 같은데?
+    private void SetDescriptionForNonSkill() //스킬이 아닌 거
+    {
+        //위와 대체로 비슷하나, statModifier에서 스탯종류와 값을 추출해야 한다.
 
+
+
+    }
 }

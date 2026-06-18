@@ -39,7 +39,7 @@ public class StageRewardPanel : MonoBehaviour
         rewards.Clear();
         RefreshUI();
     }
-    private void RefreshUI()
+    public void RefreshUI()
     {
         string text = "==== Reward Amount ====\n";
 

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MiningInput : MonoBehaviour
+public class TestMiningInput : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
     [SerializeField] private RangeIndicator rangeIndicator;
@@ -30,6 +30,7 @@ public class MiningInput : MonoBehaviour
 
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
+            Debug.Log("CLICK DETECTED");
             DetectOre(worldPos);
         }
     }
@@ -57,7 +58,8 @@ public class MiningInput : MonoBehaviour
             ore.PlayBreakTween();
 
         }
-        
+
 
     }
+
 }

@@ -50,8 +50,14 @@ public class StageTimerPanel : MonoBehaviour
     }
     private void UpdateText()
     {
-        timerText.text = $"Remain : {remainTime:F0}";
+        timerText.text = $"Time : {remainTime:F0}";
     }
+    //리스타트 버튼 누르면 호출
+    public void ResetTimer()
+    {
+        remainTime = stageTime;
+        lastStageTime = stageTime;
 
-    
+        UpdateText();
+    }
 }

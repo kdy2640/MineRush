@@ -8,6 +8,11 @@ public class GameStateController : MonoBehaviour
     [SerializeField] private GameObject resultUI;
     [SerializeField] private GameObject gameOverUI;
 
+    [Header("References for Restart")]
+    [SerializeField] private StageTimerPanel timerPanel;
+    [SerializeField] private Transform oreContainer;
+    [SerializeField] private StageRewardPanel rewardPanel;
+
     private LocalGameState state;
 
     private void Start()
@@ -17,6 +22,29 @@ public class GameStateController : MonoBehaviour
     public void StartGame()
     {
         SetState(LocalGameState.Playing);
+        if (timerPanel != null) timerPanel.StartTimer();
+    }
+    public void RestartGame()
+    {
+        SetState(LocalGameState.Playing);
+
+        if (timerPanel != null)
+        {
+            timerPanel.ResetTimer();
+            timerPanel.StartTimer();
+        }
+
+        if (oreContainer != null)
+        {
+
+            foreach (Transform oreTransform in oreContainer)
+            {
+
+                oreTransform.gameObject.SetActive(true);
+
+                oreTransform.localScale = Vector3.one;
+            }
+        }
     }
     public void ShowResult()
     {
@@ -37,6 +65,8 @@ public class GameStateController : MonoBehaviour
         switch(state)
         {
             case LocalGameState.Start: startUI.SetActive(true); break;
+
+            case LocalGameState.Playing: break;
             
             case LocalGameState.Result: resultUI.SetActive(true); break;
 

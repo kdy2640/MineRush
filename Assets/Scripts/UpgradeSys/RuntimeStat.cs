@@ -7,9 +7,8 @@ using UnityEngine;
 [System.Serializable]
 public class RuntimeStat
 {
-    // 광석 최대 티어. 내부 계산은 float로 하지만, 실제 사용 시에는 정수 티어로 변환. 
-    [SerializeField] private float maxOreTier = 1f;
 
+    [Header("채굴 스탯")]
     // 1회 채굴/공격 시 적용되는 기본 채굴력. 
     [SerializeField] private float miningPower = 1f;
 
@@ -27,6 +26,7 @@ public class RuntimeStat
     // 예 : 2 = 200% 대미지, 1.5 = 150% 대미지.
     [SerializeField] private float criticalMultiplier = 2f;
 
+    [Header("게임 진행 스탯")]
     // 추가 지속시간.
     // 예: 1.5 = 지속시간 1.5초 증가.
     [SerializeField] private float extraDuration = 0f;
@@ -35,7 +35,22 @@ public class RuntimeStat
     // 예: 1 = 기본 보상, 1.5 = 보상 150%, 2 = 보상 200%.
     [SerializeField] private float rewardMultiplier = 1f;
 
+
+    [Header("광석 스탯")]
+    // 광석 최대 티어. 내부 계산은 float로 하지만, 실제 사용 시에는 정수 티어로 변환. 
+    [SerializeField] private float maxOreTier = 1f;
+
+    // 광석 최대 개수. 내부 계산은 float로 하지만, 실제 사용 시에는 정수 티어로 변환. 
+    [SerializeField] private float stoneCount = 10f;
+
+    // 광석 조각 확률
+    [SerializeField] private float[] OreFragmentChanceArr = new float[(int)OreType.Length];
+
+    // 광석 순수 확률
+    [SerializeField] private float[] OrePureChanceArr = new float[(int)OreType.Length];
+
     public int MaxOreTier => Mathf.Max(1, Mathf.RoundToInt(maxOreTier));
+    public int StoneCount => Mathf.Max(1, Mathf.RoundToInt(stoneCount));
     public float MiningPower => miningPower;
     public float MiningSpeed => miningSpeed;
     public float MiningRadius => miningRadius;
@@ -49,12 +64,9 @@ public class RuntimeStat
     public void Apply(StatModifier modifier, int level)
     {
         float amount = modifier.value * level;
-
+        int oreIndex = 0;
         switch (modifier.statType)
         {
-            case StatType.MaxOreTier:
-                maxOreTier = ApplyValue(maxOreTier, modifier.modifierType, amount);
-                break;
 
             case StatType.MiningPower:
                 miningPower = ApplyValue(miningPower, modifier.modifierType, amount);
@@ -83,6 +95,20 @@ public class RuntimeStat
             case StatType.RewardMultiplier:
                 rewardMultiplier = ApplyValue(rewardMultiplier, modifier.modifierType, amount);
                 break;
+            case StatType.MaxOreTier:
+                maxOreTier = ApplyValue(maxOreTier, modifier.modifierType, amount);
+                break;
+            case StatType.StoneCount: 
+                stoneCount = ApplyValue(stoneCount, modifier.modifierType, amount);
+                break;
+            case StatType.FragChance:
+                oreIndex = (int)modifier.oreType;
+                OreFragmentChanceArr[oreIndex] = ApplyValue(OreFragmentChanceArr[oreIndex], modifier.modifierType, amount);
+                break;
+            case StatType.PureChance:
+                oreIndex = (int)modifier.oreType; 
+                OrePureChanceArr[oreIndex] = ApplyValue(OrePureChanceArr[oreIndex], modifier.modifierType, amount);
+                break;
         }
     }
 
@@ -97,5 +123,15 @@ public class RuntimeStat
 
             _ => current
         };
+    }
+    public float GetOreFragmentChance(OreType ore)
+    {
+        if (ore == OreType.None || ore == OreType.Length) return -1;
+        return OreFragmentChanceArr[(int)ore];
+    }
+    public float GetOrePureChance(OreType ore)
+    {
+        if (ore == OreType.None || ore == OreType.Length) return -1;
+        return OrePureChanceArr[(int)ore];
     }
 }

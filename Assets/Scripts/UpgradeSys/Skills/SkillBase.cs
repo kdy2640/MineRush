@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class SkillBase : MonoBehaviour
 {
+    // 스킬 1개랑 1대1매칭 되는 스킬타입
+    public enum SkillType
+    {
+        SpawnOreWhenMined
+    } 
     [field: SerializeField]public string id { get; protected set; }
     [field:SerializeField]public float level { get; protected set; }
     // 여기의 레벨은 업그레이드 매니저에서 참조하거나 그런 건아님.

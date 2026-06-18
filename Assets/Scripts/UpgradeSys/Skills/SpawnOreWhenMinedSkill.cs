@@ -9,11 +9,11 @@ public class SpawnOreWhenMinedSkill : SkillBase
     [field:SerializeField]public float chanceRatePerLevel { get; private set; }
     public override void Apply()
     {
-        //context.OreManager.OnOreDestroyed += HandleOreDestroyed;
+        GameManager.Instance.GameLoop.Events.Subscribe(GameLoopEventType.StoneDestroyed,HandleOreDestroyed); 
     }
     public override void Deactivate()
     {
-        // context.OreManager.OnOreDestroyed -= HandleOreDestroyed;
+        GameManager.Instance.GameLoop.Events.Unsubscribe(GameLoopEventType.StoneDestroyed, HandleOreDestroyed); 
     }
     public string GetFormattedDescription()
     {
@@ -25,11 +25,11 @@ public class SpawnOreWhenMinedSkill : SkillBase
     public void HandleOreDestroyed()
     {
         float chanceRate = baseChanceRate + (level * chanceRatePerLevel);
-        float randValue = Random.Range(0f, 100f);
+        float randValue = Random.value;
 
         if (randValue <= chanceRate)
-        {
-            Debug.Log($"돌 생성!");
+        { 
+            GameManager.Instance.GameLoop.SkillProxy.Execute(SkillType.SpawnOreWhenMined); 
         }
     }
 }

@@ -53,7 +53,7 @@ public class MiningInput : MonoBehaviour
         while (true)
         { 
             DetectOre(worldPos);
-             
+            
             yield return new WaitForSeconds(interval);
         }
     }

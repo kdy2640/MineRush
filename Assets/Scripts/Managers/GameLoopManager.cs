@@ -7,18 +7,22 @@ public class GameLoopManager : MonoBehaviour
      
     private GameLoopEventManager eventManager;
     private MiningCalculator calculator;
+    private SkillEventProxy eventProxy;
     private float timer;
     private bool isRunning;
 
     public float Timer { get { return timer; } }
     public bool IsRunning => isRunning;
-    public IGameLoopEventSubscribable Events => eventManager;
+    public GameLoopEventManager Events => eventManager;
     public MiningCalculator MiningCalculator => calculator;
+    public SkillEventProxy SkillProxy => eventProxy;
+
 
     private void Awake()
     { 
         eventManager = new GameLoopEventManager();
         calculator = new MiningCalculator();
+        eventProxy = new SkillEventProxy();
     } 
 
     public void StartLoop()

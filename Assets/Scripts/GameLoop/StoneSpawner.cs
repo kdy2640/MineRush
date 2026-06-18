@@ -18,6 +18,7 @@ public class StoneSpawner : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.GameLoop.Events.Subscribe(GameLoopEventType.LoopStarted,OnLoopStarted);
+        GameManager.Instance.GameLoop.SkillProxy.SubscribeAction(SkillBase.SkillType.SpawnOreWhenMined, RandomSpawnOne);
     }
 
     private void OnDestroy()
@@ -29,6 +30,11 @@ public class StoneSpawner : MonoBehaviour
     {
         transform.position = Vector3.zero;
         RandomSpawn(GameManager.Instance.Upgrade.GetRuntimeStat().StoneCount);
+    }
+
+    public void RandomSpawnOne()
+    {
+        RandomSpawn(1);
     }
      
     public void RandomSpawn(int spawnCount)

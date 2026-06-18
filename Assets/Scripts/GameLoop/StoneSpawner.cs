@@ -5,6 +5,9 @@ using UnityEngine.LightTransport;
 public class StoneSpawner : MonoBehaviour
 {
     public readonly int GRID_MAX_SIZE = 16;
+    public readonly int GRID_RESOLUTION_MULTIPLIER = 2;
+
+    public int GRID_SIZE => GRID_MAX_SIZE * GRID_RESOLUTION_MULTIPLIER;
 
     [SerializeField] private StoneActor stoneActorPrefab; 
 
@@ -30,7 +33,7 @@ public class StoneSpawner : MonoBehaviour
      
     public void RandomSpawn(int spawnCount)
     { 
-        int maxStoneCount = GRID_MAX_SIZE * GRID_MAX_SIZE;
+        int maxStoneCount = GRID_SIZE * GRID_SIZE;
         int availableCount = maxStoneCount - aliveStones.Count;
 
         if (availableCount <= 0) return;
@@ -41,8 +44,8 @@ public class StoneSpawner : MonoBehaviour
 
         while (spawnedCount < spawnCount)
         {
-            int x = Random.Range(0, GRID_MAX_SIZE);
-            int y = Random.Range(0, GRID_MAX_SIZE);
+            int x = Random.Range(0, GRID_SIZE);
+            int y = Random.Range(0, GRID_SIZE);
 
             Vector2Int gridPos = new Vector2Int(x, y);
 
@@ -57,7 +60,7 @@ public class StoneSpawner : MonoBehaviour
 
     private void SpawnStone(StoneDataSO data, Vector2Int gridPos)
     {
-        Vector3 worldPos = GridCalculator.GridToWorld(gridPos);
+        Vector3 worldPos = GridCalculator.GridToWorld(gridPos, (float)1 / (float)GRID_RESOLUTION_MULTIPLIER);
 
         StoneActor stone = Instantiate(stoneActorPrefab, worldPos, Quaternion.identity);
         stone.SetData(data, gridPos);

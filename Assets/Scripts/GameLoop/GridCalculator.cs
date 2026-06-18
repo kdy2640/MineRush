@@ -21,7 +21,13 @@ public class GridCalculator : MonoBehaviour
 
         return new Vector3(worldX, worldY, 0f) + deltaPos;
     }
+    public static Vector3 GridToWorld(Vector2 gridPos, float gridMultiplier)
+    {
+        float worldX = (gridPos.x - gridPos.y) * tileWidth * 0.5f * gridMultiplier;
+        float worldY = (gridPos.x + gridPos.y) * tileHeight * 0.5f * gridMultiplier;
 
+        return new Vector3(worldX, worldY, 0f) + deltaPos;
+    }
     private void OnDrawGizmos()
     {
         if (!isGizmo) return;

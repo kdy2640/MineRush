@@ -15,6 +15,8 @@ public class UI_UpgradeVisualizer : MonoBehaviour
     private void OnButtonClicked()
     {
         manager.Upgrade.TryBuyUpgrade(upgradeData);
+        //업그레이드 테스트용 임시
+        manager.Upgrade.RegisterSkillWhenUnlockNode(manager.Upgrade.GetState(upgradeData));
     }
     void Start()
     {

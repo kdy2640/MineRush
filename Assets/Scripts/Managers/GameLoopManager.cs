@@ -13,7 +13,7 @@ public class GameLoopManager : MonoBehaviour
 
     public float Timer { get { return timer; } }
     public bool IsRunning => isRunning;
-    public IGameLoopEventSubscribable Events => eventManager;
+    public GameLoopEventManager Events => eventManager;
     public MiningCalculator MiningCalculator => calculator;
     public SkillEventProxy SkillProxy => eventProxy;
 

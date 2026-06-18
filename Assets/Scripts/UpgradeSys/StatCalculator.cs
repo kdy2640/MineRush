@@ -9,6 +9,7 @@ public class StatCalculator
     // 이 클래스에서만 계산식을 수정하도록 한다.
     public RuntimeStat Calculate(List<UpgradeState> upgradeStates)
     {
+        //매번 새로 생성
         RuntimeStat calculatedStat = new RuntimeStat();
 
         if (upgradeStates == null)

@@ -20,4 +20,4 @@ MonoBehaviour:
   rewardList:
   - oreType: 0
     amount: 5
-  solidStonePrefab: {fileID: 8830104387258239869, guid: 228975ba3e109314891f74fd1d904313, type: 3}
+  solidStonePrefab: {fileID: 1146152959841357120, guid: 6d49840a77f04ac409c3d726a311baf8, type: 3}

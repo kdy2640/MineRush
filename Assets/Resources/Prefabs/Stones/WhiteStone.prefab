@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3303339616806718207}
   - component: {fileID: 21013177009183579}
   m_Layer: 0
-  m_Name: PureIronStone
+  m_Name: WhiteStone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,12 +77,12 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 482475251
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -1747220786718590559, guid: 07868338c0e3332448f4d61abd71a833, type: 3}
-  m_Color: {r: 0.589, g: 0.589, b: 0.589, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OreDataSO
   oreType: 0
   mainColor: {r: 0.70980394, g: 0.40784314, b: 0.23921569, a: 1}
-  oreSprite: {fileID: 4129367639663492878, guid: adb46d91a11e1ea42976228bc73fd255, type: 3}
+  oreSprite: {fileID: -5780904505571354112, guid: bb09eebbac285d845b2e319c144f0d5e, type: 3}

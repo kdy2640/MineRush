@@ -5,10 +5,10 @@ public class OreDataSO : ScriptableObject
 {
     [SerializeField] private OreType oreType;
     [SerializeField] private Color mainColor;
-    [SerializeField] private GameObject oreSprite;
+    [SerializeField] private Sprite oreSprite;
 
     public OreType OreType => oreType;
     public Color MainColor => mainColor;
-    public GameObject OreSprite => oreSprite;
+    public Sprite OreSprite => oreSprite;
 
 }

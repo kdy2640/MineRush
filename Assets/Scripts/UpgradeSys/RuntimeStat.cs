@@ -24,7 +24,7 @@ public class RuntimeStat
         extraDuration = 0f;
         rewardMultiplier = 1f;
         maxOreTier = 0f;
-        stoneCount = 10;
+        stoneCount = 30;
         OreFragmentChanceArr = new float[(int)OreType.Length];
         OrePureChanceArr = new float[(int)OreType.Length];
     }
@@ -70,9 +70,9 @@ public class RuntimeStat
     // 광석 순수 확률
     [SerializeField] private float[] OrePureChanceArr = new float[(int)OreType.Length];
 
-    public int PickaxeTier => Mathf.Max(1, Mathf.RoundToInt(pickaxeTier));
-    public int MaxOreTier => Mathf.Max(1, Mathf.RoundToInt(maxOreTier));
-    public int StoneCount => Mathf.Max(1, Mathf.RoundToInt(stoneCount));
+    public int PickaxeTier => Mathf.Max(0, Mathf.RoundToInt(pickaxeTier));
+    public int MaxOreTier => Mathf.Max(0, Mathf.RoundToInt(maxOreTier));
+    public int StoneCount => Mathf.Max(0, Mathf.RoundToInt(stoneCount));
     public float MiningPower => miningPower;
     public float MiningSpeed => miningSpeed;
     public float MiningRadius => miningRadius;

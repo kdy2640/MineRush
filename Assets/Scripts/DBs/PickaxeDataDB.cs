@@ -6,7 +6,7 @@ using UnityEngine;
 public static class PickaxeDataDB
 {
     private static Dictionary<int,PickaxesDataSO> pickaxeDataSOs;
-    private static string FilePath = "Sos/Pickaxes"; 
+    private static string FilePath = "Sos/PickaxeDatas"; 
     
     public static int GetPickaxeKeyCount()
     {

@@ -5,8 +5,9 @@ using UnityEngine.EventSystems;
 public class UpgradeNodePanelController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IScrollHandler
 {
     [Header("노드 설명창")]
-    [SerializeField] private RectTransform descriptionPanel;
-    [SerializeField] private Vector2 descriptionOffset;
+    [SerializeField] private RectTransform nodeInfoPanelRect;
+    [SerializeField] private Vector2 nodeInfoPanelOffset;
+    private UI_NodeInfoPanel nodeInfoPanel;
 
     [Header("노드 연결선 관련")]
     [SerializeField] private RectTransform nodeLinesRect;
@@ -37,6 +38,7 @@ public class UpgradeNodePanelController : MonoBehaviour, IBeginDragHandler, IDra
 
     private void Awake()
     {
+        nodeInfoPanel = nodeInfoPanelRect.GetComponent<UI_NodeInfoPanel>();
         panZoomParentRect = GetComponent<RectTransform>();
     }
 
@@ -50,7 +52,6 @@ public class UpgradeNodePanelController : MonoBehaviour, IBeginDragHandler, IDra
         UpgradeNode[] nodes = GetComponentsInChildren<UpgradeNode>(true);
 
         HideAllNodes(nodes);
-        descriptionPanel.gameObject.SetActive(false);
         ClearNodeLines();
 
         if (rootNode == null)
@@ -96,17 +97,17 @@ public class UpgradeNodePanelController : MonoBehaviour, IBeginDragHandler, IDra
     {
         if (!active)
         {
-            descriptionPanel.gameObject.SetActive(false);
+            nodeInfoPanelRect.gameObject.SetActive(false);
             return;
         }
 
         currentDescriptionNode = upgradeNode;
         RefreshDescriptionPanelPosition();
-        descriptionPanel.SetAsLastSibling(); // 노드 뒤에 위치하는 상황 방지용 맨위에 띄우는 내장 함수.
+        nodeInfoPanelRect.SetAsLastSibling(); // 노드 뒤에 위치하는 상황 방지용 맨위에 띄우는 내장 함수.
 
         RefreshDescriptionPanel(upgradeNode.upgradeData);
 
-        descriptionPanel.gameObject.SetActive(true);
+        nodeInfoPanelRect.gameObject.SetActive(true);
     } // 노드에 마우스를 올렸을 때 설명창을 켜고, 마우스가 빠졌을 때 설명창을 끄는 함수.
     // 설명창이 켜질 때 현재 설명 대상 노드를 저장해두고,
     // 이후 드래그나 줌이 발생하면 이 노드를 기준으로 설명창 위치를 다시 계산.
@@ -115,10 +116,7 @@ public class UpgradeNodePanelController : MonoBehaviour, IBeginDragHandler, IDra
 
     private void RefreshDescriptionPanel(UpgradeData upgradeData)
     {
-        // TODO:
-        // 노드 이름 갱신
-        // 설명 갱신
-        // 필요한 자원량 갱신
+        nodeInfoPanel.SetInfo(GameManager.Instance.Upgrade.GetState(upgradeData));
     }
 
     private void RefreshDescriptionPanelPosition()
@@ -128,7 +126,7 @@ public class UpgradeNodePanelController : MonoBehaviour, IBeginDragHandler, IDra
             return;
         }
 
-        descriptionPanel.anchoredPosition =
+        nodeInfoPanelRect.anchoredPosition =
             GetNodeScreenAnchoredPosition(currentDescriptionNode) + GetScaledDescriptionOffset();
     } // 현재 설명 대상 노드의 화면 위치를 기준으로 설명창 위치를 다시 맞추는 함수.
     // 매 프레임 호출하지 않고, 설명창이 켜질 때 / 드래그할 때 / 줌할 때만 호출한다.
@@ -136,7 +134,7 @@ public class UpgradeNodePanelController : MonoBehaviour, IBeginDragHandler, IDra
     private Vector2 GetNodeScreenAnchoredPosition(UpgradeNode upgradeNode)
     {
         Vector2 screenPosition = RectTransformUtility.WorldToScreenPoint(null, upgradeNode.rectTransform.position);
-        RectTransform descriptionParentRect = descriptionPanel.parent as RectTransform;
+        RectTransform descriptionParentRect = nodeInfoPanelRect.parent as RectTransform;
 
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             descriptionParentRect,
@@ -154,12 +152,12 @@ public class UpgradeNodePanelController : MonoBehaviour, IBeginDragHandler, IDra
     {
         if (panZoomTargetRect == null)
         {
-            return descriptionOffset;
+            return nodeInfoPanelOffset;
         }
 
         float currentZoom = panZoomTargetRect.localScale.x;
 
-        return descriptionOffset * currentZoom;
+        return nodeInfoPanelOffset * currentZoom;
     } // 현재 줌 스케일에 맞춰 설명창 offset을 보정하는 함수.
     // 예를 들어 descriptionOffset.y가 200이고 줌 스케일이 0.4라면,
     // 실제 y offset은 80이 되어 노드와 설명창 사이 간격도 줌 비율에 맞게 줄어든다.

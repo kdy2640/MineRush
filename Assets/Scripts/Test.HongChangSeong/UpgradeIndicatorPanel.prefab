@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 6845931108119202224}
   - component: {fileID: 4993922926204535738}
   - component: {fileID: 2943903296156500826}
+  - component: {fileID: -2227402303072277316}
   m_Layer: 5
   m_Name: UpgradeIndicatorPanel
   m_TagString: Untagged
@@ -310,6 +311,20 @@ MonoBehaviour:
   <DescriptionText>k__BackingField: {fileID: 1116856229492752363}
   <CostText>k__BackingField: {fileID: 7352426639294829175}
   <LevelText>k__BackingField: {fileID: 4446773691360076602}
+  hoverScale: 1.2
+  duration: 0.5
+--- !u!225 &-2227402303072277316
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799623154170845969}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &5735364323040286045
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ public class UI_OreAmountVisualizer : MonoBehaviour
 
     public void SetOre(OreAmount amount)
     {
+        OreImage.sprite = oreDataDB.GetOreDataSO(amount.oreType).OreSprite;
         OreCount.text = amount.amount.ToString();
     }
     public void Clear()

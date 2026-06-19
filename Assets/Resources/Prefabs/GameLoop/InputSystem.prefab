@@ -49,7 +49,7 @@ MonoBehaviour:
   miningRange: 1
   oreLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!1 &6498118836059251948
 GameObject:
   m_ObjectHideFlags: 0

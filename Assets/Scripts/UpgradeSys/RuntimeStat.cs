@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 /// <summary>
@@ -14,6 +15,7 @@ public class RuntimeStat
 
     private void Initialize()
     {
+        pickaxeTier = 0f;
         miningPower = 1f;
         miningSpeed = 1f;
         miningRadius = 1f;
@@ -22,11 +24,12 @@ public class RuntimeStat
         extraDuration = 0f;
         rewardMultiplier = 1f;
         maxOreTier = 0f;
-        stoneCount = 0f;
+        stoneCount = 30;
         OreFragmentChanceArr = new float[(int)OreType.Length];
         OrePureChanceArr = new float[(int)OreType.Length];
     }
     [Header("채굴 스탯")]
+    [SerializeField] private float pickaxeTier = 0f;
     // 1회 채굴/공격 시 적용되는 기본 채굴력. 
     [SerializeField] private float miningPower = 1f;
 
@@ -67,8 +70,9 @@ public class RuntimeStat
     // 광석 순수 확률
     [SerializeField] private float[] OrePureChanceArr = new float[(int)OreType.Length];
 
-    public int MaxOreTier => Mathf.Max(1, Mathf.RoundToInt(maxOreTier));
-    public int StoneCount => Mathf.Max(1, Mathf.RoundToInt(stoneCount));
+    public int PickaxeTier => Mathf.Max(0, Mathf.RoundToInt(pickaxeTier));
+    public int MaxOreTier => Mathf.Max(0, Mathf.RoundToInt(maxOreTier));
+    public int StoneCount => Mathf.Max(0, Mathf.RoundToInt(stoneCount));
     public float MiningPower => miningPower;
     public float MiningSpeed => miningSpeed;
     public float MiningRadius => miningRadius;
@@ -76,6 +80,15 @@ public class RuntimeStat
     public float CriticalMultiplier => criticalMultiplier;
     public float ExtraDuration => extraDuration;
     public float RewardMultiplier => rewardMultiplier;
+
+    //
+    public void ApplyPickaxe(PickaxesDataSO pickSO)
+    { 
+        miningPower += pickSO.MiningPower;
+        miningSpeed += pickSO.MiningSpeed;
+        miningRadius += pickSO.MiningRadius;
+        criticalChance += pickSO.CriticalChance;
+    }
 
     // 현재는 기본 스탯 값을 RuntimeStat 내부에 고정해 둔다.
     // 나중에 곡괭이 종류별 기본 스탯이 필요해지면 생성자나 별도 데이터로 기본값을 주입하도록 수정한다.
@@ -85,7 +98,9 @@ public class RuntimeStat
         int oreIndex = 0;
         switch (modifier.statType)
         {
-
+            case StatType.PickaxeTier:
+                pickaxeTier = ApplyValue(pickaxeTier, modifier.modifierType, amount);
+                break;
             case StatType.MiningPower:
                 miningPower = ApplyValue(miningPower, modifier.modifierType, amount);
                 break;

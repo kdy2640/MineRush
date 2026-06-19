@@ -15,12 +15,14 @@ MonoBehaviour:
   id: UpgradeCriticalMultiplier02
   displayName: "\uD06C\uB9AC\uD2F0\uCEEC \uACF5\uACA9 \uBC30\uC728 \uC99D\uAC00 II"
   baseOreAmounts:
-  - oreType: 0
+  - oreType: 1
     amount: 15
   - oreType: 1
     amount: 25
-  amountMultiplier: 1.2
+  amountMultiplier: 1.3
   statModifiers:
   - statType: 5
     modifierType: 1
     value: 0.1
+    oreType: 0
+  skill: {fileID: 0}

@@ -16,6 +16,7 @@ public class UpgradeIndicatorPanel : MonoBehaviour
     //왜냐하면, 광물은 이미지로 나올 것이고, 가격은 그대로 숫자로 나올 거니까.
 
     [Header("출력할 부분")]
+    [SerializeField] private UpgradeNodePanelController upgradeNodePanelController;// 손유민 : 패널컨트롤러와의 연결을 위한 추가
     [field: SerializeField] public TextMeshProUGUI DisplayNameText { get; private set; }
     [field: SerializeField] public TextMeshProUGUI DescriptionText { get; private set; }
     [field: SerializeField] public TextMeshProUGUI CostText { get; private set; } //이거 OreAmountText로 바꾸는 게?

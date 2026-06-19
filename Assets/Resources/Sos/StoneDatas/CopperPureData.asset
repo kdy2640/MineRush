@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d58b24700aa45664baff33112d1e3a6a, type: 3}
   m_Name: CopperPureData
   m_EditorClassIdentifier: Assembly-CSharp::StoneDataSO
-  id: 2
+  id: CopperPure
   tier: 1
   maxHealth: 10
   stoneType: 2

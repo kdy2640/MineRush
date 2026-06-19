@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d58b24700aa45664baff33112d1e3a6a, type: 3}
   m_Name: IronPureData
   m_EditorClassIdentifier: Assembly-CSharp::StoneDataSO
-  id: 4
+  id: IronPure
   tier: 2
   maxHealth: 20
   stoneType: 2

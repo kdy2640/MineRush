@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d58b24700aa45664baff33112d1e3a6a, type: 3}
   m_Name: DiamonFragData
   m_EditorClassIdentifier: Assembly-CSharp::StoneDataSO
-  id: 7
+  id: DiamonFrag
   tier: 4
   maxHealth: 40
   stoneType: 1

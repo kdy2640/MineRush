@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98f84d8dcc727044399c6082994ad11a, type: 3}
+  m_Name: CooperData
+  m_EditorClassIdentifier: Assembly-CSharp::OreDataSO
+  oreType: 0
+  mainColor: {r: 0.70980394, g: 0.40784314, b: 0.23921569, a: 1}
+  oreSprite: {fileID: 4129367639663492878, guid: adb46d91a11e1ea42976228bc73fd255, type: 3}

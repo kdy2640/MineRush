@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d58b24700aa45664baff33112d1e3a6a, type: 3}
   m_Name: DiamonFragData
   m_EditorClassIdentifier: Assembly-CSharp::StoneDataSO
-  id: 7
+  id: DiamonFrag
   tier: 4
   maxHealth: 40
   stoneType: 1
@@ -20,4 +20,4 @@ MonoBehaviour:
   rewardList:
   - oreType: 3
     amount: 3
-  solidStonePrefab: {fileID: 8830104387258239869, guid: 9c6ddbd60d6a9cf42b2f94df84edc037, type: 3}
+  solidStonePrefab: {fileID: 4742298680208279920, guid: ff4737b10a6087e49b8ae2e684a1c097, type: 3}

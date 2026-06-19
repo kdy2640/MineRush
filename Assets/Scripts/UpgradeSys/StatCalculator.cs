@@ -30,6 +30,10 @@ public class StatCalculator
             }
         }
 
+        //곡괭이 반영
+        PickaxesDataSO pickSO = PickaxeDataDB.GetStoneDataSO(calculatedStat.PickaxeTier);
+        calculatedStat.ApplyPickaxe(pickSO);
+
         return calculatedStat;
     }
 }

@@ -48,10 +48,10 @@ public class MiningInput : MonoBehaviour
     IEnumerator CallMethodNTimes()
     {
         // 1초에 n번이므로 각 호출 간격은 1 / n 초
-        float interval = 1f / GameManager.Instance.Upgrade.GetRuntimeStat().MiningSpeed;
 
         while (true)
-        { 
+        {
+            float interval = 1f / GameManager.Instance.Upgrade.GetRuntimeStat().MiningSpeed;
             DetectOre(worldPos);
             
             yield return new WaitForSeconds(interval);

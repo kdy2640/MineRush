@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public UpgradeManager Upgrade { get; private set; }
     public GameLoopManager GameLoop { get; private set; }
     public SkillManager SkillManager { get; private set; }
+    public AudioManager AudioManager { get; private set; }
 
     private void Awake()
     {
@@ -30,5 +31,6 @@ public class GameManager : MonoBehaviour
         Upgrade = GetComponent<UpgradeManager>();
         GameLoop = GetComponent<GameLoopManager>();
         SkillManager = GetComponent<SkillManager>();
+        AudioManager = GetComponentInChildren<AudioManager>();
     }
 }

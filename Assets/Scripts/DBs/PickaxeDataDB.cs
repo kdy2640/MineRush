@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -7,6 +8,10 @@ public static class PickaxeDataDB
     private static Dictionary<int,PickaxesDataSO> pickaxeDataSOs;
     private static string FilePath = "Sos/Pickaxes"; 
     
+    public static int GetPickaxeKeyCount()
+    {
+        return pickaxeDataSOs.Keys.Count;
+    }
     public static PickaxesDataSO GetStoneDataSO(int tierKey)
     {
         if (pickaxeDataSOs == null) Initiazlie();

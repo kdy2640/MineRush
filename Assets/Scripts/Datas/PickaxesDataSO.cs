@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Data/PickAxe Data")]
+[CreateAssetMenu(menuName = "Game/PickaxeData")]
 public class PickaxesDataSO : ScriptableObject
 {
     [Header("Info")]

@@ -22,3 +22,5 @@ MonoBehaviour:
   - statType: 0
     modifierType: 0
     value: 1
+    oreType: 0
+  skill: {fileID: 4916942327163071954, guid: bca72ccedcab5324e999694a773ec7c4, type: 3}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d58b24700aa45664baff33112d1e3a6a, type: 3}
   m_Name: GoldPureData
   m_EditorClassIdentifier: Assembly-CSharp::StoneDataSO
-  id: 6
+  id: GoldPure
   tier: 3
   maxHealth: 40
   stoneType: 2
@@ -20,4 +20,4 @@ MonoBehaviour:
   rewardList:
   - oreType: 2
     amount: 5
-  solidStonePrefab: {fileID: 8830104387258239869, guid: 8b2e925b8ad9a56469ebdff8e674c5b6, type: 3}
+  solidStonePrefab: {fileID: 1146152959841357120, guid: 4f88894a03918dd499d8839d3e89c774, type: 3}

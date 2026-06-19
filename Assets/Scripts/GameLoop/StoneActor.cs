@@ -37,6 +37,7 @@ public class StoneActor : MonoBehaviour
     {
         GameObject go = GameObject.Instantiate(dataSo.SolidStonePrefab,transform);
         go.transform.localPosition = Vector3.zero;
+        go.GetComponent<SpriteRenderer>().sortingOrder = 1000 - (GridPos.x + GridPos.y);
         hpHandler.SetMaxHealth(dataSo.MaxHealth);
         RandomAdjust(go);
     } 

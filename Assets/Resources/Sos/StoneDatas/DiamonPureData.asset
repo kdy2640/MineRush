@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d58b24700aa45664baff33112d1e3a6a, type: 3}
   m_Name: DiamonPureData
   m_EditorClassIdentifier: Assembly-CSharp::StoneDataSO
-  id: 8
+  id: DiamonPure
   tier: 4
   maxHealth: 80
   stoneType: 2
@@ -20,4 +20,4 @@ MonoBehaviour:
   rewardList:
   - oreType: 3
     amount: 5
-  solidStonePrefab: {fileID: 8830104387258239869, guid: 6e822223179a1804ba6d16a5517b43c1, type: 3}
+  solidStonePrefab: {fileID: 1146152959841357120, guid: 41fc134139037324db13481dc497399f, type: 3}

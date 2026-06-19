@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d58b24700aa45664baff33112d1e3a6a, type: 3}
   m_Name: IronFragData
   m_EditorClassIdentifier: Assembly-CSharp::StoneDataSO
-  id: 3
+  id: IronFrag
   tier: 2
   maxHealth: 10
   stoneType: 1
@@ -20,4 +20,4 @@ MonoBehaviour:
   rewardList:
   - oreType: 1
     amount: 3
-  solidStonePrefab: {fileID: 8830104387258239869, guid: a50ae790d1290844a8df17fa371f8755, type: 3}
+  solidStonePrefab: {fileID: 4742298680208279920, guid: 527be46104162624ba3169678baf210c, type: 3}

@@ -49,6 +49,7 @@ public class UpgradeNodePanelController : MonoBehaviour, IBeginDragHandler, IDra
 
     private void InitUpgradeNodePanel()
     {
+        ShowDescriptionPanel(false);
         UpgradeNode[] nodes = GetComponentsInChildren<UpgradeNode>(true);
 
         HideAllNodes(nodes);

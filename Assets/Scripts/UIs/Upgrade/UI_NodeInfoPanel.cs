@@ -69,7 +69,7 @@ public class UI_NodeInfoPanel : MonoBehaviour
         if (upgradeState == null) return;
 
         DisplayNameText.text = upgradeState.data.displayName;
-        // DescriptionText.text = upgradeState.data.description;
+        DescriptionText.text = UpgradeDescriptionFormatter.GetDescription(upgradeState);
 
         bool isMaxLevel = GameManager.Instance.Upgrade.IsMaxLevel(upgradeState);
 
@@ -87,10 +87,31 @@ public class UI_NodeInfoPanel : MonoBehaviour
         {
             bool isEnough = GameManager.Instance.OreManager.HasEnoughOre(oreAmount);
             int currentAmount = GameManager.Instance.OreManager.GetAmount(oreAmount.oreType);
-            string color = isEnough ? "#00FF00" : "#FF4444";
-            costText += $"<color={color}>{oreAmount.oreType} : {currentAmount} / {oreAmount.amount}</color>\n";
+            // string color = isEnough ? "#00FF00" : "#FF4444";
+            // costText += $"<color={color}>{oreAmount.oreType} : {currentAmount} / {oreAmount.amount}</color>\n";
+            string icon = GetOreIconTag(oreAmount.oreType);
+            string textColor = isEnough ? "#00FF00" : "#FF4444";
+
+            costText += $"{icon} <color={textColor}>: {currentAmount} / {oreAmount.amount}</color>\n";
         }
 
-        CostText.text = costText;
+        CostText.text = costText.TrimEnd();
+    }
+    private string GetOreIconTag(OreType oreType)
+    {
+        string iconColor = GetOreIconColor(oreType);
+        return $"<color={iconColor}><sprite name=\"EmptyOreForTMP\" tint=1></color>";
+    }
+
+    private string GetOreIconColor(OreType oreType)
+    {
+        return oreType switch
+        {
+            OreType.Copper => "#B87333",
+            OreType.Iron => "#C0C0C0",
+            OreType.Gold => "#FFD700",
+            OreType.Diamond => "#6EE7FF",
+            _ => "#FFFFFF"
+        };
     }
 }

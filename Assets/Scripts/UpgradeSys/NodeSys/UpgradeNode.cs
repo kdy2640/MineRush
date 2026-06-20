@@ -11,10 +11,13 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [field: SerializeField] public UpgradeData upgradeData { get; private set; }
     [field: SerializeField] public List<UpgradeNode> connectedNodes { get; private set; } = new();
     [field: SerializeField] public bool isUnlocked { get; private set; }
+    private UpgradeState upgradeState;
     
     [Header("UI")]
     private Button button;
     [SerializeField] private Image upgradeIcon;
+    private Image bgImage;
+    private Color maxLevelColor = new Color32(255, 209, 0, 255);
     
     private UpgradeNodePanelController nodePanelController;
     public RectTransform rectTransform { get; private set; }
@@ -26,6 +29,7 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         button = GetComponent<Button>();
         nodePanelController = GetComponentInParent<UpgradeNodePanelController>();
         rectTransform = GetComponent<RectTransform>();
+        bgImage = transform.GetChild(0).GetComponent<Image>();
     }
 
     private void OnEnable()
@@ -43,20 +47,48 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         isUnlocked = true;
         gameObject.SetActive(true);
 
-        UpgradeState state = GameManager.Instance.Upgrade.GetState(upgradeData);
+        upgradeState = GameManager.Instance.Upgrade.GetState(upgradeData);
 
         if (upgradeData.skill != null)
         {
-            GameManager.Instance.Upgrade.RegisterSkillWhenUnlockNode(state);
+            GameManager.Instance.Upgrade.RegisterSkillWhenUnlockNode(upgradeState);
         }
+
+        RefreshNodeVisual();
     } // 노드 해금이 곧 0레벨로 state 등록 하는것.
 
     public void RestoreUnlocked()
     {
         isUnlocked = true;
         gameObject.SetActive(true);
+        upgradeState = GameManager.Instance.Upgrade.GetState(upgradeData);
+        RefreshNodeVisual();
     }// 저장 / 씬 재진입처럼 이미 UpgradeState가 존재하는 노드를 UI에 다시 반영할 때 사용하는 함수.
     // GetState나 스킬 등록은 다시 하지 않고, 노드가 열려있다는 화면 상태만 복구한다.
+    
+    public void RefreshNodeVisual()
+    {
+        if (bgImage == null)
+        {
+            return;
+        }
+
+        if (upgradeData == null)
+        {
+            bgImage.color = Color.white;
+            return;
+        }
+
+        UpgradeState state = GameManager.Instance.Upgrade.GetState(upgradeData);
+
+        if (GameManager.Instance.Upgrade.IsMaxLevel(state))
+        {
+            bgImage.color = maxLevelColor;
+            return;
+        }
+
+        bgImage.color = Color.white;
+    }
     
     private void TryBuy()
     {
@@ -68,6 +100,7 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if (GameManager.Instance.Upgrade.TryBuyUpgrade(upgradeData))
         {
             nodePanelController.RefreshDescriptionPanel(upgradeData);
+            RefreshNodeVisual();
             UpgradeState state = GameManager.Instance.Upgrade.GetState(upgradeData);
             if (state.level == 1)
             {

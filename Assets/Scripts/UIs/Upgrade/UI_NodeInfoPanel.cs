@@ -92,7 +92,7 @@ public class UI_NodeInfoPanel : MonoBehaviour
             string icon = GetOreIconTag(oreAmount.oreType);
             string textColor = isEnough ? "#00FF00" : "#FF4444";
 
-            costText += $"{icon} <color={textColor}>: {currentAmount} / {oreAmount.amount}</color>\n";
+            costText += $"{icon} : <color={textColor}>{currentAmount} / {oreAmount.amount}</color>\n";
         }
 
         CostText.text = costText.TrimEnd();
@@ -107,10 +107,10 @@ public class UI_NodeInfoPanel : MonoBehaviour
     {
         return oreType switch
         {
-            OreType.Copper => "#B87333",
-            OreType.Iron => "#C0C0C0",
-            OreType.Gold => "#FFD700",
-            OreType.Diamond => "#6EE7FF",
+            OreType.Copper => "#E6844D",
+            OreType.Iron => "#BDD3E6",
+            OreType.Gold => "#FFC84B",
+            OreType.Diamond => "#7DF1FF",
             _ => "#FFFFFF"
         };
     }

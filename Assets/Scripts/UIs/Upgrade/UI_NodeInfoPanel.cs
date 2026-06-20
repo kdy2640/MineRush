@@ -56,18 +56,26 @@ public class UI_NodeInfoPanel : MonoBehaviour
         if (upgradeState == null) return;
 
         DisplayNameText.text = upgradeState.data.displayName; 
+        // DescriptionText.text = upgradeState.data.description;
+        
+        bool isMaxLevel = GameManager.Instance.Upgrade.IsMaxLevel(upgradeState);
 
-        // DescriptionText.text = upgradeState.data.description; 
-        //
-        // LevelText.text = $"Level : {upgradeState.level} / {upgradeState.data.maxLevel}";
 
-        string costText = ""; 
-
+        if (isMaxLevel)
+        {
+            LevelText.text = $"Level : 최대 레벨</color>";
+            CostText.text = "<color=#6A4CFF>최대 레벨</color>";
+            return;
+        }
+        string costText = "";
+        LevelText.text = $"Level : {upgradeState.level} / {upgradeState.data.maxLevel}";
         foreach (OreAmount oreAmount in upgradeState.GetCurrentCost()) 
         {
-            costText += $"{oreAmount.oreType} : {oreAmount.amount}\n";
+            bool isEnough = GameManager.Instance.OreManager.HasEnoughOre(oreAmount);
+            int currentAmount = GameManager.Instance.OreManager.GetAmount(oreAmount.oreType);
+            string color = isEnough ? "#00FF00" : "#FF4444";
+            costText += $"<color={color}>{oreAmount.oreType} : {currentAmount} / {oreAmount.amount}</color>\n";
         }
- 
         CostText.text = costText; 
     }
 }

@@ -33,6 +33,13 @@ public class OreManager : MonoBehaviour
 
         return true;
     }
+    
+    // 손유민 : UI에서 광물당 개별로 색상 표시하기 위해 개별 체크함수 추가했습니다.
+    // 오버로딩하기엔 함수 네이밍이 좀 방향성에 안맞기도 하고 고치는것보단 추가하는게 나을 것 같아서요.
+    public bool HasEnoughOre(OreAmount oreAmount)
+    {
+        return GetAmount(oreAmount.oreType) >= oreAmount.amount;
+    }
 
     public bool TrySpend(List<OreAmount> costs)
     {

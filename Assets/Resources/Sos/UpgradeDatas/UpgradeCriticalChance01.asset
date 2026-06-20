@@ -14,11 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: UpgradeCriticalChance01
   displayName: "\uD06C\uB9AC\uD2F0\uCEEC \uD655\uB960 \uC99D\uAC00 I"
+  displayIcon: {fileID: 0}
   baseOreAmounts:
   - oreType: 0
     amount: 10
   amountMultiplier: 1.2
+  maxLevel: 5
   statModifiers:
   - statType: 4
     modifierType: 0
     value: 0.25
+    oreType: 0
+  skill: {fileID: 0}

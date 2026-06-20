@@ -212,9 +212,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3539855066239646836, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5826225701428414975, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: m_Name
-      value: UpgradeMiningSpeed01_Node
+      value: "\uCC44\uAD74 \uC18D\uB3C4 \uC99D\uAC00 I"
       objectReference: {fileID: 0}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: nodeId
@@ -359,7 +363,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5826225701428414975, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: m_Name
-      value: UpgradeMiningPower02_Node
+      value: "\uCC44\uAD74 \uACF5\uACA9\uB825 \uC99D\uAC00 II"
       objectReference: {fileID: 0}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: nodeId
@@ -630,7 +634,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5826225701428414975, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: m_Name
-      value: UpgradeCriticalMultiplier02_Node
+      value: "\uD06C\uB9AC\uD2F0\uCEEC \uACF5\uACA9 \uBC30\uC728 \uC99D\uAC00 II"
       objectReference: {fileID: 0}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: nodeId
@@ -1225,8 +1229,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5826225701428414975, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: m_Name
-      value: UI_Node (4)
+      value: "\uAC15\uCCA0 \uCD94\uAC00"
       objectReference: {fileID: 0}
+    - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
+      propertyPath: nodeId
+      value: UnlockIron
+      objectReference: {fileID: 0}
+    - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
+      propertyPath: <upgradeData>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 391ad970fc3c5874fb00562a1daa56fa, type: 2}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: previousConnectedNodes.Array.size
       value: 2
@@ -2081,7 +2093,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5826225701428414975, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: m_Name
-      value: UpgradeCriticalChance01_Node
+      value: "\uD06C\uB9AC\uD2F0\uCEEC \uD655\uB960 \uC99D\uAC00 I"
       objectReference: {fileID: 0}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: nodeId
@@ -2624,7 +2636,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5826225701428414975, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: m_Name
-      value: UpgradeCriticalChance02_Node
+      value: "\uD06C\uB9AC\uD2F0\uCEEC \uD655\uB960 \uC99D\uAC00 II"
       objectReference: {fileID: 0}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: nodeId
@@ -2807,7 +2819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5826225701428414975, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: m_Name
-      value: UpgradeCriticalMultiplier01_Node
+      value: "\uD06C\uB9AC\uD2F0\uCEEC \uACF5\uACA9 \uBC30\uC728 \uC99D\uAC00 I"
       objectReference: {fileID: 0}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: nodeId
@@ -4355,7 +4367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5826225701428414975, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: m_Name
-      value: UpgradeMiningSpeed02_Node
+      value: "\uCC44\uAD74 \uC18D\uB3C4 \uC99D\uAC00 II"
       objectReference: {fileID: 0}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: nodeId
@@ -5763,7 +5775,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5826225701428414975, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: m_Name
-      value: UpgradeMiningPower01_Node
+      value: "\uCC44\uAD74 \uACF5\uACA9\uB825 \uC99D\uAC00 I"
       objectReference: {fileID: 0}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: nodeId
@@ -6119,7 +6131,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2697332242783933862
 RectTransform:
   m_ObjectHideFlags: 0

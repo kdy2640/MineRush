@@ -14,11 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: UpgradeMiningPower01
   displayName: "\uCC44\uAD74 \uACF5\uACA9\uB825 \uC99D\uAC00 I"
+  displayIcon: {fileID: 0}
   baseOreAmounts:
   - oreType: 0
     amount: 10
   amountMultiplier: 1.2
+  maxLevel: 5
   statModifiers:
   - statType: 1
     modifierType: 0
     value: 0.25
+    oreType: 0
+  skill: {fileID: 0}

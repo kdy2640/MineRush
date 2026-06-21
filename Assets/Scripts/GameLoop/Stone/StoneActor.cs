@@ -58,9 +58,10 @@ public class StoneActor : MonoBehaviour
     }
 
     private void Die()
-    {
-        manager.OreManager.AddRange(dataSo.RewardList);
+    { 
         manager.GameLoop.Events.Invoke(GameLoopEventType.StoneDestroyed);
         OnDead?.Invoke(this);
     }
+
+
 }

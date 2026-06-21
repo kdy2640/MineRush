@@ -99,8 +99,6 @@ public class StoneSpawner : MonoBehaviour
     private void HandleStoneDead(StoneActor stone)
     {
         stone.OnDead -= HandleStoneDead;
-        aliveStones.Remove(stone.GridPos);
-
-        Destroy(stone.gameObject);
+        aliveStones.Remove(stone.GridPos); 
     }
 }

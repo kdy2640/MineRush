@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab3ebfbaa35529b429005d35ded9129a, type: 3}
-  m_Name: IronPickaxe
+  m_Name: LegendaryPickaxe
   m_EditorClassIdentifier: Assembly-CSharp::PickaxesDataSO
-  tier: 2
-  displayName: Iron Pickaxe
-  icon: {fileID: 7671379760845095107, guid: f32786a0b2b16c744ba8e405c08a06ec, type: 3}
-  miningPower: 3
-  miningSpeed: 3
-  miningRadius: 3
-  criticalChance: 0.1
+  tier: 5
+  displayName: Legendary Pickaxe
+  icon: {fileID: -7075053568885052322, guid: deef49ab8c63e704cb18866918dc950c, type: 3}
+  miningPower: 5
+  miningSpeed: 5
+  miningRadius: 5
+  criticalChance: 0.5
   amounts:
-  - oreType: 1
-    amount: 100
+  - oreType: 3
+    amount: 500

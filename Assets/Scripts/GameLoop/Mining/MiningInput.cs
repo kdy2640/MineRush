@@ -6,6 +6,7 @@ public class MiningInput : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
     [SerializeField] private RangeIndicator rangeIndicator;
+    [SerializeField] private MiningSequence miningSequence;
 
     [Header("인디케이터 범위")]
     [SerializeField] private float miningRange = 1f;
@@ -69,9 +70,7 @@ public class MiningInput : MonoBehaviour
 
         foreach (Collider2D hit in hits)
         {
-            hit.GetComponentInParent<HPHandler>().TakeDamage(
-                GameManager.Instance.GameLoop.MiningCalculator.CalculateDamage()
-                );
+            miningSequence.RequestMine(hit.GetComponentInParent<StoneActor>());
         }
     }
 

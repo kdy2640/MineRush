@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab3ebfbaa35529b429005d35ded9129a, type: 3}
-  m_Name: BasePickAxe
+  m_Name: WoodPickaxe
   m_EditorClassIdentifier: Assembly-CSharp::PickaxesDataSO
   tier: 0
-  displayName: 
-  icon: {fileID: 0}
+  displayName: WoodPickaxe
+  icon: {fileID: 2797310821681655106, guid: 56194fa4cdd1c7d4ab7abeaef7668ef5, type: 3}
   miningPower: 0
   miningSpeed: 0
   miningRadius: 0

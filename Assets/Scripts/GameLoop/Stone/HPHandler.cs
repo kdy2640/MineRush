@@ -9,6 +9,7 @@ public class HPHandler : MonoBehaviour
 
     private Action<float> OnHPUpdate;
     private Action OnDied;
+    public bool IsDead => nowHp <= 0;
      
     private void Awake()
     {

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class MiningCalculator
+public static class MiningCalculator
 {
-    public float CalculateDamage()
+    public static float CalculateDamage()
     {
         RuntimeStat stat = GameManager.Instance.Upgrade.GetRuntimeStat();
 

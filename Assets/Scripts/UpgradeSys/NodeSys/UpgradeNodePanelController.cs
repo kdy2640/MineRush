@@ -49,6 +49,7 @@ public class UpgradeNodePanelController : MonoBehaviour, IBeginDragHandler, IDra
 
     private void InitUpgradeNodePanel()
     {
+        ShowDescriptionPanel(false);
         UpgradeNode[] nodes = GetComponentsInChildren<UpgradeNode>(true);
 
         HideAllNodes(nodes);
@@ -114,7 +115,7 @@ public class UpgradeNodePanelController : MonoBehaviour, IBeginDragHandler, IDra
     // 일단 setactive 방식으로 구현함.
     // 하지만 fade 애니메이션 같은 것을 넣고싶으면 캔버스 그룹 방식으로 전환해야 할 수 있음.
 
-    private void RefreshDescriptionPanel(UpgradeData upgradeData)
+    public void RefreshDescriptionPanel(UpgradeData upgradeData)
     {
         nodeInfoPanel.SetInfo(GameManager.Instance.Upgrade.GetState(upgradeData));
     }

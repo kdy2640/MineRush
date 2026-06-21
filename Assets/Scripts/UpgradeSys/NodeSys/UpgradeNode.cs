@@ -8,24 +8,28 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 {
     [Header("Node Data")]
     [SerializeField] private string nodeId; //인스펙터에서 설정안함.
-    [field:SerializeField] public UpgradeData upgradeData { get; private set; }
-    [field:SerializeField] public List<UpgradeNode> connectedNodes { get; private set; } = new();
-    [field:SerializeField] public bool isUnlocked { get; private set; }
+    [field: SerializeField] public UpgradeData upgradeData { get; private set; }
+    [field: SerializeField] public List<UpgradeNode> connectedNodes { get; private set; } = new();
+    [field: SerializeField] public bool isUnlocked { get; private set; }
+    private UpgradeState upgradeState;
     
     [Header("UI")]
     private Button button;
     [SerializeField] private Image upgradeIcon;
+    private Image bgImage;
+    private Color maxLevelColor = new Color32(255, 209, 0, 255);
     
     private UpgradeNodePanelController nodePanelController;
     public RectTransform rectTransform { get; private set; }
 
     private void Awake()
     {
-        nodeId = upgradeData.id;
+        nodeId = upgradeData != null ? upgradeData.id : string.Empty;
         isUnlocked = false;
         button = GetComponent<Button>();
         nodePanelController = GetComponentInParent<UpgradeNodePanelController>();
         rectTransform = GetComponent<RectTransform>();
+        bgImage = transform.GetChild(0).GetComponent<Image>();
     }
 
     private void OnEnable()
@@ -39,20 +43,52 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             return;
         }
+
         isUnlocked = true;
         gameObject.SetActive(true);
-        UpgradeState state = GameManager.Instance.Upgrade.GetState(upgradeData);
+
+        upgradeState = GameManager.Instance.Upgrade.GetState(upgradeData);
+
         if (upgradeData.skill != null)
         {
-            GameManager.Instance.Upgrade.RegisterSkillWhenUnlockNode(state);
+            GameManager.Instance.Upgrade.RegisterSkillWhenUnlockNode(upgradeState);
         }
+
+        RefreshNodeVisual();
     } // 노드 해금이 곧 0레벨로 state 등록 하는것.
+
     public void RestoreUnlocked()
     {
         isUnlocked = true;
         gameObject.SetActive(true);
+        upgradeState = GameManager.Instance.Upgrade.GetState(upgradeData);
+        RefreshNodeVisual();
     }// 저장 / 씬 재진입처럼 이미 UpgradeState가 존재하는 노드를 UI에 다시 반영할 때 사용하는 함수.
     // GetState나 스킬 등록은 다시 하지 않고, 노드가 열려있다는 화면 상태만 복구한다.
+    
+    public void RefreshNodeVisual()
+    {
+        if (bgImage == null)
+        {
+            return;
+        }
+
+        if (upgradeData == null)
+        {
+            bgImage.color = Color.white;
+            return;
+        }
+
+        UpgradeState state = GameManager.Instance.Upgrade.GetState(upgradeData);
+
+        if (GameManager.Instance.Upgrade.IsMaxLevel(state))
+        {
+            bgImage.color = maxLevelColor;
+            return;
+        }
+
+        bgImage.color = Color.white;
+    }
     
     private void TryBuy()
     {
@@ -60,23 +96,29 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             return;
         } // 잠겨있으면 보통 unactive되있지만 혹시모르니 방지
+
         if (GameManager.Instance.Upgrade.TryBuyUpgrade(upgradeData))
         {
+            nodePanelController.RefreshDescriptionPanel(upgradeData);
+            RefreshNodeVisual();
             UpgradeState state = GameManager.Instance.Upgrade.GetState(upgradeData);
             if (state.level == 1)
             {
-                foreach (var connectedNode in connectedNodes)
+                foreach (UpgradeNode connectedNode in connectedNodes)
                 {
                     if (connectedNode.isUnlocked)
                     {
                         continue;
                     }
+
                     connectedNode.Unlock();
                     nodePanelController.ConnectNodeLine(this, connectedNode);
                 }
             } // 0레벨에서 업그레이드해서 1레벨 됐을 때 주변 노드 언락
+            
         }
     }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         nodePanelController.ShowDescriptionPanel(true, this);
@@ -109,24 +151,7 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     //         nodePanelController.ConnectNodeLine(this, connectedNode);
     //     }
     // } // 테스트 하고 싶으면 UpgradeNodePanelController의 InitUpgradeNodePanel이 호출되지 않게 하고 테스트하기
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     private void OnDrawGizmos()
     {
         if (connectedNodes == null)
@@ -168,24 +193,8 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         Gizmos.matrix = oldMatrix;
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     [SerializeField, HideInInspector] private List<UpgradeNode> previousConnectedNodes = new();
+
     private void OnValidate()
     {
         if (connectedNodes == null)
@@ -199,6 +208,51 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         SyncBidirectionalConnections();
         CacheConnectedNodes();
     }
+
+    [ContextMenu("Refresh Node By UpgradeData")]
+    private void RefreshNodeByUpgradeData()
+    {
+        if (upgradeData == null)
+        {
+            nodeId = string.Empty;
+            gameObject.name = GetDefaultNodeName();
+
+            if (upgradeIcon != null)
+            {
+                upgradeIcon.sprite = null;
+            }
+
+            return;
+        }
+
+        nodeId = upgradeData.id;
+        gameObject.name = GetUpgradeNodeName();
+
+        if (upgradeIcon != null)
+        {
+            upgradeIcon.sprite = upgradeData.displayIcon;
+        }
+    } // UpgradeData가 들어오거나 빠졌을 때 노드 이름과 아이콘을 갱신하는 함수.
+    // 데이터가 있으면 displayName으로 오브젝트 이름을 바꾸고 displayIcon을 적용한다.
+    // 데이터가 없으면 부모 기준 자식 번호로 기본 이름을 만들고 아이콘을 비운다.
+
+    private string GetDefaultNodeName()
+    {
+        int siblingIndex = transform.GetSiblingIndex();
+        return $"Node{siblingIndex + 1}";
+    } // UpgradeData가 없을 때 사용할 기본 노드 이름을 반환하는 함수.
+    // 바로 위 부모 기준 자신의 자식 번호를 사용해서 Node0, Node1 같은 이름을 만든다.
+
+    private string GetUpgradeNodeName()
+    {
+        if (!string.IsNullOrEmpty(upgradeData.displayName))
+        {
+            return upgradeData.displayName;
+        }
+
+        return upgradeData.name;
+    } // UpgradeData가 있을 때 사용할 노드 이름을 반환하는 함수.
+    // displayName이 있으면 displayName을 쓰고, 비어있으면 SO 에셋 이름을 대신 사용한다.
 
     private void RemoveInvalidConnectedNodes()
     {
@@ -251,9 +305,9 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             {
                 previousNode.connectedNodes.Remove(this);
 
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
                 UnityEditor.EditorUtility.SetDirty(previousNode);
-    #endif
+#endif
             }
         }
     }
@@ -271,9 +325,9 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             {
                 connectedNode.connectedNodes.Add(this);
 
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
                 UnityEditor.EditorUtility.SetDirty(connectedNode);
-    #endif
+#endif
             }
         }
     }
@@ -292,8 +346,8 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             previousConnectedNodes.Add(connectedNode);
         }
 
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
         UnityEditor.EditorUtility.SetDirty(this);
-    #endif
+#endif
     }
 }

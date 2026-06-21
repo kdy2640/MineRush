@@ -93,14 +93,20 @@ public class UpgradeManager : MonoBehaviour
 
         runtimeStat = statCalculator.Calculate(upgradeStates);
     }
-     
+    
     public bool TryBuyUpgrade(UpgradeData data)
     {
         UpgradeState state = GetState(data);
-        List<OreAmount> cost = data.GetCosts(state.level);
-    
-        if (!oreManager.TrySpend(cost))
+        if (IsMaxLevel(state))
+        {
             return false;
+        }
+        List<OreAmount> cost = data.GetCosts(state.level);
+        
+        if (!oreManager.TrySpend(cost))
+        {
+            return false;
+        }
     
         state.level++;
         RecalculateRuntimeStat();
@@ -108,8 +114,13 @@ public class UpgradeManager : MonoBehaviour
         {
             GameManager.Instance.SkillManager.SetSkillLevel(state.data.skill.id, state.level);
         }
-    
+
         return true;
+    }
+
+    public bool IsMaxLevel(UpgradeState state)
+    {
+        return state.level >= state.data.maxLevel;
     }
 
     /// <summary>

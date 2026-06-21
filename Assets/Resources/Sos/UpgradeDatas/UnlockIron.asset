@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: UnlockIron
   displayName: "\uAC15\uCCA0 \uCD94\uAC00"
+  displayIcon: {fileID: 0}
   baseOreAmounts:
   - oreType: 0
     amount: 50
   amountMultiplier: 1
+  maxLevel: 1
   statModifiers:
   - statType: 8
     modifierType: 0

@@ -1,8 +1,6 @@
-using System;
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
-using Unity.VisualScripting;
 using Sequence = DG.Tweening.Sequence;
 
 public class UI_NodeInfoPanel : MonoBehaviour
@@ -27,13 +25,35 @@ public class UI_NodeInfoPanel : MonoBehaviour
     private Vector3 originalRotation;
 
     private Sequence seq;
+
     private void Awake()
+    {
+        InitTween();
+    }
+
+    private void OnEnable() //SetActive 방식으로 하셨기에 OnEnable을 써봤음.
+    {
+        if (seq == null)
+        {
+            InitTween();
+        }
+
+        seq.Restart();
+    }
+
+    private void OnDisable() //패널 비활성화 될 때
+    {
+        seq?.Pause();
+    }
+
+    private void InitTween()
     {
         rectTransform = GetComponent<RectTransform>();
         originalScale = transform.localScale;
         originalRotation = transform.localRotation.eulerAngles;
-        gameObject.SetActive(false);
-        
+
+        seq?.Kill();
+
         seq = DOTween.Sequence().SetAutoKill(false).Pause();
         seq.Join(rectTransform.DOScale(originalScale, duration).From(originalScale * hoverScale).SetEase(Ease.OutCubic))
             .Join(rectTransform.DOPunchRotation(Vector3.forward * 15f, duration, 6, 0.5f))
@@ -41,33 +61,57 @@ public class UI_NodeInfoPanel : MonoBehaviour
             {
                 rectTransform.localRotation = Quaternion.Euler(originalRotation);
             });
-    }
-
-    private void OnEnable() //SetActive 방식으로 하셨기에 OnEnable을 써봤음.
-    {
-        seq.Restart();
-    }
-    private void OnDisable() //패널 비활성화 될 때
-    {
-    }
+    } // 설명창이 켜질 때 재생할 트윈을 초기화하는 함수.
+    // 자기 자신을 여기서 끄지 않고, 처음 숨기는 처리는 UpgradeNodePanelController에서 담당한다.
 
     public void SetInfo(UpgradeState upgradeState)
     {
         if (upgradeState == null) return;
 
-        DisplayNameText.text = upgradeState.data.displayName; 
+        DisplayNameText.text = upgradeState.data.displayName;
+        DescriptionText.text = UpgradeDescriptionFormatter.GetDescription(upgradeState);
 
-        // DescriptionText.text = upgradeState.data.description; 
-        //
-        // LevelText.text = $"Level : {upgradeState.level} / {upgradeState.data.maxLevel}";
+        bool isMaxLevel = GameManager.Instance.Upgrade.IsMaxLevel(upgradeState);
 
-        string costText = ""; 
-
-        foreach (OreAmount oreAmount in upgradeState.GetCurrentCost()) 
+        if (isMaxLevel)
         {
-            costText += $"{oreAmount.oreType} : {oreAmount.amount}\n";
+            LevelText.text = "<color=#6A4CFF>Level : 최대 레벨</color>";
+            CostText.text = "<color=#6A4CFF>최대 레벨</color>";
+            return;
         }
- 
-        CostText.text = costText; 
+
+        string costText = "";
+        LevelText.text = $"Level : {upgradeState.level} / {upgradeState.data.maxLevel}";
+
+        foreach (OreAmount oreAmount in upgradeState.GetCurrentCost())
+        {
+            bool isEnough = GameManager.Instance.OreManager.HasEnoughOre(oreAmount);
+            int currentAmount = GameManager.Instance.OreManager.GetAmount(oreAmount.oreType);
+            // string color = isEnough ? "#00FF00" : "#FF4444";
+            // costText += $"<color={color}>{oreAmount.oreType} : {currentAmount} / {oreAmount.amount}</color>\n";
+            string icon = GetOreIconTag(oreAmount.oreType);
+            string textColor = isEnough ? "#00FF00" : "#FF4444";
+
+            costText += $"{icon} : <color={textColor}>{currentAmount} / {oreAmount.amount}</color>\n";
+        }
+
+        CostText.text = costText.TrimEnd();
+    }
+    private string GetOreIconTag(OreType oreType)
+    {
+        string iconColor = GetOreIconColor(oreType);
+        return $"<color={iconColor}><sprite name=\"EmptyOreForTMP\" tint=1></color>";
+    }
+
+    private string GetOreIconColor(OreType oreType)
+    {
+        return oreType switch
+        {
+            OreType.Copper => "#E6844D",
+            OreType.Iron => "#BDD3E6",
+            OreType.Gold => "#FFC84B",
+            OreType.Diamond => "#7DF1FF",
+            _ => "#FFFFFF"
+        };
     }
 }

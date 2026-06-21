@@ -12,10 +12,12 @@ public class UpgradeData : ScriptableObject
 {
     public string id;
     public string displayName;
+    [field: SerializeField] public Sprite displayIcon;
 
     public List<OreAmount> baseOreAmounts;
     public float amountMultiplier = 1.2f;
 
+    public int maxLevel = 1;
     public List<StatModifier> statModifiers;
     public SkillBase skill;
 

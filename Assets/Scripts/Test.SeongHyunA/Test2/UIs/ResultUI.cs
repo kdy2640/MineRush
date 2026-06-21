@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
@@ -22,14 +21,25 @@ public class ResultUI : MonoBehaviour
 
     [Header("Panels")]
     [SerializeField] private StatPanelUI statPanel;
-   
-    [SerializeField] private GameFlowController flow;
-    private bool playing;
 
+    [SerializeField]
+    private GameFlowController flow;
+
+    [SerializeField]
+    private MonoBehaviour providerObject;
+
+    private IResultProvider provider;
+
+    private bool playing;
 
     private void Awake()
     {
+        provider = providerObject as IResultProvider;
+
         root.alpha = 0;
+        root.blocksRaycasts = false;
+        root.interactable = false;
+
         gameObject.SetActive(false);
     }
 
@@ -42,7 +52,6 @@ public class ResultUI : MonoBehaviour
         gameObject.SetActive(true);
 
         root.alpha = 0;
-
         root.blocksRaycasts = true;
         root.interactable = true;
 
@@ -55,26 +64,34 @@ public class ResultUI : MonoBehaviour
     private IEnumerator PlaySequence()
     {
         yield return PlayTitle();
+
         yield return PlayList();
+
         playing = false;
     }
 
     private IEnumerator PlayTitle()
     {
+        if (miningEndText == null)
+            yield break;
+
         miningEndText.gameObject.SetActive(true);
+
         miningEndText.text = "MINING END";
 
         miningEndText.transform.localScale = Vector3.one * 0.7f;
 
         Sequence seq = DOTween.Sequence();
-        seq.Append(miningEndText.transform.DOScale(1.2f, 0.25f));
-        seq.Append(miningEndText.transform.DOScale(1f, 0.15f));
+
+        seq.Append( miningEndText.transform.DOScale( 1.2f, 0.25f));
+
+        seq.Append( miningEndText.transform.DOScale( 1f, 0.15f));
 
         yield return seq.WaitForCompletion();
 
         yield return new WaitForSeconds(0.8f);
 
-        miningEndText.DOFade(0, 0.3f);
+        miningEndText.DOFade(0f, 0.3f);
 
         yield return new WaitForSeconds(0.3f);
 
@@ -83,45 +100,45 @@ public class ResultUI : MonoBehaviour
 
     private IEnumerator PlayList()
     {
-        foreach (Transform c in listParent)
-            Destroy(c.gameObject);
+        foreach (Transform child in listParent)
+            Destroy(child.gameObject);
 
         yield return null;
 
-        var data = RewardSystem.Instance.GetAll();
+        var data = provider.GetSessionData();
 
-        int sessionTotal = 0;
-
-        foreach (var d in data)
+        foreach (var reward in data)
         {
-            GameObject obj = Instantiate(itemPrefab, listParent);
+            GameObject obj = Instantiate( itemPrefab, listParent);
 
             StatItemUI item = obj.GetComponent<StatItemUI>();
-            item.SetData(
-                d.Key,
-                d.Value,
-                RewardSystem.Instance.GetTotalReward(d.Key) );
 
-            sessionTotal += d.Value;
+            item.SetData( reward.Key, reward.Value,
+                provider.GetTotalOre(reward.Key));
 
             CanvasGroup cg = obj.GetComponent<CanvasGroup>();
+
             if (cg == null) cg = obj.AddComponent<CanvasGroup>();
 
             cg.alpha = 0;
+
             obj.transform.localScale = Vector3.one * 0.8f;
 
             Sequence seq = DOTween.Sequence();
-            seq.Append(cg.DOFade(1f, 0.2f));
-            seq.Join(obj.transform.DOScale(1f, 0.2f));
+
+            seq.Append( cg.DOFade( 1f, 0.2f));
+
+            seq.Join( obj.transform.DOScale( 1f, 0.2f));
 
             yield return new WaitForSeconds(0.05f);
         }
 
-        sessionText.text = $"Session XP : {XPSystem.Instance.GetSessionXP()}";
-        totalText.text = $"Total XP : {XPSystem.Instance.GetTotalXP()}";
-    }
+        sessionText.text =
+            $"Session XP : {provider.GetSessionXP()}";
 
-    // ===== BUTTON =====
+        totalText.text =
+            $"Total XP : {provider.GetTotalXP()}";
+    }
 
     public void OnRestart()
     {
@@ -133,6 +150,18 @@ public class ResultUI : MonoBehaviour
 
     public void OnStatButton()
     {
-        statPanel.Toggle();
+        if (statPanel != null)
+            statPanel.Toggle();
+    }
+
+    private void OnDisable()
+    {
+        playing = false;
+
+        StopAllCoroutines();
+
+        root.alpha = 0;
+        root.blocksRaycasts = false;
+        root.interactable = false;
     }
 }

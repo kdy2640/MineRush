@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,40 +10,51 @@ public class XPBarUI : MonoBehaviour
     [SerializeField]
     private Image fill;
 
-    private void Start()
+    [SerializeField]
+    private TMP_Text xpText;
+
+    [SerializeField]
+    private MonoBehaviour providerObject;
+
+    private IXPProvider provider;
+
+    private void Awake()
     {
-        Invoke(nameof(Register), 0.1f);
+        provider =
+            providerObject as IXPProvider;
     }
 
-    private void Register()
+    private void OnEnable()
     {
-        if (XPSystem.Instance == null)
+        if (provider == null)
             return;
 
-        XPSystem.Instance.OnXPChanged += UpdateXP;
+        provider.OnXPChanged += UpdateXP;
 
         UpdateXP(
-            XPSystem.Instance.GetLevelXP(),
-            XPSystem.Instance.GetRequiredXP());
+            provider.GetCurrentXP(),
+            provider.GetRequiredXP());
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        if (XPSystem.Instance != null)
-            XPSystem.Instance.OnXPChanged -= UpdateXP;
+        if (provider == null)
+            return;
+
+        provider.OnXPChanged -= UpdateXP;
     }
 
-    private void UpdateXP(
-        int current,
-        int max)
+    private void UpdateXP( int current, int max)
     {
-        float value =
-            (float)current / max;
+        float value = (float)current / max;
 
         slider.value = value;
 
-        if (value >= 1f)
-            fill.color = Color.magenta;
+        if (xpText != null)
+            xpText.text = $"{current} / {max}";
+
+        if (value >= 0.9f)
+            fill.color = Color.purple;
         else
             fill.color = Color.green;
     }

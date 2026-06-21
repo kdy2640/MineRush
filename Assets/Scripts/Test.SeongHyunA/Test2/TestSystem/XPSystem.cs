@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class XPSystem : MonoBehaviour
+public class XPSystem : MonoBehaviour,IXPProvider
 {
     public static XPSystem Instance;
 
@@ -29,6 +29,9 @@ public class XPSystem : MonoBehaviour
         totalXP += amount;
         levelXP += amount;
 
+        Debug.Log($"XP ADD : {amount}");
+        Debug.Log($"CURRENT XP : {levelXP}");
+
         while (levelXP >= requiredXP)
         {
             levelXP -= requiredXP;
@@ -42,9 +45,9 @@ public class XPSystem : MonoBehaviour
             requiredXP += 50;
         }
 
-        OnXPChanged?.Invoke(
-            levelXP,
-            requiredXP);
+        Debug.Log("XP EVENT FIRE");
+
+        OnXPChanged?.Invoke( levelXP, requiredXP);
     }
 
     public int GetSessionXP()
@@ -71,7 +74,11 @@ public class XPSystem : MonoBehaviour
     {
         return level;
     }
-
+    public int GetCurrentXP()
+    {
+        return levelXP;
+    } 
+    
     public void ResetSession()
     {
         sessionXP = 0;

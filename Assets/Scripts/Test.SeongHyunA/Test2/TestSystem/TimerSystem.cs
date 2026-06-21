@@ -1,20 +1,22 @@
+
 using System;
 using UnityEngine;
 
-public class TimerSystem : MonoBehaviour
+public class TimerSystem : MonoBehaviour, ITimerProvider
 {
     public static TimerSystem Instance;
 
     public event Action<float> OnTick;
 
-    [Header("Session Duration")]
-    [SerializeField] private float sessionDuration = 10f;
+    [SerializeField]
+    private float sessionDuration = 10f;
 
     private float currentTime;
 
     private bool running;
 
-    [SerializeField] private GameFlowController flow;
+    [SerializeField]
+    private GameFlowController flow;
 
     private void Awake()
     {
@@ -30,13 +32,9 @@ public class TimerSystem : MonoBehaviour
         OnTick?.Invoke(currentTime);
     }
 
-    public void ResetTimer()
+    public void StopTimer()
     {
         running = false;
-
-        currentTime = sessionDuration;
-
-        OnTick?.Invoke(currentTime);
     }
 
     private void Update()
@@ -53,12 +51,9 @@ public class TimerSystem : MonoBehaviour
 
         if (currentTime <= 0)
         {
-            Debug.Log("TIMER END");
-
             running = false;
 
-            if (flow != null)
-                flow.EndGame();
+            flow.EndGame();
         }
     }
 

@@ -3,37 +3,41 @@ using UnityEngine;
 
 public class TimerUI : MonoBehaviour
 {
-    [SerializeField]
-    private TextMeshProUGUI text;
+    [SerializeField] private TextMeshProUGUI text;
 
-    private void Start()
+    [SerializeField] private MonoBehaviour providerObject;
+
+    private ITimerProvider provider;
+
+    private void Awake()
     {
-        if (TimerSystem.Instance != null)
-        {
-            TimerSystem.Instance.OnTick += UpdateUI;
-            UpdateUI(0);
-        }
+        provider = providerObject as ITimerProvider;
     }
 
-    private void OnDestroy()
-    {
-        if (TimerSystem.Instance != null)
-            TimerSystem.Instance.OnTick -= UpdateUI;
-    }
     private void OnEnable()
     {
-        if (TimerSystem.Instance != null)
-            TimerSystem.Instance.OnTick += UpdateUI;
+        if (provider == null) return;
+
+        provider.OnTick += UpdateUI;
+
+        UpdateUI( provider.GetTime() );
     }
 
     private void OnDisable()
     {
-        if (TimerSystem.Instance != null)
-            TimerSystem.Instance.OnTick -= UpdateUI;
+        if (provider == null)
+            return;
+
+        provider.OnTick -= UpdateUI;
     }
 
     private void UpdateUI(float t)
     {
         text.text = t.ToString("F2");
+
+        if (t <= 1f)
+            text.color = Color.red;
+        else
+            text.color = Color.white;
     }
 }

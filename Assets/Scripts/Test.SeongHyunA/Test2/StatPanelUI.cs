@@ -18,6 +18,10 @@ public class StatPanelUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI extraDuration;
     [SerializeField] private TextMeshProUGUI rewardMultiplier;
 
+    [SerializeField] private MonoBehaviour providerObject;
+
+    private IStatProvider provider;
+
     private Coroutine routine;
 
     private bool isVisible;
@@ -26,6 +30,13 @@ public class StatPanelUI : MonoBehaviour
     {
         canvasGroup.alpha = 0;
         canvasGroup.blocksRaycasts = false;
+
+        provider = providerObject as IStatProvider;
+
+        if (provider == null)
+        {
+            Debug.LogError("IStatProvider ¿¬°á ¾ÈµÊ");
+        }
     }
 
     public void Toggle()
@@ -63,18 +74,50 @@ public class StatPanelUI : MonoBehaviour
 
     private void UpdateUI()
     {
-        if (StatSystem.Instance == null)
+        if (provider == null)
+        {
+            Debug.LogError("Provider NULL");
             return;
+        }
 
-        var s = StatSystem.Instance.GetStat();
+        maxOreTier.text =
+            $"Tier : {provider.GetMaxOreTier()}";
 
-        maxOreTier.text = $"Tier : {s.MaxOreTier}";
-        miningPower.text = $"Power : {s.MiningPower:0.00}";
-        miningSpeed.text = $"Speed : {s.MiningSpeed:0.00}";
-        miningRadius.text = $"Radius : {s.MiningRadius:0.00}";
-        critChance.text = $"Crit : {(s.CriticalChance * 100f):0.0}%";
-        critMultiplier.text = $"Crit x{s.CriticalMultiplier:0.00}";
-        extraDuration.text = $"Duration : {s.ExtraDuration:0.00}";
-        rewardMultiplier.text = $"Reward x{s.RewardMultiplier:0.00}";
+        miningPower.text =
+            $"Power : {provider.GetMiningPower()}";
+
+        miningSpeed.text =
+            $"Speed : {provider.GetMiningSpeed()}";
+
+        miningRadius.text =
+            $"Radius : {provider.GetMiningRadius()}";
+
+        critChance.text =
+            $"Crit : {provider.GetCritChance()}";
+
+        critMultiplier.text =
+            $"Crit Mult : {provider.GetCritMultiplier()}";
+
+        extraDuration.text =
+            $"Duration : {provider.GetExtraDuration()}";
+
+        rewardMultiplier.text =
+            $"Reward : {provider.GetRewardMultiplier()}";
     }
+    //private void UpdateUI()
+    //{
+    //    if (StatSystem.Instance == null)
+    //        return;
+
+    //    var s = StatSystem.Instance.GetStat();
+
+    //    maxOreTier.text = $"Tier : {s.MaxOreTier}";
+    //    miningPower.text = $"Power : {s.MiningPower:0.00}";
+    //    miningSpeed.text = $"Speed : {s.MiningSpeed:0.00}";
+    //    miningRadius.text = $"Radius : {s.MiningRadius:0.00}";
+    //    critChance.text = $"Crit : {(s.CriticalChance * 100f):0.0}%";
+    //    critMultiplier.text = $"Crit x{s.CriticalMultiplier:0.00}";
+    //    extraDuration.text = $"Duration : {s.ExtraDuration:0.00}";
+    //    rewardMultiplier.text = $"Reward x{s.RewardMultiplier:0.00}";
+    //}
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class GameFlowController : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class GameFlowController : MonoBehaviour
     [SerializeField] private MiningSystem miningSystem;
     [SerializeField] private TimerSystem timerSystem;
     [SerializeField] private ResultUI resultUI;
+    [SerializeField] private OreResetSystem oreResetSystem;
 
     private bool running;
 
@@ -25,7 +27,7 @@ public class GameFlowController : MonoBehaviour
 
     public void RestartGame()
     {
-        TestOreManager.Instance.ResetAllOres();
+        oreResetSystem.ResetAllOres();
 
         RewardSystem.Instance.ClearSession();
 
@@ -48,6 +50,15 @@ public class GameFlowController : MonoBehaviour
         running = false;
 
         miningSystem.StopMining();
+
+        StartCoroutine(EndRoutine());
+    }
+
+    private IEnumerator EndRoutine()
+    {
+        GameLoopEvents.OnGameEnded?.Invoke();
+
+        yield return new WaitForSeconds(1.5f);
 
         resultUI.Show();
     }

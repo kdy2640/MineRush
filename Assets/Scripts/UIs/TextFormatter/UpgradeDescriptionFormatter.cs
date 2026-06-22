@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class UpgradeDescriptionFormatter
+public static class UpgradeDescriptionTextFormatter
 {
     private enum ValueFormat
     {
@@ -34,7 +34,7 @@ public static class UpgradeDescriptionFormatter
             descriptions.Add(GetStatDescription(modifier, upgradeState.level, isMaxLevel));
         }
 
-        return string.Join("\n\n", descriptions);
+        return string.Join("\n\n", descriptions).TrimEnd();
     } // 업그레이드 상태를 받아서 설명창에 표시할 전체 설명 문장을 만들어주는 함수.
 
     private static string GetStatDescription(StatModifier modifier, int level, bool isMaxLevel)
@@ -45,38 +45,38 @@ public static class UpgradeDescriptionFormatter
                 "잘못된 스탯이 노드에 들어가있습니다",
 
             StatType.MiningPower =>
-                GetValueDescription("채굴 데미지 :\n", modifier.value, level, isMaxLevel, ValueFormat.Number),
+                GetStatValueDescription("채굴 데미지 :\n", modifier.value, level, isMaxLevel, ValueFormat.Number),
 
             StatType.MiningSpeed =>
-                GetValueDescription("채굴 속도 :\n", modifier.value, level, isMaxLevel, ValueFormat.Percent),
+                GetStatValueDescription("채굴 속도 :\n", modifier.value, level, isMaxLevel, ValueFormat.Percent),
 
             StatType.MiningRadius =>
-                GetValueDescription("채굴 범위 :\n", modifier.value, level, isMaxLevel, ValueFormat.RatioPercent),
+                GetStatValueDescription("채굴 범위 :\n", modifier.value, level, isMaxLevel, ValueFormat.RatioPercent),
 
             StatType.CriticalChance =>
-                GetValueDescription("치명타 확률 :\n", modifier.value, level, isMaxLevel, ValueFormat.Percent),
+                GetStatValueDescription("치명타 확률 :\n", modifier.value, level, isMaxLevel, ValueFormat.Percent),
 
             StatType.CriticalMultiplier =>
-                GetValueDescription("치명타 피해량 :\n", modifier.value, level, isMaxLevel, ValueFormat.Percent),
+                GetStatValueDescription("치명타 피해량 :\n", modifier.value, level, isMaxLevel, ValueFormat.Percent),
 
             StatType.ExtraDuration =>
-                GetValueDescription("채굴 시간 :\n", modifier.value, level, isMaxLevel, ValueFormat.Second),
+                GetStatValueDescription("채굴 시간 :\n", modifier.value, level, isMaxLevel, ValueFormat.Second),
 
             StatType.RewardMultiplier =>
-                GetValueDescription("보상 증가 :\n", modifier.value, level, isMaxLevel, ValueFormat.RatioPercent),
+                GetStatValueDescription("보상 증가 :\n", modifier.value, level, isMaxLevel, ValueFormat.RatioPercent),
 
             StatType.MaxOreTier =>
                 GetOreTierDescription(modifier.value, isMaxLevel),
 
             StatType.StoneCount =>
-                GetValueDescription("시작 광석 수 :\n", modifier.value, level, isMaxLevel, ValueFormat.Int),
+                GetStatValueDescription("시작 광석 수 :\n", modifier.value, level, isMaxLevel, ValueFormat.Int),
 
             StatType.FragChance =>
-                GetValueDescription($"{OreTextFormatter.GetDisplayName(modifier.oreType)} 조각돌 출현 확률 :\n",
+                GetStatValueDescription($"{OreTextFormatter.GetDisplayName(modifier.oreType)} 조각돌 출현 확률 :\n",
                     modifier.value, level, isMaxLevel, ValueFormat.RatioPercent),
 
             StatType.PureChance =>
-                GetValueDescription($"{OreTextFormatter.GetDisplayName(modifier.oreType)} 순수 광석 출현 확률 :\n",
+                GetStatValueDescription($"{OreTextFormatter.GetDisplayName(modifier.oreType)} 순수 광석 출현 확률 :\n",
                     modifier.value, level, isMaxLevel, ValueFormat.RatioPercent),
 
             _ =>
@@ -84,7 +84,7 @@ public static class UpgradeDescriptionFormatter
         };
     } // StatType에 따라 어떤 설명 문장을 만들지 정하는 함수.
 
-    private static string GetValueDescription(string statName, float valuePerLevel, int level, bool isMaxLevel, ValueFormat format)
+    private static string GetStatValueDescription(string statName, float valuePerLevel, int level, bool isMaxLevel, ValueFormat format)
     {
         float currentValue = valuePerLevel * level;
         float nextValue = valuePerLevel * (level + 1);

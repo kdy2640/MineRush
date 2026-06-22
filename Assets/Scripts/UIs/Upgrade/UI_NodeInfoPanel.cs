@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Serialization;
 using Sequence = DG.Tweening.Sequence;
 
 public class UI_NodeInfoPanel : MonoBehaviour
@@ -12,7 +13,7 @@ public class UI_NodeInfoPanel : MonoBehaviour
     [Header("출력할 부분")]
     [field: SerializeField] public TextMeshProUGUI DisplayNameText { get; private set; }
     [field: SerializeField] public TextMeshProUGUI DescriptionText { get; private set; }
-    [field: SerializeField] public TextMeshProUGUI CostText { get; private set; } //이거 OreAmountText로 바꾸는 게?
+    [field: SerializeField] public TextMeshProUGUI OreCostText { get; private set; }
     [field: SerializeField] public TextMeshProUGUI LevelText { get; private set; }
 
     [Header("등장 시 패널 크기")]
@@ -69,30 +70,18 @@ public class UI_NodeInfoPanel : MonoBehaviour
         if (upgradeState == null) return;
 
         DisplayNameText.text = upgradeState.data.displayName;
-        DescriptionText.text = UpgradeDescriptionFormatter.GetDescription(upgradeState);
+        DescriptionText.text = UpgradeDescriptionTextFormatter.GetDescription(upgradeState);
 
         bool isMaxLevel = GameManager.Instance.Upgrade.IsMaxLevel(upgradeState);
 
         if (isMaxLevel)
         {
             LevelText.text = "<color=#6A4CFF>Level : 최대 레벨</color>";
-            CostText.text = "<color=#6A4CFF>최대 레벨</color>";
+            OreCostText.text = "<color=#6A4CFF>최대 레벨</color>";
             return;
         }
 
-        string costText = "";
         LevelText.text = $"Level : {upgradeState.level} / {upgradeState.data.maxLevel}";
-
-        foreach (OreAmount oreAmount in upgradeState.GetCurrentCost())
-        {
-            bool isEnough = GameManager.Instance.OreManager.HasEnoughOre(oreAmount);
-            int currentAmount = GameManager.Instance.OreManager.GetAmount(oreAmount.oreType);
-            string icon = OreTextFormatter.GetTmpTag(oreAmount.oreType);
-            string textColor = isEnough ? "#00FF00" : "#FF4444";
-
-            costText += $"{icon} : <color={textColor}>{currentAmount} / {oreAmount.amount}</color>\n";
-        }
-
-        CostText.text = costText.TrimEnd();
+        OreCostText.text = UpgradeOreCostTextFormatter.GetAllOreCostText(upgradeState, GameManager.Instance.OreManager);
     }
 }

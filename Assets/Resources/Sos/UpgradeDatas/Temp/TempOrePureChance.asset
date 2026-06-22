@@ -10,21 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f17ab4c7a91bd145af47ff207404d92, type: 3}
-  m_Name: UpgradeCriticalMultiplier02
+  m_Name: TempOrePureChance
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
-  id: UpgradeCriticalMultiplier02
-  displayName: "\uD06C\uB9AC\uD2F0\uCEEC \uACF5\uACA9 \uBC30\uC728 \uC99D\uAC00 II"
+  id: 
+  displayName: "\uAD6C\uB9AC \uC21C\uC218\uB3CC \uD655\uB960 \uC99D\uAC00"
   displayIcon: {fileID: 0}
-  baseOreAmounts:
-  - oreType: 1
-    amount: 15
-  - oreType: 1
-    amount: 25
-  amountMultiplier: 1.3
-  maxLevel: 5
+  baseOreAmounts: []
+  amountMultiplier: 1.2
+  maxLevel: 3
   statModifiers:
-  - statType: 5
-    modifierType: 1
-    value: 0.1
+  - statType: 11
+    modifierType: 0
+    value: 0.05
     oreType: 0
   skill: {fileID: 0}

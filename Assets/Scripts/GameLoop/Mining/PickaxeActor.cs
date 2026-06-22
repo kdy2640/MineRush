@@ -1,11 +1,12 @@
-using System.Collections;
 using DG.Tweening;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PickaxeActor : Poolable
 {
     [Header("Position")]
-    [SerializeField] private Vector3 deltaPosition = Vector3.zero;
+    [SerializeField] private Vector3 deltaPosition = new Vector3(0.25f,0.1f,0);
 
     [Header("Rotation Angle")]
     [SerializeField] private float backAngle = -25f;
@@ -18,6 +19,8 @@ public class PickaxeActor : Poolable
     [SerializeField] private Ease swingEase = Ease.InQuad;
     [SerializeField] private Ease returnEase = Ease.OutSine;
 
+    private SpriteRenderer renderer;
+
     private Sequence rightSequence;
     private Sequence leftSequence;
     private Sequence currentSequence;
@@ -27,6 +30,8 @@ public class PickaxeActor : Poolable
 
     private void Awake()
     {
+        renderer = GetComponent<SpriteRenderer>();
+
         Vector3 euler = transform.localEulerAngles;
         baseX = euler.x;
         baseY = euler.y;
@@ -116,6 +121,7 @@ public class PickaxeActor : Poolable
     public override void Initialize(object obj)
     {
         StopCurrentTween();
+        renderer.sprite = PickaxeDataDB.GetStoneDataSO(GameManager.Instance.Upgrade.GetRuntimeStat().PickaxeTier).Icon;
     }
 
     public override void ResetState()

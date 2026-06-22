@@ -321,8 +321,8 @@ MonoBehaviour:
   m_text: "\uCC44\uAD74 \uC18D\uB3C4 \uC99D\uAC00 : \\n+5%\\n\\n\uCC44\uAD74 \uACF5\uACA9\uB825
     \uC99D\uAC00 :\\n+1"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4e8392103ed54de45aa5fe0f0b8cb3cd, type: 2}
-  m_sharedMaterial: {fileID: -710159384192824825, guid: 4e8392103ed54de45aa5fe0f0b8cb3cd, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 63d86a1734acbc548bf3999901aa19d5, type: 2}
+  m_sharedMaterial: {fileID: 9192151493894396883, guid: 63d86a1734acbc548bf3999901aa19d5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -512,7 +512,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 280, y: -268.57}
+  m_AnchoredPosition: {x: 280, y: -268.58}
   m_SizeDelta: {x: 0, y: 4.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &82401726
@@ -614,8 +614,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Level : 0 / 0'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4e8392103ed54de45aa5fe0f0b8cb3cd, type: 2}
-  m_sharedMaterial: {fileID: -710159384192824825, guid: 4e8392103ed54de45aa5fe0f0b8cb3cd, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 63d86a1734acbc548bf3999901aa19d5, type: 2}
+  m_sharedMaterial: {fileID: 9192151493894396883, guid: 63d86a1734acbc548bf3999901aa19d5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2999,7 +2999,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 300, y: -236.66}
+  m_AnchoredPosition: {x: 300, y: -236.67}
   m_SizeDelta: {x: 560, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &661723112
@@ -4640,8 +4640,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: UpgradeName
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4e8392103ed54de45aa5fe0f0b8cb3cd, type: 2}
-  m_sharedMaterial: {fileID: -710159384192824825, guid: 4e8392103ed54de45aa5fe0f0b8cb3cd, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 63d86a1734acbc548bf3999901aa19d5, type: 2}
+  m_sharedMaterial: {fileID: 9192151493894396883, guid: 63d86a1734acbc548bf3999901aa19d5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7479,8 +7479,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '<sprite name="CopperOre"> : aa\naaaa<sprite name="CopperOre">a'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4e8392103ed54de45aa5fe0f0b8cb3cd, type: 2}
-  m_sharedMaterial: {fileID: -710159384192824825, guid: 4e8392103ed54de45aa5fe0f0b8cb3cd, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 63d86a1734acbc548bf3999901aa19d5, type: 2}
+  m_sharedMaterial: {fileID: 9192151493894396883, guid: 63d86a1734acbc548bf3999901aa19d5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

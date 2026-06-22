@@ -40,5 +40,44 @@ public class UpgradeData : ScriptableObject
         }
         return result;
     }
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        foreach (StatModifier modifier in statModifiers)
+        {
+            if (modifier == null)
+            {
+                continue;
+            }
+
+            bool usesOreType =
+                modifier.statType == StatType.FragChance ||
+                modifier.statType == StatType.PureChance ||
+                modifier.statType == StatType.MaxOreTier;
+
+            if (!usesOreType)
+            {
+                modifier.oreType = OreType.None;
+            }
+
+            if (modifier.statType == StatType.MaxOreTier || modifier.statType == StatType.PickaxeTier)
+            {
+                modifier.modifierType = ModifierType.Max;
+            }
+
+            if (modifier.statType != StatType.MaxOreTier)
+            {
+                continue;
+            }
+
+            if (modifier.oreType == OreType.None || modifier.oreType == OreType.Length)
+            {
+                continue;
+            }
+
+            modifier.value = (int)modifier.oreType;
+        }
+    }
+#endif
 }
  

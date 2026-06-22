@@ -2,11 +2,10 @@ using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 
-public class PickaxeActor : MonoBehaviour
+public class PickaxeActor : Poolable
 {
     [Header("Position")]
-    [SerializeField] private Vector3 deltaPositon = Vector3.zero;
-    [SerializeField] private bool isFlipx = false;
+    [SerializeField] private Vector3 deltaPosition = Vector3.zero;
 
     [Header("Rotation Angle")]
     [SerializeField] private float backAngle = -25f;
@@ -19,7 +18,9 @@ public class PickaxeActor : MonoBehaviour
     [SerializeField] private Ease swingEase = Ease.InQuad;
     [SerializeField] private Ease returnEase = Ease.OutSine;
 
-    private Tween currentTween;
+    private Sequence rightSequence;
+    private Sequence leftSequence;
+    private Sequence currentSequence;
 
     private float baseX;
     private float baseY;
@@ -29,63 +30,72 @@ public class PickaxeActor : MonoBehaviour
         Vector3 euler = transform.localEulerAngles;
         baseX = euler.x;
         baseY = euler.y;
+
+        rightSequence = CreateAttackSequence(1);
+        leftSequence = CreateAttackSequence(-1);
     }
 
-    public IEnumerator PlayAttackRoutine(Vector3 summonPosition)
+    private Sequence CreateAttackSequence(int offset)
     {
-        StopCurrentTween();
-
-        int offset = 1;
-
-        isFlipx = Random.value > 0.5f;
-
-        if (isFlipx)
-        {
-            offset = -1;
-        }
-
-        transform.position = summonPosition + new Vector3(
-            offset * deltaPositon.x,
-            deltaPositon.y,
-            deltaPositon.z
-        );
-
-        transform.localScale = new Vector3(offset, 1, 1);
-
         float startAngle = backAngle * offset;
         float attackAngle = forwardAngle * offset;
 
-        transform.localRotation = Quaternion.Euler(baseX, baseY, startAngle);
+        Sequence seq = DOTween.Sequence()
+            .SetAutoKill(false)
+            .Pause();
 
-        Sequence seq = DOTween.Sequence();
-
-        // 앞으로 휘두르기
         seq.Append(transform.DOLocalRotate(
             new Vector3(baseX, baseY, attackAngle),
             swingDuration,
             RotateMode.Fast
         ).SetEase(swingEase));
 
-        // 다시 뒤로 복귀
         seq.Append(transform.DOLocalRotate(
             new Vector3(baseX, baseY, startAngle),
             returnDuration,
             RotateMode.Fast
         ).SetEase(returnEase));
 
-        currentTween = seq;
+        return seq;
+    }
 
-        yield return seq.WaitForCompletion();
+    public IEnumerator PlayAttackRoutine(Vector3 summonPosition)
+    {
+        StopCurrentTween();
 
-        currentTween = null;
+        int offset = Random.value > 0.5f ? -1 : 1;
 
-        Destroy(gameObject);
+        transform.position = summonPosition + new Vector3(
+            offset * deltaPosition.x,
+            deltaPosition.y,
+            deltaPosition.z
+        );
+
+        transform.localScale = new Vector3(offset, 1f, 1f);
+
+        float startAngle = backAngle * offset;
+        transform.localRotation = Quaternion.Euler(baseX, baseY, startAngle);
+
+        currentSequence = offset == 1 ? rightSequence : leftSequence;
+
+        currentSequence.Restart();
+
+        yield return currentSequence.WaitForCompletion();
+
+        currentSequence = null;
+         
+        RequestReturn(); 
     }
 
     public void StopCurrentTween()
     {
-        currentTween?.Kill();
-        currentTween = null;
+        if (currentSequence == null)
+            return;
+
+        currentSequence.Pause();
+        currentSequence.Rewind();
+
+        currentSequence = null;
     }
 
     private void OnDisable()
@@ -95,6 +105,24 @@ public class PickaxeActor : MonoBehaviour
 
     private void OnDestroy()
     {
+        rightSequence?.Kill();
+        leftSequence?.Kill();
+
+        rightSequence = null;
+        leftSequence = null;
+        currentSequence = null;
+    }
+
+    public override void Initialize(object obj)
+    {
         StopCurrentTween();
+    }
+
+    public override void ResetState()
+    {
+        StopCurrentTween();
+
+        transform.localScale = Vector3.one;
+        transform.localRotation = Quaternion.Euler(baseX, baseY, 0f);
     }
 }

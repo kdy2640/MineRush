@@ -5,19 +5,19 @@ public class MiningSequence : MonoBehaviour
 {
     [Header("Actors")]
     [SerializeField] private PickaxeActor pickaxePrefab;
+    [SerializeField] private Pooler pickaxePooler;
     // [SerializeField] private OreGainPresenter oreGainPresenter;
     // [SerializeField] private OrePanel orePanel;
+      
 
-    private GameLoopManager gameLoopManager;
-    private OreManager oreManager;
+    private Coroutine currentRoutine;
 
-    private Coroutine currentRoutine; 
-     
-    public void Initialize(GameLoopManager gameLoopManager, OreManager oreManager)
+    private void Awake()
     {
-        this.gameLoopManager = gameLoopManager;
-        this.oreManager = oreManager;
+        pickaxePooler = GetComponent<Pooler>();
+
     }
+     
 
     public void RequestMine(StoneActor stone)
     { 
@@ -37,7 +37,7 @@ public class MiningSequence : MonoBehaviour
         // 1. 데이터 판정 먼저 확정
         stone.GetComponent<HPHandler>().TakeDamage(MiningCalculator.CalculateDamage());
 
-        PickaxeActor pick = GameObject.Instantiate(pickaxePrefab);
+        PickaxeActor pick = pickaxePooler.Get(null).GetComponent<PickaxeActor>();
         // 2. 곡괭이 연출
         yield return pick.PlayAttackRoutine(stone.transform.position);
 

@@ -468,7 +468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6498118836059251948, guid: 68ba09d0d95102646b050086470998b1, type: 3}
       propertyPath: m_Name
-      value: InputSystem
+      value: System
       objectReference: {fileID: 0}
     - target: {fileID: 7140995894210371990, guid: 68ba09d0d95102646b050086470998b1, type: 3}
       propertyPath: mainCamera
@@ -489,6 +489,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4506878927684452183, guid: 68ba09d0d95102646b050086470998b1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 334274005}
+    - targetCorrespondingSourceObject: {fileID: 4506878927684452183, guid: 68ba09d0d95102646b050086470998b1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 334274007}
   m_SourcePrefab: {fileID: 100100000, guid: 68ba09d0d95102646b050086470998b1, type: 3}
 --- !u!1 &334274004 stripped
 GameObject:
@@ -508,6 +511,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MiningSequence
   pickaxePrefab: {fileID: 1651423998006464619, guid: 42e85b616f811bf4f87dc55d5d6e5095, type: 3}
+  pickaxePooler: {fileID: 334274007}
+--- !u!114 &334274007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 334274004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 513f37d68a9efa648af2688cd8b39fc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pooler
+  prefab: {fileID: 1651423998006464619, guid: 42e85b616f811bf4f87dc55d5d6e5095, type: 3}
 --- !u!1001 &609577317
 PrefabInstance:
   m_ObjectHideFlags: 0

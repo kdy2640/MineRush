@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-public static class oreDataDB
+public static class OreDataDB
 {
     private static OreDataSO[] oreDataMap;
     private static string FilePath = "Sos/OreDatas"; 

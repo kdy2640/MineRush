@@ -1,15 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class UpgradeDescriptionFormatter
+public static class UpgradeDescriptionTextFormatter
 {
     private enum ValueFormat
     {
         Number,
         Int,
         Percent,
+        RatioPercent,
         Second
-    } // 값에 따라 어떤걸 나타낼지 위한 enum
+    } // 값에 따라 어떤 형식으로 표시할지 정하는 enum.
 
     public static string GetDescription(UpgradeState upgradeState)
     {
@@ -33,7 +34,7 @@ public static class UpgradeDescriptionFormatter
             descriptions.Add(GetStatDescription(modifier, upgradeState.level, isMaxLevel));
         }
 
-        return string.Join("\n\n", descriptions);
+        return string.Join("\n\n", descriptions).TrimEnd();
     } // 업그레이드 상태를 받아서 설명창에 표시할 전체 설명 문장을 만들어주는 함수.
 
     private static string GetStatDescription(StatModifier modifier, int level, bool isMaxLevel)
@@ -44,54 +45,56 @@ public static class UpgradeDescriptionFormatter
                 "잘못된 스탯이 노드에 들어가있습니다",
 
             StatType.MiningPower =>
-                GetValueDescription("채굴 데미지 :\n", modifier.value, level, isMaxLevel, ValueFormat.Number),
+                GetStatValueDescription("채굴 데미지 :\n", modifier.value, level, isMaxLevel, ValueFormat.Number),
 
             StatType.MiningSpeed =>
-                GetValueDescription("채굴 속도 :\n", modifier.value, level, isMaxLevel, ValueFormat.Percent),
+                GetStatValueDescription("채굴 속도 :\n", modifier.value, level, isMaxLevel, ValueFormat.Percent),
 
             StatType.MiningRadius =>
-                GetValueDescription("채굴 범위 :\n", modifier.value, level, isMaxLevel, ValueFormat.Int),
+                GetStatValueDescription("채굴 범위 :\n", modifier.value, level, isMaxLevel, ValueFormat.RatioPercent),
 
             StatType.CriticalChance =>
-                GetValueDescription("치명타 확률 :\n", modifier.value, level, isMaxLevel, ValueFormat.Percent),
+                GetStatValueDescription("치명타 확률 :\n", modifier.value, level, isMaxLevel, ValueFormat.Percent),
 
             StatType.CriticalMultiplier =>
-                GetValueDescription("치명타 피해량 :\n", modifier.value, level, isMaxLevel, ValueFormat.Percent),
+                GetStatValueDescription("치명타 피해량 :\n", modifier.value, level, isMaxLevel, ValueFormat.Percent),
 
             StatType.ExtraDuration =>
-                GetValueDescription("채굴 시간 :\n", modifier.value, level, isMaxLevel, ValueFormat.Second),
+                GetStatValueDescription("채굴 시간 :\n", modifier.value, level, isMaxLevel, ValueFormat.Second),
 
             StatType.RewardMultiplier =>
-                GetValueDescription("보상 증가 :\n", modifier.value, level, isMaxLevel, ValueFormat.Percent),
+                GetStatValueDescription("보상 증가 :\n", modifier.value, level, isMaxLevel, ValueFormat.RatioPercent),
 
             StatType.MaxOreTier =>
                 GetOreTierDescription(modifier.value, isMaxLevel),
 
             StatType.StoneCount =>
-                GetValueDescription("시작 광석 수 :\n", modifier.value, level, isMaxLevel, ValueFormat.Int),
+                GetStatValueDescription("시작 광석 수 :\n", modifier.value, level, isMaxLevel, ValueFormat.Int),
 
             StatType.FragChance =>
-                GetValueDescription("파편 광석 확률 :\n", modifier.value, level, isMaxLevel, ValueFormat.Percent),
+                GetStatValueDescription($"{OreTextFormatter.GetDisplayName(modifier.oreType)} 조각돌 출현 확률 :\n",
+                    modifier.value, level, isMaxLevel, ValueFormat.RatioPercent),
 
             StatType.PureChance =>
-                GetValueDescription("순수 광석 확률 :\n", modifier.value, level, isMaxLevel, ValueFormat.Percent),
+                GetStatValueDescription($"{OreTextFormatter.GetDisplayName(modifier.oreType)} 순수 광석 출현 확률 :\n",
+                    modifier.value, level, isMaxLevel, ValueFormat.RatioPercent),
 
             _ =>
                 "알 수 없는 스탯입니다"
         };
     } // StatType에 따라 어떤 설명 문장을 만들지 정하는 함수.
 
-    private static string GetValueDescription(string statName, float valuePerLevel, int level, bool isMaxLevel, ValueFormat unit)
+    private static string GetStatValueDescription(string statName, float valuePerLevel, int level, bool isMaxLevel, ValueFormat format)
     {
         float currentValue = valuePerLevel * level;
         float nextValue = valuePerLevel * (level + 1);
 
         if (isMaxLevel)
         {
-            return $"{statName} +{FormatValue(currentValue, unit)}";
+            return $"{statName} +{FormatValue(currentValue, format)}";
         }
 
-        return $"{statName} +{FormatValue(currentValue, unit)} -> +{FormatValue(nextValue, unit)}";
+        return $"{statName} +{FormatValue(currentValue, format)} -> +{FormatValue(nextValue, format)}";
     } // 일반 수치형 스탯 설명을 만들어주는 함수.
 
     private static string GetOreTierDescription(float value, bool isMaxLevel)
@@ -105,24 +108,12 @@ public static class UpgradeDescriptionFormatter
 
         if (isMaxLevel)
         {
-            return $"{GetOreDisplayName(oreType)} 광석 해금 완료";
+            return $"{OreTextFormatter.GetTmpTag(oreType)} {OreTextFormatter.GetDisplayName(oreType)} 광석 해금 완료";
         }
 
-        return $"{GetOreDisplayName(oreType)} 광석을 해금합니다";
+        return $"{OreTextFormatter.GetTmpTag(oreType)} {OreTextFormatter.GetDisplayName(oreType)} 광석을 해금합니다";
     } // MaxOreTier 설명을 만들어주는 함수.
     // value를 OreType enum 값으로 보고, 해당 광물을 해금하는 설명을 만든다.
-
-    private static string GetOreDisplayName(OreType oreType)
-    {
-        return oreType switch
-        {
-            OreType.Copper => "구리", // 사실 0이지만 그냥 해놨음.
-            OreType.Iron => "철",
-            OreType.Gold => "금",
-            OreType.Diamond => "다이아몬드",
-            _ => "알 수 없는 광물"
-        };
-    } // OreType을 UI에 보여줄 이름으로 바꿔주는 함수.
 
     private static string FormatValue(float value, ValueFormat format)
     {
@@ -130,6 +121,7 @@ public static class UpgradeDescriptionFormatter
         {
             ValueFormat.Int => Mathf.RoundToInt(value).ToString(),
             ValueFormat.Percent => $"{value.ToString("0.##")}%",
+            ValueFormat.RatioPercent => $"{(value * 100f).ToString("0.##")}%",
             ValueFormat.Second => $"{value.ToString("0.##")}초",
             _ => value.ToString("0.##")
         };

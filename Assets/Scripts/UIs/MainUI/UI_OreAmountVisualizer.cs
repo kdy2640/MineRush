@@ -12,7 +12,7 @@ public class UI_OreAmountVisualizer : MonoBehaviour
 
     public void SetOre(OreAmount amount)
     {
-        OreImage.sprite = oreDataDB.GetOreDataSO(amount.oreType).OreSprite;
+        OreImage.sprite = OreDataDB.GetOreDataSO(amount.oreType).OreSprite;
         OreCount.text = amount.amount.ToString();
     }
     public void Clear()

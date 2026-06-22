@@ -338,7 +338,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: 0016aa3d41ab6a14b91f5b0e2277fb50, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
@@ -1163,7 +1163,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 132a40345e4358f47a04331f13d56fd5, type: 2}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: previousConnectedNodes.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: 'previousConnectedNodes.Array.data[0]'
@@ -1177,6 +1177,10 @@ PrefabInstance:
       propertyPath: 'previousConnectedNodes.Array.data[2]'
       value: 
       objectReference: {fileID: 1020196172}
+    - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
+      propertyPath: 'previousConnectedNodes.Array.data[3]'
+      value: 
+      objectReference: {fileID: 194779017}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: <connectedNodes>k__BackingField.Array.size
       value: 4
@@ -1449,12 +1453,20 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 13af04d395e9d1f46b0161af467ee7d9, type: 2}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: previousConnectedNodes.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: 'previousConnectedNodes.Array.data[0]'
       value: 
       objectReference: {fileID: 1020196172}
+    - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
+      propertyPath: 'previousConnectedNodes.Array.data[1]'
+      value: 
+      objectReference: {fileID: 194779017}
+    - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
+      propertyPath: 'previousConnectedNodes.Array.data[2]'
+      value: 
+      objectReference: {fileID: 561540697}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: <connectedNodes>k__BackingField.Array.size
       value: 3
@@ -2604,12 +2616,16 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 4b1ca5edc81c7404693ce5672c059d32, type: 2}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: previousConnectedNodes.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: 'previousConnectedNodes.Array.data[0]'
       value: 
       objectReference: {fileID: 1053709694}
+    - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
+      propertyPath: 'previousConnectedNodes.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1407836057}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: <connectedNodes>k__BackingField.Array.size
       value: 2
@@ -3244,6 +3260,14 @@ PrefabInstance:
       propertyPath: <upgradeData>k__BackingField
       value: 
       objectReference: {fileID: 11400000, guid: 9ec8536db2b2cd04da26cbf886055395, type: 2}
+    - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
+      propertyPath: previousConnectedNodes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
+      propertyPath: 'previousConnectedNodes.Array.data[0]'
+      value: 
+      objectReference: {fileID: 574158127}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: <connectedNodes>k__BackingField.Array.size
       value: 1
@@ -4796,12 +4820,16 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: f421f981898ed0e4ca2db028d04e1fb3, type: 2}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: previousConnectedNodes.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: 'previousConnectedNodes.Array.data[0]'
       value: 
       objectReference: {fileID: 2101638847}
+    - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
+      propertyPath: 'previousConnectedNodes.Array.data[1]'
+      value: 
+      objectReference: {fileID: 558827256}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: <connectedNodes>k__BackingField.Array.size
       value: 2
@@ -5119,6 +5147,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 751843e92e286f44aa286bdbc66f1135, type: 2}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
+      propertyPath: previousConnectedNodes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
+      propertyPath: 'previousConnectedNodes.Array.data[0]'
+      value: 
+      objectReference: {fileID: 574158127}
+    - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: <connectedNodes>k__BackingField.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -5402,6 +5438,14 @@ PrefabInstance:
       propertyPath: <upgradeData>k__BackingField
       value: 
       objectReference: {fileID: 11400000, guid: aaffef69473cb134987442089c1c90fb, type: 2}
+    - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
+      propertyPath: previousConnectedNodes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
+      propertyPath: 'previousConnectedNodes.Array.data[0]'
+      value: 
+      objectReference: {fileID: 574158127}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: <connectedNodes>k__BackingField.Array.size
       value: 1
@@ -6300,7 +6344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UI_NodeInfoPanel
   <DisplayNameText>k__BackingField: {fileID: 1038106683}
   <DescriptionText>k__BackingField: {fileID: 9423882}
-  <CostText>k__BackingField: {fileID: 1784593251}
+  <OreCostText>k__BackingField: {fileID: 1784593251}
   <LevelText>k__BackingField: {fileID: 103835589}
   hoverScale: 1.2
   duration: 0.5
@@ -6940,12 +6984,16 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 0d0499d7a5f98704fa4d0b43f8acecf9, type: 2}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: previousConnectedNodes.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: 'previousConnectedNodes.Array.data[0]'
       value: 
       objectReference: {fileID: 212053745}
+    - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
+      propertyPath: 'previousConnectedNodes.Array.data[1]'
+      value: 
+      objectReference: {fileID: 574158127}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: <connectedNodes>k__BackingField.Array.size
       value: 2
@@ -7384,7 +7432,7 @@ GameObject:
   - component: {fileID: 1784593252}
   - component: {fileID: 1784593251}
   m_Layer: 5
-  m_Name: CostText
+  m_Name: OreCostText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7429,8 +7477,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<color=#B87333><sprite name="EmptyOreForTMP" tint=1></color> : aa\naaaa<color=#B87333><sprite
-    name="EmptyOreForTMP" tint=1></color>a'
+  m_text: '<sprite name="CopperOre"> : aa\naaaa<sprite name="CopperOre">a'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4e8392103ed54de45aa5fe0f0b8cb3cd, type: 2}
   m_sharedMaterial: {fileID: -710159384192824825, guid: 4e8392103ed54de45aa5fe0f0b8cb3cd, type: 2}
@@ -7449,7 +7496,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 11400000, guid: 656ca31a3c30c064dbd0be3cc1ad3088, type: 2}
+  m_spriteAsset: {fileID: 11400000, guid: 0016aa3d41ab6a14b91f5b0e2277fb50, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
@@ -8415,7 +8462,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 45fc1185dc2766546875f4630f8e6b55, type: 2}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: previousConnectedNodes.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: 'previousConnectedNodes.Array.data[0]'
@@ -8425,6 +8472,14 @@ PrefabInstance:
       propertyPath: 'previousConnectedNodes.Array.data[1]'
       value: 
       objectReference: {fileID: 1053709694}
+    - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
+      propertyPath: 'previousConnectedNodes.Array.data[2]'
+      value: 
+      objectReference: {fileID: 502103214}
+    - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
+      propertyPath: 'previousConnectedNodes.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1407836057}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: <connectedNodes>k__BackingField.Array.size
       value: 4

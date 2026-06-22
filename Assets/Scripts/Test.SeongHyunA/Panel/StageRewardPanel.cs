@@ -41,7 +41,7 @@ public class StageRewardPanel : MonoBehaviour
     }
     private void RefreshUI()
     {
-        string text = "==== Reward Amount ====\n";
+        string text = "=== Ore Amount ===\n";
 
         int totalReward = 0;
 

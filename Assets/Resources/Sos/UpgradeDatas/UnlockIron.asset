@@ -22,7 +22,7 @@ MonoBehaviour:
   maxLevel: 1
   statModifiers:
   - statType: 8
-    modifierType: 0
+    modifierType: 2
     value: 1
-    oreType: -1
+    oreType: 1
   skill: {fileID: 0}

@@ -60,9 +60,7 @@ public class MiningSystem : MonoBehaviour
         }
     }
 
-    private void Mine(
-        Ore ore,
-        OreView view)
+    private void Mine( Ore ore, OreView view)
     {
         ore.SetMined(true);
 

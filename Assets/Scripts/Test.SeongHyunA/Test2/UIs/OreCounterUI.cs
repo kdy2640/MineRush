@@ -4,37 +4,27 @@ using UnityEngine.UI;
 
 public class OreCounterUI : MonoBehaviour
 {
-    [SerializeField]
-    private Image icon;
+    [SerializeField] private Image icon;
 
-    [SerializeField]
-    private TextMeshProUGUI text;
+    [SerializeField] private TextMeshProUGUI text;
 
-    [SerializeField]
-    private OreType oreType;
+    [SerializeField] private OreType oreType;
 
-    [SerializeField]
-    private MonoBehaviour providerObject;
+    [SerializeField] private MonoBehaviour providerObject;
 
     private IOreInventoryProvider provider;
 
     private void Awake()
     {
-        provider =
-            providerObject
-            as IOreInventoryProvider;
+        provider = providerObject as IOreInventoryProvider;
     }
 
     private void Update()
     {
-        if (provider == null)
-            return;
+        if (provider == null) return;
 
-        int amount =
-            provider.GetAmount(
-                oreType);
+        int amount = provider.GetAmount( oreType);
 
-        text.text =
-            amount.ToString();
+        text.text = amount.ToString();
     }
 }

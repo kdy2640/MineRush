@@ -23,9 +23,7 @@ private Dictionary<string, int> sessionRewards =
         Instance = this;
     }
 
-    public void Add(
-        OreType oreType,
-        int amount)
+    public void Add( OreType oreType, int amount)
     {
         string key = oreType.ToString();
 
@@ -44,11 +42,9 @@ private Dictionary<string, int> sessionRewards =
         return sessionRewards;
     }
 
-    public int GetTotalReward(
-        string oreType)
+    public int GetTotalReward( string oreType)
     {
-        if (!totalRewards.ContainsKey(oreType))
-            return 0;
+        if (!totalRewards.ContainsKey(oreType)) return 0;
 
         return totalRewards[oreType];
     }

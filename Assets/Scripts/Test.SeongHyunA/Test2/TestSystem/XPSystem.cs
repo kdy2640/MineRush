@@ -45,8 +45,6 @@ public class XPSystem : MonoBehaviour,IXPProvider
             requiredXP += 50;
         }
 
-        Debug.Log("XP EVENT FIRE");
-
         OnXPChanged?.Invoke( levelXP, requiredXP);
     }
 

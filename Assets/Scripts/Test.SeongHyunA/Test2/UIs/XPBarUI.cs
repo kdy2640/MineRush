@@ -4,30 +4,24 @@ using UnityEngine.UI;
 
 public class XPBarUI : MonoBehaviour
 {
-    [SerializeField]
-    private Slider slider;
+    [SerializeField] private Slider slider;
 
-    [SerializeField]
-    private Image fill;
+    [SerializeField] private Image fill;
 
-    [SerializeField]
-    private TMP_Text xpText;
+    [SerializeField] private TMP_Text xpText;
 
-    [SerializeField]
-    private MonoBehaviour providerObject;
+    [SerializeField] private MonoBehaviour providerObject;
 
     private IXPProvider provider;
 
     private void Awake()
     {
-        provider =
-            providerObject as IXPProvider;
+        provider = providerObject as IXPProvider;
     }
 
     private void OnEnable()
     {
-        if (provider == null)
-            return;
+        if (provider == null) return;
 
         provider.OnXPChanged += UpdateXP;
 
@@ -38,8 +32,7 @@ public class XPBarUI : MonoBehaviour
 
     private void OnDisable()
     {
-        if (provider == null)
-            return;
+        if (provider == null) return;
 
         provider.OnXPChanged -= UpdateXP;
     }

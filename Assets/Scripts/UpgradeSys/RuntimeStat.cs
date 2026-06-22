@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using UnityEngine;
 
 /// <summary>
@@ -23,8 +22,8 @@ public class RuntimeStat
         criticalMultiplier = 2f;
         extraDuration = 0f;
         rewardMultiplier = 1f;
-        maxOreTier = 0f;
-        stoneCount = 30;
+        maxOreTier = 1f;
+        stoneCount = 20;
         OreFragmentChanceArr = new float[(int)OreType.Length];
         OrePureChanceArr = new float[(int)OreType.Length];
     }

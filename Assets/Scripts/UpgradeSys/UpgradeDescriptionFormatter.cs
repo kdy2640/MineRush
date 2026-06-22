@@ -51,7 +51,7 @@ public static class UpgradeDescriptionFormatter
                 GetValueDescription("채굴 속도 :\n", modifier.value, level, isMaxLevel, ValueFormat.Percent),
 
             StatType.MiningRadius =>
-                GetValueDescription("채굴 범위 :\n", modifier.value, level, isMaxLevel, ValueFormat.Int),
+                GetValueDescription("채굴 범위 :\n", modifier.value, level, isMaxLevel, ValueFormat.RatioPercent),
 
             StatType.CriticalChance =>
                 GetValueDescription("치명타 확률 :\n", modifier.value, level, isMaxLevel, ValueFormat.Percent),
@@ -63,7 +63,7 @@ public static class UpgradeDescriptionFormatter
                 GetValueDescription("채굴 시간 :\n", modifier.value, level, isMaxLevel, ValueFormat.Second),
 
             StatType.RewardMultiplier =>
-                GetValueDescription("보상 증가 :\n", modifier.value, level, isMaxLevel, ValueFormat.Percent),
+                GetValueDescription("보상 증가 :\n", modifier.value, level, isMaxLevel, ValueFormat.RatioPercent),
 
             StatType.MaxOreTier =>
                 GetOreTierDescription(modifier.value, isMaxLevel),
@@ -72,11 +72,11 @@ public static class UpgradeDescriptionFormatter
                 GetValueDescription("시작 광석 수 :\n", modifier.value, level, isMaxLevel, ValueFormat.Int),
 
             StatType.FragChance =>
-                GetValueDescription($"{GetOreDisplayName(modifier.oreType)} 조각돌 출현 확률 :\n",
+                GetValueDescription($"{OreTextFormatter.GetDisplayName(modifier.oreType)} 조각돌 출현 확률 :\n",
                     modifier.value, level, isMaxLevel, ValueFormat.RatioPercent),
 
             StatType.PureChance =>
-                GetValueDescription($"{GetOreDisplayName(modifier.oreType)} 순수 광석 출현 확률 :\n",
+                GetValueDescription($"{OreTextFormatter.GetDisplayName(modifier.oreType)} 순수 광석 출현 확률 :\n",
                     modifier.value, level, isMaxLevel, ValueFormat.RatioPercent),
 
             _ =>
@@ -108,24 +108,12 @@ public static class UpgradeDescriptionFormatter
 
         if (isMaxLevel)
         {
-            return $"{GetOreDisplayName(oreType)} 광석 해금 완료";
+            return $"{OreTextFormatter.GetTmpTag(oreType)} {OreTextFormatter.GetDisplayName(oreType)} 광석 해금 완료";
         }
 
-        return $"{GetOreDisplayName(oreType)} 광석을 해금합니다";
+        return $"{OreTextFormatter.GetTmpTag(oreType)} {OreTextFormatter.GetDisplayName(oreType)} 광석을 해금합니다";
     } // MaxOreTier 설명을 만들어주는 함수.
     // value를 OreType enum 값으로 보고, 해당 광물을 해금하는 설명을 만든다.
-
-    private static string GetOreDisplayName(OreType oreType)
-    {
-        return oreType switch
-        {
-            OreType.Copper => "구리",
-            OreType.Iron => "철",
-            OreType.Gold => "금",
-            OreType.Diamond => "다이아몬드",
-            _ => "알 수 없는 광물"
-        };
-    } // OreType을 UI에 보여줄 이름으로 바꿔주는 함수.
 
     private static string FormatValue(float value, ValueFormat format)
     {

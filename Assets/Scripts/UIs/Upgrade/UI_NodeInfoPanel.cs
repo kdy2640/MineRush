@@ -87,30 +87,12 @@ public class UI_NodeInfoPanel : MonoBehaviour
         {
             bool isEnough = GameManager.Instance.OreManager.HasEnoughOre(oreAmount);
             int currentAmount = GameManager.Instance.OreManager.GetAmount(oreAmount.oreType);
-            string icon = GetOreIconTag(oreAmount.oreType);
+            string icon = OreTextFormatter.GetTmpTag(oreAmount.oreType);
             string textColor = isEnough ? "#00FF00" : "#FF4444";
 
             costText += $"{icon} : <color={textColor}>{currentAmount} / {oreAmount.amount}</color>\n";
         }
 
         CostText.text = costText.TrimEnd();
-    }
-    private string GetOreIconTag(OreType oreType)
-    {
-        string spriteName = oreType switch
-        {
-            OreType.Copper => "CopperOre",
-            OreType.Iron => "IronOre",
-            OreType.Gold => "GoldOre",
-            OreType.Diamond => "DiamondOre",
-            _ => string.Empty
-        };
-
-        if (string.IsNullOrEmpty(spriteName))
-        {
-            return string.Empty;
-        }
-
-        return $"<sprite name=\"{spriteName}\">";
     }
 }

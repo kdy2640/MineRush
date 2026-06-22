@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OreDataSO
   oreType: 2
   mainColor: {r: 0.8392157, g: 0.65882355, b: 0.24705882, a: 1}
-  oreSprite: {fileID: -3925343385548529487, guid: 4532ce592028c444b92a59515ad9a2a4, type: 3}
+  oreSprite: {fileID: 21300000, guid: 4532ce592028c444b92a59515ad9a2a4, type: 3}
+  displayName: "\uAE08"
+  tmpIconTag: GoldOre

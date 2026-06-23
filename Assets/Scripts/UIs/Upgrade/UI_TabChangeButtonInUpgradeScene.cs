@@ -18,16 +18,7 @@ public class UI_TabChangeButtonInUpgradeScene : MonoBehaviour
             upgradeUIController = GetComponentInParent<UI_UpgradeUIController>();
         }
     }
-    private void OnEnable()
-    {
-        button.onClick.AddListener(OnClick);
-    }
-
-    private void OnDisable()
-    {
-        button.onClick.RemoveListener(OnClick);
-    }
-    private void OnClick()
+    public void OnClick()
     {
         upgradeUIController.ShowPanel(panelType);
     }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PickaxesDataSO
   tier: 2
   displayName: Iron Pickaxe
-  icon: {fileID: 7671379760845095107, guid: f32786a0b2b16c744ba8e405c08a06ec, type: 3}
+  icon: {fileID: 21300000, guid: f32786a0b2b16c744ba8e405c08a06ec, type: 3}
   miningPower: 3
   miningSpeed: 3
   miningRadius: 3

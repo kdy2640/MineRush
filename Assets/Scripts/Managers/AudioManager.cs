@@ -1,10 +1,8 @@
 using NUnit.Framework.Constraints;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement; 
 
-//AudioManager는 Singleton<AudioManager>를 상속받는다.
-//그래서 AudioManager.Instance로 어디서든 접근할수 있다.
 //프로젝트 전체에서 하나만 존재하도록 관리된다.
 public enum BGMType
 {

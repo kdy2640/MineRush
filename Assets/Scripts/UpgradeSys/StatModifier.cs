@@ -26,7 +26,8 @@ public enum StatType
 public enum ModifierType
 {
     Add,
-    Multiply
+    Multiply,
+    Max
 }
 
 /// <summary>

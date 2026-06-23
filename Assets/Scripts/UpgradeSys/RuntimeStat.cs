@@ -153,6 +153,9 @@ public class RuntimeStat
             // amount 0.2 -> 1.2배
             ModifierType.Multiply => current * (1f + amount),
 
+            // 곡갱이 티어의 스탯 또는 광물티어용
+            ModifierType.Max => Mathf.Max(current, amount),
+            
             _ => current
         };
     }

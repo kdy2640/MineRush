@@ -20,6 +20,10 @@ public class UI_NodeInfoPanel : MonoBehaviour
     [SerializeField] private float hoverScale = 1.2f;
     [Header("연출 지속시간")]
     [SerializeField] private float duration = 0.5f;
+    [Header("효과 조절")]
+    [SerializeField] private float punchPower = 10.0f;
+    [SerializeField] private int vibratio = 3;
+    [SerializeField] private float elasticity = 0.25f;
 
     private RectTransform rectTransform;
     private Vector3 originalScale;
@@ -57,7 +61,7 @@ public class UI_NodeInfoPanel : MonoBehaviour
 
         seq = DOTween.Sequence().SetAutoKill(false).Pause();
         seq.Join(rectTransform.DOScale(originalScale, duration).From(originalScale * hoverScale).SetEase(Ease.OutCubic))
-            .Join(rectTransform.DOPunchRotation(Vector3.forward * 15f, duration, 6, 0.5f))
+            .Join(rectTransform.DOPunchRotation(Vector3.forward * punchPower, duration, vibratio, elasticity))
             .OnStart(() =>
             {
                 rectTransform.localRotation = Quaternion.Euler(originalRotation);

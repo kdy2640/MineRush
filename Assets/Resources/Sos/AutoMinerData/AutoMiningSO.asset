@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f17ab4c7a91bd145af47ff207404d92, type: 3}
+  m_Name: AutoMiningSO
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
+  id: AutoMining
+  displayName: "\uC790\uB3D9 \uCC44\uAD74"
+  displayIcon: {fileID: 0}
+  baseOreAmounts: []
+  amountMultiplier: 0
+  maxLevel: 50
+  statModifiers: []
+  skill: {fileID: 0}
+  levelBasedCosts:
+  - oreType: 0
+    startLevel: 0
+    baseAmount: 50
+    amountMultiplier: 1.3
+  - oreType: 1
+    startLevel: 5
+    baseAmount: 30
+    amountMultiplier: 1.1
+  levelBasedRewards:
+  - oreType: 0
+    startLevel: 1
+    amountPerSecond: 0.3
+    amountPerLevel: 0.5
+  - oreType: 1
+    startLevel: 6
+    amountPerSecond: 0.1
+    amountPerLevel: 0.1

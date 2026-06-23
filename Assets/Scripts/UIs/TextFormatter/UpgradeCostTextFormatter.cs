@@ -2,29 +2,24 @@ using System.Collections.Generic;
 
 public static class UpgradeOreCostTextFormatter
 {
-    public static string GetAllOreCostText(UpgradeState upgradeState, OreManager oreManager)
+    public static string GetAllOreCostText(List<OreAmount> costs, OreManager oreManager)
     {
-        if (upgradeState == null || oreManager == null)
-        {
+        if (costs == null || oreManager == null)
             return string.Empty;
-        }
 
-        var currentCosts = upgradeState.GetCurrentCost();
-
-        if (currentCosts == null || currentCosts.Count == 0)
-        {
+        if (costs.Count == 0)
             return string.Empty;
-        }
 
         List<string> costTexts = new();
 
-        foreach (OreAmount oreAmount in currentCosts)
+        foreach (OreAmount oreAmount in costs)
         {
             costTexts.Add(GetOreCostLine(oreAmount, oreManager));
         }
 
         return string.Join("\n", costTexts).TrimEnd();
     } // 업그레이드에 필요한 광물 비용들을 설명창에 표시할 문자열로 만들어주는 함수.
+    // 자동채굴에서도 쓰기 위해 인자를 state말고 oreamount로 바꿈.
 
     private static string GetOreCostLine(OreAmount oreAmount, OreManager oreManager)
     {

@@ -6,7 +6,8 @@ public class AutoMiner : MonoBehaviour
     [SerializeField] private UpgradeData autoMiningUpgradeData;
     // 인스펙터에서 자동채굴 전용 UpgradeData SO를 넣는다.
 
-    private UpgradeState State => GameManager.Instance.Upgrade.GetState(autoMiningUpgradeData);
+    public UpgradeData Data => autoMiningUpgradeData;
+    public UpgradeState State => GameManager.Instance.Upgrade.GetState(autoMiningUpgradeData);
 
     private void Start()
     {

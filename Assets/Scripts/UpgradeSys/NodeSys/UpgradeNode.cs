@@ -4,21 +4,27 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+#if UNITY_EDITOR
+using UnityEditor;
+using UnityEditor.Events;
+#endif
+
 public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("Node Data")]
-    [SerializeField] private string nodeId; //인스펙터에서 설정안함.
+    [SerializeField] private string nodeId; // 인스펙터에서 설정안함.
     [field: SerializeField] public UpgradeData upgradeData { get; private set; }
     [field: SerializeField] public List<UpgradeNode> connectedNodes { get; private set; } = new();
     [field: SerializeField] public bool isUnlocked { get; private set; }
+
     private UpgradeState upgradeState;
-    
+
     [Header("UI")]
     private Button button;
     [SerializeField] private Image upgradeIcon;
     private Image bgImage;
     private Color maxLevelColor = new Color32(255, 209, 0, 255);
-    
+
     private UpgradeNodePanelController nodePanelController;
     public RectTransform rectTransform { get; private set; }
 
@@ -30,11 +36,6 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         nodePanelController = GetComponentInParent<UpgradeNodePanelController>();
         rectTransform = GetComponent<RectTransform>();
         bgImage = transform.GetChild(0).GetComponent<Image>();
-    }
-
-    private void OnEnable()
-    {
-        button.onClick.AddListener(TryBuy);
     }
 
     public void Unlock()
@@ -55,7 +56,7 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         }
 
         RefreshNodeVisual();
-    } // 노드 해금이 곧 0레벨로 state 등록 하는것.
+    } // 노드 해금이 곧 0레벨로 state 등록하는 것.
 
     public void RestoreUnlocked()
     {
@@ -63,9 +64,8 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         gameObject.SetActive(true);
         upgradeState = GameManager.Instance.Upgrade.GetState(upgradeData);
         RefreshNodeVisual();
-    }// 저장 / 씬 재진입처럼 이미 UpgradeState가 존재하는 노드를 UI에 다시 반영할 때 사용하는 함수.
-    // GetState나 스킬 등록은 다시 하지 않고, 노드가 열려있다는 화면 상태만 복구한다.
-    
+    } // 저장 / 씬 재진입 시 이미 UpgradeState가 존재하는 노드를 UI에 다시 반영할 때 사용하는 함수.
+
     public void RefreshNodeVisual()
     {
         if (bgImage == null)
@@ -89,19 +89,21 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         bgImage.color = Color.white;
     }
-    
-    private void TryBuy()
+
+    public void TryBuy()
     {
         if (!isUnlocked)
         {
             return;
-        } // 잠겨있으면 보통 unactive되있지만 혹시모르니 방지
+        }
 
         if (GameManager.Instance.Upgrade.TryBuyUpgrade(upgradeData))
         {
             nodePanelController.RefreshDescriptionPanel(upgradeData);
             RefreshNodeVisual();
+
             UpgradeState state = GameManager.Instance.Upgrade.GetState(upgradeData);
+
             if (state.level == 1)
             {
                 foreach (UpgradeNode connectedNode in connectedNodes)
@@ -114,10 +116,9 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                     connectedNode.Unlock();
                     nodePanelController.ConnectNodeLine(this, connectedNode);
                 }
-            } // 0레벨에서 업그레이드해서 1레벨 됐을 때 주변 노드 언락
-            
+            }
         }
-    }
+    } // 버튼 OnClick에서 직접 호출되는 구매 함수.
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -128,29 +129,6 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         nodePanelController.ShowDescriptionPanel(false);
     }
-
-    private void OnDisable()
-    {
-        button.onClick.RemoveListener(TryBuy);
-    }
-    
-    // [ContextMenu("Test Buy Node")]
-    // private void TestBuyNode()
-    // {
-    //     foreach (UpgradeNode connectedNode in connectedNodes)
-    //     {
-    //         if (connectedNode == null)
-    //         {
-    //             continue;
-    //         }
-    //
-    //         if (connectedNode.isUnlocked)
-    //         {
-    //             continue;
-    //         }
-    //         nodePanelController.ConnectNodeLine(this, connectedNode);
-    //     }
-    // } // 테스트 하고 싶으면 UpgradeNodePanelController의 InitUpgradeNodePanel이 호출되지 않게 하고 테스트하기
 
     private void OnDrawGizmos()
     {
@@ -212,6 +190,11 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [ContextMenu("Refresh Node By UpgradeData")]
     private void RefreshNodeByUpgradeData()
     {
+        if (button == null)
+        {
+            button = GetComponent<Button>();
+        }
+
         if (upgradeData == null)
         {
             nodeId = string.Empty;
@@ -221,6 +204,10 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             {
                 upgradeIcon.sprite = null;
             }
+
+#if UNITY_EDITOR
+            RefreshButtonEvent();
+#endif
 
             return;
         }
@@ -232,16 +219,58 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             upgradeIcon.sprite = upgradeData.displayIcon;
         }
-    } // UpgradeData가 들어오거나 빠졌을 때 노드 이름과 아이콘을 갱신하는 함수.
-    // 데이터가 있으면 displayName으로 오브젝트 이름을 바꾸고 displayIcon을 적용한다.
-    // 데이터가 없으면 부모 기준 자식 번호로 기본 이름을 만들고 아이콘을 비운다.
+
+#if UNITY_EDITOR
+        RefreshButtonEvent();
+#endif
+    } // UpgradeData 기준으로 노드 이름, 아이콘, 버튼 OnClick 이벤트를 갱신하는 함수.
+
+#if UNITY_EDITOR
+    private void RefreshButtonEvent()
+    {
+        if (button == null)
+        {
+            button = GetComponent<Button>();
+        }
+
+        if (button == null)
+        {
+            return;
+        }
+
+        if (HasPersistentTryBuyEvent())
+        {
+            return;
+        }
+
+        UnityEventTools.AddPersistentListener(button.onClick, TryBuy);
+
+        EditorUtility.SetDirty(button);
+        EditorUtility.SetDirty(this);
+    } // 에디터에서 Button OnClick에 TryBuy 함수를 인스펙터 이벤트로 등록하는 함수.
+
+    private bool HasPersistentTryBuyEvent()
+    {
+        int eventCount = button.onClick.GetPersistentEventCount();
+
+        for (int i = 0; i < eventCount; i++)
+        {
+            if (button.onClick.GetPersistentTarget(i) == this &&
+                button.onClick.GetPersistentMethodName(i) == nameof(TryBuy))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    } // Button OnClick에 이미 TryBuy가 등록되어 있는지 확인해서 중복 등록을 막는 함수.
+#endif
 
     private string GetDefaultNodeName()
     {
         int siblingIndex = transform.GetSiblingIndex();
         return $"Node{siblingIndex + 1}";
-    } // UpgradeData가 없을 때 사용할 기본 노드 이름을 반환하는 함수.
-    // 바로 위 부모 기준 자신의 자식 번호를 사용해서 Node0, Node1 같은 이름을 만든다.
+    } // UpgradeData가 없을 때 사용하는 기본 노드 이름을 반환하는 함수.
 
     private string GetUpgradeNodeName()
     {
@@ -252,7 +281,6 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         return upgradeData.name;
     } // UpgradeData가 있을 때 사용할 노드 이름을 반환하는 함수.
-    // displayName이 있으면 displayName을 쓰고, 비어있으면 SO 에셋 이름을 대신 사용한다.
 
     private void RemoveInvalidConnectedNodes()
     {
@@ -306,7 +334,7 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 previousNode.connectedNodes.Remove(this);
 
 #if UNITY_EDITOR
-                UnityEditor.EditorUtility.SetDirty(previousNode);
+                EditorUtility.SetDirty(previousNode);
 #endif
             }
         }
@@ -326,7 +354,7 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 connectedNode.connectedNodes.Add(this);
 
 #if UNITY_EDITOR
-                UnityEditor.EditorUtility.SetDirty(connectedNode);
+                EditorUtility.SetDirty(connectedNode);
 #endif
             }
         }
@@ -347,7 +375,7 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         }
 
 #if UNITY_EDITOR
-        UnityEditor.EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(this);
 #endif
     }
 }

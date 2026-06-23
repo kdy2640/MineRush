@@ -4,12 +4,14 @@ using UnityEngine.EventSystems;
 
 public class PickaxeShower : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    //띄울 SO
     [field: SerializeField] public PickaxesDataSO CurrentPickAxe { get; private set; }
 
+    //띄울 장소
     [SerializeField] private CurrentPickaxeInfo pickaxeInfo;
 
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnPointerEnter(PointerEventData eventData) //일반 메서드로 변환한 다음, 매개변수로 받는 식으로 바꿔야 할지.
     {
         pickaxeInfo.DisplayNameText.text = CurrentPickAxe.DisplayName;
         pickaxeInfo.MiningPowerText.text = $"채굴 공격력 : {CurrentPickAxe.MiningPower}";

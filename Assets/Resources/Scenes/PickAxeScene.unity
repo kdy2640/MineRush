@@ -666,6 +666,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8140516826012697890, guid: 726623f4984992d4a94966ab7f24f5fb, type: 3}
+      propertyPath: pickaxeInfo
+      value: 
+      objectReference: {fileID: 767274953}
     - target: {fileID: 8805290689411914703, guid: 726623f4984992d4a94966ab7f24f5fb, type: 3}
       propertyPath: m_Name
       value: PickAxeShower

@@ -24,7 +24,9 @@ public class PickAxesPanel : MonoBehaviour
 
     public void MoveRight() //오른쪽으로 움직일 때.
     {
-        if (currentIndex >= 10) return; //임시로 오른쪽 버튼 횟수 제한.
+        int clickLimit = PickaxeDataDB.GetPickaxeKeyCount();
+
+        if (currentIndex >= clickLimit) return;
 
         currentIndex++;
 

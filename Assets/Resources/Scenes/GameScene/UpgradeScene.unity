@@ -419,6 +419,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1190509411602202673, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1190509411602202673, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1190509411602202673, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1190509411602202673, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1392577112876192105, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -539,6 +555,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3151666502202431777, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151666502202431777, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151666502202431777, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151666502202431777, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3414814010545886960, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -560,6 +592,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3414814010545886960, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3735975462137751819, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3735975462137751819, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3735975462137751819, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3735975462137751819, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -777,6 +825,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7676023934960269771, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8028117898526322501, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8028117898526322501, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8028117898526322501, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8028117898526322501, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8368182489724419965, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}

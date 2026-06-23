@@ -12,11 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f17ab4c7a91bd145af47ff207404d92, type: 3}
   m_Name: UpgradeMiningPower03
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
-  id: 
-  displayName: 
+  id: 'UpgradeMiningPower03 '
+  displayName: "\uCC44\uAD74 \uACF5\uACA9\uB825 \uC99D\uAC00 III "
   displayIcon: {fileID: 0}
-  baseOreAmounts: []
+  baseOreAmounts:
+  - oreType: 2
+    amount: 200
   amountMultiplier: 1.2
-  maxLevel: 1
-  statModifiers: []
+  maxLevel: 5
+  statModifiers:
+  - statType: 1
+    modifierType: 0
+    value: 0.6
+    oreType: -1
   skill: {fileID: 0}

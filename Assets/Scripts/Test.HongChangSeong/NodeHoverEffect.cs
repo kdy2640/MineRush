@@ -2,10 +2,10 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class USceneChangePanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class NodeHoverEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     //노드, 버튼들에 사운드 효과나 DOTween효과를 부여하는 스크립트가 될 예정.
-    //이 스크립트를, 노드 프리팹 원본에다가 붙이면 끝일 것 같은데.
+    //이 스크립트를, 노드 프리팹 원본에다가 붙이면 될 것 같음.
     //사운드는 GameManager.Instance.AudioManager.PlaySFX(SFXType.~~~) 이런 식으로 넣으면 나올 것.
     //enum 및 Inspector에 추가 필요.
     private Vector3 originalScale;

@@ -86,6 +86,6 @@ public class UI_NodeInfoPanel : MonoBehaviour
         }
 
         LevelText.text = $"Level : {upgradeState.level} / {upgradeState.data.maxLevel}";
-        OreCostText.text = UpgradeOreCostTextFormatter.GetAllOreCostText(upgradeState, GameManager.Instance.OreManager);
+        OreCostText.text = UpgradeOreCostTextFormatter.GetAllOreCostText(upgradeState.GetCurrentCost(), GameManager.Instance.OreManager);
     }
 }

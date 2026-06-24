@@ -1,67 +1,94 @@
+using System.Collections;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using System.Collections;
 
 public class StartUI : MonoBehaviour
 {
-    [SerializeField] private RectTransform target;
+    [SerializeField] private RectTransform panel;
 
-    [SerializeField] private TMP_Text countdownText;
+    [SerializeField] private TMP_Text messageText;
 
-    [SerializeField] private float enterDuration = 0.5f;
+    [SerializeField] private string message = "MINING START!";
 
-    [SerializeField] private float exitDuration = 0.5f;
+    [SerializeField] private float panelOpenDuration = 0.45f;
 
-    [SerializeField] private float startY = 1200f;
+    [SerializeField] private float panelCloseDuration = 0.45f;
 
-    [SerializeField] private float centerY = 0f;
+    [SerializeField] private float textDuration = 0.35f;
 
-    [SerializeField] private string startMessage = "Mining Start!";
+    [SerializeField] private float waveDuration = 1.2f;
 
     public UnityEvent onFinished;
 
-    private void Start()
-    { 
+    private bool isPlaying;
 
+    private void Awake()
+    {
+        if (panel == null)
+        {
+            Debug.LogError("[StartUI] Panel�� ������� �ʾҽ��ϴ�.");
+        }
+
+        if (messageText == null)
+        {
+            Debug.LogError("[StartUI] MessageText�� ������� �ʾҽ��ϴ�.");
+        }
     }
 
     public void Play()
     {
+        if (isPlaying) return;
+
         StartCoroutine(PlayRoutine());
     }
 
     public IEnumerator PlayRoutine()
     {
-        target.anchoredPosition = new Vector2(0, startY);
+        isPlaying = true;
+
+        panel.localScale = new Vector3(1f, 0f, 1f);
+
+        messageText.rectTransform.localScale = Vector3.zero;
+
+        messageText.text = message;
 
         Sequence seq = DOTween.Sequence();
 
-        seq.Append(
-            target.DOAnchorPosY( centerY, enterDuration)
-            .SetEase(Ease.OutBack));
+        seq.Append(panel.
+            DOScaleY(1f, panelOpenDuration)
+                .SetEase(Ease.OutBack));
+
+        seq.Join( messageText.rectTransform.
+            DOScale(1f, textDuration).SetEase(Ease.OutBack));
 
         yield return seq.WaitForCompletion();
 
-        for (int i = 3; i > 0; i--)
-        {
-            countdownText.text = i.ToString();
+        messageText.rectTransform.DOShakePosition(waveDuration,
+            new Vector3(6f, 3f, 0f),
+            20,
+            90,
+            false,
+            true);
 
-            yield return new WaitForSeconds(1f);
-        }
+        messageText.rectTransform.DOShakeRotation(waveDuration,
+            2f,
+            20,
+            90,
+            false);
 
-        countdownText.text = startMessage;
-
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(waveDuration);
 
         seq = DOTween.Sequence();
 
-        seq.Append(
-            target.DOAnchorPosY( startY, exitDuration)
-            .SetEase(Ease.InBack));
+        seq.Append( messageText.rectTransform.DOScale(0f, textDuration));
+
+        seq.Join( panel.DOScaleY(0f, panelCloseDuration).SetEase(Ease.InBack));
 
         yield return seq.WaitForCompletion();
+
+        isPlaying = false;
 
         gameObject.SetActive(false);
 

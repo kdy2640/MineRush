@@ -370,6 +370,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UpgradeNodePanel
       objectReference: {fileID: 0}
+    - target: {fileID: 9131441707070775071, guid: ca860e8da5faf7b439320d00752560cd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

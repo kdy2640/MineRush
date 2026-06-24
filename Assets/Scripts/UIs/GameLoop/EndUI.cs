@@ -5,28 +5,33 @@ using UnityEngine;
 
 public class EndUI : MonoBehaviour
 {
-    [SerializeField] private RectTransform target;
-    [SerializeField] private TMP_Text endText;
+    [SerializeField] private RectTransform panel;
+
+    [SerializeField] private TMP_Text messageText;
 
     [SerializeField] private string message = "GAME OVER";
 
-    [SerializeField] private float startY = 1200f;
-    [SerializeField] private float centerY = 0f;
-    [SerializeField] private float endY = -1200f;
+    [SerializeField] private float panelOpenDuration = 0.45f;
 
-    [SerializeField] private float enterDuration = 0.5f;
-    [SerializeField] private float waitDuration = 3f;
-    [SerializeField] private float exitDuration = 0.5f;
+    [SerializeField] private float panelCloseDuration = 0.45f;
+
+    [SerializeField] private float textDuration = 0.35f;
+
+    [SerializeField] private float waveDuration = 1.2f;
 
     private bool isPlaying;
 
     private void Awake()
     {
-        if (target == null)
-            target = GetComponent<RectTransform>();
+        if (panel == null)
+        {
+            Debug.LogError("[EndUI] Panel이 연결되지 않았습니다.");
+        }
 
-        if (endText == null)
-            endText = GetComponentInChildren<TMP_Text>();
+        if (messageText == null)
+        {
+            Debug.LogError("[EndUI] MessageText가 연결되지 않았습니다.");
+        }
     }
 
     public void Play()
@@ -42,23 +47,48 @@ public class EndUI : MonoBehaviour
     {
         isPlaying = true;
 
-        gameObject.SetActive(true);
+        panel.localScale = new Vector3(1f, 0f, 1f);
 
-        endText.text = message;
+        messageText.rectTransform.localScale = Vector3.zero;
 
-        target.anchoredPosition = new Vector2(0, startY);
+        messageText.text = message;
 
         Sequence seq = DOTween.Sequence();
 
-        seq.Append(
-            target.DOAnchorPosY( centerY, enterDuration)
-            .SetEase(Ease.OutBack));
+        seq.Append(panel.
+            DOScaleY(1f, panelOpenDuration)
+                .SetEase(Ease.OutBack));
 
-        seq.AppendInterval(waitDuration);
+        seq.Join(messageText.rectTransform
+                .DOScale(1f, textDuration)
+                .SetEase(Ease.OutBack));
+
+        yield return seq.WaitForCompletion();
+
+        messageText.rectTransform.DOShakePosition(waveDuration,
+            new Vector3(6f, 3f, 0f),
+            20,
+            90,
+            false,
+            true);
+
+        messageText.rectTransform.DOShakeRotation(waveDuration,
+            2f,
+            20,
+            90,
+            false);
+
+        yield return new WaitForSeconds(waveDuration);
+
+        seq = DOTween.Sequence();
 
         seq.Append(
-            target.DOAnchorPosY( endY, exitDuration)
-            .SetEase(Ease.InBack));
+            messageText.rectTransform
+                .DOScale(0f, textDuration));
+
+        seq.Join(
+            panel.DOScaleY(0f, panelCloseDuration)
+                .SetEase(Ease.InBack));
 
         yield return seq.WaitForCompletion();
 

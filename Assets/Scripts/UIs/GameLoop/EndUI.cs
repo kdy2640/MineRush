@@ -28,7 +28,6 @@ public class EndUI : MonoBehaviour
         if (endText == null)
             endText = GetComponentInChildren<TMP_Text>();
     }
-
     public void Play()
     {
         if (isPlaying) return;

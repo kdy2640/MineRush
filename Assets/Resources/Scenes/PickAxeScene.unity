@@ -119,108 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &3221634
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1069415903}
-    m_Modifications:
-    - target: {fileID: 220878294887336863, guid: d07e73aed9b5c234cb9fe16e320a5c00, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 220878294887336863, guid: d07e73aed9b5c234cb9fe16e320a5c00, type: 3}
-      propertyPath: m_Pivot.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 220878294887336863, guid: d07e73aed9b5c234cb9fe16e320a5c00, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 220878294887336863, guid: d07e73aed9b5c234cb9fe16e320a5c00, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 220878294887336863, guid: d07e73aed9b5c234cb9fe16e320a5c00, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 220878294887336863, guid: d07e73aed9b5c234cb9fe16e320a5c00, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 220878294887336863, guid: d07e73aed9b5c234cb9fe16e320a5c00, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 220878294887336863, guid: d07e73aed9b5c234cb9fe16e320a5c00, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 220878294887336863, guid: d07e73aed9b5c234cb9fe16e320a5c00, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 220878294887336863, guid: d07e73aed9b5c234cb9fe16e320a5c00, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 220878294887336863, guid: d07e73aed9b5c234cb9fe16e320a5c00, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 220878294887336863, guid: d07e73aed9b5c234cb9fe16e320a5c00, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 220878294887336863, guid: d07e73aed9b5c234cb9fe16e320a5c00, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 220878294887336863, guid: d07e73aed9b5c234cb9fe16e320a5c00, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 220878294887336863, guid: d07e73aed9b5c234cb9fe16e320a5c00, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 220878294887336863, guid: d07e73aed9b5c234cb9fe16e320a5c00, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 220878294887336863, guid: d07e73aed9b5c234cb9fe16e320a5c00, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 220878294887336863, guid: d07e73aed9b5c234cb9fe16e320a5c00, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 220878294887336863, guid: d07e73aed9b5c234cb9fe16e320a5c00, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 220878294887336863, guid: d07e73aed9b5c234cb9fe16e320a5c00, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6867537348962108034, guid: d07e73aed9b5c234cb9fe16e320a5c00, type: 3}
-      propertyPath: m_Name
-      value: UI_USceneChangePanel
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d07e73aed9b5c234cb9fe16e320a5c00, type: 3}
---- !u!224 &3221635 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 220878294887336863, guid: d07e73aed9b5c234cb9fe16e320a5c00, type: 3}
-  m_PrefabInstance: {fileID: 3221634}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &37717987
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,17 +568,23 @@ PrefabInstance:
       propertyPath: pickaxeInfo
       value: 
       objectReference: {fileID: 767274953}
+    - target: {fileID: 8140516826012697890, guid: 726623f4984992d4a94966ab7f24f5fb, type: 3}
+      propertyPath: currentPickaxeImage
+      value: 
+      objectReference: {fileID: 6556015708953711987, guid: aa7ef8d7802d3d44a91afbbfbdf23ec3, type: 3}
     - target: {fileID: 8805290689411914703, guid: 726623f4984992d4a94966ab7f24f5fb, type: 3}
       propertyPath: m_Name
       value: PickAxeShower
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 403076423227266587, guid: 726623f4984992d4a94966ab7f24f5fb, type: 3}
+    - {fileID: 6315643707584529333, guid: 726623f4984992d4a94966ab7f24f5fb, type: 3}
+    - {fileID: 8556856519801805677, guid: 726623f4984992d4a94966ab7f24f5fb, type: 3}
+    - {fileID: 5755475170440462796, guid: 726623f4984992d4a94966ab7f24f5fb, type: 3}
+    - {fileID: 5135606643676319507, guid: 726623f4984992d4a94966ab7f24f5fb, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8805290689411914703, guid: 726623f4984992d4a94966ab7f24f5fb, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2056962848}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 726623f4984992d4a94966ab7f24f5fb, type: 3}
 --- !u!224 &635634315 stripped
 RectTransform:
@@ -879,7 +783,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3221635}
   - {fileID: 635634315}
   - {fileID: 767274952}
   m_Father: {fileID: 0}
@@ -1437,25 +1340,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2044411286}
   m_CullTransparentMesh: 1
---- !u!1 &2056962846 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8805290689411914703, guid: 726623f4984992d4a94966ab7f24f5fb, type: 3}
-  m_PrefabInstance: {fileID: 635634314}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2056962848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2056962846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c931103887a85984b8ffa911b3daf9cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PickaxeShower
-  <CurrentPickAxe>k__BackingField: {fileID: 11400000, guid: cd73382d8a256534db56ea035c85acfa, type: 2}
-  pickaxeInfo: {fileID: 767274953}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

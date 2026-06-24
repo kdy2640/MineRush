@@ -20,6 +20,7 @@ public class NodeHoverEffect : MonoBehaviour, IPointerEnterHandler, IPointerExit
     {        
         transform.DOKill();
         transform.DOScale(originalScale * hoverScale, 0.15f).SetEase(Ease.OutQuad);
+        GameManager.Instance.AudioManager.PlaySFX(SFXType.UIHover);
     }
 
     public void OnPointerExit(PointerEventData eventData)

@@ -4800,16 +4800,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5826225701428414975, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: m_Name
-      value: "\uD06C\uB9AC\uD2F0\uCEEC \uD655\uB960 \uC99D\uAC00 III "
+      value: "\uD06C\uB9AC\uD2F0\uCEEC \uD655\uB960 \uC99D\uAC00 IV "
       objectReference: {fileID: 0}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: nodeId
-      value: 'UpgradeCriticalChance03 '
+      value: 'UpgradeCriticalChance04 '
       objectReference: {fileID: 0}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: <upgradeData>k__BackingField
       value: 
-      objectReference: {fileID: 11400000, guid: 6da1ed28198712d4183c6be7df543509, type: 2}
+      objectReference: {fileID: 11400000, guid: 4007d6b90c4e4b84c8e983f76d5b31ac, type: 2}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: previousConnectedNodes.Array.size
       value: 3

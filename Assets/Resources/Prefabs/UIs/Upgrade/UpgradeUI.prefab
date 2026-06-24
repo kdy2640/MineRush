@@ -362,38 +362,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 802767958573528939, guid: ca860e8da5faf7b439320d00752560cd, type: 3}
-      propertyPath: previousConnectedNodes.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1785337474832073939, guid: ca860e8da5faf7b439320d00752560cd, type: 3}
-      propertyPath: previousConnectedNodes.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2156653986217204105, guid: ca860e8da5faf7b439320d00752560cd, type: 3}
-      propertyPath: previousConnectedNodes.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4346028147984303151, guid: ca860e8da5faf7b439320d00752560cd, type: 3}
-      propertyPath: previousConnectedNodes.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7349725197191725378, guid: ca860e8da5faf7b439320d00752560cd, type: 3}
       propertyPath: nodeInfoPanelRect
       value: 
       objectReference: {fileID: 8723704264517157887}
-    - target: {fileID: 7804479744468085643, guid: ca860e8da5faf7b439320d00752560cd, type: 3}
-      propertyPath: previousConnectedNodes.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8792961346874122927, guid: ca860e8da5faf7b439320d00752560cd, type: 3}
-      propertyPath: previousConnectedNodes.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8941014933026249258, guid: ca860e8da5faf7b439320d00752560cd, type: 3}
-      propertyPath: previousConnectedNodes.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 9131441707070775071, guid: ca860e8da5faf7b439320d00752560cd, type: 3}
       propertyPath: m_Name
       value: UpgradeNodePanel

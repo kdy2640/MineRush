@@ -12,13 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f17ab4c7a91bd145af47ff207404d92, type: 3}
   m_Name: UpgradeExtraDuration04
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
-  id: 
-  displayName: 
+  id: 'UpgradeExtraDuration04 '
+  displayName: "\uCC44\uAD74 \uC2DC\uAC04 \uC99D\uAC00 IV "
   displayIcon: {fileID: 0}
-  baseOreAmounts: []
+  baseOreAmounts:
+  - oreType: 3
+    amount: 900
   amountMultiplier: 1.2
-  maxLevel: 1
-  statModifiers: []
+  maxLevel: 3
+  statModifiers:
+  - statType: 6
+    modifierType: 0
+    value: 1.5
+    oreType: -1
   skill: {fileID: 0}
   levelBasedCosts: []
   levelBasedRewards: []

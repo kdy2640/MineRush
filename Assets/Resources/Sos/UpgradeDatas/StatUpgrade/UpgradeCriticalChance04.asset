@@ -12,13 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f17ab4c7a91bd145af47ff207404d92, type: 3}
   m_Name: UpgradeCriticalChance04
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
-  id: 
-  displayName: 
+  id: 'UpgradeCriticalChance04 '
+  displayName: "\uD06C\uB9AC\uD2F0\uCEEC \uD655\uB960 \uC99D\uAC00 IV "
   displayIcon: {fileID: 0}
-  baseOreAmounts: []
+  baseOreAmounts:
+  - oreType: 3
+    amount: 700
   amountMultiplier: 1.2
-  maxLevel: 1
-  statModifiers: []
+  maxLevel: 5
+  statModifiers:
+  - statType: 4
+    modifierType: 0
+    value: 0.8
+    oreType: -1
   skill: {fileID: 0}
   levelBasedCosts: []
   levelBasedRewards: []

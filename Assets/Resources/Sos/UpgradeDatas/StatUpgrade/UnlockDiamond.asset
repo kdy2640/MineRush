@@ -12,13 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f17ab4c7a91bd145af47ff207404d92, type: 3}
   m_Name: UnlockDiamond
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
-  id: 
-  displayName: 
+  id: UnlockDiamond
+  displayName: "\uB2E4\uC774\uC544\uBAAC\uB4DC \uCD94\uAC00"
   displayIcon: {fileID: 0}
-  baseOreAmounts: []
-  amountMultiplier: 1.2
+  baseOreAmounts:
+  - oreType: 2
+    amount: 1500
+  amountMultiplier: 1
   maxLevel: 1
-  statModifiers: []
+  statModifiers:
+  - statType: 8
+    modifierType: 2
+    value: 3
+    oreType: 3
   skill: {fileID: 0}
   levelBasedCosts: []
   levelBasedRewards: []

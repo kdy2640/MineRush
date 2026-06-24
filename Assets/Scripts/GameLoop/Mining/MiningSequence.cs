@@ -43,7 +43,7 @@ public class MiningSequence : MonoBehaviour
 
         // 3. 돌 피격 반응 연출
         yield return stone.GetComponent<StonePresenter>().PlayHitReactionRoutine();
-
+        stone.CheckCrack();
         // 4. 안 죽었으면 여기서 채굴 1회 종료
         if (!stone.GetComponent<HPHandler>().IsDead)
         {

@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Unity.Android.Gradle;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,10 +15,13 @@ public enum SceneType
 // GameManager.Instance.Scene.ChangeScene(SceneType)을 통해 실행해주세요.
 public class SceneController : MonoBehaviour
 {
+    [SerializeField] private UI_Loading loadingPrefab;
     private Dictionary<SceneType, SceneBase> scenes;
     private SceneBase currentScene;
-
     public SceneType currenSceneType => currentScene.SceneType;
+
+    private bool isChangingScene;
+    private UI_Loading loading;
     private void Awake()
     {
         scenes = new Dictionary<SceneType, SceneBase>
@@ -26,25 +31,43 @@ public class SceneController : MonoBehaviour
             { SceneType.GameLoop, new GameLoopScene() }
         };
         currentScene = scenes[SceneType.Main];
+        loading = GameObject.Instantiate(loadingPrefab); 
     }
 
     public void ChangeScene(SceneType nextSceneType)
     {
+        if (isChangingScene)
+            return;
+
+        if (currentScene != null && currentScene.SceneType == nextSceneType)
+            return;
+
         StartCoroutine(ChangeSceneRoutine(nextSceneType));
     }
-     
+
     private IEnumerator ChangeSceneRoutine(SceneType nextSceneType)
     {
-        currentScene?.Exit();
+        isChangingScene = true;
+
+        yield return loading.OpenLoading();
+
+        yield return currentScene?.Exit();
 
         SceneBase nextScene = scenes[nextSceneType];
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(nextScene.SceneName);
 
         while (!operation.isDone)
-            yield return new WaitForSeconds(1f);
+            yield return null;
 
         currentScene = nextScene;
-        currentScene.Enter();
+
+        yield return currentScene.PrepareBeforeReveal();
+
+        yield return loading.CloseLoading();
+
+        yield return currentScene.Enter();
+
+        isChangingScene = false;
     }
 }

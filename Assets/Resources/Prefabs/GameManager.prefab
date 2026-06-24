@@ -346,6 +346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af4c9c37f29a12b4e9ebc29b16ab1fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneController
+  loadingPrefab: {fileID: 8149016728800430027, guid: 66ab3c8dfaffa0849a5b4f9519988d1d, type: 3}
 --- !u!114 &9083949984633655817
 MonoBehaviour:
   m_ObjectHideFlags: 0

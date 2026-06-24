@@ -50,5 +50,8 @@ TagManager:
   - name: Setting
     uniqueID: 26837455
     locked: 0
+  - name: Loading
+    uniqueID: 3586704001
+    locked: 0
   m_RenderingLayers:
   - Default

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum GameLoopEventType
 {
+    BeforeLoopStarted,
     LoopStarted,
     LoopEnded,
     StoneSpawned,

@@ -1,10 +1,33 @@
 using DG.Tweening;
-using System.Collections;
+using System.Collections; 
 using UnityEngine;
 
 public class StonePresenter : MonoBehaviour
 {
-    private Tween currentTween;
+    [Header("Spawn")]
+    [SerializeField] private float spawnDuration = 0.2f;
+    [SerializeField] private Ease spawnEase = Ease.OutBack;
+     
+
+    private Tween currentTween;  
+    private void OnDestroy()
+    {  
+        StopCurrentTween();
+    }
+    public IEnumerator PlaySpawnRoutine()
+    {
+        StopCurrentTween();
+
+        transform.localScale = Vector3.zero;
+
+        currentTween = transform
+            .DOScale(Vector3.one, spawnDuration)
+            .SetEase(spawnEase);
+
+        yield return currentTween.WaitForCompletion();
+
+        currentTween = null;
+    }
 
     public IEnumerator PlayHitReactionRoutine()
     {
@@ -27,7 +50,8 @@ public class StonePresenter : MonoBehaviour
 
         Sequence seq = DOTween.Sequence();
 
-        seq.Append(transform.DOScale(Vector3.zero, 0.2f));
+        seq.Append(transform.DOScale(Vector3.zero, 0.2f)
+            .SetEase(Ease.InBack));
 
         currentTween = seq;
 
@@ -41,9 +65,5 @@ public class StonePresenter : MonoBehaviour
         currentTween?.Kill();
         currentTween = null;
     }
-
-    private void OnDestroy()
-    {
-        StopCurrentTween();
-    }
+     
 }

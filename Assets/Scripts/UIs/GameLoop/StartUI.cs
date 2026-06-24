@@ -23,8 +23,8 @@ public class StartUI : MonoBehaviour
     public UnityEvent onFinished;
 
     private void Start()
-    {
-        Play();
+    { 
+
     }
 
     public void Play()
@@ -32,7 +32,7 @@ public class StartUI : MonoBehaviour
         StartCoroutine(PlayRoutine());
     }
 
-    private IEnumerator PlayRoutine()
+    public IEnumerator PlayRoutine()
     {
         target.anchoredPosition = new Vector2(0, startY);
 

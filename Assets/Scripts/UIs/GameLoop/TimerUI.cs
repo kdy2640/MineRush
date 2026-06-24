@@ -13,6 +13,14 @@ public class TimerUI : MonoBehaviour
     public event Action OnTimerEnded;
 
     private bool ended;
+    private void Start()
+    {
+        GameManager.Instance.GameLoop.SubscribeTick(SetTime);   
+    }
+    private void OnDestroy()
+    {
+        GameManager.Instance.GameLoop.UnSubscribeTick(SetTime);
+    }
 
     public void SetTime(float time)
     {

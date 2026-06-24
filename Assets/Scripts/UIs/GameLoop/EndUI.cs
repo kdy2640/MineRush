@@ -38,7 +38,7 @@ public class EndUI : MonoBehaviour
         StartCoroutine(PlayRoutine());
     }
 
-    private IEnumerator PlayRoutine()
+    public IEnumerator PlayRoutine()
     {
         isPlaying = true;
 

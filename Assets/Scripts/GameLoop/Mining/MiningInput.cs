@@ -22,7 +22,10 @@ public class MiningInput : MonoBehaviour
         if (mainCamera == null)
             mainCamera = Camera.main;
     }
-
+    private void OnEnable()
+    { 
+        rangeIndicator.transform.position = new Vector3(0, 1000f, 0);
+    }
     private void Start()
     {
         GameManager.Instance.GameLoop.Events.Subscribe(GameLoopEventType.LoopStarted, OnLoopStarted);

@@ -7,11 +7,23 @@ public class AutoMiner : MonoBehaviour
     // 인스펙터에서 자동채굴 전용 UpgradeData SO를 넣는다.
 
     public UpgradeData Data => autoMiningUpgradeData;
-    public UpgradeState State => GameManager.Instance.Upgrade.GetState(autoMiningUpgradeData);
+    private UpgradeState state;
+    public UpgradeState State
+    {
+        get
+        {
+            if (state == null)
+                state = GameManager.Instance.Upgrade.GetState(autoMiningUpgradeData);
+
+            return state;
+        }
+    }
+    // 캐싱해두기. 아마 작동 될듯.
 
     private void Start()
     {
         AutoMiningRuntimeData.Init();
+        state = GameManager.Instance.Upgrade.GetState(autoMiningUpgradeData);
     } // 자동채굴 시간 데이터가 초기화되지 않았다면 현재 시간으로 초기화한다.
 
     public int GetLevel()
@@ -44,7 +56,7 @@ public class AutoMiner : MonoBehaviour
 
     public List<OreAmount> CalculateClaimRewards()
     {
-        int currentLevel = State.level;
+        int currentLevel = state.level;
         List<OreAmount> result = new();
 
         if (currentLevel <= 0)
@@ -72,7 +84,7 @@ public class AutoMiner : MonoBehaviour
 
     public bool TryUpgradeWithClaim()
     {
-        if (GameManager.Instance.Upgrade.IsMaxLevel(State))
+        if (GameManager.Instance.Upgrade.IsMaxLevel(state))
             return false;
 
         List<OreAmount> costs = GetCurrentCost();
@@ -81,7 +93,7 @@ public class AutoMiner : MonoBehaviour
             return false;
 
         Claim();
-        State.level++;
+        state.level++;
         AutoMiningRuntimeData.ResetClaimTime();
 
         return true;

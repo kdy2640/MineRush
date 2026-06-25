@@ -17,7 +17,7 @@ public class UI_OrePanel : MonoBehaviour
         manager.OreManager.SubscribeOreChange(OnOreChangeHandler);
         OnOreChangeHandler();
     }
-
+     
     private void OnDestroy()
     {
         if (manager != null)

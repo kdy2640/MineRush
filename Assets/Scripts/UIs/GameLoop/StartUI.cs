@@ -16,8 +16,8 @@ public class StartUI : MonoBehaviour
 
     [SerializeField] private float panelCloseDuration = 0.45f;
 
-    [SerializeField] private float textDuration = 0.35f;
-
+    [SerializeField] private float textOpenDuration = 0.35f;
+    [SerializeField] private float textCloseDuration = 0.35f;
     [SerializeField] private float waveDuration = 1.2f;
 
     public UnityEvent onFinished;
@@ -37,6 +37,7 @@ public class StartUI : MonoBehaviour
         }
     }
 
+    [ContextMenu("Debug/Play StartUI")]
     public void Play()
     {
         if (isPlaying) return;
@@ -61,7 +62,7 @@ public class StartUI : MonoBehaviour
                 .SetEase(Ease.OutBack));
 
         seq.Join( messageText.rectTransform.
-            DOScale(1f, textDuration).SetEase(Ease.OutBack));
+            DOScale(1f, textOpenDuration).SetEase(Ease.OutBack));
 
         yield return seq.WaitForCompletion();
 
@@ -82,7 +83,7 @@ public class StartUI : MonoBehaviour
 
         seq = DOTween.Sequence();
 
-        seq.Append( messageText.rectTransform.DOScale(0f, textDuration));
+        seq.Append( messageText.rectTransform.DOScale(0f, textCloseDuration));
 
         seq.Join( panel.DOScaleY(0f, panelCloseDuration).SetEase(Ease.InBack));
 

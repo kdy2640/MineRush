@@ -6,7 +6,7 @@ public class MiningSequence : MonoBehaviour
     [Header("Actors")]
     [SerializeField] private PickaxeActor pickaxePrefab;
     [SerializeField] private Pooler pickaxePooler;
-    // [SerializeField] private OreGainPresenter oreGainPresenter;
+    [SerializeField] private OreGainPresenter oreGainPresenter;
     // [SerializeField] private OrePanel orePanel;
       
 
@@ -59,7 +59,7 @@ public class MiningSequence : MonoBehaviour
         yield return stone.GetComponent<StonePresenter>().PlayBreakRoutine();
 
         // 7. ±¤¼® ³¯¾Æ°¡´Â ¿¬Ãâ
-        // yield return oreGainPresenter.PlayRoutine(rewardResult, stone.transform.position);
+        yield return oreGainPresenter.OreGainRoutine(stone.DataSO.RewardList, stone.transform.position);
 
         // 8. UI´Â ´Ê°Ô ¶ì·Õ
         // OrePanelÀÌ OreManager¸¦ Áõ°¡½ÃÅ°¸é ¾È µÊ.

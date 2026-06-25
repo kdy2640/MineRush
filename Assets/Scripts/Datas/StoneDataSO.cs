@@ -11,7 +11,8 @@ public class StoneDataSO : ScriptableObject
     [SerializeField] private OreType oreType;
      
     [SerializeField] private List<OreAmount> rewardList = new(); 
-    [SerializeField] private GameObject solidStonePrefab;
+    [SerializeField] private Sprite stoneSprite;
+    [SerializeField] private Sprite stoneCrackSprite;
 
     public string Id => id;
     public int Tier => tier;
@@ -19,5 +20,6 @@ public class StoneDataSO : ScriptableObject
     public StoneDataDB.StoneType StoneType => stoneType;
     public OreType OreType => oreType;
     public IReadOnlyList<OreAmount> RewardList => rewardList;
-    public GameObject SolidStonePrefab => solidStonePrefab;
+    public Sprite StoneSprite => stoneSprite;
+    public Sprite StoneCrackSprite => stoneCrackSprite;
 }

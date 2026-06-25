@@ -32,6 +32,7 @@ public class UI_OreAmountVisualizer : MonoBehaviour
         RectTransform countRect = OreCount.rectTransform;
 
         countRect.localScale = Vector3.one;
+        GameManager.Instance.AudioManager.PlaySFX(SFXType.OreCollect);
 
         Sequence seq = DOTween.Sequence();
 

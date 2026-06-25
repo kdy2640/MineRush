@@ -1,7 +1,6 @@
 using DG.Tweening;
-using System.Collections; 
+using System.Collections;
 using UnityEngine;
-using static UnityEngine.ParticleSystem;
 
 public class StonePresenter : MonoBehaviour
 {
@@ -10,41 +9,75 @@ public class StonePresenter : MonoBehaviour
     [SerializeField] private Ease spawnEase = Ease.OutBack;
     [SerializeField] private ParticleSystem breakParticle;
 
+    private Tween currentTween;
 
+    private Tween spawnTween;
+    private Sequence hitSequence;
+    private Sequence breakSequence;
 
-    private Tween currentTween;  
-    private void OnDestroy()
-    {  
-        StopCurrentTween();
+    private Vector3 defaultScale;
+
+    private void Awake()
+    {
+        defaultScale = transform.localScale;
+
+        CreateTweens();
     }
+
+    private void OnDestroy()
+    {
+        currentTween?.Kill();
+
+        spawnTween?.Kill();
+        hitSequence?.Kill();
+        breakSequence?.Kill();
+    }
+
+    private void CreateTweens()
+    {
+        spawnTween = transform
+            .DOScale(defaultScale, spawnDuration)
+            .SetEase(spawnEase)
+            .SetAutoKill(false)
+            .Pause();
+
+        hitSequence = DOTween.Sequence()
+            .Append(transform.DOShakePosition(0.12f, 0.08f, 10))
+            .SetAutoKill(false)
+            .Pause();
+
+        breakSequence = DOTween.Sequence()
+            .Append(transform.DOScale(Vector3.zero, 0.2f).SetEase(Ease.InBack))
+            .SetAutoKill(false)
+            .Pause();
+    }
+
     public IEnumerator PlaySpawnRoutine()
     {
         StopCurrentTween();
 
         transform.localScale = Vector3.zero;
 
-        currentTween = transform
-            .DOScale(Vector3.one, spawnDuration)
-            .SetEase(spawnEase);
+        currentTween = spawnTween;
+        spawnTween.Restart();
 
-        yield return currentTween.WaitForCompletion();
+        yield return spawnTween.WaitForCompletion();
 
-        currentTween = null;
+        if (currentTween == spawnTween)
+            currentTween = null;
     }
 
     public IEnumerator PlayHitReactionRoutine()
     {
         StopCurrentTween();
 
-        Sequence seq = DOTween.Sequence();
+        currentTween = hitSequence;
+        hitSequence.Restart();
 
-        seq.Append(transform.DOShakePosition(0.12f, 0.08f, 10));
+        yield return hitSequence.WaitForCompletion();
 
-        currentTween = seq;
-
-        yield return seq.WaitForCompletion();
-
-        currentTween = null;
+        if (currentTween == hitSequence)
+            currentTween = null;
     }
 
     public IEnumerator PlayBreakRoutine()
@@ -52,29 +85,30 @@ public class StonePresenter : MonoBehaviour
         StopCurrentTween();
 
         if (breakParticle != null)
-        { 
-            breakParticle.transform.SetParent(null, true); 
+        {
+            breakParticle.transform.SetParent(null, true);
         }
 
+        currentTween = breakSequence;
+        breakSequence.Restart();
 
-        Sequence seq = DOTween.Sequence();
+        yield return breakSequence.WaitForCompletion();
 
-        seq.Append(transform.DOScale(Vector3.zero, 0.2f)
-            .SetEase(Ease.InBack));
-         
-        currentTween = seq;
-        yield return seq.WaitForCompletion();
+        if (breakParticle != null)
+            breakParticle.Play();
 
-         
-        breakParticle.Play(); 
-
-        currentTween = null;
+        if (currentTween == breakSequence)
+            currentTween = null;
     }
 
     public void StopCurrentTween()
     {
-        currentTween?.Kill();
+        if (currentTween == null)
+            return;
+
+        currentTween.Pause();
+        currentTween.Rewind();
+
         currentTween = null;
     }
-     
 }

@@ -20,4 +20,5 @@ MonoBehaviour:
   rewardList:
   - oreType: 0
     amount: 1
-  solidStonePrefab: {fileID: 4742298680208279920, guid: 33c5a7f6b410a9f46bc1be5b009ac891, type: 3}
+  stoneSprite: {fileID: 21300000, guid: 2fd6277598fac4e4395ee5e942a44c46, type: 3}
+  stoneCrackSprite: {fileID: 21300000, guid: e31b7eee6da07bc46a8fa7a489fbf901, type: 3}

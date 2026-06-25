@@ -5,7 +5,7 @@ public class MiningSequence : MonoBehaviour
 {
     [Header("Actors")]
     [SerializeField] private PickaxeActor pickaxePrefab;
-    [SerializeField] private Pooler pickaxePooler;
+    [SerializeField] private PickaxePooler pickaxePooler;
     [SerializeField] private OreGainPresenter oreGainPresenter;
     // [SerializeField] private OrePanel orePanel;
       
@@ -14,7 +14,7 @@ public class MiningSequence : MonoBehaviour
 
     private void Awake()
     {
-        pickaxePooler = GetComponent<Pooler>();
+        pickaxePooler = GetComponent<PickaxePooler>();
 
     }
      

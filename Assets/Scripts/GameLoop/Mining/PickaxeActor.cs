@@ -118,7 +118,7 @@ public class PickaxeActor : Poolable
         currentSequence = null;
     }
 
-    public override void Initialize(object obj)
+    public override void Initialize(PoolArgs obj)
     {
         StopCurrentTween();
         renderer.sprite = PickaxeDataDB.GetStoneDataSO(GameManager.Instance.Upgrade.GetRuntimeStat().PickaxeTier).Icon;

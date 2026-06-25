@@ -78,10 +78,16 @@ public class GameLoopUIRoot : MonoBehaviour
             new OreAmount(OreType.Gold, 5),
             new OreAmount(OreType.Diamond, 1)
         };
-
-        resultUI.gameObject.SetActive(true);
+        
 
         resultUI.SetData(test);
+
+        resultUI.Show();
+    }
+    [ContextMenu("Hide Result UI")]
+    private void HideResultUI()
+    {
+        resultUI.Hide();
     }
 
     [ContextMenu("Test Runtime Stat Panel")]

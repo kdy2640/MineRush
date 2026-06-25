@@ -11,13 +11,13 @@ public class EndUI : MonoBehaviour
 
     [SerializeField] private string message = "GAME OVER";
 
-    [SerializeField] private float panelOpenDuration = 0.45f;
+    [SerializeField] private float panelOpenDuration = 0.22f;
 
-    [SerializeField] private float panelCloseDuration = 0.45f;
+    [SerializeField] private float panelCloseDuration = 0.22f;
 
-    [SerializeField] private float textDuration = 0.35f;
+    [SerializeField] private float textDuration = 0.15f;
 
-    [SerializeField] private float waveDuration = 1.2f;
+    [SerializeField] private float waveDuration = 0.45f;
 
     private bool isPlaying;
 

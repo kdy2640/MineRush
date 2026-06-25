@@ -19,6 +19,11 @@ public static class UpgradeDescriptionTextFormatter
             return string.Empty;
         }
 
+        if (upgradeState.data.skill != null)
+        {
+            return upgradeState.data.skill.GetFormattedDescription(upgradeState.level, upgradeState.data.maxLevel);
+        }
+
         List<StatModifier> statModifiers = upgradeState.data.statModifiers;
 
         if (statModifiers == null || statModifiers.Count == 0)

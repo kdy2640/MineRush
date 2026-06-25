@@ -2185,7 +2185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5826225701428414975, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: m_Name
-      value: "\uCD5C\uB300 \uB3CC \uAC1C\uC218 \uC99D\uAC00 II "
+      value: "\uCD5C\uB300 \uB3CC \uAC2F\uC218 \uC99D\uAC00 II "
       objectReference: {fileID: 0}
     - target: {fileID: 5859329987286111728, guid: 00c9dadd1e7fd8c449de99c36091d4ba, type: 3}
       propertyPath: nodeId

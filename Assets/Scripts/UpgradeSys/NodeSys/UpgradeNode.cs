@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -22,8 +23,8 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [Header("UI")]
     private Button button;
     [SerializeField] private Image upgradeIcon;
-    private Image bgImage;
-    private Color maxLevelColor = new Color32(255, 209, 0, 255);
+    [FormerlySerializedAs("bgImage")] [SerializeField] private Image borderImg;
+    private Color maxLevelColor = new Color32(0, 255, 0, 255);
 
     private UpgradeNodePanelController nodePanelController;
     public RectTransform rectTransform { get; private set; }
@@ -35,7 +36,6 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         button = GetComponent<Button>();
         nodePanelController = GetComponentInParent<UpgradeNodePanelController>();
         rectTransform = GetComponent<RectTransform>();
-        bgImage = transform.GetChild(0).GetComponent<Image>();
     }
 
     public void Unlock()
@@ -68,14 +68,14 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void RefreshNodeVisual()
     {
-        if (bgImage == null)
+        if (borderImg == null)
         {
             return;
         }
 
         if (upgradeData == null)
         {
-            bgImage.color = Color.white;
+            borderImg.color = Color.white;
             return;
         }
 
@@ -83,11 +83,11 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         if (GameManager.Instance.Upgrade.IsMaxLevel(state))
         {
-            bgImage.color = maxLevelColor;
+            borderImg.color = maxLevelColor;
             return;
         }
 
-        bgImage.color = Color.white;
+        borderImg.color = Color.white;
     }
 
     public void TryBuy()

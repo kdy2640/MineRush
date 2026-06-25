@@ -1,14 +1,16 @@
+using System;
 using UnityEngine;
 
 public class GameLoopManager : MonoBehaviour
 {
     private bool IsGameLoopScene => GameManager.Instance.Scene.currenSceneType == SceneType.GameLoop; 
-    [SerializeField] private float loopDuration = 20f;
+    private float loopDuration = 20f;
      
     private GameLoopEventManager eventManager; 
     private SkillEventProxy eventProxy;
+    private Action<float> OnTick;
     private float timer;
-    private bool isRunning;
+    private bool isRunning = false;
 
     public float Timer { get { return timer; } }
     public bool IsRunning => isRunning;
@@ -21,11 +23,14 @@ public class GameLoopManager : MonoBehaviour
         eventManager = new GameLoopEventManager(); 
         eventProxy = new SkillEventProxy();
     } 
-
+    public void BeforeStart()
+    {
+    }
     public void StartLoop()
     {
         if (!IsGameLoopScene) return;
         timer = loopDuration + GameManager.Instance.Upgrade.GetRuntimeStat().ExtraDuration;
+        OnTick?.Invoke(Timer);
         isRunning = true;
 
         eventManager.Invoke(GameLoopEventType.LoopStarted);
@@ -36,7 +41,8 @@ public class GameLoopManager : MonoBehaviour
         if (!isRunning)
             return;
 
-        timer -= Time.deltaTime;
+        timer -= Time.deltaTime; 
+        OnTick?.Invoke(Timer);
 
         if (timer <= 0f)
             EndLoop();
@@ -44,8 +50,19 @@ public class GameLoopManager : MonoBehaviour
 
     private void EndLoop()
     {
+        if (!isRunning) return;
         if (!IsGameLoopScene) return;
         isRunning = false;
-        GameManager.Instance.Scene.ChangeScene(SceneType.Upgrade);
+        eventManager.Invoke(GameLoopEventType.LoopEnded);
     }
+
+    public void SubscribeTick(Action<float> ev)
+    {
+        OnTick += ev;
+    }
+    public void UnSubscribeTick(Action<float> ev)
+    {
+        OnTick -= ev;
+    }
+
 }

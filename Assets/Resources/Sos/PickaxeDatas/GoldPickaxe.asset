@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PickaxesDataSO
   tier: 3
   displayName: Gold Pickaxe
-  icon: {fileID: -8829508912781822099, guid: 510921d6c5d01994a9a0079a30648367, type: 3}
+  icon: {fileID: 21300000, guid: 510921d6c5d01994a9a0079a30648367, type: 3}
   miningPower: 4
   miningSpeed: 4
   miningRadius: 4

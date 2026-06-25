@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PickaxesDataSO
   tier: 5
   displayName: Legendary Pickaxe
-  icon: {fileID: -7075053568885052322, guid: deef49ab8c63e704cb18866918dc950c, type: 3}
+  icon: {fileID: 21300000, guid: deef49ab8c63e704cb18866918dc950c, type: 3}
   miningPower: 5
   miningSpeed: 5
   miningRadius: 5

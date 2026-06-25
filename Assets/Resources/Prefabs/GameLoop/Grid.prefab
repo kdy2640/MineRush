@@ -74,9 +74,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76ec29fe7e783ee45a148778f8704f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StoneSpawner
+  lineSpawnDelay: 0.04
   stoneActorPrefab: {fileID: 6453653315695144141, guid: 0cbbf68ae87c36a4c8db70452c657a30, type: 3}
-  stoneDataList:
-  - {fileID: 11400000, guid: ab5db79773e24104b91c087595cdf11b, type: 2}
 --- !u!1 &5928266537064970552
 GameObject:
   m_ObjectHideFlags: 0

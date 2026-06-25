@@ -4,15 +4,21 @@ using UnityEngine;
 public class GameLoopPreStart : MonoBehaviour
 { 
     [SerializeField] private StoneSpawner stoneSpawner;
-    // [SerializeField] private StartUI startUI;
+    [SerializeField] private StartUI startUI;
 
+    private void Awake()
+    {
+        startUI.gameObject.SetActive(false);
+    }
     public IEnumerator Run()
-    { 
-        yield return null;
-        // if (stoneSpawner != null)
-           //  yield return stoneSpawner.SpawnRoutine();
+    {  
+        if (stoneSpawner != null)
+           yield return stoneSpawner.PreStartRoutine();
 
-        // if (startUI != null) ;
-            // yield return startUI.ShowRoutine();
+        if (startUI != null)
+        {
+            startUI.gameObject.SetActive(true);
+            yield return startUI.PlayRoutine();
+        }
     }
 }

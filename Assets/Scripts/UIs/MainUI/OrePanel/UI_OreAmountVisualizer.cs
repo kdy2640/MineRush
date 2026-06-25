@@ -1,7 +1,7 @@
+using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEngine;
-using UnityEngine.Rendering;
+using DG.Tweening;
+using UnityEngine; 
 using UnityEngine.UI;
 
 public class UI_OreAmountVisualizer : MonoBehaviour
@@ -9,7 +9,12 @@ public class UI_OreAmountVisualizer : MonoBehaviour
     [SerializeField] private Image BackGround;
     [SerializeField] private Image OreImage;
     [SerializeField] private TextMeshProUGUI OreCount;
-     
+
+    [SerializeField] private float gainPopScale = 1.25f;
+    [SerializeField] private float gainPopDuration = 0.12f;
+    [SerializeField] private float gainSettleDuration = 0.08f;
+
+    private Tween gainTween;
 
     public void SetOre(OreAmount amount)
     {
@@ -19,5 +24,24 @@ public class UI_OreAmountVisualizer : MonoBehaviour
     public void Clear()
     { 
         OreCount.text = "";
-    } 
+    }
+    public void PlayGain()
+    {
+        gainTween?.Kill();
+
+        RectTransform countRect = OreCount.rectTransform;
+
+        countRect.localScale = Vector3.one;
+
+        Sequence seq = DOTween.Sequence();
+
+        seq.Append(countRect.DOScale(gainPopScale, gainPopDuration).SetEase(Ease.OutBack));
+        seq.Append(countRect.DOScale(1f, gainSettleDuration).SetEase(Ease.OutQuad));
+
+        gainTween = seq;
+    }
+    private void OnDestroy()
+    {
+        gainTween?.Kill();
+    }
 }

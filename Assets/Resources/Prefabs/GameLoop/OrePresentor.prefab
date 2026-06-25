@@ -53,10 +53,10 @@ MonoBehaviour:
   spawnMaxUpOffset: 0.65
   popupDuration: 0.18
   popupStartScale: 0.05
-  popupEndScale: 0.2
+  popupEndScale: 0.15
   popupStayDuration: 0.15
   moveDuration: 0.15
-  moveEndScale: 0.15
+  moveEndScale: 0.1
 --- !u!1 &6794245691983256267
 GameObject:
   m_ObjectHideFlags: 0

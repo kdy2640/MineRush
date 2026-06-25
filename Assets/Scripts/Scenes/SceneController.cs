@@ -57,10 +57,10 @@ public class SceneController : MonoBehaviour
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(nextScene.SceneName);
 
+        currentScene = nextScene;
+
         while (!operation.isDone)
             yield return null;
-
-        currentScene = nextScene;
 
         yield return currentScene.PrepareBeforeReveal();
 

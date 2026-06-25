@@ -66,7 +66,7 @@ public class StonePresenter : MonoBehaviour
         yield return seq.WaitForCompletion();
 
          
-         breakParticle.Play(); 
+        breakParticle.Play(); 
 
         currentTween = null;
     }

@@ -282,10 +282,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7676023934960269771}
     m_Modifications:
-    - target: {fileID: 94708551079689370, guid: ca860e8da5faf7b439320d00752560cd, type: 3}
-      propertyPath: previousConnectedNodes.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 749211656858358124, guid: ca860e8da5faf7b439320d00752560cd, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -366,26 +362,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1476463003028804349, guid: ca860e8da5faf7b439320d00752560cd, type: 3}
-      propertyPath: previousConnectedNodes.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2787129274538516986, guid: ca860e8da5faf7b439320d00752560cd, type: 3}
-      propertyPath: previousConnectedNodes.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2945906968700334612, guid: ca860e8da5faf7b439320d00752560cd, type: 3}
-      propertyPath: previousConnectedNodes.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 7349725197191725378, guid: ca860e8da5faf7b439320d00752560cd, type: 3}
       propertyPath: nodeInfoPanelRect
       value: 
       objectReference: {fileID: 8723704264517157887}
-    - target: {fileID: 7737103514659953136, guid: ca860e8da5faf7b439320d00752560cd, type: 3}
-      propertyPath: previousConnectedNodes.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 9131441707070775071, guid: ca860e8da5faf7b439320d00752560cd, type: 3}
       propertyPath: m_Name
       value: UpgradeNodePanel

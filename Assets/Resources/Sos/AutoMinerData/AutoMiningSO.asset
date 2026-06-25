@@ -33,7 +33,7 @@ MonoBehaviour:
     startLevel: 14
     baseAmount: 14
     amountMultiplier: 1.06
-  - oreType: 1
+  - oreType: 3
     startLevel: 21
     baseAmount: 5
     amountMultiplier: 1.05

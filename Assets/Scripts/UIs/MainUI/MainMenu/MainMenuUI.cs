@@ -15,6 +15,9 @@ public class MainMenuUI : MonoBehaviour
 
     [SerializeField] private RectTransform settingsButton;
 
+    [SerializeField] private Button startButtonComponent;
+    [SerializeField] private Button exitButtonComponent;
+
     [Header("Popup")]
     [SerializeField] private SettingsPopup settingsPopup;
 
@@ -29,7 +32,15 @@ public class MainMenuUI : MonoBehaviour
     {
         if (settingsButtonComponent != null)
         {
-            settingsButtonComponent.onClick.AddListener( settingsPopup.Open);
+            settingsButtonComponent.onClick.AddListener(settingsPopup.Open);
+        }
+        if(startButtonComponent != null)
+        {
+            startButtonComponent.onClick.AddListener(OnClickStart);
+        }
+        if (exitButtonComponent != null)
+        {
+            exitButtonComponent.onClick.AddListener(OnClickExit);
         }
     }
 
@@ -63,5 +74,28 @@ public class MainMenuUI : MonoBehaviour
         yield return new WaitForSeconds(0.15f);
 
         settingsButton.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+    }
+    private void OnClickStart()
+    {
+        GameManager.Instance.Scene.ChangeScene(SceneType.Upgrade);
+    }
+    public void OnClickExit()
+    {
+        Application.Quit();
+    }
+    private void OnDestroy()
+    {
+        if(settingsButton != null)
+        {
+            settingsButtonComponent.onClick.RemoveListener(settingsPopup.Open);
+        }
+        if(startButtonComponent != null)
+        {
+            startButtonComponent.onClick.RemoveListener(OnClickStart);
+        }
+        if (exitButtonComponent != null)
+        {
+            exitButtonComponent.onClick.RemoveListener(OnClickExit);
+        }
     }
 }

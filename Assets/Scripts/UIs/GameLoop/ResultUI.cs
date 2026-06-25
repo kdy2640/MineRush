@@ -13,8 +13,6 @@ public class ResultUI : MonoBehaviour
 
     [SerializeField] private Button nextSessionButton;
 
-    [SerializeField] private Button closeButton;
-
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private RectTransform panel;
 
@@ -33,24 +31,16 @@ public class ResultUI : MonoBehaviour
             upgradeButton.onClick.AddListener(() =>
             {
                 PlayButtonAnimation(upgradeButton);
+
+                GameManager.Instance.Scene.ChangeScene(SceneType.Upgrade);
             });
         }
 
-        if (nextSessionButton != null)
+        if (nextSessionButton != null)//다음 세션 시작 기능 추가예정
         {
             nextSessionButton.onClick.AddListener(() =>
             {
                 PlayButtonAnimation(nextSessionButton);
-            });
-        }
-
-        if (closeButton != null)
-        {
-            closeButton.onClick.AddListener(() =>
-            {
-                PlayButtonAnimation(closeButton);
-
-                CloseResultUI();
             });
         }
     }
@@ -129,11 +119,7 @@ public class ResultUI : MonoBehaviour
             gameObject.SetActive(false);
         });
     }
-    public void CloseResultUI()
-    {
-        Hide();
-    }
-
+   
     private void PlayButtonAnimation(Button button)
     {
         if(button == null) return;

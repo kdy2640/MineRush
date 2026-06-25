@@ -34,7 +34,7 @@ public class GameLoopUIRoot : MonoBehaviour
 
     private void Start()
     {
-        TestResultUI();
+        //TestResultUI();
 
         TestRuntimeStatPanel();
 
@@ -57,6 +57,10 @@ public class GameLoopUIRoot : MonoBehaviour
         timerRunning = false;
 
         endUI.Play();
+
+        //resultUI.SetData(currentSessionResult); 추가예정 기능
+
+        resultUI.Show();
     }
 
     private void Update()
@@ -68,24 +72,32 @@ public class GameLoopUIRoot : MonoBehaviour
         timerUI.SetTime(currentTime);
     }
 
-    [ContextMenu("Test Result UI")]
-    private void TestResultUI()
+
+    //[ContextMenu("Test Result UI")]
+    //private void TestResultUI()
+    //{
+    //    List<OreAmount> test = new()
+    //    {
+    //        new OreAmount(OreType.Copper, 10),
+    //        new OreAmount(OreType.Iron, 20),
+    //        new OreAmount(OreType.Gold, 5),
+    //        new OreAmount(OreType.Diamond, 1)
+    //    };
+
+
+    //    resultUI.SetData(test);
+
+    //    resultUI.Show();
+    //}
+
+    [ContextMenu("Show Result UI")]
+    private void TestShowResultUI()
     {
-        List<OreAmount> test = new()
-        {
-            new OreAmount(OreType.Copper, 10),
-            new OreAmount(OreType.Iron, 20),
-            new OreAmount(OreType.Gold, 5),
-            new OreAmount(OreType.Diamond, 1)
-        };
-        
-
-        resultUI.SetData(test);
-
         resultUI.Show();
     }
+
     [ContextMenu("Hide Result UI")]
-    private void HideResultUI()
+    private void TestHideResultUI()
     {
         resultUI.Hide();
     }

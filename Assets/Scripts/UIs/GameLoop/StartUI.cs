@@ -12,9 +12,9 @@ public class StartUI : MonoBehaviour
 
     [SerializeField] private string message = "MINING START!";
 
-    [SerializeField] private float panelOpenDuration = 0.45f;
+    [SerializeField] private float panelOpenDuration = 0.23f;
 
-    [SerializeField] private float panelCloseDuration = 0.45f;
+    [SerializeField] private float panelCloseDuration = 0.23f;
 
     [SerializeField] private float textOpenDuration = 0.35f;
     [SerializeField] private float textCloseDuration = 0.35f;
@@ -58,14 +58,17 @@ public class StartUI : MonoBehaviour
         Sequence seq = DOTween.Sequence();
 
         seq.Append(panel.
-            DOScaleY(1f, panelOpenDuration)
-                .SetEase(Ease.OutBack));
+            DOScaleY(1f, panelOpenDuration).SetEase(Ease.OutBack));
 
         seq.Join( messageText.rectTransform.
             DOScale(1f, textOpenDuration).SetEase(Ease.OutBack));
 
         yield return seq.WaitForCompletion();
 
+        messageText.rectTransform.DOPunchScale(Vector3.one * 0.2f,
+        0.2f,
+        10,
+        1f);
         messageText.rectTransform.DOShakePosition(waveDuration,
             new Vector3(6f, 3f, 0f),
             20,

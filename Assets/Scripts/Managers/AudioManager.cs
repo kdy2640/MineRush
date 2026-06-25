@@ -19,6 +19,7 @@ public enum SFXType
     OreCollect,
     StoneHit,
     StoneCrush,
+    UIHover,
     GameEnd
 }
 public class AudioManager : MonoBehaviour

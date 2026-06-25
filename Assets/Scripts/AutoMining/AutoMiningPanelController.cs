@@ -15,18 +15,36 @@ public class AutoMiningPanelController : MonoBehaviour
 
     private bool isPanelFocus;
     [SerializeField] private RectTransform targetRefreshLayoutRoot;
+    [SerializeField] private Slider timerSlider;
+    
+    private bool needRefreshNextFrame;
     private void Awake()
     {
         if (autoMiner == null)
             autoMiner = GetComponent<AutoMiner>();
     }
+    private float CalculateRefreshTimerOffset()
+    {
+        if (autoMiner.GetLevel() <= 0)
+        {
+            return 0f;
+        }
+        if (refreshInterval <= 0f)
+            return 0f;
+
+        float elapsedSeconds = Mathf.Max(
+            0f,
+            (float)AutoMiningRuntimeData.GetElapsedClaimTime().TotalSeconds
+        );
+
+        return elapsedSeconds % refreshInterval;
+    }
 
     private void OnEnable()
     {
         isPanelFocus = true;
-        refreshTimer = 0f;
-        RefreshRewardText();
-        RefreshCostText();
+        refreshTimer = CalculateRefreshTimerOffset();
+        needRefreshNextFrame = true;
     }
 
     private void OnDisable()
@@ -37,17 +55,30 @@ public class AutoMiningPanelController : MonoBehaviour
     private void Update()
     {
         if(!isPanelFocus) return;
-        
-        refreshTimer += Time.deltaTime;
-        if (refreshTimer < refreshInterval) return;
-        
-        RefreshRewardText();
-        refreshTimer = 0f;
+        if (needRefreshNextFrame)
+        {
+            needRefreshNextFrame = false;
+            RefreshRewardText();
+            RefreshCostText();
+            RefreshSlider();
+        }
+
+        if (autoMiner.GetLevel() > 0)
+        {
+            refreshTimer += Time.deltaTime;
+            if (refreshTimer >= refreshInterval)
+            {
+                refreshTimer = 0f;
+
+                RefreshRewardText();
+            }
+            RefreshSlider();
+        }
     }
 
     private string GetAllOreRewardText()
     {
-        int currentLevel = autoMiner.State.level;
+        int currentLevel = autoMiner.GetLevel();
         List<LevelBasedOreReward> rewardData = autoMiner.Data.levelBasedRewards;
         List<OreAmount> claimRewards = autoMiner.CalculateClaimRewards();
 
@@ -98,19 +129,25 @@ public class AutoMiningPanelController : MonoBehaviour
         rewardText.text = value;
     } // tmp 자주 호출 될때 성능 하락 방지용.
     //어차피 1초마다 갱신이긴 하지만 그래도 만들어놓음.
-    public void RefreshRewardText()
+    private void RefreshRewardText()
     {
         SetRewardText(GetAllOreRewardText());
         RebuildLayout();
     }
 
-    public void RefreshCostText()
+    private void RefreshCostText()
     {
         costText.text = UpgradeOreCostTextFormatter.GetAllOreCostText(
             autoMiner.GetCurrentCost(),
             GameManager.Instance.OreManager
         );
         RebuildLayout();
+    }
+
+    private void RefreshSlider()
+    {
+        if(timerSlider == null) return;
+        timerSlider.value = Mathf.Clamp01(refreshTimer / refreshInterval);
     }
     private void RebuildLayout()
     {
@@ -127,6 +164,7 @@ public class AutoMiningPanelController : MonoBehaviour
         RefreshRewardText();
         RefreshCostText();
         refreshTimer = 0f;
+        RefreshSlider();
     }
 
     public void ClaimBtnClick()
@@ -134,5 +172,6 @@ public class AutoMiningPanelController : MonoBehaviour
         autoMiner.Claim();
         RefreshRewardText();
         refreshTimer = 0f;
+        RefreshSlider();
     }
 }

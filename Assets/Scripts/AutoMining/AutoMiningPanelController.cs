@@ -25,6 +25,10 @@ public class AutoMiningPanelController : MonoBehaviour
     }
     private float CalculateRefreshTimerOffset()
     {
+        if (autoMiner.GetLevel() <= 0)
+        {
+            return 0f;
+        }
         if (refreshInterval <= 0f)
             return 0f;
 

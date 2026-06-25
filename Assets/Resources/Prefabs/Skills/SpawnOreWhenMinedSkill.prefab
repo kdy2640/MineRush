@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e922cb269c766245867a08ec6d95372, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnOreWhenMinedSkill
-  <id>k__BackingField: 0
+  <id>k__BackingField: SpawnOreWhenMined
   <level>k__BackingField: 0
   <description>k__BackingField: "\uAD11\uC11D \uCC44\uAD74 \uC2DC +<color=#00FF00>{\uD655\uB960}%</color>
     \uD655\uB960\uB85C \uC0DD\uC131"
   <baseChanceRate>k__BackingField: 0.3
-  <chanceRatePerLevel>k__BackingField: 0
+  <chanceRatePerLevel>k__BackingField: 0.3

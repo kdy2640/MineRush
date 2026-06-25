@@ -10,6 +10,7 @@ public static class PickaxeDataDB
     
     public static int GetPickaxeKeyCount()
     {
+        Initiazlie();
         return pickaxeDataSOs.Keys.Count;
     }
     public static PickaxesDataSO GetStoneDataSO(int tierKey)

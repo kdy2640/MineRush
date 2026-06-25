@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpawnOreWhenMinedSkill
   <id>k__BackingField: SpawnOreWhenMined
   <level>k__BackingField: 0
-  <description>k__BackingField: "\uAD11\uC11D \uCC44\uAD74 \uC2DC +<color=#00FF00>{\uD655\uB960}%</color>
-    \uD655\uB960\uB85C \uC0DD\uC131"
+  <description>k__BackingField: "\uAD11\uC11D \uCC44\uAD74 \uC2DC \uC0C8 \uAD11\uC11D
+    \uC0DD\uC131 \uD655\uB960 :\n{\uACC4\uC218}"
   <baseChanceRate>k__BackingField: 0.3
   <chanceRatePerLevel>k__BackingField: 0.3

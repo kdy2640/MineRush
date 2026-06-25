@@ -11,21 +11,39 @@ public class NodeHoverEffect : MonoBehaviour, IPointerEnterHandler, IPointerExit
     private Vector3 originalScale;
     private float hoverScale = 1.09f;
 
+    private Tween zoomInTween;
+    private Tween zoomOutTween;
+
     private void Awake()
     {
         originalScale = transform.localScale;
+        zoomInTween = transform
+            .DOScale(hoverScale, 0.15f)
+            .SetEase(Ease.OutQuad)
+            .Pause()
+            .SetAutoKill(false);
+        zoomOutTween = transform
+            .DOScale(originalScale, 0.15f)
+            .SetEase(Ease.OutQuad)
+            .Pause()
+            .SetAutoKill(false);
     }
 
     public void OnPointerEnter(PointerEventData eventData) //Sequence를 쓰지 않을 것 같아서 간단히 구현.
-    {        
-        transform.DOKill();
-        transform.DOScale(originalScale * hoverScale, 0.15f).SetEase(Ease.OutQuad);
+    {
         GameManager.Instance.AudioManager.PlaySFX(SFXType.UIHover);
+        zoomOutTween.Pause();
+        zoomInTween.Restart();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {        
-        transform.DOKill();
-        transform.DOScale(originalScale, 0.15f).SetEase(Ease.OutQuad);
+        zoomInTween.Pause();
+        zoomOutTween.Restart();
+    }
+    private void OnDestroy()
+    {
+        zoomInTween?.Kill();
+        zoomOutTween?.Kill();
     }
 }

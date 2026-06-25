@@ -5,7 +5,6 @@ using Random = UnityEngine.Random;
 
 public class SpawnOreWhenMinedSkill : SkillBase
 {
-    [field:SerializeField]public float baseChanceRate { get; private set; }
     [field:SerializeField]public float chanceRatePerLevel { get; private set; }
     public override void Apply()
     {
@@ -15,16 +14,27 @@ public class SpawnOreWhenMinedSkill : SkillBase
     {
         GameManager.Instance.GameLoop.Events.Unsubscribe(GameLoopEventType.StoneDestroyed, HandleOreDestroyed); 
     }
-    public string GetFormattedDescription()
+    public override string GetFormattedDescription(int level, int maxLevel)
     {
-        float chanceRate = baseChanceRate + (level * chanceRatePerLevel);
-        return description
-            .Replace("{확률}", chanceRate.ToString("0.##"));
+        float currentChanceRate = level * chanceRatePerLevel;
+        string desc;
+
+        if (level >= maxLevel)
+        {
+            desc = $"+{currentChanceRate:0.##}%";
+        }
+        else
+        {
+            float nextChanceRate = (level + 1) * chanceRatePerLevel;
+            desc = $"+{currentChanceRate:0.##}% -> +{nextChanceRate:0.##}%";
+        }
+
+        return description.Replace("{계수}", desc);
     }
 
     public void HandleOreDestroyed()
     {
-        float chanceRate = baseChanceRate + (level * chanceRatePerLevel);
+        float chanceRate = (level * chanceRatePerLevel) / 100f;
         float randValue = Random.value;
 
         if (randValue <= chanceRate)

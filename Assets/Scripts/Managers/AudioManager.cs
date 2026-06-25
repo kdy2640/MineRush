@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement; 
 
-//ÇÁ·ÎÁ§Æ® ÀüÃ¼¿¡¼­ ÇÏ³ª¸¸ Á¸ÀçÇÏµµ·Ï °ü¸®µÈ´Ù.
+//í”„ë¡œì íŠ¸ ì „ì²´ì—ì„œ í•˜ë‚˜ë§Œ ì¡´ì¬í•˜ë„ë¡ ê´€ë¦¬ëœë‹¤.
 public enum BGMType
 {
     None,
@@ -19,6 +19,9 @@ public enum SFXType
     OreCollect,
     StoneHit,
     StoneCrush,
+    MetalHit,
+    FieldPlacement,
+    LevelUp,
     UIHover,
     GameEnd
 }
@@ -29,14 +32,14 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource sfxSource;
 
     [Header("BGM List")]
-    [SerializeField] private BGMClipData[] bgmClips;//ÀÎ½ºÆåÅÍ¿¡¼­ µî·ÏÇÒ BGM
+    [SerializeField] private BGMClipData[] bgmClips;//ì¸ìŠ¤í™í„°ì—ì„œ ë“±ë¡í•  BGM
     [Header("SFX List")]
-    [SerializeField] private SFXClipData[] sfxClips;//ÀÎ½ºÆåÅÍ¿¡¼­ µî·ÏÇÒ È¿°úÀ½ µ¥ÀÌÅÍ
+    [SerializeField] private SFXClipData[] sfxClips;//ì¸ìŠ¤í™í„°ì—ì„œ ë“±ë¡í•  íš¨ê³¼ìŒ ë°ì´í„°
 
 
-    //¿¹ : BGMType.Stage -> Stage BGMµ¥ÀÌÅÍ
+    //ì˜ˆ : BGMType.Stage -> Stage BGMë°ì´í„°
     private Dictionary<BGMType, BGMClipData> bgmDictionary;
-    //¿¹ : SFXType.Jump -> Jump È¿°úÀ½ µ¥ÀÌÅÍ
+    //ì˜ˆ : SFXType.Jump -> Jump íš¨ê³¼ìŒ ë°ì´í„°
     private Dictionary<SFXType, SFXClipData> sfxDictionary;
 
     private BGMClipData currentBGMData;
@@ -49,31 +52,31 @@ public class AudioManager : MonoBehaviour
 
         InitializeDictionary();
     }
-   //AudioSource°¡ ¾øÀ»°æ¿ì ÀÚµ¿À¸·Î ¸¸µé¾îÁÖ´Â ³à¼®
+   //AudioSourceê°€ ì—†ì„ê²½ìš° ìë™ìœ¼ë¡œ ë§Œë“¤ì–´ì£¼ëŠ” ë…€ì„
    private void CreateAudioSources()
     {
         if(bgmSource==null)
         {
-            //BGM source ¶ó´Â ÀÌ¸§ÀÇ ºó °ÔÀÓ¿ÀºêÁ§Æ®¸¦ »ı¼ºÇÏÀÚ.
+            //BGM source ë¼ëŠ” ì´ë¦„ì˜ ë¹ˆ ê²Œì„ì˜¤ë¸Œì íŠ¸ë¥¼ ìƒì„±í•˜ì.
             GameObject bgmObj = new GameObject("BGM source");
             bgmObj.transform.SetParent(transform);
 
-            //»ı¼ºÇÑ ¿ÀºêÁ§Æ®¿¡ AudioSourceÄÄÆ÷³ÍÆ®¸¦ Ãß°¡
+            //ìƒì„±í•œ ì˜¤ë¸Œì íŠ¸ì— AudioSourceì»´í¬ë„ŒíŠ¸ë¥¼ ì¶”ê°€
             bgmSource = bgmObj.AddComponent<AudioSource>();
 
-            //BGMÀº ¹İº¹Àç»ıÇÏ´Ï±î ·çÇÁ¸¦ true·Î ¼³Á¤
+            //BGMì€ ë°˜ë³µì¬ìƒí•˜ë‹ˆê¹Œ ë£¨í”„ë¥¼ trueë¡œ ì„¤ì •
             bgmSource.loop = true;
         }
         if (sfxSource == null)
         {
-            //SFX Source¶ó´Â ÀÌ¸§ÀÇ ºó °ÔÀÓ ¿ÀºêÁ§Æ®¸¦ »ı¼ºÇÏÀÚ.
+            //SFX Sourceë¼ëŠ” ì´ë¦„ì˜ ë¹ˆ ê²Œì„ ì˜¤ë¸Œì íŠ¸ë¥¼ ìƒì„±í•˜ì.
             GameObject sfxObj = new GameObject("SFX Source");
             sfxObj.transform.SetParent(transform);
             sfxSource = sfxObj.AddComponent<AudioSource>();
             sfxSource.loop = false;
         }
     }
-    //¹è¿­·Î µî·ÏÇÑ ¿Àµğ µ¥ÀÌÅÍ¸¦ µñ¼Å³Ê¸®¿¡ ÀúÀåÇÏ´Â ³à¼®
+    //ë°°ì—´ë¡œ ë“±ë¡í•œ ì˜¤ë”” ë°ì´í„°ë¥¼ ë”•ì…”ë„ˆë¦¬ì— ì €ì¥í•˜ëŠ” ë…€ì„
     private void InitializeDictionary()
     {
         bgmDictionary = new Dictionary<BGMType, BGMClipData>();
@@ -81,15 +84,15 @@ public class AudioManager : MonoBehaviour
 
         for(int i = 0;i<bgmClips.Length;i++)
         {
-            //¹è¿­ ¿ä¼Ò°¡ ºñ¾î ÀÖÀ¸¸é
+            //ë°°ì—´ ìš”ì†Œê°€ ë¹„ì–´ ìˆìœ¼ë©´
             if (bgmClips[i] == null) continue;
-            //BGMµ¥ÀÌÅÍ ¾È¿¡ AudioClipÀÌ ¿¬°áµÇ¾î ÀÖÁö ¾ÊÀ¸¸é
+            //BGMë°ì´í„° ì•ˆì— AudioClipì´ ì—°ê²°ë˜ì–´ ìˆì§€ ì•Šìœ¼ë©´
             if (bgmClips[i].clip == null) continue;
 
-            //µñ¼Å³Ê¸®¿¡ °°Àº BGMTypeÀÌ ¾ÆÁ÷ ¾øÀ¸¸é
+            //ë”•ì…”ë„ˆë¦¬ì— ê°™ì€ BGMTypeì´ ì•„ì§ ì—†ìœ¼ë©´
             if (!bgmDictionary.ContainsKey(bgmClips[i].type))
             {
-                //BGMTypeÀ» key, BGMClipData¸¦ Value·Î ÀúÀå
+                //BGMTypeì„ key, BGMClipDataë¥¼ Valueë¡œ ì €ì¥
                 bgmDictionary.Add(bgmClips[i].type, bgmClips[i]);
             }
         }
@@ -98,61 +101,61 @@ public class AudioManager : MonoBehaviour
             if (sfxClips[i] == null) continue;
             if (sfxClips[i].clip == null) continue;
 
-            //µñ¼Å³Ê¸®¿¡ °°Àº SFXTypeÀÌ ¾ÆÁ÷ ¾øÀ¸¸é
+            //ë”•ì…”ë„ˆë¦¬ì— ê°™ì€ SFXTypeì´ ì•„ì§ ì—†ìœ¼ë©´
             if (!sfxDictionary.ContainsKey(sfxClips[i].type))
             {
                 sfxDictionary.Add(sfxClips[i].type, sfxClips[i]);
             }
         }
     }
-    //BGMÀ» Àç»ıÇÏ´Â ³à¼®
+    //BGMì„ ì¬ìƒí•˜ëŠ” ë…€ì„
     //AudioManager.Instance.PlayBGM(BGMType.Stage);
     public void PlayBGM(BGMType type)
     {
-        //¿äÃ»ÇÑ BGMTypeÀÌ µñ¼Å³Ê¸®¿¡ ¾øÀ¸¸é
+        //ìš”ì²­í•œ BGMTypeì´ ë”•ì…”ë„ˆë¦¬ì— ì—†ìœ¼ë©´
         if(!bgmDictionary.ContainsKey(type))
         {
             return;
         }
-        //µñ¼Å³Ê¸®¿¡¼­ ÇØ´ç BGMµ¥ÀÌÅÍ¸¦ °¡Á®¿Â´Ù.
+        //ë”•ì…”ë„ˆë¦¬ì—ì„œ í•´ë‹¹ BGMë°ì´í„°ë¥¼ ê°€ì ¸ì˜¨ë‹¤.
         BGMClipData data = bgmDictionary[type];
 
-        //ÇöÀç Àç»ıÁßÀÎ BGM°ú ¿äÃ»ÇÑ BGMÀÌ °°´Ù¸é
+        //í˜„ì¬ ì¬ìƒì¤‘ì¸ BGMê³¼ ìš”ì²­í•œ BGMì´ ê°™ë‹¤ë©´
         if(bgmSource.clip==data.clip)
         {
             return;
         }
-        //ÇöÀç Àç»ıÁßÀÎ BGMµ¥ÀÌÅÍ¸¦ ÀúÀå
+        //í˜„ì¬ ì¬ìƒì¤‘ì¸ BGMë°ì´í„°ë¥¼ ì €ì¥
         currentBGMData = data;
-        //BGM AudioSource¿¡ Àç»ıÇÒ AudioClipÀ» ³Ö´Â´Ù.
+        //BGM AudioSourceì— ì¬ìƒí•  AudioClipì„ ë„£ëŠ”ë‹¤.
         bgmSource.clip = data.clip;
 
         bgmSource.volume = data.volume * bgmVolume * masterVolume;
-        //BGMÀ» Àç»ıÇÑ´Ù.
+        //BGMì„ ì¬ìƒí•œë‹¤.
         bgmSource.Play();
     }
-    //BGMÀ» Á¤Áö½ÃÅ°´Â †Ç¼®
+    //BGMì„ ì •ì§€ì‹œí‚¤ëŠ” Â†í“¬
     public void StopBGM()
     {
-        //ÇöÀç Àç¼î¤À¤·ÁßÀÎ BGMÀ» Á¤Áö
+        //í˜„ì¬ ì¬ì‡¼ã…ã…‡ì¤‘ì¸ BGMì„ ì •ì§€
         bgmSource.Stop();
-        //¿Àµğ¿À ¼Ò½º¿¡ ¿¬°áµÈ ¿Àµğ¿À Å¬¸³À» Á¦°Å
+        //ì˜¤ë””ì˜¤ ì†ŒìŠ¤ì— ì—°ê²°ëœ ì˜¤ë””ì˜¤ í´ë¦½ì„ ì œê±°
         bgmSource.clip = null;
-        //ÇöÀç Àç»ıÁßÀÎ BGMµ¥ÀÌÅÍµµ ºñ¿ìÀÚ.
+        //í˜„ì¬ ì¬ìƒì¤‘ì¸ BGMë°ì´í„°ë„ ë¹„ìš°ì.
         currentBGMData = null;
     }
-    //ÀÏ½Ã Á¤Áö
+    //ì¼ì‹œ ì •ì§€
     public void PauseBGM()
     {
         bgmSource.Pause();
     }
-    //ÀÏ½ÃÁ¤ÁöµÈ BGMÀ» ´Ù½Ã Àç»ı
+    //ì¼ì‹œì •ì§€ëœ BGMì„ ë‹¤ì‹œ ì¬ìƒ
     public void ResumeBGM()
     {
         bgmSource.UnPause();
     }
 
-    //È¿°úÀ½ Àç»ıÇÏ´Â ³à¼®
+    //íš¨ê³¼ìŒ ì¬ìƒí•˜ëŠ” ë…€ì„
     public void PlaySFX(SFXType type)
     {
         if(!sfxDictionary.ContainsKey(type))
@@ -162,16 +165,30 @@ public class AudioManager : MonoBehaviour
         SFXClipData data = sfxDictionary[type];
 
         float volume = data.volume * sfxVolume * masterVolume;
+
+        //============ì‹œí—˜ìš© ì½”ë“œ
+        switch (type)
+        {
+            case SFXType.StoneHit:
+            case SFXType.StoneCrush:
+            case SFXType.OreCollect:
+
+            sfxSource.pitch = Random.Range(0.95f, 1.05f); break;
+
+            default: sfxSource.pitch = 1f; break;
+        }
+        //============ì‹œí—˜ìš© ì½”ë“œ
+
         sfxSource.PlayOneShot(data.clip, volume);
     }
 
-    //ÀüÃ¼ º¼·ıÀ» º¯°æÇÏ´Â ³à¼®
+    //ì „ì²´ ë³¼ë¥¨ì„ ë³€ê²½í•˜ëŠ” ë…€ì„
     public void SetMasterVolume(float volume)
     {
         masterVolume = Mathf.Clamp01(volume);
         UpdateBGMVolume();
     }
-    //BGMº¼·ıÀ» º¯°æÇÏ´Â ³à¼®
+    //BGMë³¼ë¥¨ì„ ë³€ê²½í•˜ëŠ” ë…€ì„
     public void SetBGMVolume(float volume)
     {
         bgmVolume = Mathf.Clamp01(volume);
@@ -181,15 +198,15 @@ public class AudioManager : MonoBehaviour
     {
         sfxVolume = Mathf.Clamp01(volume);
     }
-    //ÇöÀç Àç»ıÁßÀÎ BGMÀÇ º¼·ıÀ» °è»ê
+    //í˜„ì¬ ì¬ìƒì¤‘ì¸ BGMì˜ ë³¼ë¥¨ì„ ê³„ì‚°
     private void UpdateBGMVolume()
     {
-        //bgmSource°¡ ¾øÀ¸¸é
+        //bgmSourceê°€ ì—†ìœ¼ë©´
         if (bgmSource == null) return;
-        //ÇöÀç Àç»ıÁßÀÎ BGMµ¥ÀÌÅÍ°¡ ¾ø´Ù¸é
+        //í˜„ì¬ ì¬ìƒì¤‘ì¸ BGMë°ì´í„°ê°€ ì—†ë‹¤ë©´
         if(currentBGMData==null)
         {
-            //±âº» BGMº¼·ı°ú ¸¶½ºÅÍ º¼·ı¸¸ Àû¿ë
+            //ê¸°ë³¸ BGMë³¼ë¥¨ê³¼ ë§ˆìŠ¤í„° ë³¼ë¥¨ë§Œ ì ìš©
             bgmSource.volume = bgmVolume * masterVolume;
             return;
         }

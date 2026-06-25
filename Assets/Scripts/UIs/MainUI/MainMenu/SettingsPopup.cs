@@ -62,6 +62,8 @@ public class SettingsPopup : MonoBehaviour
 
         if (toggleButton != null)
             toggleButton.onClick.RemoveListener(Toggle);
+
+
     }
     private void UpdateVolumeTexts()
     {

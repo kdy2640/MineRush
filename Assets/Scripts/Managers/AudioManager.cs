@@ -21,6 +21,9 @@ public enum SFXType
     OreCollect,
     StoneHit,
     StoneCrush,
+    MetalHit,
+    FieldPlacement,
+    LevelUp,
     GameEnd
 }
 public class AudioManager : MonoBehaviour
@@ -163,6 +166,20 @@ public class AudioManager : MonoBehaviour
         SFXClipData data = sfxDictionary[type];
 
         float volume = data.volume * sfxVolume * masterVolume;
+
+        //============시험용 코드
+        switch (type)
+        {
+            case SFXType.StoneHit:
+            case SFXType.StoneCrush:
+            case SFXType.OreCollect:
+
+            sfxSource.pitch = Random.Range(0.95f, 1.05f); break;
+
+            default: sfxSource.pitch = 1f; break;
+        }
+        //============시험용 코드
+
         sfxSource.PlayOneShot(data.clip, volume);
     }
 

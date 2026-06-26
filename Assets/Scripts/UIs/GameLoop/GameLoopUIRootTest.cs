@@ -73,22 +73,22 @@ public class GameLoopUIRoot : MonoBehaviour
     }
 
 
-    //[ContextMenu("Test Result UI")]
-    //private void TestResultUI()
-    //{
-    //    List<OreAmount> test = new()
-    //    {
-    //        new OreAmount(OreType.Copper, 10),
-    //        new OreAmount(OreType.Iron, 20),
-    //        new OreAmount(OreType.Gold, 5),
-    //        new OreAmount(OreType.Diamond, 1)
-    //    };
+    [ContextMenu("Test Result UI")]
+    private void TestResultUI()
+    {
+        List<OreAmount> test = new()
+        {
+            new OreAmount(OreType.Copper, 10),
+            new OreAmount(OreType.Iron, 20),
+            new OreAmount(OreType.Gold, 5),
+            new OreAmount(OreType.Diamond, 1)
+        };
 
 
-    //    resultUI.SetData(test);
+        resultUI.SetData(test);
 
-    //    resultUI.Show();
-    //}
+        resultUI.Show();
+    }
 
     [ContextMenu("Show Result UI")]
     private void TestShowResultUI()

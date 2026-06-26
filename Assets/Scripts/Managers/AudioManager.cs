@@ -183,18 +183,6 @@ public class AudioManager : MonoBehaviour
 
         float volume = data.volume * sfxVolume * masterVolume;
 
-        //============시험용 코드
-        switch (type)
-        {
-            case SFXType.StoneHit:
-            case SFXType.StoneCrush:
-            case SFXType.OreCollect:
-
-            sfxSource.pitch = Random.Range(0.95f, 1.05f); break;
-
-            default: sfxSource.pitch = 1f; break;
-        }
-        //============시험용 코드
         sfxSource.pitch = data.pitch;
 
         sfxSource.PlayOneShot(data.clip, volume);

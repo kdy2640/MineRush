@@ -1,5 +1,5 @@
 using DG.Tweening;
-using System.Collections; 
+using System.Collections;
 using UnityEngine;
 
 public class StonePresenter : MonoBehaviour
@@ -7,63 +7,112 @@ public class StonePresenter : MonoBehaviour
     [Header("Spawn")]
     [SerializeField] private float spawnDuration = 0.2f;
     [SerializeField] private Ease spawnEase = Ease.OutBack;
-     
+    [SerializeField] private ParticleSystem breakParticle;
 
-    private Tween currentTween;  
-    private void OnDestroy()
-    {  
-        StopCurrentTween();
+    private Tween currentTween;
+
+    private Tween spawnTween;
+    private Sequence hitSequence;
+    private Sequence breakSequence;
+
+    private Vector3 defaultScale;
+
+    private void Awake()
+    {
+        defaultScale = transform.localScale;
+
+        CreateTweens();
     }
+
+    private void OnDestroy()
+    {
+        currentTween?.Kill();
+
+        spawnTween?.Kill();
+        hitSequence?.Kill();
+        breakSequence?.Kill();
+    }
+
+    private void CreateTweens()
+    {
+        spawnTween = transform
+            .DOScale(defaultScale, spawnDuration)
+            .SetEase(spawnEase)
+            .SetAutoKill(false)
+            .Pause();
+
+        hitSequence = DOTween.Sequence()
+            .Append(transform.DOShakePosition(0.12f, 0.08f, 10))
+            .SetAutoKill(false)
+            .Pause();
+
+        breakSequence = DOTween.Sequence()
+            .Append(transform.DOScale(Vector3.zero, 0.2f).SetEase(Ease.InBack))
+            .SetAutoKill(false)
+            .Pause();
+    }
+
     public IEnumerator PlaySpawnRoutine()
     {
         StopCurrentTween();
 
         transform.localScale = Vector3.zero;
 
-        currentTween = transform
-            .DOScale(Vector3.one, spawnDuration)
-            .SetEase(spawnEase);
+        currentTween = spawnTween;
+        spawnTween.Restart();
 
-        yield return currentTween.WaitForCompletion();
+        yield return spawnTween.WaitForCompletion();
 
-        currentTween = null;
+        if (currentTween == spawnTween)
+            currentTween = null;
     }
 
     public IEnumerator PlayHitReactionRoutine()
     {
         StopCurrentTween();
 
-        Sequence seq = DOTween.Sequence();
+        GameManager.Instance.AudioManager.PlaySFXRandomPitch(SFXType.StoneHit, 0.2f); 
 
-        seq.Append(transform.DOShakePosition(0.12f, 0.08f, 10));
+        currentTween = hitSequence;
+        hitSequence.Restart();
+        
+        yield return hitSequence.WaitForCompletion();
 
-        currentTween = seq;
-
-        yield return seq.WaitForCompletion();
-
-        currentTween = null;
+        if (currentTween == hitSequence)
+            currentTween = null;
     }
 
     public IEnumerator PlayBreakRoutine()
     {
         StopCurrentTween();
 
-        Sequence seq = DOTween.Sequence();
+        if (breakParticle != null)
+        {
+            breakParticle.transform.SetParent(null, true);
+        }
 
-        seq.Append(transform.DOScale(Vector3.zero, 0.2f)
-            .SetEase(Ease.InBack));
+        GameManager.Instance.AudioManager.PlaySFXRandomPitch(SFXType.StoneCrush,0.2f);
 
-        currentTween = seq;
+        currentTween = breakSequence;
+        breakSequence.Restart();
 
-        yield return seq.WaitForCompletion();
+        yield return breakSequence.WaitForCompletion();
 
-        currentTween = null;
+        if (breakParticle != null)
+            breakParticle.Play();
+
+        if (currentTween == breakSequence)
+            currentTween = null;
     }
 
     public void StopCurrentTween()
     {
-        currentTween?.Kill();
+        if (currentTween == null)
+            return;
+
+        currentTween.Pause();
+        currentTween.Rewind();
+
         currentTween = null;
     }
-     
 }

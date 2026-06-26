@@ -1,13 +1,5 @@
 using UnityEngine;
-
-public static class StoneSortingOrder
-{
-    public const int Step = 10;
-
-    public const int Solid = 0;
-    public const int Frag = 1;
-    public const int CrackOverlay = 2;
-} 
+ 
 public class StoneViewSorter : MonoBehaviour
 {
     [Header("Renderers")]
@@ -31,18 +23,7 @@ public class StoneViewSorter : MonoBehaviour
     public void SetCrack(bool isActive)
     {
         crackOverlayRenderer.gameObject.SetActive(isActive);
-    } 
-    public void SetSorting(int baseOrder)
-    {
-        Apply(solidRenderer, baseOrder + StoneSortingOrder.Solid);
-
-        for (int i = 0; i < fragRenderers.Length; i++)
-        {
-            Apply(fragRenderers[i], baseOrder + StoneSortingOrder.Frag);
-        } 
-
-        Apply(crackOverlayRenderer, baseOrder + StoneSortingOrder.CrackOverlay);
-    }
+    }  
 
     private void Apply(SpriteRenderer renderer, int order)
     {

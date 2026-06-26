@@ -26,6 +26,7 @@ public class UI_Loading : MonoBehaviour
     {
         KillCurrentTween();
 
+        GameManager.Instance.AudioManager.PlaySFX(SFXType.LoadingIn);
         solidCover.SetActive(true);
         solidCover.transform.localScale = Vector3.zero;
 
@@ -42,7 +43,8 @@ public class UI_Loading : MonoBehaviour
     public IEnumerator CloseLoading()
     {
         KillCurrentTween();
-
+        
+        GameManager.Instance.AudioManager.PlaySFX(SFXType.LoadingOut);
         solidCover.transform.localScale = Vector3.one;
 
         currentTween = solidCover.transform

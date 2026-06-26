@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GameLoopManager : MonoBehaviour
 {
-    private bool IsGameLoopScene => GameManager.Instance.Scene.currenSceneType == SceneType.GameLoop; 
+    public bool IsGameLoopScene => GameManager.Instance.Scene.currenSceneType == SceneType.GameLoop; 
     private float loopDuration = 20f;
      
     private GameLoopEventManager eventManager; 

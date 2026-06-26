@@ -8,7 +8,7 @@ public class GameLoopScene : SceneBase
 
     public override IEnumerator PrepareBeforeReveal()
     {
-        GameLoopPrepareReveal PrepareReveal = Object.FindFirstObjectByType<GameLoopPrepareReveal>();
+        GameLoopPrepareSequence  PrepareReveal = Object.FindFirstObjectByType<GameLoopPrepareSequence >();
 
         if (PrepareReveal == null)
         {

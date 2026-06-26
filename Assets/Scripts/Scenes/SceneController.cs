@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.Android.Gradle;
+using System.Collections.Generic; 
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -57,10 +55,10 @@ public class SceneController : MonoBehaviour
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(nextScene.SceneName);
 
+        currentScene = nextScene;
+
         while (!operation.isDone)
             yield return null;
-
-        currentScene = nextScene;
 
         yield return currentScene.PrepareBeforeReveal();
 

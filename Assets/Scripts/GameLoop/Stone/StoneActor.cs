@@ -3,17 +3,22 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class StoneActor : MonoBehaviour
+public static class StoneSortingOrder
+{
+    public const int Step = 10;
+
+}
+    public class StoneActor : MonoBehaviour
 {
     public event Action<StoneActor> OnDead; 
     [SerializeField] private StoneDataSO dataSo;
+    [SerializeField] private SpriteRenderer solidRenderer;
     [SerializeField] private float ScaleNoise = 0.1f;
     [SerializeField] private float CrackHealthRatio = 0.5f;
 
     private bool nowCracked = false;
     private GameManager manager;
-    private HPHandler hpHandler;
-    private StoneViewSorter sorter;
+    private HPHandler hpHandler; 
 
     private Vector2Int gridPos;
     public Vector2Int GridPos => gridPos;
@@ -38,16 +43,28 @@ public class StoneActor : MonoBehaviour
         Initialize();
     }
     public void Initialize()
-    {
-        GameObject go = GameObject.Instantiate(dataSo.SolidStonePrefab,transform);
-        go.transform.localPosition = Vector3.zero;
-        sorter = go.GetComponent<StoneViewSorter>();
+    { 
+        solidRenderer.sprite = dataSo.StoneSprite;  
         int sortingOrder = 10000 - StoneSortingOrder.Step * (GridPos.x + GridPos.y);
-        sorter.SetSorting(sortingOrder);
-        sorter.RandomAdjust(ScaleNoise); 
+        solidRenderer.sortingOrder = sortingOrder; 
+
+        RandomAdjust(solidRenderer.transform,ScaleNoise); 
+
         hpHandler.SetMaxHealth(dataSo.MaxHealth);
         nowCracked = false;
-    }  
+    }
+
+    public void RandomAdjust(Transform transform, float ScaleNoise)
+    {
+        transform.localScale = Vector3.one * (1 + (Random.value - 0.5f) * 2 * ScaleNoise);
+        SetFlip(transform, Random.value < 0.5f);
+
+    }
+    private void SetFlip(Transform transform,bool isFlip)
+    {
+        float offset = isFlip ? 1 : -1;
+        transform.localScale = new Vector3(offset * transform.localScale.x, transform.localScale.y, transform.localScale.z);
+    }
 
     public void Mine(float nowHP)
     {
@@ -56,7 +73,10 @@ public class StoneActor : MonoBehaviour
 
     public void CheckCrack()
     {
-        sorter.SetCrack(nowCracked);
+        if(nowCracked)
+        {
+            solidRenderer.sprite = dataSo.StoneCrackSprite;
+        } 
     }
 
     private void Die()

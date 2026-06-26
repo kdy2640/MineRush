@@ -15,6 +15,7 @@ public class RuntimeStat
     private void Initialize()
     {
         pickaxeTier = 0f;
+        maxOreTier = 0f;
         miningPower = 1f;
         miningSpeed = 1f;
         miningRadius = 1f;
@@ -22,7 +23,6 @@ public class RuntimeStat
         criticalMultiplier = 2f;
         extraDuration = 0f;
         rewardMultiplier = 1f;
-        maxOreTier = 1f;
         stoneCount = 40;
         OreFragmentChanceArr = new float[(int)OreType.Length];
         OrePureChanceArr = new float[(int)OreType.Length];

@@ -31,6 +31,7 @@ public class PickAxesPanel : MonoBehaviour
     {
         InitializePanel();
         RefreshCurrentPickaxeInfo();
+        RefreshEquippedPickaxeInfo();
         RefreshSelectedPickaxeScale(currentIndex, currentIndex);
     }
 
@@ -83,6 +84,10 @@ public class PickAxesPanel : MonoBehaviour
 
         return currentPickaxe; //가져온 곡괭이를 반환한다.
     }
+    public PickaxesDataSO GetCurrentPickaxe()
+    {
+        return GetPickaxeData(currentIndex);
+    }
     
     private void RefreshCurrentPickaxeInfo()
     {
@@ -112,6 +117,49 @@ public class PickAxesPanel : MonoBehaviour
         {
             selectedPickaxe.localScale = selectedPickaxeScale;
         }
+    }
+    private void RefreshEquippedPickaxeInfo()
+    {
+        int equippedTier = GameManager.Instance.Upgrade.GetRuntimeStat().PickaxeTier;
+        PickaxesDataSO equippedPickaxe = PickaxeDataDB.GetStoneDataSO(equippedTier);
+
+        if (equippedPickaxe == null)
+            return;
+
+        // TODO: 장착 곡괭이 정보 패널 갱신
+        equippedPickaxeInfoPanel.SetInfo(equippedPickaxe);
+
+        // TODO: 장착 곡괭이 아이콘 갱신
+        equippedPickaxeIconImg.sprite = equippedPickaxe.Icon;
+    }
+
+    public void BuySelectedPickaxe()
+    {
+        PickaxesDataSO currentPickaxe = GetPickaxeData(currentIndex);
+        GameManager.Instance.Upgrade.TryBuyUpgrade(currentPickaxe.UpgradeData);
+        RefreshCurrentPickaxeInfo();
+        RefreshEquippedPickaxeInfo();
+    }
+    public bool CanBuyCurrentPickaxe()
+    {
+        PickaxesDataSO currentPickaxe = GetPickaxeData(currentIndex);
+
+        if (currentPickaxe == null || currentPickaxe.UpgradeData == null)
+            return false;
+        if (currentPickaxe.Tier != GameManager.Instance.Upgrade.GetRuntimeStat().PickaxeTier + 1)
+            return false;
+        // currentPickaxe.Tier <= GameManager.Instance.Upgrade.GetRuntimeStat().PickaxeTier 면 두단계 건너뛰어도 살 수있게 하는것.
+        //지금은 런타임스탯 기준으로 다음 티어가 아니면 막아둠.
+
+        UpgradeState state = GameManager.Instance.Upgrade.GetState(currentPickaxe.UpgradeData);
+
+        if (state == null)
+            return false;
+
+        if (GameManager.Instance.Upgrade.IsMaxLevel(state))
+            return false;
+
+        return GameManager.Instance.OreManager.HasCost(state.GetCurrentCost());
     }
 
 

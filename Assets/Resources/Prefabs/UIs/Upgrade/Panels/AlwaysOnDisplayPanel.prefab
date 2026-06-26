@@ -3205,6 +3205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfafbfd9bd81ad442a6d2ad81fc6e415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickaxeBuy
+  pickAxesPanel: {fileID: 0}
   rightClickAction: {fileID: 142740000185140123, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   holdDuration: 2.25
   pickaxeBuyPanelCanvasGroup: {fileID: 4301822260185590108}

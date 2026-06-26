@@ -489,7 +489,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -870,6 +870,8 @@ MonoBehaviour:
   <MiningSpeedText>k__BackingField: {fileID: 4761679657709975733}
   <MiningRadiusText>k__BackingField: {fileID: 4642101833300392006}
   <CriticalChanceText>k__BackingField: {fileID: 4577791411356574563}
+  <CostTitle>k__BackingField: {fileID: 0}
+  <CostText>k__BackingField: {fileID: 0}
 --- !u!114 &1717518030754696145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1307,7 +1309,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4026637686118885060}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1347,6 +1349,8 @@ MonoBehaviour:
   <MiningSpeedText>k__BackingField: {fileID: 510951151346434997}
   <MiningRadiusText>k__BackingField: {fileID: 4327971703658169478}
   <CriticalChanceText>k__BackingField: {fileID: 4118554471260901663}
+  <CostTitle>k__BackingField: {fileID: 7050277726708315835}
+  <CostText>k__BackingField: {fileID: 1938488022277056841}
 --- !u!114 &3634572979052741949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1482,7 +1486,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -1694,7 +1698,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -2122,7 +2126,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -2264,7 +2268,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -2304,7 +2308,7 @@ GameObject:
   - component: {fileID: 8936569473083874178}
   - component: {fileID: 7050277726708315835}
   m_Layer: 5
-  m_Name: CostNoticeText
+  m_Name: CostTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2401,7 +2405,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -3107,7 +3111,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}

@@ -113,8 +113,9 @@ public class PickaxeBuyDisplay : MonoBehaviour
         pickaxeIconImg.color = color;
     } // 연출에 사용된 크기와 알파값을 초기 상태로 되돌린다.
 
-    public void PlayBuyCompleteVisual()
+    public void PlayBuyCompleteVisual(PickaxesDataSO data)
     {
+        SetImg(data);
         buySequence?.Kill();
 
         pickaxeIconRect.gameObject.SetActive(true);

@@ -88,6 +88,8 @@ public class RuntimeStat
     //
     public void ApplyPickaxe(PickaxesDataSO pickSO)
     { 
+        pickaxeTier = Mathf.Max(pickaxeTier, pickSO.Tier);
+        
         miningPower += pickSO.MiningPower;
         miningSpeed += pickSO.MiningSpeed;
         miningRadius += pickSO.MiningRadius;

@@ -185,7 +185,7 @@ MonoBehaviour:
   content: {fileID: 5037716552513907853}
   moveDistance: 200
   moveDuration: 0.3
-  pickaxeInfo: {fileID: 5543526409211331685}
+  pickaxeInfoPanel: {fileID: 0}
   currentPickaxeImage: {fileID: 6556015708953711987, guid: aa7ef8d7802d3d44a91afbbfbdf23ec3, type: 3}
 --- !u!1 &1526148446476940548
 GameObject:
@@ -197,7 +197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2607783786029479680}
   m_Layer: 5
-  m_Name: PickAxeSelectRoot
+  m_Name: '[Old]ForgePanel'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -215,15 +215,15 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2492794212239578947}
   - {fileID: 414586620023765146}
   - {fileID: 1162616464005605400}
+  - {fileID: 4999310443629082865}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 800, y: 1200}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5820282470231438283
 GameObject:
@@ -875,7 +875,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1001 &8966517172709592519
+--- !u!1001 &1987853939127771765
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -885,7 +885,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1406338296201340317, guid: 494bd22552bc1ef47ba8e04b929efde9, type: 3}
       propertyPath: m_Name
-      value: CurrentPickaxeInfo
+      value: PickaxeInfoPanel
       objectReference: {fileID: 0}
     - target: {fileID: 6843035999400565380, guid: 494bd22552bc1ef47ba8e04b929efde9, type: 3}
       propertyPath: m_Pivot.x
@@ -913,11 +913,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6843035999400565380, guid: 494bd22552bc1ef47ba8e04b929efde9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 700
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 6843035999400565380, guid: 494bd22552bc1ef47ba8e04b929efde9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 800
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: 6843035999400565380, guid: 494bd22552bc1ef47ba8e04b929efde9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -949,7 +949,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6843035999400565380, guid: 494bd22552bc1ef47ba8e04b929efde9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 560
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 6843035999400565380, guid: 494bd22552bc1ef47ba8e04b929efde9, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -972,19 +972,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 494bd22552bc1ef47ba8e04b929efde9, type: 3}
---- !u!224 &2492794212239578947 stripped
+--- !u!224 &4999310443629082865 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6843035999400565380, guid: 494bd22552bc1ef47ba8e04b929efde9, type: 3}
-  m_PrefabInstance: {fileID: 8966517172709592519}
+  m_PrefabInstance: {fileID: 1987853939127771765}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5543526409211331685 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3495347711119608226, guid: 494bd22552bc1ef47ba8e04b929efde9, type: 3}
-  m_PrefabInstance: {fileID: 8966517172709592519}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 008f274c183ca2d41bc224b1cf3b08a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CurrentPickaxeInfo

@@ -15,8 +15,8 @@ MonoBehaviour:
   tier: 0
   displayName: WoodPickaxe
   icon: {fileID: 21300000, guid: 56194fa4cdd1c7d4ab7abeaef7668ef5, type: 3}
+  upgradeData: {fileID: 11400000, guid: dc3f90f7199c4764bae5f3de19b92696, type: 2}
   miningPower: 0
   miningSpeed: 0
   miningRadius: 0
   criticalChance: 0
-  amounts: []

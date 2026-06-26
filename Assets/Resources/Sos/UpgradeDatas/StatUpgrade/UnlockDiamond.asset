@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: UnlockDiamond
   displayName: "\uB2E4\uC774\uC544\uBAAC\uB4DC \uCD94\uAC00"
-  displayIcon: {fileID: 0}
+  displayIcon: {fileID: 8333125912657560223, guid: 8c95cb578acd82d4b9cb03990e9ac7a8, type: 3}
   baseOreAmounts:
   - oreType: 2
     amount: 1500

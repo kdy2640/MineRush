@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: UnlockIron
   displayName: "\uAC15\uCCA0 \uCD94\uAC00"
-  displayIcon: {fileID: 0}
+  displayIcon: {fileID: -397387148720336617, guid: 5013c85d7a590e9459d488a187ad359d, type: 3}
   baseOreAmounts:
   - oreType: 0
     amount: 50
@@ -26,3 +26,5 @@ MonoBehaviour:
     value: 1
     oreType: 1
   skill: {fileID: 0}
+  levelBasedCosts: []
+  levelBasedRewards: []

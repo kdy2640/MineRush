@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: 'UpgradeOrePureChance03 '
   displayName: "\uAE08 \uC21C\uC218\uB3CC \uD655\uB960 \uC99D\uAC00 "
-  displayIcon: {fileID: 0}
+  displayIcon: {fileID: -2948907268119407418, guid: 6e7031fd11b71c340b378c43dddd9251, type: 3}
   baseOreAmounts:
   - oreType: 2
     amount: 300
@@ -26,3 +26,5 @@ MonoBehaviour:
     value: 0.05
     oreType: 2
   skill: {fileID: 0}
+  levelBasedCosts: []
+  levelBasedRewards: []

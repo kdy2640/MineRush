@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: 'UpgradeStoneCount06 '
   displayName: "\uCD5C\uB300 \uB3CC \uAC2F\uC218 \uC99D\uAC00 VI "
-  displayIcon: {fileID: 0}
+  displayIcon: {fileID: -1961593735744361799, guid: ba1c760a6f3ff5748816e887bbf8c240, type: 3}
   baseOreAmounts:
   - oreType: 1
     amount: 2000

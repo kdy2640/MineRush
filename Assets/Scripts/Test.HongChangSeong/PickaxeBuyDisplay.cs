@@ -1,5 +1,8 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 //0625 홍창성
@@ -19,8 +22,11 @@ public class PickaxeBuyDisplay : MonoBehaviour
     //위치 이동이나 크기 변경은 RectTransform의 DOAnchorPos, DOSizeDelta를 사용하는 것이 좋다.
     //UI용 코드라는 의도를 명확히 하기 위해서라도 UI 스크립트에서는 보통 RectTransform rectTransform을 캐싱해서 사용한다. 
 
+    [Header("구매 완료 연출")]
+    [SerializeField] private Image pickaxeIconImg;
     [SerializeField] private float extraScale = 15f;
     [SerializeField] private float duration = 0.5f;
+    [SerializeField] private UnityEvent onDisplayComplete;
 
 
     //아래의 displayBuying 메서드를 사용할 다른 스크립트에서 구매한 곡괭이 이미지를 전달하기 위한 프로퍼티.
@@ -29,24 +35,26 @@ public class PickaxeBuyDisplay : MonoBehaviour
     ////이거를 
     //[field: SerializeField] public Image PickaxeImage;
 
+    
+    [Header("마우스 홀딩 관련")]
+    [SerializeField] private GameObject holdingMouseUI;
+    [SerializeField] private Image holdingMouseFillImage;
+
     private Vector3 originalScale;
-    private RectTransform rectTransform;
-    [SerializeField] private Image image;
-
-
-
+    private RectTransform pickaxeIconRect;
+    private Sequence buySequence;
 
     private void Awake()
     {
-        originalScale = transform.localScale;
-        rectTransform = GetComponent<RectTransform>();
-        image = GetComponent<Image>();
+        pickaxeIconRect = pickaxeIconImg.rectTransform;
+        originalScale = pickaxeIconRect.localScale;
+
+        SetOriginal();
+        pickaxeIconRect.gameObject.SetActive(false);
     }
 
     private void OnEnable() //테스트를 위해 OnEnable에 넣어봄.
     {
-
-        DisplayBuying(); //테스트 용이라면 매개변수를 지우던가 해야 할 것 같다.
     }
 
     private void OnDisable()
@@ -54,6 +62,13 @@ public class PickaxeBuyDisplay : MonoBehaviour
         SetOriginal();
     }
 
+    public void SetImg(PickaxesDataSO data)
+    {
+        if (data == null)
+            return;
+
+        pickaxeIconImg.sprite = data.Icon;
+    } // 전달받은 곡괭이 데이터의 아이콘을 구매 완료 연출 이미지에 세팅한다.
 
 
     public void DisplayBuying() //이 메서드를 원하는 상황에 원하는 오브젝트에 붙여 호출하기만 하면 될 것 같은데.
@@ -67,26 +82,71 @@ public class PickaxeBuyDisplay : MonoBehaviour
         Sequence sequence = DOTween.Sequence();
 
         //레퍼런스 게임과 같이 완전히 작아진 상태에서 커지는 방식으로 만들 거라면 From을 써야 한다.
-        sequence.Append(rectTransform.DOScale(originalScale, duration).From(Vector3.zero).SetEase(Ease.OutBack));
+        sequence.Append(pickaxeIconRect.DOScale(originalScale, duration).From(Vector3.zero).SetEase(Ease.OutBack));
 
-        sequence.Append(rectTransform.DOScale(originalScale * extraScale, duration).SetEase(Ease.OutQuad));
+        sequence.Append(pickaxeIconRect.DOScale(originalScale * extraScale, duration).SetEase(Ease.OutQuad));
 
-        sequence.Join(image.DOFade(0.0f, duration));
+        sequence.Join(pickaxeIconImg.DOFade(0.0f, duration));
 
         //연출이 전부 끝난 후 스스로를 꺼버리게?
 
-        enabled = false;
+        // enabled = false;
  
+        // 손유민 : 연출이 끝난 후 끄게 하려면 시퀀스의 콜백을 이용하시면 됩니다.
+        sequence.OnComplete(() =>
+        {
+            gameObject.SetActive(false);
+            onDisplayComplete?.Invoke();
+        });
     }
 
-    public void SetOriginal() //알파값과 크기 등등을 원래대로 바꿔버리는 메서드.
+    public void SetOriginal()
     {
-        rectTransform.DOKill();
-        image.DOKill();
-        rectTransform.localScale = Vector3.one;
+        buySequence?.Kill();
+        pickaxeIconRect.DOKill();
+        pickaxeIconImg.DOKill();
 
-        Color color = image.color;
+        pickaxeIconRect.localScale = originalScale;
+
+        Color color = pickaxeIconImg.color;
         color.a = 1f;
-        image.color = color;
+        pickaxeIconImg.color = color;
+    } // 연출에 사용된 크기와 알파값을 초기 상태로 되돌린다.
+
+    public void PlayBuyCompleteVisual()
+    {
+        buySequence?.Kill();
+
+        pickaxeIconRect.gameObject.SetActive(true);
+        SetOriginal();
+        
+        buySequence = DOTween.Sequence();
+        
+        buySequence.Append(pickaxeIconRect
+            .DOScale(originalScale, duration)
+            .From(Vector3.zero)
+            .SetEase(Ease.OutBack));
+        
+        buySequence.Append(pickaxeIconRect
+            .DOScale(originalScale * extraScale, duration)
+            .SetEase(Ease.OutQuad));
+        buySequence.Join(pickaxeIconImg
+            .DOFade(0f, duration));
+        
+        buySequence.OnComplete(() =>
+        {
+            pickaxeIconRect.gameObject.SetActive(false);
+            onDisplayComplete?.Invoke();
+        });
+    }
+
+
+    public void ShowHoldingUI(bool isActive)
+    {
+        holdingMouseUI.SetActive(isActive);
+    }
+    public void SetHoldingFillAmount(float progress)
+    {
+        holdingMouseFillImage.fillAmount = progress;
     }
 }

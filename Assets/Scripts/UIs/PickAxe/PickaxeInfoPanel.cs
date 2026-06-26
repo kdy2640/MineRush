@@ -8,6 +8,7 @@ public class PickaxeInfoPanel : MonoBehaviour
     [field: SerializeField] public TextMeshProUGUI MiningSpeedText { get; private set; }
     [field: SerializeField] public TextMeshProUGUI MiningRadiusText { get; private set; }
     [field: SerializeField] public TextMeshProUGUI CriticalChanceText { get; private set; }
+    [field: SerializeField] public TextMeshProUGUI CostText { get; private set; }
 
 
     //전달받은 데이터를 실제로 전시하는 역할.
@@ -21,5 +22,11 @@ public class PickaxeInfoPanel : MonoBehaviour
         MiningSpeedText.text = $"채굴속도 : {currentPickaxe.MiningSpeed}";
         MiningRadiusText.text = $"채굴반경 : {currentPickaxe.MiningRadius}";
         CriticalChanceText.text = $"크리티컬 확률 : {currentPickaxe.CriticalChance}";
+        CostText.text = GetCostText();
+    }
+
+    public string GetCostText()
+    {
+        return "";
     }
 }

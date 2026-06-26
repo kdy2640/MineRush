@@ -16,6 +16,8 @@ public class PickAxesPanel : MonoBehaviour
     [SerializeField] private  float moveDuration = 0.3f;
 
     [FormerlySerializedAs("pickaxeInfo")] [SerializeField] private PickaxeInfoPanel pickaxeInfoPanel;
+    [SerializeField] private PickaxeInfoPanel equippedPickaxeInfoPanel;
+    [SerializeField] private Image equippedPickaxeIconImg;
 
     [SerializeField]private Image currentPickaxeImage; //여기에 image 프리팹을 넣는 거지.
 

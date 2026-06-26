@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: 'UpgradeMiningSpeed04 '
   displayName: "\uCC44\uAD74 \uC18D\uB3C4 \uC99D\uAC00 IV "
-  displayIcon: {fileID: 0}
+  displayIcon: {fileID: -4027769951789712743, guid: e36d2453ea2393049bb51f5e9c7aff22, type: 3}
   baseOreAmounts:
   - oreType: 3
     amount: 850

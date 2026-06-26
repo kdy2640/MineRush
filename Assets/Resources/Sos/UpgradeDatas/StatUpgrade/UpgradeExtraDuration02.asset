@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: 'UpgradeExtraDuration02 '
   displayName: "\uCC44\uAD74 \uC2DC\uAC04 \uC99D\uAC00 II "
-  displayIcon: {fileID: 0}
+  displayIcon: {fileID: -5962064757214411996, guid: 9b219a953a787e4418d2a7582e212d8e, type: 3}
   baseOreAmounts:
   - oreType: 1
     amount: 25
@@ -26,3 +26,5 @@ MonoBehaviour:
     value: 0.75
     oreType: -1
   skill: {fileID: 0}
+  levelBasedCosts: []
+  levelBasedRewards: []

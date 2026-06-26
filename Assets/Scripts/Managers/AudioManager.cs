@@ -23,7 +23,9 @@ public enum SFXType
     FieldPlacement,
     LevelUp,
     UIHover,
-    GameEnd
+    GameEnd,
+    LoadingIn,
+    LoadingOut
 }
 public class AudioManager : MonoBehaviour
 {
@@ -155,6 +157,21 @@ public class AudioManager : MonoBehaviour
         bgmSource.UnPause();
     }
 
+    //효과음 랜덤으로 Randomratio (0~0.2) 추천
+    public void PlaySFXRandomPitch(SFXType type, float randomRatio)
+    {
+        if (!sfxDictionary.ContainsKey(type))
+        {
+            return;
+        }
+        SFXClipData data = sfxDictionary[type];
+
+        float volume = data.volume * sfxVolume * masterVolume;
+         
+        sfxSource.pitch = data.pitch + (Random.value - 0.5f) * 2 * randomRatio;
+
+        sfxSource.PlayOneShot(data.clip, volume);
+    }
     //효과음 재생하는 녀석
     public void PlaySFX(SFXType type)
     {
@@ -178,6 +195,7 @@ public class AudioManager : MonoBehaviour
             default: sfxSource.pitch = 1f; break;
         }
         //============시험용 코드
+        sfxSource.pitch = data.pitch;
 
         sfxSource.PlayOneShot(data.clip, volume);
     }

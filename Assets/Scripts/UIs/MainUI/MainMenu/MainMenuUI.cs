@@ -11,7 +11,7 @@ public class MainMenuUI : MonoBehaviour
     [Header("Buttons")]
     [SerializeField] private RectTransform startButton;
 
-    [SerializeField] private RectTransform upgradeButton;
+    [SerializeField] private RectTransform exitButton;
 
     [SerializeField] private RectTransform settingsButton;
 
@@ -55,11 +55,11 @@ public class MainMenuUI : MonoBehaviour
             new Vector2(0, titleStartY);
 
         startButton.localScale = Vector3.zero;
-        upgradeButton.localScale = Vector3.zero;
+        exitButton.localScale = Vector3.zero;
         settingsButton.localScale = Vector3.zero;
 
         yield return titlePanel
-            .DOAnchorPosY( 0, titleEnterDuration)
+            .DOAnchorPosY( -120, titleEnterDuration)
             .SetEase(Ease.OutBack)
             .WaitForCompletion();
 
@@ -69,11 +69,12 @@ public class MainMenuUI : MonoBehaviour
 
         yield return new WaitForSeconds(0.15f);
 
-        upgradeButton.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+        settingsButton.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
 
         yield return new WaitForSeconds(0.15f);
 
-        settingsButton.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+        exitButton.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+
     }
     private void OnClickStart()
     {

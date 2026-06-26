@@ -71,9 +71,11 @@ public class StonePresenter : MonoBehaviour
     {
         StopCurrentTween();
 
+        GameManager.Instance.AudioManager.PlaySFXRandomPitch(SFXType.StoneHit, 0.2f); 
+
         currentTween = hitSequence;
         hitSequence.Restart();
-
+        
         yield return hitSequence.WaitForCompletion();
 
         if (currentTween == hitSequence)
@@ -88,6 +90,8 @@ public class StonePresenter : MonoBehaviour
         {
             breakParticle.transform.SetParent(null, true);
         }
+
+        GameManager.Instance.AudioManager.PlaySFXRandomPitch(SFXType.StoneCrush,0.2f);
 
         currentTween = breakSequence;
         breakSequence.Restart();

@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.Android.Gradle;
+using System.Collections.Generic; 
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

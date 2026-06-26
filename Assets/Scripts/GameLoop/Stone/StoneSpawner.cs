@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.LightTransport;
+using UnityEngine; 
 
 public class StoneSpawner : MonoBehaviour
 {
@@ -102,7 +101,7 @@ public class StoneSpawner : MonoBehaviour
     private StoneDataSO GetStoneDataSO()
     {
         RuntimeStat stat = GameManager.Instance.Upgrade.GetRuntimeStat();
-        int nowMaxOreTierIndex = stat.MaxOreTier;
+        int nowMaxOreTierIndex = stat.MaxOreTier - 1;
 
         for (int i = nowMaxOreTierIndex; i >= 0; i--)
         {

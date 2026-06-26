@@ -23,9 +23,14 @@ public class RuntimeStat
         extraDuration = 0f;
         rewardMultiplier = 1f;
         maxOreTier = 1f;
-        stoneCount = 20;
+        stoneCount = 40;
         OreFragmentChanceArr = new float[(int)OreType.Length];
         OrePureChanceArr = new float[(int)OreType.Length];
+        for (int i = 0; i < (int)OreType.Length; i++)
+        {
+            OreFragmentChanceArr[i] = 0.1f;
+            OrePureChanceArr[i] = 0.05f;
+        }
     }
     [Header("채굴 스탯")]
     [SerializeField] private float pickaxeTier = 0f;

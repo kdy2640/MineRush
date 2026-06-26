@@ -101,7 +101,7 @@ public class StoneSpawner : MonoBehaviour
     private StoneDataSO GetStoneDataSO()
     {
         RuntimeStat stat = GameManager.Instance.Upgrade.GetRuntimeStat();
-        int nowMaxOreTierIndex = stat.MaxOreTier - 1;
+        int nowMaxOreTierIndex = stat.MaxOreTier;
 
         for (int i = nowMaxOreTierIndex; i >= 0; i--)
         {

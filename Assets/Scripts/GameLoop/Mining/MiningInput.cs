@@ -28,16 +28,24 @@ public class MiningInput : MonoBehaviour
     }
     private void Start()
     {
+        rangeIndicator.gameObject.SetActive(false);
         GameManager.Instance.GameLoop.Events.Subscribe(GameLoopEventType.LoopStarted, OnLoopStarted);
+        GameManager.Instance.GameLoop.Events.Subscribe(GameLoopEventType.LoopEnded, OnLoopEnded);
     }
 
     private void OnDestroy()
     {
-        GameManager.Instance.GameLoop.Events.Unsubscribe(GameLoopEventType.LoopStarted, OnLoopStarted); 
+        GameManager.Instance.GameLoop.Events.Unsubscribe(GameLoopEventType.LoopStarted, OnLoopStarted);
+        GameManager.Instance.GameLoop.Events.Unsubscribe(GameLoopEventType.LoopEnded, OnLoopEnded);
     }
 
     public void OnLoopStarted()
-    { 
+    {
+        rangeIndicator.gameObject.SetActive(true);
+    }
+    public void OnLoopEnded()
+    {
+        rangeIndicator.gameObject.SetActive(false);
     }
     private void Update()
     {

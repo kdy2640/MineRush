@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class SettingsPopup : MonoBehaviour
 {
+    [SerializeField] private Canvas SettingCanvas;
     [SerializeField] private RectTransform popupContainer;
 
     [SerializeField] private Button closeButton;
@@ -31,6 +32,8 @@ public class SettingsPopup : MonoBehaviour
 
     private void Awake()
     {
+        SettingCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        SettingCanvas.sortingOrder = 10;
         masterSlider.value = 1;
         bgmSlider.value = 1;
         sfxSlider.value = 1;

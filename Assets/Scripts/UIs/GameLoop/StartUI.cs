@@ -28,12 +28,12 @@ public class StartUI : MonoBehaviour
     {
         if (panel == null)
         {
-            Debug.LogError("[StartUI] PanelÀÌ ¿¬°áµÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+            Debug.LogError("[StartUI] Panelï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò½ï¿½ï¿½Ï´ï¿½.");
         }
 
         if (messageText == null)
         {
-            Debug.LogError("[StartUI] MessageText°¡ ¿¬°áµÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+            Debug.LogError("[StartUI] MessageTextï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò½ï¿½ï¿½Ï´ï¿½.");
         }
     }
 
@@ -44,7 +44,7 @@ public class StartUI : MonoBehaviour
         StartCoroutine(PlayRoutine());
     }
 
-    private IEnumerator PlayRoutine()
+    public IEnumerator PlayRoutine()
     {
         isPlaying = true;
 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PickaxesDataSO
   tier: 1
   displayName: Copper Pickaxe
-  icon: {fileID: -933044988184697902, guid: 65c91e2aca8d0df479aa2efbea431422, type: 3}
+  icon: {fileID: 21300000, guid: 65c91e2aca8d0df479aa2efbea431422, type: 3}
   miningPower: 1
   miningSpeed: 1
   miningRadius: 1

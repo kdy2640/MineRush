@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UpgradeStoneCount02
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: 'UpgradeStoneCount02 '
-  displayName: "\uCD5C\uB300 \uB3CC \uAC1C\uC218 \uC99D\uAC00 II "
+  displayName: "\uCD5C\uB300 \uB3CC \uAC2F\uC218 \uC99D\uAC00 II "
   displayIcon: {fileID: 0}
   baseOreAmounts:
   - oreType: 1

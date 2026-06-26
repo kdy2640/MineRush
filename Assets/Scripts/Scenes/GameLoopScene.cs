@@ -3,21 +3,28 @@ using UnityEngine;
 
 public class GameLoopScene : SceneBase
 {
-    private Coroutine enterCoroutine;
-
     public override SceneType SceneType => SceneType.GameLoop;
     public override string SceneName => "GameLoopScene";
 
-    public override void Enter()
+    public override IEnumerator PrepareBeforeReveal()
     {
-        enterCoroutine = GameManager.Instance.StartCoroutine(EnterRoutine());
+        GameLoopPrepareReveal PrepareReveal = Object.FindFirstObjectByType<GameLoopPrepareReveal>();
+
+        if (PrepareReveal == null)
+        {
+            Debug.LogError("GameLoopPrepareReveal가 씬에 없습니다.");
+            yield break;
+        }
+
+        yield return PrepareReveal.Run();
+        yield return null;
     }
 
-    private IEnumerator EnterRoutine()
+    public override IEnumerator Enter()
     {
         GameManager.Instance.SkillManager.ApplySkillsBeforeLoopSceneStart();
 
-        var preStart = Object.FindFirstObjectByType<GameLoopPreStart>();
+        GameLoopPreStart preStart = Object.FindFirstObjectByType<GameLoopPreStart>();
 
         if (preStart == null)
         {
@@ -28,19 +35,13 @@ public class GameLoopScene : SceneBase
         yield return preStart.Run();
 
         GameManager.Instance.GameLoop.StartLoop();
-
-        enterCoroutine = null;
     }
 
-    public override void Exit()
+    public override IEnumerator Exit()
     {
-        if (enterCoroutine != null)
-        {
-            GameManager.Instance.StopCoroutine(enterCoroutine);
-            enterCoroutine = null;
-        }
-
         // GameManager.Instance.GameLoop.StopLoop();
         GameManager.Instance.SkillManager.DeactivateSkillsBeforeLoopSceneExit();
+
+        yield return null;
     }
 }

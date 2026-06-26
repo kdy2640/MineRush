@@ -20,6 +20,10 @@ public class UpgradeData : ScriptableObject
     public int maxLevel = 1;
     public List<StatModifier> statModifiers;
     public SkillBase skill;
+    
+    [Header("일단은 자동채굴용")]
+    public List<LevelBasedOreCost> levelBasedCosts;
+    public List<LevelBasedOreReward> levelBasedRewards;
 
     /// <summary>
     /// 다음 레벨에 따라 필요한 재료량을 뱉어주는 함수.

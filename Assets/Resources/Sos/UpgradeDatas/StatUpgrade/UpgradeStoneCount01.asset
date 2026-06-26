@@ -19,10 +19,12 @@ MonoBehaviour:
   - oreType: 0
     amount: 25
   amountMultiplier: 1.2
-  maxLevel: 1
+  maxLevel: 5
   statModifiers:
   - statType: 9
     modifierType: 0
     value: 3
     oreType: -1
   skill: {fileID: 0}
+  levelBasedCosts: []
+  levelBasedRewards: []

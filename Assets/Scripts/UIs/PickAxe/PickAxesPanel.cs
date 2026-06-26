@@ -28,7 +28,9 @@ public class PickAxesPanel : MonoBehaviour
 
     private void Update()
     {
-        ShowPickaxeInfo(SetCurrentPickaxe(currentIndex)); //0으로 초기화를 해뒀기에 처음에는 기본 곡괭이가 나온다.
+        pickaxeInfo.ShowPickaxeInfo(SetCurrentPickaxe(currentIndex));
+
+        //ShowPickaxeInfo(SetCurrentPickaxe(currentIndex)); //0으로 초기화를 해뒀기에 처음에는 기본 곡괭이가 나온다.
         //근데, 메서드 안에 메서드가 있는 거 기묘한데 뭔가 아닌 것 같기도 하고.
     }
 
@@ -83,9 +85,10 @@ public class PickAxesPanel : MonoBehaviour
         pickaxeInfo.MiningRadiusText.text = $"채굴반경 : {currentPickaxe.MiningRadius}";
         pickaxeInfo.CriticalChanceText.text = $"크리티컬 확률 : {currentPickaxe.CriticalChance}";
 
-        //추가로, 현재 선택한 곡괭를 어딘가에 띄우는 건 위랑 사실상 똑같이 하면 된다.
-        //bool필드 하나 만들어서, if(!isUnlocked) 이런 식으로 조건문을 나누면 해금 안 된 곡괭이 처리도 할 수 있을 것 같은데. 
+ 
     }
+
+
 
     //content 안에 현재 있는 곡괭이들의 이미지를 전부 일정 간격으로 생성하는 메서드
     //그러니까 위의 정보 출력과는 다르게, 얘는 업데이트에서 하는 게 아니라 Start나 Awake에서 해도 되잖아?

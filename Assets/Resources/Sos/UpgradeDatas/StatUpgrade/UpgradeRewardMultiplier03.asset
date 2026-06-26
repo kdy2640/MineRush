@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: 'UpgradeRewardMultiplier03 '
   displayName: "\uBCF4\uC0C1 \uBC30\uC728 \uC99D\uAC00 III "
-  displayIcon: {fileID: 0}
+  displayIcon: {fileID: -8397615044459118022, guid: 664e451dad62dc34bbe1762169e479a7, type: 3}
   baseOreAmounts:
   - oreType: 2
     amount: 1000

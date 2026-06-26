@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: UpgradeMiningPower01
   displayName: "\uCC44\uAD74 \uACF5\uACA9\uB825 \uC99D\uAC00 I"
-  displayIcon: {fileID: 0}
+  displayIcon: {fileID: -6256336731238548332, guid: 9f3e76711ffffac4a9f6ce75584148bc, type: 3}
   baseOreAmounts:
   - oreType: 0
     amount: 10
@@ -24,5 +24,7 @@ MonoBehaviour:
   - statType: 1
     modifierType: 0
     value: 0.25
-    oreType: 0
+    oreType: -1
   skill: {fileID: 0}
+  levelBasedCosts: []
+  levelBasedRewards: []

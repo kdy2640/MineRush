@@ -25,17 +25,7 @@ public class UI_SettingButton : MonoBehaviour
 
     private void OnClickButton()
     {
-        if(isOpen)
-        {
-            settingInstance.gameObject.SetActive(false);
-            settingInstance.Close();
-            isOpen = false;
-        }
-        else
-        {
-            settingInstance.gameObject.SetActive(true);
-            settingInstance.Open();
-            isOpen = true;
-        }
+        settingInstance.gameObject.SetActive(true);
+        settingInstance.Open();
     }
 }

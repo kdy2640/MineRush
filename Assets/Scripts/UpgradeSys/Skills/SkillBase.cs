@@ -19,4 +19,8 @@ public class SkillBase : MonoBehaviour
     {
         this.level = level;
     }
+    public virtual string GetFormattedDescription(int level, int maxLevel)
+    {
+        return "";
+    }
 }

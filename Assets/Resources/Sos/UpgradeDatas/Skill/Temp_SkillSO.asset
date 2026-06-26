@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Temp_SkillSO
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: SpawnOreWhenMined
-  displayName: "\uB3CC \uC7AC\uC0DD\uC131!"
+  displayName: "\uB3CC \uC7AC\uC0DD\uC131"
   displayIcon: {fileID: 0}
   baseOreAmounts:
   - oreType: 0

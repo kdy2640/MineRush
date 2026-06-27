@@ -31,6 +31,10 @@ public class RuntimeStat
             OreFragmentChanceArr[i] = 0.1f;
             OrePureChanceArr[i] = 0.05f;
         }
+        laserDamage = 10f; 
+        bombDamage = 20f;
+
+
     }
     [Header("채굴 스탯")]
     [SerializeField] private float pickaxeTier = 0f;
@@ -74,6 +78,13 @@ public class RuntimeStat
     // 광석 순수 확률
     [SerializeField] private float[] OrePureChanceArr = new float[(int)OreType.Length];
 
+    [Header("스킬 스탯")]
+    // 1회 레이저시 적용되는 기본 채굴력. 
+    [SerializeField] private float laserDamage = 10f;
+
+    // 1회 폭발시 적용되는 기본 채굴력. 
+    [SerializeField] private float bombDamage = 20f;
+
     public int PickaxeTier => Mathf.Max(0, Mathf.RoundToInt(pickaxeTier));
     public int MaxOreTier => Mathf.Max(0, Mathf.RoundToInt(maxOreTier));
     public int StoneCount => Mathf.Max(0, Mathf.RoundToInt(stoneCount));
@@ -84,6 +95,9 @@ public class RuntimeStat
     public float CriticalMultiplier => criticalMultiplier;
     public float ExtraDuration => extraDuration;
     public float RewardMultiplier => rewardMultiplier;
+
+    public float LaserDamage => laserDamage;
+    public float BombDamage => bombDamage;
 
     //
     public void ApplyPickaxe(PickaxesDataSO pickSO)
@@ -145,6 +159,12 @@ public class RuntimeStat
             case StatType.PureChance:
                 oreIndex = (int)modifier.oreType; 
                 OrePureChanceArr[oreIndex] = ApplyValue(OrePureChanceArr[oreIndex], modifier.modifierType, amount);
+                break; 
+            case StatType.LaserDamage:
+                laserDamage = ApplyValue(laserDamage, modifier.modifierType, amount);
+                break;
+            case StatType.BombDamage: 
+                bombDamage = ApplyValue(bombDamage, modifier.modifierType, amount);
                 break;
         }
     }

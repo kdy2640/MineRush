@@ -5,7 +5,10 @@ public class SkillBase : MonoBehaviour
     // 스킬 1개랑 1대1매칭 되는 스킬타입
     public enum SkillType
     {
-        SpawnOreWhenMined
+        SpawnOreWhenMined,
+        SpawnOreWhenSecond,
+        SpawnLaserWhenMined,
+        SpawnBombWhenWhenMined
     } 
     [field: SerializeField]public string id { get; protected set; }
     [field:SerializeField]public float level { get; protected set; }

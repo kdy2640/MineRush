@@ -17,7 +17,9 @@ public enum StatType
     MaxOreTier,
     StoneCount,
     FragChance,
-    PureChance 
+    PureChance,
+    LaserDamage,
+    BombDamage
 }
 
 /// <summary>

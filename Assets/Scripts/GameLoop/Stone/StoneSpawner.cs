@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine; 
 
 public class StoneSpawner : MonoBehaviour
 {
     [SerializeField] private float lineSpawnDelay = 0.08f;
     [SerializeField] private StoneActor stoneActorPrefab;
-
+    
     public readonly int GRID_MAX_SIZE = 16;
     public readonly int GRID_RESOLUTION_MULTIPLIER = 2;
 
@@ -123,5 +124,12 @@ public class StoneSpawner : MonoBehaviour
     {
         stone.OnDead -= HandleStoneDead;
         aliveStones.Remove(stone.GridPos); 
+    }
+
+    public Vector2Int GetRandomStonePosition()
+    {
+        int count = aliveStones.Keys.Count;
+        int random = Random.Range(0, count);
+        return aliveStones.Keys.ToList()[random];
     }
 }

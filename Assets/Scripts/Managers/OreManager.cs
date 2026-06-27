@@ -79,6 +79,53 @@ public class OreManager : MonoBehaviour
     {
         OnOreChanged -= ev;
     }
+    
+    public List<OreAmount> CreateOreSaveData()
+    {
+        List<OreAmount> saveData = new();
+
+        foreach (var pair in ores)
+        {
+            if (pair.Key == OreType.None)
+                continue;
+
+            if (pair.Key == OreType.Length)
+                continue;
+
+            if (pair.Value <= 0)
+                continue;
+
+            saveData.Add(new OreAmount(pair.Key, pair.Value));
+        }
+
+        return saveData;
+    } // 현재 보유 중인 광물 딕셔너리를 저장 가능한 리스트로 변환한다.
+    // 0개 이하는 저장하지 않고, 없는 광물은 로드 시 0개로 취급한다.
+
+    public void LoadOreSaveData(List<OreAmount> saveData)
+    {
+        ores.Clear();
+
+        if (saveData != null)
+        {
+            foreach (OreAmount savedOre in saveData)
+            {
+                if (savedOre == null)
+                    continue;
+
+                if (savedOre.oreType == OreType.None)
+                    continue;
+
+                if (savedOre.oreType == OreType.Length)
+                    continue;
+
+                ores[savedOre.oreType] = Mathf.Max(0, savedOre.amount);
+            }
+        }
+
+        OnOreChanged?.Invoke();
+    }// 저장된 광물 리스트를 현재 보유 광물 딕셔너리에 다시 넣는다.
+    // 로드 후 UI 갱신을 위해 OnOreChanged를 호출한다.
 
     // 디버깅용 -> 업그레이드에서 광석수 증가 감소 및 시각화
 #if UNITY_EDITOR

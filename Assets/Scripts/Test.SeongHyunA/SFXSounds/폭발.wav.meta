@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2ebf2421dddc15a45b7fc6ae8197b1c0
+guid: d1698dd553af8ef4d887bc83b9687173
 AudioImporter:
   externalObjects: {}
   serializedVersion: 6
@@ -25,5 +25,5 @@ AssetOrigin:
   productId: 177430
   packageName: Free 2D Mega Pack
   packageVersion: 1.0
-  assetPath: Assets/Scripts/Test.SeongHyunA/SFXSounds/Whoosh.wav
+  assetPath: Assets/Brackeys/2D Mega Pack/Sounds/Explosion.wav
   uploadId: 386437

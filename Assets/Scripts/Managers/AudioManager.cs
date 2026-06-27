@@ -25,13 +25,18 @@ public enum SFXType
     UIHover,
     GameEnd,
     LoadingIn,
-    LoadingOut
+    LoadingOut,
+    LaserBeam,
+    Explosion,
+    PickaxeEnhancing
 }
 public class AudioManager : MonoBehaviour
 {
     [Header("AudioSource")]
     [SerializeField] private AudioSource bgmSource;
-    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private int sfxSourceCount = 10;
+    [SerializeField] private AudioSource[] sfxSources;
+    private int currentSFXIndex = 0;
 
     [Header("BGM List")]
     [SerializeField] private BGMClipData[] bgmClips;//인스펙터에서 등록할 BGM
@@ -69,14 +74,40 @@ public class AudioManager : MonoBehaviour
             //BGM은 반복재생하니까 루프를 true로 설정
             bgmSource.loop = true;
         }
-        if (sfxSource == null)
+        if (sfxSources == null || sfxSources.Length == 0)
         {
-            //SFX Source라는 이름의 빈 게임 오브젝트를 생성하자.
-            GameObject sfxObj = new GameObject("SFX Source");
-            sfxObj.transform.SetParent(transform);
-            sfxSource = sfxObj.AddComponent<AudioSource>();
-            sfxSource.loop = false;
+            sfxSources = new AudioSource[sfxSourceCount];
+
+            for (int i = 0; i < sfxSourceCount; i++)
+            {
+                GameObject sfxObj = new GameObject($"SFX Source {i}");
+                sfxObj.transform.SetParent(transform);
+
+                AudioSource source = sfxObj.AddComponent<AudioSource>();
+                source.loop = false;
+
+                sfxSources[i] = source;
+            }
         }
+    }
+    private AudioSource GetSFXSource()
+    {
+        // 먼저 비어있는 AudioSource를 찾는다.
+        for (int i = 0; i < sfxSources.Length; i++)
+        {
+            if (!sfxSources[i].isPlaying)
+                return sfxSources[i];
+        }
+
+        // 모두 재생 중이면 순환 사용
+        AudioSource source = sfxSources[currentSFXIndex];
+
+        currentSFXIndex++;
+
+        if (currentSFXIndex >= sfxSources.Length)
+            currentSFXIndex = 0;
+
+        return source;
     }
     //배열로 등록한 오디 데이터를 딕셔너리에 저장하는 녀석
     private void InitializeDictionary()
@@ -161,31 +192,33 @@ public class AudioManager : MonoBehaviour
     public void PlaySFXRandomPitch(SFXType type, float randomRatio)
     {
         if (!sfxDictionary.ContainsKey(type))
-        {
             return;
-        }
+
         SFXClipData data = sfxDictionary[type];
 
-        float volume = data.volume * sfxVolume * masterVolume;
-         
-        sfxSource.pitch = data.pitch + (Random.value - 0.5f) * 2 * randomRatio;
+        AudioSource source = GetSFXSource();
 
-        sfxSource.PlayOneShot(data.clip, volume);
+        float volume = data.volume * sfxVolume * masterVolume;
+
+        source.pitch = data.pitch + Random.Range(-randomRatio, randomRatio);
+
+        source.PlayOneShot(data.clip, volume);
     }
     //효과음 재생하는 녀석
     public void PlaySFX(SFXType type)
     {
-        if(!sfxDictionary.ContainsKey(type))
-        {
-            return;
-        }
+        if (!sfxDictionary.ContainsKey(type)) return;
+
         SFXClipData data = sfxDictionary[type];
+
+        AudioSource source = GetSFXSource();
 
         float volume = data.volume * sfxVolume * masterVolume;
 
-        sfxSource.pitch = data.pitch;
+        float pitch = data.pitch;
 
-        sfxSource.PlayOneShot(data.clip, volume);
+        source.pitch = pitch;
+        source.PlayOneShot(data.clip, volume);
     }
 
     //전체 볼륨을 변경하는 녀석

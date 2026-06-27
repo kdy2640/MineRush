@@ -16,8 +16,10 @@ MonoBehaviour:
   displayName: "\uB2E4\uC774\uC544\uBAAC\uB4DC \uACE1\uAC31\uC774 \uD574\uAE08"
   displayIcon: {fileID: 0}
   baseOreAmounts:
-  - oreType: 0
-    amount: 50
+  - oreType: 2
+    amount: 1800
+  - oreType: 3
+    amount: 2200
   amountMultiplier: 1.2
   maxLevel: 1
   statModifiers:

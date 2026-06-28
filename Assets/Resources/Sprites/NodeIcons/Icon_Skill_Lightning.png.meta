@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0712047002131ca43a131ae7b0d8a470
+guid: 5c0a3b0546fcd7e42ba47c8241515d3c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5962064757214411996
-    second: Icon_ED_0
+      213: 7725850152863957707
+    second: Icon_Skill_Lightning_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,7 +126,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Icon_ED_0
+      name: Icon_Skill_Lightning_0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4230c5211bd724da0800000000000000
-      internalID: -5962064757214411996
+      spriteID: bc28a5dd7cbb73b60800000000000000
+      internalID: 7725850152863957707
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Icon_ED_0: -5962064757214411996
+      Icon_Skill_Lightning_0: 7725850152863957707
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

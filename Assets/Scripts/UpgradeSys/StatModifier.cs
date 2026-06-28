@@ -19,7 +19,8 @@ public enum StatType
     FragChance,
     PureChance,
     LaserDamage,
-    BombDamage
+    BombDamage,
+    BombRadius
 }
 
 /// <summary>

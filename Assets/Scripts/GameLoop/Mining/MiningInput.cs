@@ -10,7 +10,7 @@ public class MiningInput : MonoBehaviour
     [SerializeField] private MiningSequence miningSequence;
     [SerializeField] private StoneSpawner spawner;
     [Header("인디케이터 기본 범위")]
-    [SerializeField] private float miningRange = 1f;
+    [SerializeField] private float miningRange = 0.75f;
 
     [Header("광석 레이어")]
     [SerializeField] private LayerMask oreLayer;

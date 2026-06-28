@@ -33,8 +33,7 @@ public class RuntimeStat
         }
         laserDamage = 10f; 
         bombDamage = 20f;
-
-
+        bombRadius = 1f; 
     }
     [Header("채굴 스탯")]
     [SerializeField] private float pickaxeTier = 0f;
@@ -85,6 +84,8 @@ public class RuntimeStat
     // 1회 폭발시 적용되는 기본 채굴력. 
     [SerializeField] private float bombDamage = 20f;
 
+    [SerializeField] private float bombRadius = 1f;
+
     public int PickaxeTier => Mathf.Max(0, Mathf.RoundToInt(pickaxeTier));
     public int MaxOreTier => Mathf.Max(0, Mathf.RoundToInt(maxOreTier));
     public int StoneCount => Mathf.Max(0, Mathf.RoundToInt(stoneCount));
@@ -99,6 +100,7 @@ public class RuntimeStat
     public float LaserDamage => laserDamage;
     public float BombDamage => bombDamage;
 
+    public float BombRadius => bombRadius;
     //
     public void ApplyPickaxe(PickaxesDataSO pickSO)
     { 
@@ -165,6 +167,9 @@ public class RuntimeStat
                 break;
             case StatType.BombDamage: 
                 bombDamage = ApplyValue(bombDamage, modifier.modifierType, amount);
+                break;
+            case StatType.BombRadius:
+                bombRadius = ApplyValue(bombRadius, modifier.modifierType, amount);
                 break;
         }
     }

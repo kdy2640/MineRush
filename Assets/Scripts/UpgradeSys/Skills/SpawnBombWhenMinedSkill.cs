@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class SpawnBombWhenWhenMinedSkill : SkillBase
+public class SpawnBombWhenMinedSkill : SkillBase
 {
     [field:SerializeField]public float chanceRatePerLevel { get; private set; }
     public override void Apply()
@@ -34,12 +34,12 @@ public class SpawnBombWhenWhenMinedSkill : SkillBase
 
     public void HandleOreDestroyed()
     {
-        float chanceRate = (level * chanceRatePerLevel);
+        float chanceRate = (level * chanceRatePerLevel) / 100f;
         float randValue = Random.value;
 
         if (randValue <= chanceRate)
         { 
-            GameManager.Instance.GameLoop.SkillProxy.Execute(SkillType.SpawnBombWhenWhenMined); 
+            GameManager.Instance.GameLoop.SkillProxy.Execute(SkillType.SpawnBombWhenMined); 
         }
     }
 }

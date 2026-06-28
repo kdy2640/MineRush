@@ -34,7 +34,7 @@ public class SpawnOreWhenMinedSkill : SkillBase
 
     public void HandleOreDestroyed()
     {
-        float chanceRate = (level * chanceRatePerLevel);
+        float chanceRate = (level * chanceRatePerLevel) / 100f;
         float randValue = Random.value;
 
         if (randValue <= chanceRate)

@@ -8,7 +8,7 @@ public class SkillBase : MonoBehaviour
         SpawnOreWhenMined,
         SpawnOreWhenSecond,
         SpawnLaserWhenMined,
-        SpawnBombWhenWhenMined
+        SpawnBombWhenMined
     } 
     [field: SerializeField]public string id { get; protected set; }
     [field:SerializeField]public float level { get; protected set; }

@@ -228,6 +228,7 @@ public class UpgradeManager : MonoBehaviour
             if (state.data.skill == null)
                 continue;
 
+            GameManager.Instance.SkillManager.RegisterSkill(state.data.skill);
             GameManager.Instance.SkillManager.SetSkillLevel(state.data.skill.id, state.level);
         }
     }// 로드된 업그레이드 중 스킬이 연결된 것들의 레벨을 SkillManager에 반영한다.

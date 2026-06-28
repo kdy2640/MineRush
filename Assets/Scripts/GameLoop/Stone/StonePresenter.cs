@@ -53,7 +53,12 @@ public class StonePresenter : MonoBehaviour
             .SetAutoKill(false)
             .Pause();
     }
-
+    //생성용
+    public void PlaySpawnTween()
+    {
+        StartCoroutine(PlaySpawnRoutine());
+    }
+    // 반환용
     public IEnumerator PlaySpawnRoutine()
     {
         StopCurrentTween();

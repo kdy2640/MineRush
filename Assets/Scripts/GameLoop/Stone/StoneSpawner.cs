@@ -23,7 +23,11 @@ public class StoneSpawner : MonoBehaviour
     { 
         GameManager.Instance.GameLoop.SkillProxy.SubscribeAction(SkillBase.SkillType.SpawnOreWhenMined, RandomSpawnOne);
     }
-     
+    private void OnDestroy()
+    { 
+        GameManager.Instance.GameLoop.SkillProxy.UnSubscribeAction(SkillBase.SkillType.SpawnOreWhenMined, RandomSpawnOne);
+    }
+
     public IEnumerator PrepareRoutine()
     {
         RandomSpawn(GameManager.Instance.Upgrade.GetRuntimeStat().StoneCount, false);
@@ -95,6 +99,10 @@ public class StoneSpawner : MonoBehaviour
         StoneActor stone = Instantiate(stoneActorPrefab, worldPos, Quaternion.identity);
         stone.SetData(data, gridPos);
         stone.gameObject.SetActive(isImmediate);
+        if(isImmediate)
+        {
+            stone.Presenter.PlaySpawnTween();
+        }
 
         aliveStones[gridPos] = stone;
         stone.OnDead += HandleStoneDead;

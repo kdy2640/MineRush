@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class PickaxeActor : Poolable
+public class PickaxeActor : Poolable , IAttackPresenter
 {
     [Header("Position")]
     [SerializeField] private Vector3 deltaPosition = new Vector3(0.25f,0.1f,0);

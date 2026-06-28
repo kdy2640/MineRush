@@ -18,15 +18,19 @@ public static class StoneSortingOrder
 
     private bool nowCracked = false;
     private GameManager manager;
-    private HPHandler hpHandler; 
+    private HPHandler hpHandler;
+    private StonePresenter presenter;
 
     private Vector2Int gridPos;
     public Vector2Int GridPos => gridPos;
     public StoneDataSO DataSO => dataSo;
+    public HPHandler HP => hpHandler;
+    public StonePresenter Presenter => presenter;
 
     private void Awake()
     {
         manager = GameManager.Instance;
+        presenter = GetComponent<StonePresenter>();
         hpHandler = GetComponent<HPHandler>(); 
         hpHandler.SubscribeDying(Die);
         hpHandler.SubscribeHPUpdate(Mine);
@@ -36,6 +40,19 @@ public static class StoneSortingOrder
         hpHandler.UnSubscribeHPUpdate(Mine);
         hpHandler.UnSubscribeDying(Die); 
     }
+
+    public bool TryStartDeathSequence()
+    {
+        if (!HP.IsDead)
+            return false;
+
+        if (presenter.DeathSequenceStarted)
+            return false;
+
+        presenter.DeathSequenceStarted = true;
+        return true;
+    }
+
     public void SetData(StoneDataSO data, Vector2Int gridPos)
     {
         this.dataSo = data;

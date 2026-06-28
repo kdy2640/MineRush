@@ -14,9 +14,12 @@ public class SpriteFlipbookPlayer : MonoBehaviour
     [SerializeField] private bool playOnEnable = false;
     [SerializeField] private bool deactivateOnComplete = false;
 
-    private Coroutine playCoroutine;
+    [Header("Impact")]
+    [SerializeField] private int impactIndex = 0;
+     
+    private Coroutine afterImpactCoroutine;
 
-    public bool IsPlaying => playCoroutine != null;
+    public bool IsPlaying =>   afterImpactCoroutine != null;
     public int FrameCount => frames == null ? 0 : frames.Length;
 
     private void Awake()
@@ -24,13 +27,7 @@ public class SpriteFlipbookPlayer : MonoBehaviour
         if (spriteRenderer == null)
             spriteRenderer = GetComponent<SpriteRenderer>();
     }
-
-    private void OnEnable()
-    {
-        if (playOnEnable)
-            playCoroutine = StartCoroutine(PlayRoutine());
-    }
-
+     
     private void OnDisable()
     {
         Stop();
@@ -41,12 +38,18 @@ public class SpriteFlipbookPlayer : MonoBehaviour
         frames = newFrames;
     }
 
-    public void Stop()
+    public void SetImpactIndex(int index)
     {
-        if (playCoroutine != null)
+        impactIndex = index;
+    }
+
+    public void Stop()
+    { 
+
+        if (afterImpactCoroutine != null)
         {
-            StopCoroutine(playCoroutine);
-            playCoroutine = null;
+            StopCoroutine(afterImpactCoroutine);
+            afterImpactCoroutine = null;
         }
     }
 
@@ -55,7 +58,11 @@ public class SpriteFlipbookPlayer : MonoBehaviour
         if (frames == null || frames.Length == 0)
             return;
 
-        spriteRenderer.sprite = frames[0];
+        if (spriteRenderer == null)
+            spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer != null)
+            spriteRenderer.sprite = frames[0];
     }
 
     public IEnumerator PlayRoutine()
@@ -79,22 +86,51 @@ public class SpriteFlipbookPlayer : MonoBehaviour
                 gameObject.SetActive(false);
 
             yield break;
-        } 
-        yield return PlayInternalRoutine();
+        }
+         
+        yield return PlayUntilImpactRoutine();
     }
 
-    private IEnumerator PlayInternalRoutine()
+    private IEnumerator PlayUntilImpactRoutine()
     {
         float delay = fps <= 0f ? 0.1f : 1f / fps;
 
-        for (int i = 0; i < frames.Length; i++)
+        int clampedImpactIndex = Mathf.Clamp(impactIndex, 0, frames.Length - 1);
+
+        for (int i = 0; i <= clampedImpactIndex; i++)
+        {
+            spriteRenderer.sprite = frames[i];
+            yield return new WaitForSeconds(delay);
+        } 
+
+        int nextIndex = clampedImpactIndex + 1;
+
+        if (nextIndex < frames.Length)
+        {
+            afterImpactCoroutine = StartCoroutine(PlayAfterImpactRoutine(nextIndex));
+        }
+        else
+        {
+            Complete();
+        }
+    }
+
+    private IEnumerator PlayAfterImpactRoutine(int startIndex)
+    {
+        float delay = fps <= 0f ? 0.1f : 1f / fps;
+
+        for (int i = startIndex; i < frames.Length; i++)
         {
             spriteRenderer.sprite = frames[i];
             yield return new WaitForSeconds(delay);
         }
 
-        playCoroutine = null;
+        afterImpactCoroutine = null;
+        Complete();
+    }
 
+    private void Complete()
+    {
         if (deactivateOnComplete)
             gameObject.SetActive(false);
     }

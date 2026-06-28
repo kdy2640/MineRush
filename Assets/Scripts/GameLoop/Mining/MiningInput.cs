@@ -72,8 +72,8 @@ public class MiningInput : MonoBehaviour
 
         if(Time.time - lastSkillTime >= 1)
         {
-            RandomRandomMining(MiningType.Laser);
-            RandomRandomMining(MiningType.Bomb);
+            ResolveRandomMining(MiningType.Laser);
+            ResolveRandomMining(MiningType.Bomb);
             lastSkillTime = Time.time;
         }
     }   
@@ -83,9 +83,10 @@ public class MiningInput : MonoBehaviour
         miningSequence.RequestMines(stones, Vector3.zero, type); 
     }
 
-    private void RandomRandomMining(MiningType type)
+    private void ResolveRandomMining(MiningType type)
     {
-        Vector3 position = GridCalculator.GridToWorld(spawner.GetRandomStonePosition());
+        if (!spawner.GetRandomStonePosition(out Vector2Int position2D)) return;
+        Vector3 position = GridCalculator.GridToWorld(position2D);
         List<StoneActor> stones = DetectOre(position);
         miningSequence.RequestMines(stones, position, type);
     }

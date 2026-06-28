@@ -1,32 +1,35 @@
-using System;
-using TMPro;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class SpawnOreWhenSecondSkill : SkillBase
 {
-    [field:SerializeField]public float chanceRatePerLevel { get; private set; }
+    [field: SerializeField] public float timeIntervalPerLevel { get; private set; }
+
+    private float lastActiveTime = float.MinValue;
+
     public override void Apply()
     {
-        GameManager.Instance.GameLoop.SubscribeTick(HandleSecond); 
+        GameManager.Instance.GameLoop.SubscribeTick(HandleSecond);
     }
+
     public override void Deactivate()
     {
-        GameManager.Instance.GameLoop.UnSubscribeTick(HandleSecond); 
+        GameManager.Instance.GameLoop.UnSubscribeTick(HandleSecond);
     }
+
     public override string GetFormattedDescription(int level, int maxLevel)
     {
-        float currentChanceRate = level * chanceRatePerLevel;
+        float currentTimeInterval = GetTimeInterval(level);
+
         string desc;
 
         if (level >= maxLevel)
         {
-            desc = $"+{currentChanceRate:0.##}%";
+            desc = $"{currentTimeInterval:0.##}초마다";
         }
         else
         {
-            float nextChanceRate = (level + 1) * chanceRatePerLevel;
-            desc = $"+{currentChanceRate:0.##}% -> +{nextChanceRate:0.##}%";
+            float nextTimeInterval = GetTimeInterval(level + 1);
+            desc = $"{currentTimeInterval:0.##}초마다 -> {nextTimeInterval:0.##}초마다";
         }
 
         return description.Replace("{계수}", desc);
@@ -34,12 +37,17 @@ public class SpawnOreWhenSecondSkill : SkillBase
 
     public void HandleSecond(float time)
     {
-        float chanceRate = (level * chanceRatePerLevel);
-        float randValue = Random.value;
+        float currentTimeInterval = GetTimeInterval(level);
 
-        if (randValue <= chanceRate)
-        { 
-            GameManager.Instance.GameLoop.SkillProxy.Execute(SkillType.SpawnOreWhenSecond); 
+        if (Time.time - lastActiveTime > currentTimeInterval)
+        {
+            GameManager.Instance.GameLoop.SkillProxy.Execute(SkillType.SpawnOreWhenSecond);
+            lastActiveTime = Time.time;
         }
+    }
+
+    private float GetTimeInterval(float targetLevel)
+    {
+        return timeIntervalPerLevel / (targetLevel + 1f);
     }
 }

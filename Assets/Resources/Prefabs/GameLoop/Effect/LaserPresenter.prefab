@@ -89,7 +89,7 @@ SpriteRenderer:
   m_Size: {x: 3.26, y: 10.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!1 &8728390051587620200
 GameObject:
@@ -139,25 +139,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpriteFlipbookPlayer
   spriteRenderer: {fileID: 2903504875743667348}
   frames:
-  - {fileID: -981872717603057595, guid: 6dccab786e029c7439d838053cf11cb1, type: 3}
-  - {fileID: -3316814855546732237, guid: d274c9967f1a90a418ec7f0e2beab71c, type: 3}
-  - {fileID: -6412560048614900902, guid: 9c2e60502b0c605458d95e0f4a1a3d62, type: 3}
-  - {fileID: 4220797400643434077, guid: 92a7bb97f49a22a43ba3b9eb0cf7bc4e, type: 3}
-  - {fileID: -1270049339158190406, guid: fc3d309e0825de548b4d8e5e8a430ba5, type: 3}
-  - {fileID: -7482363410647045699, guid: 2d8ff0af3f426f740bcf2383c983b3f8, type: 3}
-  - {fileID: -5830587960499942591, guid: 2d918334f32d9d742b1e708341653328, type: 3}
-  - {fileID: -8636832090435625384, guid: 380096ac20c920e439d486b6ca40eb8f, type: 3}
-  - {fileID: 6183655431177764376, guid: 7b862e47c84305d479d6cf23b3c17a12, type: 3}
-  - {fileID: -8336961806868782998, guid: 0cc8b6d2c8aa4d94a9fde4119561d053, type: 3}
-  - {fileID: 8393456095914339282, guid: 949a31c827d26c14a8a293e209f2fd1a, type: 3}
-  - {fileID: 7561109859259867190, guid: 159c2582c403cfa4b8b9bcb5ff614093, type: 3}
-  - {fileID: 7338570898795656646, guid: f740ea6613b479e4c83a75bf6a0c4f08, type: 3}
-  - {fileID: -7264036323121688163, guid: 7c84a9a0c82998241933dc8140cd6f7e, type: 3}
-  - {fileID: 9074198417679505582, guid: 3e110c67264f7fd4f80fecde1d83f6ea, type: 3}
-  - {fileID: -1420124659504332586, guid: a7f30410058ce0048a78e545d56d3c8d, type: 3}
+  - {fileID: 21300000, guid: 6dccab786e029c7439d838053cf11cb1, type: 3}
+  - {fileID: 21300000, guid: d274c9967f1a90a418ec7f0e2beab71c, type: 3}
+  - {fileID: 21300000, guid: 9c2e60502b0c605458d95e0f4a1a3d62, type: 3}
+  - {fileID: 21300000, guid: 92a7bb97f49a22a43ba3b9eb0cf7bc4e, type: 3}
+  - {fileID: 21300000, guid: fc3d309e0825de548b4d8e5e8a430ba5, type: 3}
+  - {fileID: 21300000, guid: 2d8ff0af3f426f740bcf2383c983b3f8, type: 3}
+  - {fileID: 21300000, guid: 2d918334f32d9d742b1e708341653328, type: 3}
+  - {fileID: 21300000, guid: 380096ac20c920e439d486b6ca40eb8f, type: 3}
+  - {fileID: 21300000, guid: 7b862e47c84305d479d6cf23b3c17a12, type: 3}
+  - {fileID: 21300000, guid: 0cc8b6d2c8aa4d94a9fde4119561d053, type: 3}
+  - {fileID: 21300000, guid: 949a31c827d26c14a8a293e209f2fd1a, type: 3}
+  - {fileID: 21300000, guid: 159c2582c403cfa4b8b9bcb5ff614093, type: 3}
+  - {fileID: 21300000, guid: f740ea6613b479e4c83a75bf6a0c4f08, type: 3}
+  - {fileID: 21300000, guid: 7c84a9a0c82998241933dc8140cd6f7e, type: 3}
+  - {fileID: 21300000, guid: 3e110c67264f7fd4f80fecde1d83f6ea, type: 3}
+  - {fileID: 21300000, guid: a7f30410058ce0048a78e545d56d3c8d, type: 3}
   fps: 12
   playOnEnable: 1
   deactivateOnComplete: 1
+  impactIndex: 2
 --- !u!114 &7790640701629826339
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -48,25 +48,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpriteFlipbookPlayer
   spriteRenderer: {fileID: 173897237628416809}
   frames:
-  - {fileID: 6914316554805183744, guid: 17fb990de22b8b4449f66a1b14f3f614, type: 3}
-  - {fileID: -5919437495673855364, guid: 5f279ec34ac398349a00bfeda8e0f25e, type: 3}
-  - {fileID: 3393498304004430312, guid: 75e64edb36124594797487d336392eb3, type: 3}
-  - {fileID: 2324547709652983379, guid: 04ce2da7cd9a08f40b98667bd181b49f, type: 3}
-  - {fileID: -3492817952743211886, guid: 8cc63fa817ef19f4d831d9cd457a05c4, type: 3}
-  - {fileID: 6789192600420429626, guid: b65cee9ff6c3d8b4bbfbe017a3c73d10, type: 3}
-  - {fileID: -6828136559971663731, guid: c0bbfc21eb331994cb93f6c990b8a28f, type: 3}
-  - {fileID: -26068358609354710, guid: 8483e7da342431d408f4e0893d8f0dfa, type: 3}
-  - {fileID: -8297860382975652608, guid: c70c3d9bb6cd2454aa62e62edb0e732c, type: 3}
-  - {fileID: -6928484746216844734, guid: 9047f192945d90546b941eef1a897725, type: 3}
-  - {fileID: -7754261680358221051, guid: 6e9d202512835bb4b9428866e0aade94, type: 3}
-  - {fileID: 2090673344303012844, guid: 822fbd74c1fcc0547b8789ac6583df72, type: 3}
-  - {fileID: -776298913228610915, guid: 29f0d8ff691d7f0448823e87d3237e2d, type: 3}
-  - {fileID: 7902509940707586492, guid: dd9966390c003b14799b447dd3a37956, type: 3}
-  - {fileID: -8501083728048307773, guid: 7c974af7e2bf1f746ba57dbfb8e71dae, type: 3}
-  - {fileID: -6077564700443795553, guid: 0a1024a6d1854cd449cdccc4e1be6e7d, type: 3}
+  - {fileID: 21300000, guid: 17fb990de22b8b4449f66a1b14f3f614, type: 3}
+  - {fileID: 21300000, guid: 5f279ec34ac398349a00bfeda8e0f25e, type: 3}
+  - {fileID: 21300000, guid: 75e64edb36124594797487d336392eb3, type: 3}
+  - {fileID: 21300000, guid: 04ce2da7cd9a08f40b98667bd181b49f, type: 3}
+  - {fileID: 21300000, guid: 8cc63fa817ef19f4d831d9cd457a05c4, type: 3}
+  - {fileID: 21300000, guid: b65cee9ff6c3d8b4bbfbe017a3c73d10, type: 3}
+  - {fileID: 21300000, guid: c0bbfc21eb331994cb93f6c990b8a28f, type: 3}
+  - {fileID: 21300000, guid: 8483e7da342431d408f4e0893d8f0dfa, type: 3}
+  - {fileID: 21300000, guid: c70c3d9bb6cd2454aa62e62edb0e732c, type: 3}
+  - {fileID: 21300000, guid: 9047f192945d90546b941eef1a897725, type: 3}
+  - {fileID: 21300000, guid: 6e9d202512835bb4b9428866e0aade94, type: 3}
+  - {fileID: 21300000, guid: 822fbd74c1fcc0547b8789ac6583df72, type: 3}
+  - {fileID: 21300000, guid: 29f0d8ff691d7f0448823e87d3237e2d, type: 3}
+  - {fileID: 21300000, guid: dd9966390c003b14799b447dd3a37956, type: 3}
+  - {fileID: 21300000, guid: 7c974af7e2bf1f746ba57dbfb8e71dae, type: 3}
+  - {fileID: 21300000, guid: 0a1024a6d1854cd449cdccc4e1be6e7d, type: 3}
   fps: 12
   playOnEnable: 1
   deactivateOnComplete: 1
+  impactIndex: 1
 --- !u!114 &1746193671766893751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,5 +170,5 @@ SpriteRenderer:
   m_Size: {x: 3.26, y: 10.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0

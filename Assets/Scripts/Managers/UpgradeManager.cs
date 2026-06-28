@@ -233,4 +233,8 @@ public class UpgradeManager : MonoBehaviour
         }
     }// 로드된 업그레이드 중 스킬이 연결된 것들의 레벨을 SkillManager에 반영한다.
     // 스킬을 따로 저장하지 않고 업그레이드 레벨을 기준으로 복구한다.
+    public void ResetUpgradeSaveData()
+    {
+        upgradeStates.Clear();
+    }
 }

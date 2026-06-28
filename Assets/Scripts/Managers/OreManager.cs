@@ -126,6 +126,10 @@ public class OreManager : MonoBehaviour
         OnOreChanged?.Invoke();
     }// 저장된 광물 리스트를 현재 보유 광물 딕셔너리에 다시 넣는다.
     // 로드 후 UI 갱신을 위해 OnOreChanged를 호출한다.
+    public void ResetOreSaveData()
+    {
+        ores.Clear();
+    }
 
     // 디버깅용 -> 업그레이드에서 광석수 증가 감소 및 시각화
 #if UNITY_EDITOR

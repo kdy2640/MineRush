@@ -37,15 +37,29 @@ public class MiningInput : MonoBehaviour
     {
         rangeIndicator.gameObject.SetActive(false);
         GameManager.Instance.GameLoop.Events.Subscribe(GameLoopEventType.LoopStarted, OnLoopStarted);
-        GameManager.Instance.GameLoop.Events.Subscribe(GameLoopEventType.LoopEnded, OnLoopEnded); 
+        GameManager.Instance.GameLoop.Events.Subscribe(GameLoopEventType.LoopEnded, OnLoopEnded);
+
+        GameManager.Instance.GameLoop.SkillProxy.SubscribeAction(SkillBase.SkillType.SpawnLaserWhenMined, SpawnLaser);
+        GameManager.Instance.GameLoop.SkillProxy.SubscribeAction(SkillBase.SkillType.SpawnBombWhenMined, SpawnBomb);
     }
 
     private void OnDestroy()
     {
         GameManager.Instance.GameLoop.Events.Unsubscribe(GameLoopEventType.LoopStarted, OnLoopStarted);
         GameManager.Instance.GameLoop.Events.Unsubscribe(GameLoopEventType.LoopEnded, OnLoopEnded);
+
+        GameManager.Instance.GameLoop.SkillProxy.UnSubscribeAction(SkillBase.SkillType.SpawnLaserWhenMined, SpawnLaser);
+        GameManager.Instance.GameLoop.SkillProxy.UnSubscribeAction(SkillBase.SkillType.SpawnBombWhenMined, SpawnBomb);
     }
 
+    private void SpawnLaser()
+    {
+        ResolveRandomMining(MiningType.Laser);
+    }
+    private void SpawnBomb()
+    { 
+        ResolveRandomMining(MiningType.Bomb);
+    }
 
     public void OnLoopStarted()
     {
@@ -69,13 +83,7 @@ public class MiningInput : MonoBehaviour
             ResolveTargetMining(worldPos,MiningType.Pickaxe);
             pickaxelastTime = Time.time;
         } 
-
-        if(Time.time - lastSkillTime >= 1)
-        {
-            ResolveRandomMining(MiningType.Laser);
-            ResolveRandomMining(MiningType.Bomb);
-            lastSkillTime = Time.time;
-        }
+         
     }   
     private void ResolveTargetMining(Vector2 position,MiningType type)
     {

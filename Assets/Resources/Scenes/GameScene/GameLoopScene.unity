@@ -509,6 +509,7 @@ GameObject:
   - component: {fileID: 437765760}
   - component: {fileID: 437765759}
   - component: {fileID: 437765758}
+  - component: {fileID: 437765761}
   m_Layer: 5
   m_Name: SessionEndButton
   m_TagString: Untagged
@@ -618,6 +619,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 437765756}
   m_CullTransparentMesh: 1
+--- !u!114 &437765761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437765756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71010ac8693ff354ea34c58ed191ec69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SessionEndButton
+  button: {fileID: 437765758}
 --- !u!1001 &535322535
 PrefabInstance:
   m_ObjectHideFlags: 0

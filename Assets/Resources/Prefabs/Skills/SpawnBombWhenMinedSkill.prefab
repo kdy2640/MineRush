@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3629071630424348254}
   - component: {fileID: -2104536031578270171}
   m_Layer: 0
-  m_Name: SpawnBombWhenMined
+  m_Name: SpawnBombWhenMinedSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: 'UnlockGold '
   displayName: "\uAE08 \uCD94\uAC00 "
-  displayIcon: {fileID: 0}
+  displayIcon: {fileID: -1512068093441800608, guid: 651e31353fc89314e8f4fbfb2bd8998c, type: 3}
   baseOreAmounts:
   - oreType: 1
     amount: 150
@@ -26,3 +26,5 @@ MonoBehaviour:
     value: 2
     oreType: 2
   skill: {fileID: 0}
+  levelBasedCosts: []
+  levelBasedRewards: []

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: 'UpgradeMiningRadius04 '
   displayName: "\uCC44\uAD74 \uBC94\uC704 \uC99D\uAC00 IV "
-  displayIcon: {fileID: 0}
+  displayIcon: {fileID: -2179651812193520410, guid: d0777f39bfb105843bee067002335b10, type: 3}
   baseOreAmounts:
   - oreType: 3
     amount: 1100

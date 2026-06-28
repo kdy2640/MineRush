@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class UI_BackMainButton : MonoBehaviour
 {
-    Button mainButton;
+    [SerializeField] Button mainButton;
     void Start()
     {
         mainButton = GetComponent<Button>();

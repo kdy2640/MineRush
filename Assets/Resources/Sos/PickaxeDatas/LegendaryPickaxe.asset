@@ -15,10 +15,8 @@ MonoBehaviour:
   tier: 5
   displayName: Legendary Pickaxe
   icon: {fileID: 21300000, guid: deef49ab8c63e704cb18866918dc950c, type: 3}
+  upgradeData: {fileID: 11400000, guid: a5e45802fa3455947b5fa764cb87979f, type: 2}
   miningPower: 5
   miningSpeed: 5
   miningRadius: 5
   criticalChance: 0.5
-  amounts:
-  - oreType: 3
-    amount: 500

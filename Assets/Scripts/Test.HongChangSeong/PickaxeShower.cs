@@ -8,7 +8,7 @@ public class PickaxeShower : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [field: SerializeField] public PickaxesDataSO CurrentPickAxe { get; private set; }
 
     //띄울 장소
-    [SerializeField] private CurrentPickaxeInfo pickaxeInfo;
+    [SerializeField] private PickaxeInfoPanel pickaxeInfo;
 
 
     public void OnPointerEnter(PointerEventData eventData) //일반 메서드로 변환한 다음, 매개변수로 받는 식으로 바꿔야 할지.

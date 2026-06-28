@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,13 +11,20 @@ public class FillAmountTest : MonoBehaviour
 
     private float holdTime;
 
+    private InputAction RightClick;
+
+    private void Awake()
+    {
+        //RightClick = InputSystem.actions.FindAction
+    }
+
     void Update()
     {
         
 
 
 
-        if(Input.GetMouseButton(1))
+        if(true)
         {
             holdTime += Time.deltaTime;
 

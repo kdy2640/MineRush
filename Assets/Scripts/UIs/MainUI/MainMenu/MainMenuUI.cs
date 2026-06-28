@@ -17,11 +17,7 @@ public class MainMenuUI : MonoBehaviour
 
     [SerializeField] private Button startButtonComponent;
     [SerializeField] private Button exitButtonComponent;
-
-    [Header("Popup")]
-    [SerializeField] private SettingsPopup settingsPopup;
-
-    [SerializeField] private Button settingsButtonComponent;
+     
 
     [Header("Animation")]
     [SerializeField] private float titleStartY = 1200f;
@@ -29,11 +25,7 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private float titleEnterDuration = 0.7f;
 
     private void Awake()
-    {
-        if (settingsButtonComponent != null)
-        {
-            settingsButtonComponent.onClick.AddListener(settingsPopup.Open);
-        }
+    { 
         if(startButtonComponent != null)
         {
             startButtonComponent.onClick.AddListener(OnClickStart);
@@ -85,11 +77,7 @@ public class MainMenuUI : MonoBehaviour
         Application.Quit();
     }
     private void OnDestroy()
-    {
-        if(settingsButton != null)
-        {
-            settingsButtonComponent.onClick.RemoveListener(settingsPopup.Open);
-        }
+    { 
         if(startButtonComponent != null)
         {
             startButtonComponent.onClick.RemoveListener(OnClickStart);

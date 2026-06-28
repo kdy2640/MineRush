@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: 'UpgradeExtraDuration04 '
   displayName: "\uCC44\uAD74 \uC2DC\uAC04 \uC99D\uAC00 IV "
-  displayIcon: {fileID: 0}
+  displayIcon: {fileID: -5962064757214411996, guid: 0712047002131ca43a131ae7b0d8a470, type: 3}
   baseOreAmounts:
   - oreType: 3
     amount: 900

@@ -15,10 +15,8 @@ MonoBehaviour:
   tier: 3
   displayName: Gold Pickaxe
   icon: {fileID: 21300000, guid: 510921d6c5d01994a9a0079a30648367, type: 3}
+  upgradeData: {fileID: 11400000, guid: e6a2281252282054d9e26964ab7cff9c, type: 2}
   miningPower: 4
   miningSpeed: 4
   miningRadius: 4
   criticalChance: 0.2
-  amounts:
-  - oreType: 2
-    amount: 100

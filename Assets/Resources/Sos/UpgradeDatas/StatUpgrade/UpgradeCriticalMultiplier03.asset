@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: 'UpgradeCriticalMultiplier03 '
   displayName: "\uD06C\uB9AC\uD2F0\uCEEC \uACF5\uACA9 \uBC30\uC728 \uC99D\uAC00 III "
-  displayIcon: {fileID: 0}
+  displayIcon: {fileID: 785705770821208718, guid: 213851d1791f815408ced9cc7a71b329, type: 3}
   baseOreAmounts:
   - oreType: 1
     amount: 250
@@ -25,6 +25,8 @@ MonoBehaviour:
   statModifiers:
   - statType: 5
     modifierType: 0
-    value: 0.1
+    value: 0.2
     oreType: -1
   skill: {fileID: 0}
+  levelBasedCosts: []
+  levelBasedRewards: []

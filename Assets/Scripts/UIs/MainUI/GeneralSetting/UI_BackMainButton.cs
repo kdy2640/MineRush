@@ -10,8 +10,12 @@ public class UI_BackMainButton : MonoBehaviour
         mainButton.onClick.AddListener(OnClickButton);
     }
     private void OnDestroy()
-    { 
-        mainButton.onClick.RemoveListener(OnClickButton);
+    {
+        if (mainButton != null)
+        {
+            mainButton.onClick.RemoveListener(OnClickButton);
+        }
+           
     }
     private void OnClickButton()
     {

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: 'UpgradeRewardMultiplier02 '
   displayName: "\uBCF4\uC0C1 \uBC30\uC728 \uC99D\uAC00 II "
-  displayIcon: {fileID: 0}
+  displayIcon: {fileID: -8397615044459118022, guid: 664e451dad62dc34bbe1762169e479a7, type: 3}
   baseOreAmounts:
   - oreType: 1
     amount: 350
@@ -28,3 +28,5 @@ MonoBehaviour:
     value: 0.2
     oreType: -1
   skill: {fileID: 0}
+  levelBasedCosts: []
+  levelBasedRewards: []

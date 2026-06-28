@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: 'UpgradeMiningRadius03 '
   displayName: "\uCC44\uAD74 \uBC94\uC704 \uC99D\uAC00 III "
-  displayIcon: {fileID: 0}
+  displayIcon: {fileID: -2179651812193520410, guid: d0777f39bfb105843bee067002335b10, type: 3}
   baseOreAmounts:
   - oreType: 2
     amount: 350
@@ -26,3 +26,5 @@ MonoBehaviour:
     value: 0.2
     oreType: -1
   skill: {fileID: 0}
+  levelBasedCosts: []
+  levelBasedRewards: []

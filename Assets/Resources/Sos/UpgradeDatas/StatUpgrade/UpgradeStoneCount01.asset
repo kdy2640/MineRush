@@ -14,15 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: 'UpgradeStoneCount01 '
   displayName: "\uCD5C\uB300 \uB3CC \uAC2F\uC218 \uC99D\uAC00 I"
-  displayIcon: {fileID: 0}
+  displayIcon: {fileID: -1961593735744361799, guid: ba1c760a6f3ff5748816e887bbf8c240, type: 3}
   baseOreAmounts:
   - oreType: 0
     amount: 25
   amountMultiplier: 1.2
-  maxLevel: 1
+  maxLevel: 5
   statModifiers:
   - statType: 9
     modifierType: 0
     value: 3
     oreType: -1
   skill: {fileID: 0}
+  levelBasedCosts: []
+  levelBasedRewards: []

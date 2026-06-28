@@ -15,10 +15,8 @@ MonoBehaviour:
   tier: 2
   displayName: Iron Pickaxe
   icon: {fileID: 21300000, guid: f32786a0b2b16c744ba8e405c08a06ec, type: 3}
+  upgradeData: {fileID: 11400000, guid: 3b9d0d36b459cf44e924ddb761c4cd91, type: 2}
   miningPower: 3
   miningSpeed: 3
   miningRadius: 3
   criticalChance: 0.1
-  amounts:
-  - oreType: 1
-    amount: 100

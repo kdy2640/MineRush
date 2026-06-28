@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: 'UpgradeOreFragChance04 '
   displayName: "\uB2E4\uC774\uC544\uBAAC\uB4DC \uC870\uAC01\uB3CC \uD655\uB960 \uC99D\uAC00 "
-  displayIcon: {fileID: 0}
+  displayIcon: {fileID: -7995088169963277126, guid: 9b6ad3ec40dfe1e44804983da45340b5, type: 3}
   baseOreAmounts:
   - oreType: 3
     amount: 750

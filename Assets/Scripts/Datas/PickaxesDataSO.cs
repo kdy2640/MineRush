@@ -9,6 +9,7 @@ public class PickaxesDataSO : ScriptableObject
     [SerializeField] private int tier;
     [SerializeField] private string displayName;
     [SerializeField] private Sprite icon;
+    [SerializeField] private UpgradeData upgradeData;
 
     [Header("Stats")]
     [SerializeField] private int miningPower;
@@ -16,13 +17,14 @@ public class PickaxesDataSO : ScriptableObject
     [SerializeField] private float miningRadius;
     [SerializeField] private float criticalChance;
 
-    [Header("Shop")]
-    [SerializeField] private List<OreAmount> amounts;
+    
 
     public int Tier => tier;
     public string DisplayName => displayName;
     public Sprite Icon => icon;
+    public UpgradeData UpgradeData => upgradeData;
 
+    
     public int MiningPower => miningPower;
     public float MiningSpeed => miningSpeed;
     public float MiningRadius => miningRadius;

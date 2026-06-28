@@ -9,18 +9,20 @@ public class StonePresenter : MonoBehaviour
     [SerializeField] private Ease spawnEase = Ease.OutBack;
     [SerializeField] private ParticleSystem breakParticle;
 
-    private Tween currentTween;
 
+
+    private Tween currentTween; 
     private Tween spawnTween;
     private Sequence hitSequence;
-    private Sequence breakSequence;
-
+    private Sequence breakSequence; 
     private Vector3 defaultScale;
-
+    private bool deathSequenceStarted = false;
+   
+    public bool DeathSequenceStarted { get { return deathSequenceStarted; } set { deathSequenceStarted = value; } }
     private void Awake()
     {
         defaultScale = transform.localScale;
-
+        DeathSequenceStarted = false;
         CreateTweens();
     }
 

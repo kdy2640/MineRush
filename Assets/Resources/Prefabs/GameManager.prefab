@@ -62,24 +62,31 @@ MonoBehaviour:
   - type: 1
     clip: {fileID: 0}
     volume: 1
+    pitch: 1
   - type: 2
     clip: {fileID: 0}
     volume: 1
+    pitch: 1
   - type: 3
     clip: {fileID: 0}
     volume: 1
+    pitch: 1
   - type: 4
     clip: {fileID: 0}
     volume: 1
+    pitch: 1
   - type: 5
     clip: {fileID: 0}
     volume: 1
+    pitch: 1
   - type: 6
     clip: {fileID: 8300000, guid: e9ff06c589de7644c9d1842aa010dd2c, type: 3}
     volume: 1
+    pitch: 1
   - type: 7
     clip: {fileID: 0}
     volume: 1
+    pitch: 1
 --- !u!82 &9080711514536660056
 AudioSource:
   m_ObjectHideFlags: 0
@@ -289,6 +296,7 @@ GameObject:
   - component: {fileID: 9083949984633655817}
   - component: {fileID: 5262340494953791802}
   - component: {fileID: -7716375607518359727}
+  - component: {fileID: 708777595408594811}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -398,7 +406,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8653f44969cb2342ba1914e04e9142e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManagerScene
-  loopDuration: 30
 --- !u!114 &-7716375607518359727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,3 +418,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5eea2c5ade66424696f8ce9b3fd0d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillManager
+--- !u!114 &708777595408594811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4075179859343089073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04aea43a1fc7f7a4580578f2c652431d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveManager
+  saveFileName: save.json

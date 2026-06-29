@@ -95,6 +95,7 @@ public class AutoMiner : MonoBehaviour
         Claim();
         state.level++;
         AutoMiningRuntimeData.ResetClaimTime();
+        GameManager.Instance.Save.SaveGame();
 
         return true;
     } // 기존 누적 보상을 먼저 정산한 뒤, 비용을 지불하고 자동채굴 레벨을 1 올린다.

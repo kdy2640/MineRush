@@ -68,6 +68,7 @@ public class SaveManager : MonoBehaviour
     {
         GameManager.Instance.Upgrade.ResetUpgradeSaveData();
         GameManager.Instance.OreManager.ResetOreSaveData();
+        DeleteSave();
     }
 
     public bool HasSave()

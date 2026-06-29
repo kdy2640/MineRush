@@ -55,6 +55,8 @@ public class MainMenuUI : MonoBehaviour
             .SetEase(Ease.OutBack)
             .WaitForCompletion();
 
+        GameManager.Instance.AudioManager.PlayBGM(BGMType.Titie);
+
         yield return new WaitForSeconds(0.3f);
 
         startButton.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
@@ -67,7 +69,6 @@ public class MainMenuUI : MonoBehaviour
 
         exitButton.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
 
-        GameManager.Instance.AudioManager.PlayBGM(BGMType.Titie);
 
     }
     private void OnClickStart()

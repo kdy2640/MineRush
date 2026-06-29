@@ -3291,7 +3291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2313289536565849921, guid: f7719fd5d449f154dbcb885834bfdd1a, type: 3}
       propertyPath: m_Name
-      value: Delete_Btn
+      value: ClearData_Btn
       objectReference: {fileID: 0}
     - target: {fileID: 8216015995311724204, guid: f7719fd5d449f154dbcb885834bfdd1a, type: 3}
       propertyPath: m_Pivot.x
@@ -3380,6 +3380,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2313289536565849921, guid: f7719fd5d449f154dbcb885834bfdd1a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 634193216411504982}
+    - targetCorrespondingSourceObject: {fileID: 2313289536565849921, guid: f7719fd5d449f154dbcb885834bfdd1a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8874221993003238764}
   m_SourcePrefab: {fileID: 100100000, guid: f7719fd5d449f154dbcb885834bfdd1a, type: 3}
 --- !u!224 &3481713889386654622 stripped
 RectTransform:
@@ -3397,6 +3400,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!114 &5925145469917154590 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1184155572337487916, guid: f7719fd5d449f154dbcb885834bfdd1a, type: 3}
+  m_PrefabInstance: {fileID: 4779637869508885810}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7083840891625296499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &7083840891625296499 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2313289536565849921, guid: f7719fd5d449f154dbcb885834bfdd1a, type: 3}
@@ -3417,6 +3431,19 @@ MonoBehaviour:
   m_EffectColor: {r: 1, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 10, y: 10}
   m_UseGraphicAlpha: 1
+--- !u!114 &8874221993003238764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7083840891625296499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b07a62b3b8f1a4c8140c79f18bb992, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI_ClearData
+  button: {fileID: 5925145469917154590}
 --- !u!1001 &7472784964341133174
 PrefabInstance:
   m_ObjectHideFlags: 0

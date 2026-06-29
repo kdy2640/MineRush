@@ -16,17 +16,26 @@ public class NodeUpgradeEffect : MonoBehaviour
 
     [Header("효과 조절")]
     [SerializeField] private float punchPower = 5.0f;
-    [SerializeField] private int vibratio = 3;
+    [SerializeField] private int vibratio = 3; //vibrato가 맞긴 한데 라틴어로 vibratio가 있으니 그냥 맞다고 칩시다.
     [SerializeField] private float elasticity = 0.25f;
+
+    //회전을 누적하지 않기 위해 필드를 만들고 메서드 내부에서 값을 할당하는 식으로 한다.
+    private Tween punchTween;
 
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
     }
 
-    public void DisplayUpgradeEffect(bool isUpgraded) //매개변수로 bool을 받으면, 이 메서드 하나로 실패/성공 사운드를 둘 다 처리할 수 있을 듯.
-    {       
-        rectTransform.DOPunchRotation(Vector3.forward * punchPower, duration, vibratio, elasticity);
+
+    //업그레이드 시도 시 DOTween 효과를 실행하고, 업그레이드 성공/실패에 따라 다른 효과음을 재생한다.
+    //UpgradeNode 클래스의 TryBuy 메서드 내부에서 호출된다. 매개변수로 bool을 받아 성공/실패 시의 효과를 몰아놓을 수 있다.
+    public void DisplayUpgradeEffect(bool isUpgraded)
+    {
+        punchTween?.Kill(); //punchTween을 끄고
+        rectTransform.localRotation = Quaternion.identity; //rotation 값을 원래대로 돌린다.
+
+        punchTween = rectTransform.DOPunchRotation(Vector3.forward * punchPower, duration, vibratio, elasticity);
 
         if(isUpgraded)
         {
@@ -36,6 +45,5 @@ public class NodeUpgradeEffect : MonoBehaviour
         {
             //GameManager.Instance.AudioManager.PlaySFX(SFXType.UpgradeFail);
         }
-
     }
 }

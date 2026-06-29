@@ -67,6 +67,8 @@ public class MainMenuUI : MonoBehaviour
 
         exitButton.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
 
+        GameManager.Instance.AudioManager.PlayBGM(BGMType.Titie);
+
     }
     private void OnClickStart()
     {

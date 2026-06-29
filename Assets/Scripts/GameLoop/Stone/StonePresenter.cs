@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ public class StonePresenter : MonoBehaviour
     [SerializeField] private Ease spawnEase = Ease.OutBack;
     [SerializeField] private ParticleSystem breakParticle;
 
-
+    private Action OnBreakRouineEnd;
 
     private Tween currentTween; 
     private Tween spawnTween;
@@ -22,14 +23,16 @@ public class StonePresenter : MonoBehaviour
     private void Awake()
     {
         defaultScale = transform.localScale;
-        DeathSequenceStarted = false;
         CreateTweens();
+    }
+    public void Initialie()
+    { 
+        DeathSequenceStarted = false;
     }
 
     private void OnDestroy()
     {
-        currentTween?.Kill();
-
+        currentTween?.Kill(); 
         spawnTween?.Kill();
         hitSequence?.Kill();
         breakSequence?.Kill();
@@ -110,6 +113,8 @@ public class StonePresenter : MonoBehaviour
 
         if (currentTween == breakSequence)
             currentTween = null;
+
+        OnBreakRouineEnd?.Invoke();
     }
 
     public void StopCurrentTween()
@@ -121,5 +126,15 @@ public class StonePresenter : MonoBehaviour
         currentTween.Rewind();
 
         currentTween = null;
+    }
+
+    public void SubscribeBreakRoutineEnd(Action ev)
+    {
+        OnBreakRouineEnd += ev;
+    }
+
+    public void UnSubscribeBreakRoutineEnd(Action ev)
+    { 
+        OnBreakRouineEnd -= ev;
     }
 }

@@ -6,7 +6,7 @@ public class OrePresentor : Poolable
 {
     [SerializeField] private SpriteRenderer solidOreRenderer;
 
-    [Header("Random Adjust")]
+    [Header("Random Adjust")] 
     [SerializeField] private float randomRotationRange = 25f;
     [SerializeField] private float randomScaleRange = 0.2f;
 
@@ -101,6 +101,7 @@ public class OrePresentor : Poolable
         StopCurrentTween();
 
         solidOreRenderer.gameObject.SetActive(true);
+
 
         currentSequence = DOTween.Sequence();
 

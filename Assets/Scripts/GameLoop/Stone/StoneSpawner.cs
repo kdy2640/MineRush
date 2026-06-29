@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class StoneSpawner : MonoBehaviour
 {
-    [SerializeField] private float lineSpawnDelay = 0.08f;
-    [SerializeField] private StoneActor stoneActorPrefab;
+    [SerializeField] private float lineSpawnDelay = 0.08f; 
+    [SerializeField] private StonePooler pooler;
     
     public static readonly int GRID_MAX_SIZE = 16;
     public static readonly int GRID_RESOLUTION_MULTIPLIER = 2;
@@ -96,8 +96,9 @@ public class StoneSpawner : MonoBehaviour
     {
         Vector3 worldPos = GridCalculator.GridToWorld(gridPos);
 
-        StoneActor stone = Instantiate(stoneActorPrefab, worldPos, Quaternion.identity);
-        stone.SetData(data, gridPos);
+        StoneActor stone = pooler.Get(new StonePoolArgs(data, gridPos));
+        stone.transform.position = worldPos;
+
         stone.gameObject.SetActive(isImmediate);
         if(isImmediate)
         {
@@ -105,7 +106,7 @@ public class StoneSpawner : MonoBehaviour
         }
 
         aliveStones[gridPos] = stone;
-        stone.OnDead += HandleStoneDead;
+        stone.SubscribeReturnListener(HandleStoneDead); 
     }
 
     private StoneDataSO GetStoneDataSO()
@@ -129,10 +130,14 @@ public class StoneSpawner : MonoBehaviour
 
     } 
 
-    private void HandleStoneDead(StoneActor stone)
+    private void HandleStoneDead(Poolable stone)
     {
-        stone.OnDead -= HandleStoneDead;
-        aliveStones.Remove(stone.GridPos); 
+        if(stone is StoneActor)
+        {
+            StoneActor stoneActor = stone as StoneActor;
+            stoneActor.UnSubscribeReturnListener(HandleStoneDead);
+            aliveStones.Remove(stoneActor.GridPos);
+        }
     }
 
     public bool GetRandomStonePosition(out Vector2Int position)

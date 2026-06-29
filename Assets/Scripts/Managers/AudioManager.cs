@@ -55,8 +55,7 @@ public class AudioManager : MonoBehaviour
     private float sfxVolume = 1.0f;
     protected void Awake()
     {  
-        CreateAudioSources();
-
+        CreateAudioSources(); 
         InitializeDictionary();
     }
    //AudioSource가 없을경우 자동으로 만들어주는 녀석

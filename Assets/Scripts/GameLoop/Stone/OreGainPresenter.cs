@@ -10,6 +10,7 @@ public class OreGainPresenter : MonoBehaviour
     [SerializeField] OrePooler pooler;
     [SerializeField] List<GameObject> OreDummyTarget = new();
     [SerializeField] float SpawnDelay = 0.12f;
+    [SerializeField] float MoveDelay = 0.3f;
 
     private List<int> nowAliveOre = new();
     private void Awake()
@@ -55,6 +56,8 @@ public class OreGainPresenter : MonoBehaviour
             targetPoint = OreDummyTarget[(int)nowType].transform.position;
         }
 
+
+        yield return new WaitForSeconds(MoveDelay * Random.value);
 
         // 3. 빨아들이듯 날아가기 // OrePresenter
         yield return presenter.MoveToTarget(targetPoint);

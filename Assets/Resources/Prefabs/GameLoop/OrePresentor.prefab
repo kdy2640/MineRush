@@ -55,7 +55,7 @@ MonoBehaviour:
   popupStartScale: 0.05
   popupEndScale: 0.15
   popupStayDuration: 0.15
-  moveDuration: 0.15
+  moveDuration: 0.2
   moveEndScale: 0.1
 --- !u!1 &6794245691983256267
 GameObject:

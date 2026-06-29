@@ -59,11 +59,11 @@ public class AudioManager : MonoBehaviour
     private float bgmVolume = 1.0f;
     private float sfxVolume = 1.0f;
     protected void Awake()
-    {  
+    {   
         CreateAudioSources();
         // 각 효과음의 마지막 재생 시간을 저장하는 Dictionary 생성
-        lastPlayTimes = new Dictionary<SFXType, float>();
-
+        lastPlayTimes = new Dictionary<SFXType, float>(); 
+        
         InitializeDictionary();
     }
    //AudioSource가 없을경우 자동으로 만들어주는 녀석

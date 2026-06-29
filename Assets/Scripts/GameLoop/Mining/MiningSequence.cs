@@ -98,10 +98,14 @@ public class MiningSequence : MonoBehaviour
     } 
     private IEnumerator StoneHitSequence(StoneActor stone)
     {
-        // 3. 돌 피격 반응 연출
-        yield return stone.Presenter.PlayHitReactionRoutine();
+        if(!stone.HP.IsDead)
+        { 
+            // 3. 돌 피격 반응 연출
+            yield return stone.Presenter.PlayHitReactionRoutine();
 
-        stone.CheckCrack();
+            stone.CheckCrack();
+            yield return null;
+        }
 
         // 4. 진행해야하는지 확인
         if (!stone.TryStartDeathSequence())

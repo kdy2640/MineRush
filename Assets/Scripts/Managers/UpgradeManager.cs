@@ -236,5 +236,7 @@ public class UpgradeManager : MonoBehaviour
     public void ResetUpgradeSaveData()
     {
         upgradeStates.Clear();
+        RecalculateRuntimeStat();
+        ApplyLoadedSkillLevels();
     }
 }

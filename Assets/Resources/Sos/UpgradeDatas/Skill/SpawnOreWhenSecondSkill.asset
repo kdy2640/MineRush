@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f17ab4c7a91bd145af47ff207404d92, type: 3}
   m_Name: SpawnOreWhenSecondSkill
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
-  id: 
-  displayName: 
-  displayIcon: {fileID: 0}
-  baseOreAmounts: []
-  amountMultiplier: 1.2
-  maxLevel: 1
+  id: 'SpawnOreWhenSecondSkill '
+  displayName: "\uAE30\uB2E4\uB824\uC11C \uAD11\uC11D \uC0DD\uC131 "
+  displayIcon: {fileID: -8741835296272452696, guid: 49682c8fe32b1c54ebff30232d065444, type: 3}
+  baseOreAmounts:
+  - oreType: 1
+    amount: 200
+  amountMultiplier: 1.5
+  maxLevel: 3
   statModifiers: []
-  skill: {fileID: 0}
+  skill: {fileID: -6019913264876187738, guid: ba40fdfd0b013904dacbc7aee93ae80e, type: 3}
   levelBasedCosts: []
   levelBasedRewards: []

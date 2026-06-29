@@ -15,6 +15,26 @@ public class UpgradeState
 
     public List<OreAmount> GetCurrentCost()
     {
+        if (data.levelBasedCosts != null && data.levelBasedCosts.Count > 0)
+            return GetLevelBasedCost();
         return data.GetCosts(level);
+    }
+    private List<OreAmount> GetLevelBasedCost()
+    {
+        List<OreAmount> costs = new();
+
+        foreach (LevelBasedOreCost cost in data.levelBasedCosts)
+        {
+            if (level < cost.startLevel)
+                continue;
+
+            int effectiveLevel = level - cost.startLevel;
+            float calculatedAmount = cost.baseAmount * Mathf.Pow(cost.amountMultiplier, effectiveLevel);
+            int finalAmount = Mathf.RoundToInt(calculatedAmount);
+
+            costs.Add(new OreAmount(cost.oreType, finalAmount));
+        }
+
+        return costs;
     }
 }

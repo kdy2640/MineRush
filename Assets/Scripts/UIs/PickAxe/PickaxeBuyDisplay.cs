@@ -24,9 +24,12 @@ public class PickaxeBuyDisplay : MonoBehaviour
 
     [Header("구매 완료 연출")]
     [SerializeField] private Image pickaxeIconImg;
+    [SerializeField] private RectTransform pickaxeIconRect;
+    [SerializeField] private Image pickaxeIconGlowRayImg;
     [SerializeField] private float extraScale = 15f;
-    [SerializeField] private float duration = 0.5f;
     [SerializeField] private UnityEvent onDisplayComplete;
+    private Vector3 originalScale;
+    private Sequence buySequence;
 
 
     //아래의 displayBuying 메서드를 사용할 다른 스크립트에서 구매한 곡괭이 이미지를 전달하기 위한 프로퍼티.
@@ -40,13 +43,10 @@ public class PickaxeBuyDisplay : MonoBehaviour
     [SerializeField] private GameObject holdingMouseUI;
     [SerializeField] private Image holdingMouseFillImage;
 
-    private Vector3 originalScale;
-    private RectTransform pickaxeIconRect;
-    private Sequence buySequence;
+    
 
     private void Awake()
     {
-        pickaxeIconRect = pickaxeIconImg.rectTransform;
         originalScale = pickaxeIconRect.localScale;
 
         SetOriginal();
@@ -71,34 +71,34 @@ public class PickaxeBuyDisplay : MonoBehaviour
     } // 전달받은 곡괭이 데이터의 아이콘을 구매 완료 연출 이미지에 세팅한다.
 
 
-    public void DisplayBuying() //이 메서드를 원하는 상황에 원하는 오브젝트에 붙여 호출하기만 하면 될 것 같은데.
-    {
-        //이 메서드를 외부에서 호출하는 녀석이 있다면, 그 녀석이 Sprite pickaxeSprite로 매개변수를 전달하기만 하면 되겠지.
-
-        
-
-        //image.sprite = pickaxeSprite;
-
-        Sequence sequence = DOTween.Sequence();
-
-        //레퍼런스 게임과 같이 완전히 작아진 상태에서 커지는 방식으로 만들 거라면 From을 써야 한다.
-        sequence.Append(pickaxeIconRect.DOScale(originalScale, duration).From(Vector3.zero).SetEase(Ease.OutBack));
-
-        sequence.Append(pickaxeIconRect.DOScale(originalScale * extraScale, duration).SetEase(Ease.OutQuad));
-
-        sequence.Join(pickaxeIconImg.DOFade(0.0f, duration));
-
-        //연출이 전부 끝난 후 스스로를 꺼버리게?
-
-        // enabled = false;
- 
-        // 손유민 : 연출이 끝난 후 끄게 하려면 시퀀스의 콜백을 이용하시면 됩니다.
-        sequence.OnComplete(() =>
-        {
-            gameObject.SetActive(false);
-            onDisplayComplete?.Invoke();
-        });
-    }
+    // public void DisplayBuying() //이 메서드를 원하는 상황에 원하는 오브젝트에 붙여 호출하기만 하면 될 것 같은데.
+    // {
+    //     //이 메서드를 외부에서 호출하는 녀석이 있다면, 그 녀석이 Sprite pickaxeSprite로 매개변수를 전달하기만 하면 되겠지.
+    //
+    //     
+    //
+    //     //image.sprite = pickaxeSprite;
+    //
+    //     Sequence sequence = DOTween.Sequence();
+    //
+    //     //레퍼런스 게임과 같이 완전히 작아진 상태에서 커지는 방식으로 만들 거라면 From을 써야 한다.
+    //     sequence.Append(pickaxeIconRect.DOScale(originalScale, duration).From(Vector3.zero).SetEase(Ease.OutBack));
+    //
+    //     sequence.Append(pickaxeIconRect.DOScale(originalScale * extraScale, duration).SetEase(Ease.OutQuad));
+    //
+    //     sequence.Join(pickaxeIconImg.DOFade(0.0f, duration));
+    //
+    //     //연출이 전부 끝난 후 스스로를 꺼버리게?
+    //
+    //     // enabled = false;
+    //
+    //     // 손유민 : 연출이 끝난 후 끄게 하려면 시퀀스의 콜백을 이용하시면 됩니다.
+    //     sequence.OnComplete(() =>
+    //     {
+    //         gameObject.SetActive(false);
+    //         onDisplayComplete?.Invoke();
+    //     });
+    // }
 
     public void SetOriginal()
     {
@@ -108,9 +108,11 @@ public class PickaxeBuyDisplay : MonoBehaviour
 
         pickaxeIconRect.localScale = originalScale;
 
-        Color color = pickaxeIconImg.color;
-        color.a = 1f;
-        pickaxeIconImg.color = color;
+        pickaxeIconGlowRayImg.GetComponent<RectTransform>().localScale = originalScale;
+        Color tempColor = pickaxeIconGlowRayImg.color;
+        pickaxeIconGlowRayImg.color = new Color(tempColor.r, tempColor.g, tempColor.b, 0f);
+        tempColor = pickaxeIconImg.color;
+        pickaxeIconImg.color = new Color(tempColor.r, tempColor.g, tempColor.b, 1f);
     } // 연출에 사용된 크기와 알파값을 초기 상태로 되돌린다.
 
     public void PlayBuyCompleteVisual(PickaxesDataSO data)
@@ -122,23 +124,47 @@ public class PickaxeBuyDisplay : MonoBehaviour
         SetOriginal();
         
         buySequence = DOTween.Sequence();
+        Sequence pickaxeIconSeq = DOTween.Sequence();
         
-        buySequence.Append(pickaxeIconRect
-            .DOScale(originalScale, duration)
+        pickaxeIconSeq.Append(pickaxeIconRect
+            .DOScale(originalScale, 0.7f)
             .From(Vector3.zero)
             .SetEase(Ease.OutBack));
+        //아이콘 확대
         
-        buySequence.Append(pickaxeIconRect
-            .DOScale(originalScale * extraScale, duration)
-            .SetEase(Ease.OutQuad));
-        buySequence.Join(pickaxeIconImg
-            .DOFade(0f, duration));
-        
-        buySequence.OnComplete(() =>
+        pickaxeIconSeq.Append(pickaxeIconRect
+            .DOScale(originalScale * extraScale, 0.7f)
+            .SetEase(Ease.OutQuad).SetDelay(1.3f));
+        pickaxeIconSeq.Join(pickaxeIconImg
+            .DOFade(0f, 0.7f)
+            .From(1f));
+        //아이콘 확대 및 아이콘 페이드
+        pickaxeIconSeq.OnComplete(() =>
         {
             pickaxeIconRect.gameObject.SetActive(false);
             onDisplayComplete?.Invoke();
         });
+
+        
+        
+        Sequence glowRaySeq = DOTween.Sequence();
+        glowRaySeq.Append(
+            pickaxeIconGlowRayImg
+                .DOFade(1f, 0.57f)
+                .From(0f)
+                .SetEase(Ease.InQuad));
+        glowRaySeq.Join(
+                pickaxeIconGlowRayImg.GetComponent<RectTransform>()
+                    .DOScale(originalScale, 0.57f)
+                    .From(Vector3.zero)
+                    .SetEase(Ease.InQuad));
+        
+        glowRaySeq.Append(pickaxeIconGlowRayImg
+            .DOFade(0f, 2f)
+            .SetEase(Ease.InQuad));
+        
+        buySequence.Append(pickaxeIconSeq);
+        buySequence.Join(glowRaySeq);
     }
 
 

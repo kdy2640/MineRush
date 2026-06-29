@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -131,14 +132,16 @@ public class PickaxeBuy : MonoBehaviour
 
     private void ShowBuyPanel()
     {
-        pickaxeBuyPanelCanvasGroup.alpha = 1f;
+        pickaxeBuyPanelCanvasGroup.DOKill();
+        pickaxeBuyPanelCanvasGroup.DOFade(1f, 0.3f);
         pickaxeBuyPanelCanvasGroup.blocksRaycasts = true;
         pickaxeBuyPanelCanvasGroup.interactable = true;
     }
 
     private void HideBuyPanel()
     {
-        pickaxeBuyPanelCanvasGroup.alpha = 0f;
+        pickaxeBuyPanelCanvasGroup.DOKill();
+        pickaxeBuyPanelCanvasGroup.DOFade(0f, 0.3f);
         pickaxeBuyPanelCanvasGroup.blocksRaycasts = false;
         pickaxeBuyPanelCanvasGroup.interactable = false;
     }

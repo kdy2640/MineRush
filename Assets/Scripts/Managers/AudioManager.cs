@@ -28,7 +28,11 @@ public enum SFXType
     LoadingOut,
     LaserBeam,
     Explosion,
-    PickaxeEnhancing
+    PickaxeEnhancing,
+    SessionStart,
+    SessionEnd,
+    ResultPanelOre
+
 }
 public class AudioManager : MonoBehaviour
 {
@@ -36,7 +40,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource bgmSource;
     [SerializeField] private int sfxSourceCount = 10;
     [SerializeField] private AudioSource[] sfxSources;
-    private int currentSFXIndex = 0;
+
+    // AudioSource를 순환 관리하기 위한 Queue
+    private Queue<AudioSource> sfxQueue;
 
     [Header("BGM List")]
     [SerializeField] private BGMClipData[] bgmClips;//인스펙터에서 등록할 BGM
@@ -59,11 +65,13 @@ public class AudioManager : MonoBehaviour
     private float bgmVolume = 1.0f;
     private float sfxVolume = 1.0f;
     protected void Awake()
-    {   
+    {  
+        sfxQueue = new Queue<AudioSource>();
+
         CreateAudioSources();
         // 각 효과음의 마지막 재생 시간을 저장하는 Dictionary 생성
-        lastPlayTimes = new Dictionary<SFXType, float>(); 
-        
+        lastPlayTimes = new Dictionary<SFXType, float>();
+
         InitializeDictionary();
     }
    //AudioSource가 없을경우 자동으로 만들어주는 녀석
@@ -94,27 +102,37 @@ public class AudioManager : MonoBehaviour
                 source.loop = false;
 
                 sfxSources[i] = source;
+
+                sfxQueue.Enqueue(source);
             }
         }
     }
     private AudioSource GetSFXSource()
     {
-        // 먼저 비어있는 AudioSource를 찾는다.
-        for (int i = 0; i < sfxSources.Length; i++)
+        int count = sfxQueue.Count;
+
+        // Queue에 있는 AudioSource를 모두 검사
+        for (int i = 0; i < count; i++)
         {
-            if (!sfxSources[i].isPlaying)
-                return sfxSources[i];
+            AudioSource source = sfxQueue.Dequeue();
+
+            // 다시 Queue의 뒤에 넣는다.
+            sfxQueue.Enqueue(source);
+
+            // 사용 가능하면 즉시 반환
+            if (!source.isPlaying)
+            {
+                return source;
+            }
         }
 
-        // 모두 재생 중이면 순환 사용
-        AudioSource source = sfxSources[currentSFXIndex];
+        // 모두 사용 중이면
+        // 가장 오래된 AudioSource 하나를 재사용
+        AudioSource oldest = sfxQueue.Dequeue();
 
-        currentSFXIndex++;
+        sfxQueue.Enqueue(oldest);
 
-        if (currentSFXIndex >= sfxSources.Length)
-            currentSFXIndex = 0;
-
-        return source;
+        return oldest;
     }
     //배열로 등록한 오디 데이터를 딕셔너리에 저장하는 녀석
     private void InitializeDictionary()

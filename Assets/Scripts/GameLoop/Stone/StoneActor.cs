@@ -8,9 +8,20 @@ public static class StoneSortingOrder
     public const int Step = 10;
 
 }
-    public class StoneActor : MonoBehaviour
+
+public class StonePoolArgs : PoolArgs
 {
-    public event Action<StoneActor> OnDead; 
+    public StoneDataSO dataSO;
+    public Vector2Int gridPos;
+
+    public StonePoolArgs(StoneDataSO dataSO, Vector2Int gridPos)
+    {
+        this.dataSO = dataSO;
+        this.gridPos = gridPos;
+    }
+}
+    public class StoneActor : Poolable
+{ 
     [SerializeField] private StoneDataSO dataSo;
     [SerializeField] private SpriteRenderer solidRenderer;
     [SerializeField] private float ScaleNoise = 0.1f;
@@ -18,24 +29,41 @@ public static class StoneSortingOrder
 
     private bool nowCracked = false;
     private GameManager manager;
-    private HPHandler hpHandler; 
+    private HPHandler hpHandler;
+    private StonePresenter presenter;
 
     private Vector2Int gridPos;
     public Vector2Int GridPos => gridPos;
     public StoneDataSO DataSO => dataSo;
+    public HPHandler HP => hpHandler;
+    public StonePresenter Presenter => presenter;
 
     private void Awake()
     {
         manager = GameManager.Instance;
-        hpHandler = GetComponent<HPHandler>(); 
-        hpHandler.SubscribeDying(Die);
+        presenter = GetComponent<StonePresenter>();
+        hpHandler = GetComponent<HPHandler>();  
         hpHandler.SubscribeHPUpdate(Mine);
+        presenter.SubscribeBreakRoutineEnd(Die);
     }
     private void OnDestroy()
     {
         hpHandler.UnSubscribeHPUpdate(Mine);
-        hpHandler.UnSubscribeDying(Die); 
+        presenter.UnSubscribeBreakRoutineEnd(Die);
     }
+
+    public bool TryStartDeathSequence()
+    {
+        if (!HP.IsDead)
+            return false;
+
+        if (presenter.DeathSequenceStarted)
+            return false;
+
+        presenter.DeathSequenceStarted = true;
+        return true;
+    }
+
     public void SetData(StoneDataSO data, Vector2Int gridPos)
     {
         this.dataSo = data;
@@ -82,8 +110,22 @@ public static class StoneSortingOrder
     private void Die()
     { 
         manager.GameLoop.Events.Invoke(GameLoopEventType.StoneDestroyed);
-        OnDead?.Invoke(this);
+        RequestReturn();
     }
 
+    public override void Initialize(PoolArgs obj)
+    {
+        if(obj is StonePoolArgs)
+        {
+            StonePoolArgs args = obj as StonePoolArgs;
+            SetData(args.dataSO, args.gridPos);
+            presenter.Initialie();
+        } 
+    }
 
+    public override void ResetState()
+    { 
+
+    }
+     
 }

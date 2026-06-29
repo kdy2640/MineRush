@@ -16,8 +16,10 @@ MonoBehaviour:
   displayName: "\uAE08 \uACE1\uAC31\uC774 \uD574\uAE08"
   displayIcon: {fileID: 0}
   baseOreAmounts:
-  - oreType: 0
-    amount: 50
+  - oreType: 1
+    amount: 1000
+  - oreType: 2
+    amount: 1500
   amountMultiplier: 1.2
   maxLevel: 1
   statModifiers:

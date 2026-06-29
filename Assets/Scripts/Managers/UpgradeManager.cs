@@ -114,6 +114,7 @@ public class UpgradeManager : MonoBehaviour
         {
             GameManager.Instance.SkillManager.SetSkillLevel(state.data.skill.id, state.level);
         }
+        GameManager.Instance.Save.SaveGame();
 
         return true;
     }
@@ -147,5 +148,95 @@ public class UpgradeManager : MonoBehaviour
             return false;
         }
         return upgradeStateMap.ContainsKey(data.id);
+    }
+    
+    
+    public List<UpgradeSaveData> CreateUpgradeSaveData()
+    {
+        List<UpgradeSaveData> saveData = new();
+
+        foreach (UpgradeState state in upgradeStates)
+        {
+            if (state == null)
+                continue;
+
+            if (state.data == null)
+                continue;
+
+            if (string.IsNullOrEmpty(state.data.id))
+                continue;
+
+            saveData.Add(new UpgradeSaveData(state.data.id, state.level));
+        }
+
+        return saveData;
+    }// 현재 upgradeStates에서 저장할 데이터만 뽑아낸다.
+    // SO 자체는 저장하지 않고 UpgradeData의 id와 level만 저장한다.
+
+    public void LoadUpgradeSaveData(List<UpgradeSaveData> saveData)
+    {
+        upgradeStates.Clear();
+        upgradeStateMap.Clear();
+
+        if (saveData != null)
+        {
+            foreach (UpgradeSaveData savedState in saveData)
+            {
+                if (savedState == null)
+                    continue;
+
+                if (string.IsNullOrEmpty(savedState.id))
+                    continue;
+
+                UpgradeData data = UpgradeDataDB.GetData(savedState.id);
+
+                if (data == null)
+                    continue;
+
+                UpgradeState state = new()
+                {
+                    data = data,
+                    level = Mathf.Clamp(savedState.level, 0, data.maxLevel)
+                };
+
+                upgradeStates.Add(state);
+                upgradeStateMap.Add(data.id, state);
+            }
+        }
+
+        RecalculateRuntimeStat();
+        ApplyLoadedSkillLevels();
+    }// 저장된 id로 UpgradeData를 다시 찾고 UpgradeState를 복구한다.
+    // 복구 후 런타임 스탯과 스킬 레벨을 다시 반영한다.
+
+    private void ApplyLoadedSkillLevels()
+    {
+        if (GameManager.Instance == null)
+            return;
+
+        if (GameManager.Instance.SkillManager == null)
+            return;
+
+        foreach (UpgradeState state in upgradeStates)
+        {
+            if (state == null)
+                continue;
+
+            if (state.data == null)
+                continue;
+
+            if (state.data.skill == null)
+                continue;
+
+            GameManager.Instance.SkillManager.RegisterSkill(state.data.skill);
+            GameManager.Instance.SkillManager.SetSkillLevel(state.data.skill.id, state.level);
+        }
+    }// 로드된 업그레이드 중 스킬이 연결된 것들의 레벨을 SkillManager에 반영한다.
+    // 스킬을 따로 저장하지 않고 업그레이드 레벨을 기준으로 복구한다.
+    public void ResetUpgradeSaveData()
+    {
+        upgradeStates.Clear();
+        RecalculateRuntimeStat();
+        ApplyLoadedSkillLevels();
     }
 }

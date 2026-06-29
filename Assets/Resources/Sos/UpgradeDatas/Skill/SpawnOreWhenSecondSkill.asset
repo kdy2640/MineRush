@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f17ab4c7a91bd145af47ff207404d92, type: 3}
+  m_Name: SpawnOreWhenSecondSkill
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
+  id: 'SpawnOreWhenSecondSkill '
+  displayName: "\uAE30\uB2E4\uB824\uC11C \uAD11\uC11D \uC0DD\uC131 "
+  displayIcon: {fileID: -8741835296272452696, guid: 49682c8fe32b1c54ebff30232d065444, type: 3}
+  baseOreAmounts:
+  - oreType: 1
+    amount: 200
+  amountMultiplier: 1.5
+  maxLevel: 3
+  statModifiers: []
+  skill: {fileID: -6019913264876187738, guid: ba40fdfd0b013904dacbc7aee93ae80e, type: 3}
+  levelBasedCosts: []
+  levelBasedRewards: []

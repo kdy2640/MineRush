@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f17ab4c7a91bd145af47ff207404d92, type: 3}
-  m_Name: SpawnOreWhenMinedSkill
+  m_Name: SpawnBombWhenMinedSkill
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
-  id: 'SpawnOreWhenMinedSkill '
-  displayName: "\uCC44\uAD74 \uC2DC \uAD11\uC11D \uC0DD\uC131 "
-  displayIcon: {fileID: 5757998383619074860, guid: 90165c27734564149abadabbad61f3b5, type: 3}
+  id: 'SpawnBombWhenMinedSkill '
+  displayName: "\uCC44\uAD74 \uC2DC \uD3ED\uD0C4 \uC0DD\uC131 "
+  displayIcon: {fileID: 3638378531137523996, guid: 2499268fc846e4845a0474a292a75c31, type: 3}
   baseOreAmounts:
-  - oreType: 0
-    amount: 150
+  - oreType: 2
+    amount: 300
   amountMultiplier: 1.5
-  maxLevel: 10
+  maxLevel: 3
   statModifiers: []
-  skill: {fileID: 4916942327163071954, guid: bca72ccedcab5324e999694a773ec7c4, type: 3}
+  skill: {fileID: -2104536031578270171, guid: 404fa6a77cab6a94daad06504721adef, type: 3}
   levelBasedCosts: []
   levelBasedRewards: []

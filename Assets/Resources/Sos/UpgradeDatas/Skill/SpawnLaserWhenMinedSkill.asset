@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f17ab4c7a91bd145af47ff207404d92, type: 3}
-  m_Name: SpawnOreWhenMinedSkill
+  m_Name: SpawnLaserWhenMinedSkill
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
-  id: 'SpawnOreWhenMinedSkill '
-  displayName: "\uCC44\uAD74 \uC2DC \uAD11\uC11D \uC0DD\uC131 "
-  displayIcon: {fileID: 5757998383619074860, guid: 90165c27734564149abadabbad61f3b5, type: 3}
+  id: 'SpawnLaserWhenMinedSkill '
+  displayName: "\uCC44\uAD74 \uC2DC \uB808\uC774\uC800 \uC0DD\uC131 "
+  displayIcon: {fileID: 5078450195151033454, guid: ed148e25a50f4f04ea544d645f71b86f, type: 3}
   baseOreAmounts:
-  - oreType: 0
+  - oreType: 1
     amount: 150
   amountMultiplier: 1.5
-  maxLevel: 10
+  maxLevel: 3
   statModifiers: []
-  skill: {fileID: 4916942327163071954, guid: bca72ccedcab5324e999694a773ec7c4, type: 3}
+  skill: {fileID: -860146822385286539, guid: 23651ba0a263b3647afb6b45309bbb6b, type: 3}
   levelBasedCosts: []
   levelBasedRewards: []

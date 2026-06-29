@@ -15,7 +15,7 @@ public class ResultOreItem : MonoBehaviour
     [SerializeField] private Sprite goldSprite;
     [SerializeField] private Sprite diamondSprite;
     public void SetData(OreAmount oreAmount)
-        {
+    {
             oreNameText.text = oreAmount.oreType.ToString();
             amountText.text = $"x{oreAmount.amount}";
 
@@ -32,7 +32,11 @@ public class ResultOreItem : MonoBehaviour
 
             case OreType.Diamond:
                 oreIcon.color = Color.cyan; break;
-        }
-
+            }
+    }
+    //수량 텍스트만 변경
+    public void SetAmount(int amount)
+    {
+        amountText.text = $"X{amount}";
     }
     }

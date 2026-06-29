@@ -16,6 +16,8 @@ public class ResultUI : MonoBehaviour
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private RectTransform panel;
 
+    //1차로 수집된 oreItem 수량 저장
+    private List<ResultOreItem> oreItems = new List<ResultOreItem>();
     private bool isInitialized;
 
     private void Awake()
@@ -61,6 +63,7 @@ public class ResultUI : MonoBehaviour
         {
             CreateItem(oreAmount);
         }
+        PlayBonusAnimation(oreAmounts);
     }
 
     private void CreateItem(OreAmount oreAmount)
@@ -76,6 +79,8 @@ public class ResultUI : MonoBehaviour
         }
 
         oreItem.SetData(oreAmount);
+
+        oreItems.Add(oreItem);//수량 5배 변경 전 저장
     }
 
     private void Clear()
@@ -90,6 +95,7 @@ public class ResultUI : MonoBehaviour
 
             Destroy(child.gameObject);
         }
+            oreItems.Clear();//1차 광석수량 데이터(List) 삭제
     }
     public void Show()
     {
@@ -134,5 +140,40 @@ public class ResultUI : MonoBehaviour
 
         seq.Append(rect.DOScale(1.0f, 0.12f));
     }
+    private void PlayBonusAnimation(List<OreAmount> oreAmounts)
+    {
+        // 첫 번째 변경 전까지 대기 시간
+        float startDelay = 0.6f;
 
+        // 각 아이템 사이의 변경 간격
+        float interval = 0.15f;
+
+        for (int i = 0; i < oreItems.Count; i++)
+        {
+            if (i >= oreAmounts.Count) break;
+
+            ResultOreItem item = oreItems[i];
+            OreAmount data = oreAmounts[i];
+
+            // 캡처용 지역 변수
+            int bonusAmount = data.amount * 5;
+
+            // i번째 아이템은 조금씩 늦게 실행
+            DOVirtual.DelayedCall(startDelay + interval * i, () =>
+            {
+                // 숫자 변경
+                item.SetAmount(bonusAmount);
+
+                // 혹시 이전 Tween이 있다면 제거
+                item.transform.DOKill();
+
+                // 팝업 애니메이션
+                Sequence seq = DOTween.Sequence();
+
+                seq.Append(item.transform.DOScale(1.2f, 0.12f));
+
+                seq.Append(item.transform.DOScale(1f, 0.12f));
+            });
+        }
+    }
 }

@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!224 &486196727 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8638587418078543259, guid: 5b5d0817d5196aa498478ec01e6b86c9, type: 3}
+  m_PrefabInstance: {fileID: 694152041040660213}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &686130207
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -183,6 +188,10 @@ PrefabInstance:
       propertyPath: sfxSource
       value: 
       objectReference: {fileID: 1263741623}
+    - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
+      propertyPath: sfxSourceCount
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
       propertyPath: sfxClips.Array.size
       value: 14
@@ -367,6 +376,26 @@ PrefabInstance:
       propertyPath: sfxClips.Array.data[13].volume
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
+      propertyPath: sfxClips.Array.data[2].minInterval
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
+      propertyPath: sfxClips.Array.data[3].minInterval
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
+      propertyPath: sfxClips.Array.data[4].minInterval
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
+      propertyPath: sfxClips.Array.data[5].minInterval
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
+      propertyPath: sfxClips.Array.data[6].minInterval
+      value: 0.03
+      objectReference: {fileID: 0}
     - target: {fileID: 9080711514536660056, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
       propertyPath: Loop
       value: 1
@@ -480,6 +509,7 @@ RectTransform:
   m_Children:
   - {fileID: 2075686917}
   - {fileID: 1266327242}
+  - {fileID: 486196727}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1034,7 +1064,7 @@ PrefabInstance:
     - target: {fileID: 6101077023842496904, guid: d042e1215c3d61149927c2d541de4e94, type: 3}
       propertyPath: settingsPopup
       value: 
-      objectReference: {fileID: 817454185}
+      objectReference: {fileID: 0}
     - target: {fileID: 7362565223971332194, guid: d042e1215c3d61149927c2d541de4e94, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

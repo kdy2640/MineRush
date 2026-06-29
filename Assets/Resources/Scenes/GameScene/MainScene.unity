@@ -337,7 +337,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
       propertyPath: sfxClips.Array.data[4].volume
-      value: 0.3
+      value: 0.53
       objectReference: {fileID: 0}
     - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
       propertyPath: sfxClips.Array.data[6].volume
@@ -377,11 +377,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
       propertyPath: sfxClips.Array.data[3].minInterval
-      value: 0.03
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
       propertyPath: sfxClips.Array.data[4].minInterval
-      value: 0.03
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
       propertyPath: sfxClips.Array.data[5].minInterval
@@ -389,7 +389,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
       propertyPath: sfxClips.Array.data[6].minInterval
-      value: 0.03
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 9080711514536660056, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
       propertyPath: Loop

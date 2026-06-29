@@ -666,6 +666,7 @@ MonoBehaviour:
   nextSessionButton: {fileID: 1681181535272677770}
   canvasGroup: {fileID: 4717813904043048064}
   panel: {fileID: 3003534090788794184}
+  rewardMultiplier: 5
 --- !u!114 &3236808987365658107
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -49,13 +49,21 @@ public class AudioManager : MonoBehaviour
     //예 : SFXType.Jump -> Jump 효과음 데이터
     private Dictionary<SFXType, SFXClipData> sfxDictionary;
 
+    // 각 효과음이 마지막으로 재생된 시간을 저장하는 딕셔너리
+    // Key   : 효과음 종류(SFXType)
+    // Value : 마지막 재생 시간(Time.time)
+    private Dictionary<SFXType, float> lastPlayTimes;
+
     private BGMClipData currentBGMData;
     private float masterVolume = 1.0f;
     private float bgmVolume = 1.0f;
     private float sfxVolume = 1.0f;
     protected void Awake()
-    {  
-        CreateAudioSources(); 
+    {   
+        CreateAudioSources();
+        // 각 효과음의 마지막 재생 시간을 저장하는 Dictionary 생성
+        lastPlayTimes = new Dictionary<SFXType, float>(); 
+        
         InitializeDictionary();
     }
    //AudioSource가 없을경우 자동으로 만들어주는 녀석
@@ -114,7 +122,7 @@ public class AudioManager : MonoBehaviour
         bgmDictionary = new Dictionary<BGMType, BGMClipData>();
         sfxDictionary = new Dictionary<SFXType, SFXClipData>();
 
-        for(int i = 0;i<bgmClips.Length;i++)
+        for (int i = 0;i<bgmClips.Length;i++)
         {
             //배열 요소가 비어 있으면
             if (bgmClips[i] == null) continue;
@@ -209,6 +217,16 @@ public class AudioManager : MonoBehaviour
         if (!sfxDictionary.ContainsKey(type)) return;
 
         SFXClipData data = sfxDictionary[type];
+
+        // 마지막 재생 시간이 저장되어 있다면
+        if (lastPlayTimes.TryGetValue(type, out float lastPlayTime))
+        {
+            // 마지막 재생 후 아직 최소 재생 간격이 지나지 않았다면
+            // 이번 재생은 무시한다.
+            if (Time.time - lastPlayTime < data.minInterval) return;
+        }
+        // 이번 재생 시간을 저장한다.
+        lastPlayTimes[type] = Time.time;
 
         AudioSource source = GetSFXSource();
 

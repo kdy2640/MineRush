@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine; 
 
 public class StoneSpawner : MonoBehaviour
 {
     [SerializeField] private float lineSpawnDelay = 0.08f;
     [SerializeField] private StoneActor stoneActorPrefab;
-
-    public readonly int GRID_MAX_SIZE = 16;
-    public readonly int GRID_RESOLUTION_MULTIPLIER = 2;
+    
+    public static readonly int GRID_MAX_SIZE = 16;
+    public static readonly int GRID_RESOLUTION_MULTIPLIER = 2;
+    public static readonly float GRID_RESOLUTION_RATIO = 1f / (float)GRID_RESOLUTION_MULTIPLIER;
 
     public int GRID_SIZE => GRID_MAX_SIZE * GRID_RESOLUTION_MULTIPLIER;
 
@@ -21,7 +23,11 @@ public class StoneSpawner : MonoBehaviour
     { 
         GameManager.Instance.GameLoop.SkillProxy.SubscribeAction(SkillBase.SkillType.SpawnOreWhenMined, RandomSpawnOne);
     }
-     
+    private void OnDestroy()
+    { 
+        GameManager.Instance.GameLoop.SkillProxy.UnSubscribeAction(SkillBase.SkillType.SpawnOreWhenMined, RandomSpawnOne);
+    }
+
     public IEnumerator PrepareRoutine()
     {
         RandomSpawn(GameManager.Instance.Upgrade.GetRuntimeStat().StoneCount, false);
@@ -88,11 +94,15 @@ public class StoneSpawner : MonoBehaviour
 
     private void SpawnStone(StoneDataSO data, Vector2Int gridPos, bool isImmediate)
     {
-        Vector3 worldPos = GridCalculator.GridToWorld(gridPos, (float)1 / (float)GRID_RESOLUTION_MULTIPLIER);
+        Vector3 worldPos = GridCalculator.GridToWorld(gridPos);
 
         StoneActor stone = Instantiate(stoneActorPrefab, worldPos, Quaternion.identity);
         stone.SetData(data, gridPos);
         stone.gameObject.SetActive(isImmediate);
+        if(isImmediate)
+        {
+            stone.Presenter.PlaySpawnTween();
+        }
 
         aliveStones[gridPos] = stone;
         stone.OnDead += HandleStoneDead;
@@ -123,5 +133,15 @@ public class StoneSpawner : MonoBehaviour
     {
         stone.OnDead -= HandleStoneDead;
         aliveStones.Remove(stone.GridPos); 
+    }
+
+    public bool GetRandomStonePosition(out Vector2Int position)
+    {
+        int count = aliveStones.Keys.Count;
+        position = Vector2Int.zero;
+        if (count == 0) return false;
+        int random = Random.Range(0, count);
+        position =  aliveStones.Keys.ToList()[random];
+        return true;
     }
 }

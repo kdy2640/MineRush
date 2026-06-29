@@ -48,7 +48,7 @@ public class GameLoopManager : MonoBehaviour
             EndLoop();
     }
 
-    private void EndLoop()
+    public void EndLoop()
     {
         if (!isRunning) return;
         if (!IsGameLoopScene) return;

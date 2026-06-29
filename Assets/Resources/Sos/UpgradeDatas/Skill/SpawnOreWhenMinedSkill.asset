@@ -15,12 +15,26 @@ MonoBehaviour:
   id: 'SpawnOreWhenMinedSkill '
   displayName: "\uCC44\uAD74 \uC2DC \uAD11\uC11D \uC0DD\uC131 "
   displayIcon: {fileID: 5757998383619074860, guid: 90165c27734564149abadabbad61f3b5, type: 3}
-  baseOreAmounts:
-  - oreType: 0
-    amount: 150
-  amountMultiplier: 1.5
-  maxLevel: 10
+  baseOreAmounts: []
+  amountMultiplier: 0
+  maxLevel: 50
   statModifiers: []
   skill: {fileID: 4916942327163071954, guid: bca72ccedcab5324e999694a773ec7c4, type: 3}
-  levelBasedCosts: []
+  levelBasedCosts:
+  - oreType: 0
+    startLevel: 0
+    baseAmount: 150
+    amountMultiplier: 1.01
+  - oreType: 1
+    startLevel: 10
+    baseAmount: 200
+    amountMultiplier: 1.02
+  - oreType: 2
+    startLevel: 20
+    baseAmount: 300
+    amountMultiplier: 1.03
+  - oreType: 3
+    startLevel: 30
+    baseAmount: 400
+    amountMultiplier: 1.04
   levelBasedRewards: []

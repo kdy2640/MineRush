@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,27 +10,43 @@ public class AutoMiningPanelController : MonoBehaviour
     [SerializeField] private AutoMiner autoMiner;
     [SerializeField] private TMP_Text rewardText;
     [SerializeField] private TMP_Text costText;
+    [SerializeField] private Transform rewardChestTransform;
+    private Tween chestTween;
     
     [SerializeField] private float refreshInterval = 1f;
+    [SerializeField] private float rewardDisplaySeconds = 10f;
+    [SerializeField] private float gaugeInterval = 10f;
+
     private float refreshTimer;
+    private float gaugeTimer;
 
     private bool isPanelFocus;
     [SerializeField] private RectTransform targetRefreshLayoutRoot;
     [SerializeField] private Slider timerSlider;
     
     private bool needRefreshNextFrame;
+
     private void Awake()
     {
         if (autoMiner == null)
             autoMiner = GetComponent<AutoMiner>();
+        chestTween = rewardChestTransform.DOShakeScale(0.35f, 0.45f, 10)
+            .SetAutoKill(false)
+            .Pause()
+            .OnComplete(() =>
+            {
+                rewardChestTransform.localScale = Vector3.one;
+            });
     }
-    private float CalculateRefreshTimerOffset()
+
+    private float CalculateGaugeTimerOffset()
     {
         if (autoMiner.GetLevel() <= 0)
         {
             return 0f;
         }
-        if (refreshInterval <= 0f)
+
+        if (gaugeInterval <= 0f)
             return 0f;
 
         float elapsedSeconds = Mathf.Max(
@@ -37,13 +54,14 @@ public class AutoMiningPanelController : MonoBehaviour
             (float)AutoMiningRuntimeData.GetElapsedClaimTime().TotalSeconds
         );
 
-        return elapsedSeconds % refreshInterval;
+        return elapsedSeconds % gaugeInterval;
     }
 
     private void OnEnable()
     {
         isPanelFocus = true;
-        refreshTimer = CalculateRefreshTimerOffset();
+        refreshTimer = 0f;
+        gaugeTimer = CalculateGaugeTimerOffset();
         needRefreshNextFrame = true;
     }
 
@@ -55,25 +73,37 @@ public class AutoMiningPanelController : MonoBehaviour
     private void Update()
     {
         if(!isPanelFocus) return;
+
         if (needRefreshNextFrame)
         {
             needRefreshNextFrame = false;
-            RefreshRewardText();
-            RefreshCostText();
+            RefreshInfoPanel();
             RefreshSlider();
         }
 
-        if (autoMiner.GetLevel() > 0)
+        if (autoMiner.GetLevel() <= 0)
         {
-            refreshTimer += Time.deltaTime;
-            if (refreshTimer >= refreshInterval)
-            {
-                refreshTimer = 0f;
-
-                RefreshRewardText();
-            }
             RefreshSlider();
+            return;
         }
+
+        refreshTimer += Time.deltaTime;
+        gaugeTimer += Time.deltaTime;
+
+        if (refreshTimer >= refreshInterval)
+        {
+            refreshTimer = 0f;
+            RefreshInfoPanel();
+            PlayAutoMiningSfx();
+        }
+
+        if (gaugeTimer >= gaugeInterval)
+        {
+            gaugeTimer %= gaugeInterval;
+            chestTween.Restart();
+        }
+
+        RefreshSlider();
     }
 
     private string GetAllOreRewardText()
@@ -96,6 +126,7 @@ public class AutoMiningPanelController : MonoBehaviour
 
             int effectiveLevel = currentLevel - reward.startLevel;
             float amountPerSecond = reward.amountPerSecond + reward.amountPerLevel * effectiveLevel;
+            float amountPerDisplaySeconds = amountPerSecond * rewardDisplaySeconds;
 
             int totalAmount = 0;
 
@@ -109,9 +140,10 @@ public class AutoMiningPanelController : MonoBehaviour
             }
 
             string oreIcon = OreTextFormatter.GetTmpTag(reward.oreType);
-            string perSecondText = amountPerSecond.ToString("0.##");
+            string displaySecondsText = rewardDisplaySeconds.ToString("0.##");
+            string perDisplaySecondsText = amountPerDisplaySeconds.ToString("0.##");
 
-            rewardTextLines.Add($"{oreIcon}(1초당 {perSecondText}) : {totalAmount}");
+            rewardTextLines.Add($"{oreIcon}({displaySecondsText}초당 {perDisplaySecondsText}) : {totalAmount}");
         }
 
         if (rewardTextLines.Count <= 0)
@@ -121,6 +153,7 @@ public class AutoMiningPanelController : MonoBehaviour
 
         return string.Join("\n", rewardTextLines);
     }
+
     private void SetRewardText(string value)
     {
         if (rewardText.text == value)
@@ -129,6 +162,13 @@ public class AutoMiningPanelController : MonoBehaviour
         rewardText.text = value;
     } // tmp 자주 호출 될때 성능 하락 방지용.
     //어차피 1초마다 갱신이긴 하지만 그래도 만들어놓음.
+
+    private void RefreshInfoPanel()
+    {
+        RefreshRewardText();
+        RefreshCostText();
+    }
+
     private void RefreshRewardText()
     {
         SetRewardText(GetAllOreRewardText());
@@ -147,8 +187,16 @@ public class AutoMiningPanelController : MonoBehaviour
     private void RefreshSlider()
     {
         if(timerSlider == null) return;
-        timerSlider.value = Mathf.Clamp01(refreshTimer / refreshInterval);
+
+        if (autoMiner.GetLevel() <= 0 || gaugeInterval <= 0f)
+        {
+            timerSlider.value = 0f;
+            return;
+        }
+
+        timerSlider.value = Mathf.Clamp01(gaugeTimer / gaugeInterval);
     }
+
     private void RebuildLayout()
     {
         if (targetRefreshLayoutRoot == null)
@@ -161,9 +209,8 @@ public class AutoMiningPanelController : MonoBehaviour
     public void UpgradeBtnClick()
     {
         if(!autoMiner.TryUpgradeWithClaim()) return;
-        RefreshRewardText();
-        RefreshCostText();
-        refreshTimer = 0f;
+        RefreshInfoPanel();
+        gaugeTimer = 0f;
         RefreshSlider();
     }
 
@@ -171,7 +218,15 @@ public class AutoMiningPanelController : MonoBehaviour
     {
         autoMiner.Claim();
         RefreshRewardText();
-        refreshTimer = 0f;
+        gaugeTimer = 0f;
         RefreshSlider();
+        GameManager.Instance.AudioManager.PlaySFX(SFXType.OreCollect);
+    }
+    private void PlayAutoMiningSfx()
+    {
+        if (autoMiner.GetLevel() <= 0)
+            return;
+
+        GameManager.Instance.AudioManager.PlaySFX(SFXType.MetalHit);
     }
 }

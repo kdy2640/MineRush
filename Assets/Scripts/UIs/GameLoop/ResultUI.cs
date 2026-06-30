@@ -18,6 +18,8 @@ public class ResultUI : MonoBehaviour
 
     //1차로 수집된 oreItem 수량 저장
     private List<ResultOreItem> oreItems = new List<ResultOreItem>();
+    //결과보상 배수
+    [SerializeField]private float rewardMultiplier = 1.0f;
     private bool isInitialized;
 
     private void Awake()
@@ -63,6 +65,7 @@ public class ResultUI : MonoBehaviour
         {
             CreateItem(oreAmount);
         }
+
         PlayBonusAnimation(oreAmounts);
     }
 
@@ -143,37 +146,46 @@ public class ResultUI : MonoBehaviour
     private void PlayBonusAnimation(List<OreAmount> oreAmounts)
     {
         // 첫 번째 변경 전까지 대기 시간
-        float startDelay = 0.6f;
+        float startDelay = 0.8f;
 
         // 각 아이템 사이의 변경 간격
-        float interval = 0.15f;
+        float interval = 0.2f;
 
-        for (int i = 0; i < oreItems.Count; i++)
+        for (int i = 0; i < oreItems.Count && i < oreAmounts.Count; i++)
         {
-            if (i >= oreAmounts.Count) break;
-
             ResultOreItem item = oreItems[i];
             OreAmount data = oreAmounts[i];
 
-            // 캡처용 지역 변수
-            int bonusAmount = data.amount * 5;
+            int bonusAmount = Mathf.RoundToInt(data.amount * rewardMultiplier);
 
-            // i번째 아이템은 조금씩 늦게 실행
             DOVirtual.DelayedCall(startDelay + interval * i, () =>
             {
-                // 숫자 변경
-                item.SetAmount(bonusAmount);
+                // ×5 표시
+                item.ShowMultiplier(rewardMultiplier);
 
-                // 혹시 이전 Tween이 있다면 제거
-                item.transform.DOKill();
+                // 지정된 시간 뒤 실제 수량 변경
+                DOVirtual.DelayedCall(0.35f, () =>
+                {
+                    item.SetAmount(bonusAmount);
 
-                // 팝업 애니메이션
-                Sequence seq = DOTween.Sequence();
+                    DOVirtual.DelayedCall(0.15f, () =>
+                    {
+                        item.HideMultiplier();
+                    });
 
-                seq.Append(item.transform.DOScale(1.2f, 0.12f));
+                    item.transform.DOKill();
 
-                seq.Append(item.transform.DOScale(1f, 0.12f));
+                    Sequence seq = DOTween.Sequence();
+
+                    seq.Append(item.transform.DOScale(1.2f, 0.12f));
+
+                    seq.Append(item.transform.DOScale(1f, 0.12f));
+                });
             });
         }
+    }
+    public void SetMultiplier(float value)
+    {
+        rewardMultiplier = value;
     }
 }

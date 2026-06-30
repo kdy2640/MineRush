@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -43,8 +44,9 @@ public class ResultUI : MonoBehaviour
         if (nextSessionButton != null)//다음 세션 시작 기능 추가예정
         {
             nextSessionButton.onClick.AddListener(() =>
-            {
+            { 
                 PlayButtonAnimation(nextSessionButton);
+                GameManager.Instance.GameLoop.Restart();
             });
         }
     }
@@ -65,8 +67,7 @@ public class ResultUI : MonoBehaviour
         {
             CreateItem(oreAmount);
         }
-
-        PlayBonusAnimation(oreAmounts);
+         
     }
 
     private void CreateItem(OreAmount oreAmount)
@@ -100,7 +101,7 @@ public class ResultUI : MonoBehaviour
         }
             oreItems.Clear();//1차 광석수량 데이터(List) 삭제
     }
-    public void Show()
+    public IEnumerator Show()
     {
         gameObject.SetActive(true);
 
@@ -113,6 +114,8 @@ public class ResultUI : MonoBehaviour
         seq.Join(canvasGroup.DOFade(1f, 0.4f));
 
         seq.Join(panel.DOScale(1f, 0.45f).SetEase(Ease.OutBack));
+
+        yield return seq.WaitForCompletion();
     }
 
     public void Hide()
@@ -143,13 +146,15 @@ public class ResultUI : MonoBehaviour
 
         seq.Append(rect.DOScale(1.0f, 0.12f));
     }
-    private void PlayBonusAnimation(List<OreAmount> oreAmounts)
+    public IEnumerator PlayBonusAnimation(List<OreAmount> oreAmounts)
     {
-        // 첫 번째 변경 전까지 대기 시간
-        float startDelay = 0.8f;
+        if (oreAmounts == null)
+            yield break;
 
-        // 각 아이템 사이의 변경 간격
+        float startDelay = 0.8f;
         float interval = 0.2f;
+
+        Sequence totalSeq = DOTween.Sequence();
 
         for (int i = 0; i < oreItems.Count && i < oreAmounts.Count; i++)
         {
@@ -157,33 +162,42 @@ public class ResultUI : MonoBehaviour
             OreAmount data = oreAmounts[i];
 
             int bonusAmount = Mathf.RoundToInt(data.amount * rewardMultiplier);
+            float delay = startDelay + interval * i;
 
-            DOVirtual.DelayedCall(startDelay + interval * i, () =>
+            Sequence itemSeq = DOTween.Sequence();
+
+            itemSeq.AppendInterval(delay);
+
+            itemSeq.AppendCallback(() =>
             {
-                // ×5 표시
                 item.ShowMultiplier(rewardMultiplier);
-
-                // 지정된 시간 뒤 실제 수량 변경
-                DOVirtual.DelayedCall(0.35f, () =>
-                {
-                    item.SetAmount(bonusAmount);
-
-                    DOVirtual.DelayedCall(0.15f, () =>
-                    {
-                        item.HideMultiplier();
-                    });
-
-                    item.transform.DOKill();
-
-                    Sequence seq = DOTween.Sequence();
-
-                    seq.Append(item.transform.DOScale(1.2f, 0.12f));
-
-                    seq.Append(item.transform.DOScale(1f, 0.12f));
-                });
             });
+
+            itemSeq.AppendInterval(0.35f);
+
+            itemSeq.AppendCallback(() =>
+            {
+                item.SetAmount(bonusAmount);
+                item.transform.DOKill();
+            });
+
+            itemSeq.Append(item.transform.DOScale(1.2f, 0.12f));
+            itemSeq.Append(item.transform.DOScale(1f, 0.12f));
+
+            itemSeq.AppendInterval(0.15f);
+
+            itemSeq.AppendCallback(() =>
+            {
+                item.HideMultiplier();
+            });
+
+            totalSeq.Join(itemSeq);
         }
+
+        yield return totalSeq.WaitForCompletion();
     }
+
+
     public void SetMultiplier(float value)
     {
         rewardMultiplier = value;

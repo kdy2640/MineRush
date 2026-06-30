@@ -1,3 +1,4 @@
+using DG.Tweening.Core.Easing;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ public class GameLoopEndSequence : MonoBehaviour
 {
     [SerializeField] EndUI endUI;
     [SerializeField] ResultUI resultUI;
+    [SerializeField] UI_OrePanel orePanel;
+    [SerializeField] float earnDealy = 0.1f;
     private List<OreAmount> saveOreList = new();
     private List<OreAmount> diffOreList = new();
     void Start()
@@ -46,9 +49,19 @@ public class GameLoopEndSequence : MonoBehaviour
     {
         endUI.gameObject.SetActive(true);
         yield return endUI.PlayRoutine();
-
+        float rewardMultipler = GameManager.Instance.Upgrade.GetRuntimeStat().RewardMultiplier;
         resultUI.gameObject.SetActive(true);
+        resultUI.SetMultiplier(rewardMultipler);
         resultUI.SetData(diffOreList);
-        resultUI.Show();
+        yield return resultUI.Show();
+        yield return resultUI.PlayBonusAnimation(diffOreList);
+
+        for (int i = 0; i < diffOreList.Count; i++)
+        { 
+            int bonusAmount = Mathf.RoundToInt(diffOreList[i].amount * rewardMultipler) - diffOreList[i].amount;
+            GameManager.Instance.OreManager.Add((OreType)i, bonusAmount);
+            orePanel.RefreshOneUI(new OreAmount((OreType)i,1), true);
+            yield return new WaitForSeconds(earnDealy);
+        }
     }
 }

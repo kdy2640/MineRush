@@ -22,10 +22,12 @@ public class StoneSpawner : MonoBehaviour
     private void Start()
     { 
         GameManager.Instance.GameLoop.SkillProxy.SubscribeAction(SkillBase.SkillType.SpawnOreWhenMined, RandomSpawnOne);
+        GameManager.Instance.GameLoop.SkillProxy.SubscribeAction(SkillBase.SkillType.SpawnOreWhenSecond, RandomSpawnOne);
     }
     private void OnDestroy()
     { 
         GameManager.Instance.GameLoop.SkillProxy.UnSubscribeAction(SkillBase.SkillType.SpawnOreWhenMined, RandomSpawnOne);
+        GameManager.Instance.GameLoop.SkillProxy.UnSubscribeAction(SkillBase.SkillType.SpawnOreWhenSecond, RandomSpawnOne);
     }
 
     public IEnumerator PrepareRoutine()

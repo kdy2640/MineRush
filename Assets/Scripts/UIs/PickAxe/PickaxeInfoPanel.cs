@@ -30,10 +30,10 @@ public class PickaxeInfoPanel : MonoBehaviour
             MiningSpeedText.gameObject.SetActive(true);
             MiningRadiusText.gameObject.SetActive(true);
             CriticalChanceText.gameObject.SetActive(true);
-            MiningPowerText.text = $"Ã¤±¼ °ø°Ý·Â : {currentPickaxe.MiningPower}";
-            MiningSpeedText.text = $"Ã¤±¼¼Óµµ : {currentPickaxe.MiningSpeed}";
-            MiningRadiusText.text = $"Ã¤±¼¹Ý°æ : {currentPickaxe.MiningRadius}";
-            CriticalChanceText.text = $"Å©¸®Æ¼ÄÃ È®·ü : {currentPickaxe.CriticalChance * 100f:0.##}%";
+            MiningPowerText.text = $"Ã¤±¼ °ø°Ý·Â : +{currentPickaxe.MiningPower}";
+            MiningSpeedText.text = $"Ã¤±¼¼Óµµ : +{currentPickaxe.MiningSpeed}";
+            MiningRadiusText.text = $"Ã¤±¼¹Ý°æ : +{currentPickaxe.MiningRadius}";
+            CriticalChanceText.text = $"Å©¸®Æ¼ÄÃ È®·ü : +{currentPickaxe.CriticalChance * 100f:0.##}%";
         }
         else
         {

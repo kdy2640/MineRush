@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [Serializable]
 public enum UpgradePanelType
@@ -16,12 +17,14 @@ public class UpgradePanelEntry
 {
     public UpgradePanelType type;
     public GameObject panelObject;
+    public Sprite filterImg;
 }
 
 public class UI_UpgradeUIController : MonoBehaviour
 {
     [SerializeField] private List<UpgradePanelEntry> panels = new();
     [SerializeField] private UpgradePanelType defaultPanel = UpgradePanelType.UpgradeNode;
+    [SerializeField] private SpriteRenderer filterTargetBG;
 
     private UpgradePanelEntry currentPanel;
 
@@ -48,6 +51,7 @@ public class UI_UpgradeUIController : MonoBehaviour
 
         currentPanel = targetPanel;
         SetPanelActive(currentPanel, true);
+        filterTargetBG.sprite = targetPanel.filterImg;
     } // 원하는 패널 하나만 켜는 함수.
     // 기존에 켜져 있던 패널은 끄고, 인자로 받은 타입의 패널만 켠다.
 

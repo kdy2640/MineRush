@@ -19,7 +19,7 @@ public class ResultOreItem : MonoBehaviour
     [SerializeField] private Sprite diamondSprite;
     public void SetData(OreAmount oreAmount)
     {
-            oreNameText.text = oreAmount.oreType.ToString();
+            oreNameText.text = OreTextFormatter.GetDisplayName(oreAmount.oreType);
             amountText.text = $"x{oreAmount.amount}";
 
         switch (oreAmount.oreType)

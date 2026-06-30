@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -64,9 +65,7 @@ public class ResultUI : MonoBehaviour
         foreach (OreAmount oreAmount in oreAmounts)
         {
             CreateItem(oreAmount);
-        }
-
-        PlayBonusAnimation(oreAmounts);
+        } 
     }
 
     private void CreateItem(OreAmount oreAmount)
@@ -100,7 +99,7 @@ public class ResultUI : MonoBehaviour
         }
             oreItems.Clear();//1차 광석수량 데이터(List) 삭제
     }
-    public void Show()
+    public IEnumerator Show()
     {
         gameObject.SetActive(true);
 
@@ -113,6 +112,8 @@ public class ResultUI : MonoBehaviour
         seq.Join(canvasGroup.DOFade(1f, 0.4f));
 
         seq.Join(panel.DOScale(1f, 0.45f).SetEase(Ease.OutBack));
+        
+        yield return seq.WaitForCompletion();
     }
 
     public void Hide()
@@ -185,6 +186,58 @@ public class ResultUI : MonoBehaviour
             });
         }
     }
+
+    public IEnumerator PlayBonusAnim(List<OreAmount> oreAmounts)
+    {
+        if (oreAmounts == null)
+            yield break;
+
+        float startDelay = 0.8f;
+        float interval = 0.2f;
+
+        Sequence totalSeq = DOTween.Sequence();
+
+        for (int i = 0; i < oreItems.Count && i < oreAmounts.Count; i++)
+        {
+            ResultOreItem item = oreItems[i];
+            OreAmount data = oreAmounts[i];
+
+            int bonusAmount = Mathf.RoundToInt(data.amount * rewardMultiplier);
+            float delay = startDelay + interval * i;
+
+            Sequence itemSeq = DOTween.Sequence();
+
+            itemSeq.AppendInterval(delay);
+
+            itemSeq.AppendCallback(() =>
+            {
+                item.ShowMultiplier(rewardMultiplier);
+            });
+
+            itemSeq.AppendInterval(0.35f);
+
+            itemSeq.AppendCallback(() =>
+            {
+                item.SetAmount(bonusAmount);
+                item.transform.DOKill();
+            });
+
+            itemSeq.Append(item.transform.DOScale(1.2f, 0.12f));
+            itemSeq.Append(item.transform.DOScale(1f, 0.12f));
+
+            itemSeq.AppendInterval(0.15f);
+
+            itemSeq.AppendCallback(() =>
+            {
+                item.HideMultiplier();
+            });
+
+            totalSeq.Join(itemSeq);
+        }
+
+        yield return totalSeq.WaitForCompletion();
+    }
+
     public void SetMultiplier(float value)
     {
         rewardMultiplier = value;

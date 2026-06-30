@@ -46,7 +46,7 @@ public class ResultOreItem : MonoBehaviour
     {
         multiplierText.DOKill();
 
-        multiplierText.text = $"¡¿{multiplier:0}";
+        multiplierText.text = $"¡¿{multiplier:0.00}";
 
         RectTransform rect = multiplierText.rectTransform;
 

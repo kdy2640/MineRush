@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class UI_BackMainButton : MonoBehaviour
 {
     [SerializeField] Button mainButton;
+    [SerializeField] private SettingsPopup settingsPopup;
     void Start()
     {
         mainButton = GetComponent<Button>();
@@ -19,6 +20,11 @@ public class UI_BackMainButton : MonoBehaviour
     }
     private void OnClickButton()
     {
+        if (GameManager.Instance.Scene.currenSceneType == SceneType.Main)
+        {
+            settingsPopup.Close();
+            return;
+        }
         GameManager.Instance.Scene.ChangeScene(SceneType.Main);
     }
 }

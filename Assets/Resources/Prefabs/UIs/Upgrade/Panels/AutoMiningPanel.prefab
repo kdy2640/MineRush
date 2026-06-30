@@ -2458,7 +2458,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -30, y: 0}
   m_SizeDelta: {x: 400, y: 700}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &9201816084673408374
@@ -3813,6 +3813,8 @@ MonoBehaviour:
   gaugeInterval: 10
   targetRefreshLayoutRoot: {fileID: 3307608630650646266}
   timerSlider: {fileID: 577205335091307702}
+  mineVisual: {fileID: 0}
+  orePanel: {fileID: 0}
 --- !u!114 &6148198299781795519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3826,6 +3828,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoMiner
   autoMiningUpgradeData: {fileID: 11400000, guid: f11ad7b82d5511e46abffe9639516f89, type: 2}
+  presenter: {fileID: 0}
+  minevisual: {fileID: 0}
 --- !u!1 &9191632489499558192
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,10 +24,13 @@ public class AutoMiner : MonoBehaviour
         }
     }
     // ĳ���صα�. �Ƹ� �۵� �ɵ�.
+    private void Awake()
+    {
+        
+    }
 
     private void Start()
     {
-        AutoMiningRuntimeData.Init();
         state = GameManager.Instance.Upgrade.GetState(autoMiningUpgradeData);
     } // �ڵ�ä�� �ð� �����Ͱ� �ʱ�ȭ���� �ʾҴٸ� ���� �ð����� �ʱ�ȭ�Ѵ�.
 

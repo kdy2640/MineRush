@@ -859,8 +859,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 859640669}
     m_Modifications:
     - target: {fileID: 189143754175850286, guid: d042e1215c3d61149927c2d541de4e94, type: 3}
+      propertyPath: m_text
+      value: "\uC2DC\uC791!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 189143754175850286, guid: d042e1215c3d61149927c2d541de4e94, type: 3}
       propertyPath: m_fontSize
       value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 189143754175850286, guid: d042e1215c3d61149927c2d541de4e94, type: 3}
+      propertyPath: m_margin.y
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 189143754175850286, guid: d042e1215c3d61149927c2d541de4e94, type: 3}
       propertyPath: m_fontStyle
@@ -895,8 +903,16 @@ PrefabInstance:
       value: -350
       objectReference: {fileID: 0}
     - target: {fileID: 1284742723796182369, guid: d042e1215c3d61149927c2d541de4e94, type: 3}
+      propertyPath: m_text
+      value: "\uAC8C\uC784 \uC885\uB8CC"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284742723796182369, guid: d042e1215c3d61149927c2d541de4e94, type: 3}
       propertyPath: m_fontSize
       value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284742723796182369, guid: d042e1215c3d61149927c2d541de4e94, type: 3}
+      propertyPath: m_margin.y
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1284742723796182369, guid: d042e1215c3d61149927c2d541de4e94, type: 3}
       propertyPath: m_fontStyle
@@ -1099,8 +1115,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9092816349401890992, guid: d042e1215c3d61149927c2d541de4e94, type: 3}
+      propertyPath: m_text
+      value: "\uC124\uC815"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092816349401890992, guid: d042e1215c3d61149927c2d541de4e94, type: 3}
       propertyPath: m_fontSize
       value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092816349401890992, guid: d042e1215c3d61149927c2d541de4e94, type: 3}
+      propertyPath: m_margin.y
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9092816349401890992, guid: d042e1215c3d61149927c2d541de4e94, type: 3}
       propertyPath: m_fontStyle

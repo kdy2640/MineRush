@@ -121,7 +121,7 @@ public class StonePoolArgs : PoolArgs
         {
             StonePoolArgs args = obj as StonePoolArgs;
             SetData(args.dataSO, args.gridPos);
-            presenter.Initialie();
+            presenter.Initialize();
             collider.enabled = true;
         } 
     }

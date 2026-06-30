@@ -9,7 +9,7 @@ public class EndUI : MonoBehaviour
 
     [SerializeField] private TMP_Text messageText;
 
-    [SerializeField] private string message = "GAME OVER";
+    [SerializeField] private string message = "시간 종료!";
 
     [SerializeField] private float panelOpenDuration = 0.22f;
 

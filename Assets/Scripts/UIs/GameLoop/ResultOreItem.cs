@@ -19,7 +19,7 @@ public class ResultOreItem : MonoBehaviour
     [SerializeField] private Sprite diamondSprite;
     public void SetData(OreAmount oreAmount)
     {
-            oreNameText.text = oreAmount.oreType.ToString();
+            oreNameText.text = OreTextFormatter.GetDisplayName(oreAmount.oreType);
             amountText.text = $"x{oreAmount.amount}";
 
         switch (oreAmount.oreType)
@@ -44,38 +44,34 @@ public class ResultOreItem : MonoBehaviour
     }
     public void ShowMultiplier(float multiplier)
     {
-        multiplierText.gameObject.SetActive(true);
-
-        multiplierText.text = $"x{multiplier:0.0}";
-
         multiplierText.DOKill();
 
-        // 처음에는 조금 아래에서 시작
-        multiplierText.rectTransform.anchoredPosition = new Vector2(0, 15);
+        multiplierText.text = $"×{multiplier:0.00}";
+
+        RectTransform rect = multiplierText.rectTransform;
+
+        rect.localScale = Vector3.zero;
 
         multiplierText.alpha = 0f;
 
         Sequence seq = DOTween.Sequence();
 
-        seq.Join(multiplierText.rectTransform.DOAnchorPosY(30, 0.25f));
-
         seq.Join(multiplierText.DOFade(1f, 0.2f));
+
+        seq.Join(rect.DOScale(1.25f, 0.18f).SetEase(Ease.OutBack));
+
+        seq.Append(rect.DOScale(1f, 0.12f));
     }
     public void HideMultiplier()
     {
         multiplierText.DOKill();
 
+        RectTransform rect = multiplierText.rectTransform;
+
         Sequence seq = DOTween.Sequence();
 
-        // 조금 더 위로 올라감
-        seq.Join(multiplierText.rectTransform.DOAnchorPosY(40, 0.15f));
+        seq.Join(multiplierText.DOFade(0f, 0.3f));
 
-        // 사라짐
-        seq.Join(multiplierText.DOFade(0f, 0.15f));
-
-        seq.OnComplete(() =>
-        {
-            multiplierText.gameObject.SetActive(false);
-        });
+        seq.Join(rect.DOScale(0.8f, 0.3f));
     }
     }

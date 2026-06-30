@@ -19,6 +19,6 @@ public class UI_ClearData : MonoBehaviour
     private void OnClickButtonHandler()
     {
         GameManager.Instance.Save.ResetSave();
-        GameManager.Instance.Scene.ChangeScene(SceneType.Main);
+        GameManager.Instance.Scene.ChangeScene(SceneType.Main, true);
     }
 }

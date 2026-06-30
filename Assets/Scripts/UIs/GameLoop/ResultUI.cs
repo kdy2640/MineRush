@@ -44,9 +44,8 @@ public class ResultUI : MonoBehaviour
         if (nextSessionButton != null)//다음 세션 시작 기능 추가예정
         {
             nextSessionButton.onClick.AddListener(() =>
-            { 
+            {
                 PlayButtonAnimation(nextSessionButton);
-                GameManager.Instance.GameLoop.Restart();
             });
         }
     }
@@ -66,8 +65,7 @@ public class ResultUI : MonoBehaviour
         foreach (OreAmount oreAmount in oreAmounts)
         {
             CreateItem(oreAmount);
-        }
-         
+        } 
     }
 
     private void CreateItem(OreAmount oreAmount)
@@ -114,7 +112,7 @@ public class ResultUI : MonoBehaviour
         seq.Join(canvasGroup.DOFade(1f, 0.4f));
 
         seq.Join(panel.DOScale(1f, 0.45f).SetEase(Ease.OutBack));
-
+        
         yield return seq.WaitForCompletion();
     }
 
@@ -146,7 +144,50 @@ public class ResultUI : MonoBehaviour
 
         seq.Append(rect.DOScale(1.0f, 0.12f));
     }
-    public IEnumerator PlayBonusAnimation(List<OreAmount> oreAmounts)
+    private void PlayBonusAnimation(List<OreAmount> oreAmounts)
+    {
+        // 첫 번째 변경 전까지 대기 시간
+        float startDelay = 0.8f;
+
+        // 각 아이템 사이의 변경 간격
+        float interval = 0.2f;
+
+        for (int i = 0; i < oreItems.Count && i < oreAmounts.Count; i++)
+        {
+            ResultOreItem item = oreItems[i];
+            OreAmount data = oreAmounts[i];
+
+            int bonusAmount = Mathf.RoundToInt(data.amount * rewardMultiplier);
+
+            DOVirtual.DelayedCall(startDelay + interval * i, () =>
+            {
+                // ×5 표시
+                item.ShowMultiplier(rewardMultiplier);
+
+                // 지정된 시간 뒤 실제 수량 변경
+                DOVirtual.DelayedCall(0.8f, () =>
+                {
+                    item.SetAmount(bonusAmount);
+
+                    item.transform.DOKill();
+
+                    Sequence seq = DOTween.Sequence();
+
+                    seq.Append(item.transform.DOScale(1.2f, 0.12f));
+
+                    seq.Append(item.transform.DOScale(1f, 0.12f));
+
+                    DOVirtual.DelayedCall(0.3f, () =>
+                    {
+                        item.HideMultiplier();
+                    });
+
+                });
+            });
+        }
+    }
+
+    public IEnumerator PlayBonusAnim(List<OreAmount> oreAmounts)
     {
         if (oreAmounts == null)
             yield break;
@@ -196,7 +237,6 @@ public class ResultUI : MonoBehaviour
 
         yield return totalSeq.WaitForCompletion();
     }
-
 
     public void SetMultiplier(float value)
     {

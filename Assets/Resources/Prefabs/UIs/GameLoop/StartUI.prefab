@@ -65,10 +65,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Mining Start!
+  m_text: "\uCC44\uAD74 \uC2DC\uC791!"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 63d86a1734acbc548bf3999901aa19d5, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: d1e3ac05d392a20459908ec0e204a55f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -92,13 +92,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 250
-  m_fontSizeBase: 250
+  m_fontSize: 150
+  m_fontSizeBase: 150
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 20, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -200,9 +200,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6f9fc27fd8e1124db30621c8ab52443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartUIController
-  panel: {fileID: 0}
-  messageText: {fileID: 0}
-  message: Mining Start!
+  panel: {fileID: 4124883965197742121}
+  messageText: {fileID: 5578313626758126903}
+  message: "\uCC44\uAD74 \uC2DC\uC791!"
+  panelOpenDuration: 0.75
+  panelCloseDuration: 0.25
+  textOpenDuration: 0.5
+  textCloseDuration: 0.25
+  waveDuration: 0.6
   onFinished:
     m_PersistentCalls:
       m_Calls: []

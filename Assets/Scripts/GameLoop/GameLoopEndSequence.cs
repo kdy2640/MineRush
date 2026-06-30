@@ -53,13 +53,18 @@ public class GameLoopEndSequence : MonoBehaviour
         resultUI.gameObject.SetActive(true);
         resultUI.SetMultiplier(rewardMultipler);
         resultUI.SetData(diffOreList);
-        yield return resultUI.Show();
-        yield return resultUI.PlayBonusAnimation(diffOreList);
 
         for (int i = 0; i < diffOreList.Count; i++)
-        { 
+        {
             int bonusAmount = Mathf.RoundToInt(diffOreList[i].amount * rewardMultipler) - diffOreList[i].amount;
             GameManager.Instance.OreManager.Add((OreType)i, bonusAmount);
+        }
+
+        yield return resultUI.Show();
+        yield return resultUI.PlayBonusAnim(diffOreList);
+
+        for (int i = 0; i < diffOreList.Count; i++)
+        {  
             orePanel.RefreshOneUI(new OreAmount((OreType)i,1), true);
             yield return new WaitForSeconds(earnDealy);
         }

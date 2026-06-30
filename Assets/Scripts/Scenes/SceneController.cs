@@ -28,16 +28,20 @@ public class SceneController : MonoBehaviour
             { SceneType.Upgrade, new UpgradeScene() },
             { SceneType.GameLoop, new GameLoopScene() }
         };
-        currentScene = scenes[SceneType.Main];
-        loading = GameObject.Instantiate(loadingPrefab); 
+        currentScene = scenes[SceneType.Main]; 
     }
 
-    public void ChangeScene(SceneType nextSceneType)
+    private void Start()
     {
+        if (loading == null)
+            loading = GameObject.Instantiate(loadingPrefab);
+    }
+    public void ChangeScene(SceneType nextSceneType, bool isForced = false)
+    { 
         if (isChangingScene)
             return;
 
-        if (currentScene != null && currentScene.SceneType == nextSceneType)
+        if ((currentScene != null && currentScene.SceneType == nextSceneType) && !isForced)
             return;
 
         StartCoroutine(ChangeSceneRoutine(nextSceneType));

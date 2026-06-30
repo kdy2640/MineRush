@@ -1,6 +1,5 @@
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Rendering;
+using UnityEngine; 
 
 public class UI_OrePanel : MonoBehaviour
 {
@@ -20,7 +19,11 @@ public class UI_OrePanel : MonoBehaviour
     {
         for (int i = 0; i < (int)OreType.Length; i++)
         {
-            DisplayAmount.Add((OreType)i, 0);
+            OreType nowType = (OreType)i;
+            if (!DisplayAmount.ContainsKey(nowType))
+            { 
+                DisplayAmount.Add(nowType, 0);
+            }
         }
     }
     private void Start()
@@ -126,7 +129,7 @@ public class UI_OrePanel : MonoBehaviour
         for (int i = 0; i < oreTypeCount; i++)
         {
             OreType oreType = (OreType)i;
-            int nowAmount = manager.OreManager.GetAmount(oreType);
+            int nowAmount = GameManager.Instance.OreManager.GetAmount(oreType);
 
             DisplayAmount[oreType] = nowAmount;
             oreUIs[i].gameObject.SetActive(true);

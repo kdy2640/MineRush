@@ -10,7 +10,7 @@ public class StartUI : MonoBehaviour
 
     [SerializeField] private TMP_Text messageText;
 
-    [SerializeField] private string message = "MINING START!";
+    [SerializeField] private string message = "채굴 시작!";
 
     [SerializeField] private float panelOpenDuration = 0.23f;
 

@@ -18,8 +18,8 @@ MonoBehaviour:
   baseOreAmounts:
   - oreType: 1
     amount: 2000
-  amountMultiplier: 1.3
-  maxLevel: 5
+  amountMultiplier: 1.1
+  maxLevel: 6
   statModifiers:
   - statType: 9
     modifierType: 0

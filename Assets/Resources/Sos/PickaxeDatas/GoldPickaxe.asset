@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: "\uAE08 \uACE1\uAC31\uC774"
   icon: {fileID: 21300000, guid: 510921d6c5d01994a9a0079a30648367, type: 3}
   upgradeData: {fileID: 11400000, guid: e6a2281252282054d9e26964ab7cff9c, type: 2}
-  miningPower: 4
-  miningSpeed: 4
-  miningRadius: 4
+  miningPower: 3
+  miningSpeed: 2.5
+  miningRadius: 2.5
   criticalChance: 0.2

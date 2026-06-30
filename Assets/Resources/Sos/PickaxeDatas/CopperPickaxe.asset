@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CopperPickaxe
   m_EditorClassIdentifier: Assembly-CSharp::PickaxesDataSO
   tier: 1
-  displayName: Copper Pickaxe
+  displayName: "\uAD6C\uB9AC \uACE1\uAC31\uC774"
   icon: {fileID: 21300000, guid: 65c91e2aca8d0df479aa2efbea431422, type: 3}
   upgradeData: {fileID: 11400000, guid: af0012e5cc5f86f4a86957fe4ab8413f, type: 2}
   miningPower: 1

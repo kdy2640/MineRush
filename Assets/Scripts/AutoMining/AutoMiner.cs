@@ -6,6 +6,8 @@ public class AutoMiner : MonoBehaviour
     [SerializeField] private UpgradeData autoMiningUpgradeData;
     // 인스펙터에서 자동채굴 전용 UpgradeData SO를 넣는다.
 
+    private const float RewardIntervalSeconds = 10f;
+
     public UpgradeData Data => autoMiningUpgradeData;
     private UpgradeState state;
     public UpgradeState State
@@ -56,13 +58,20 @@ public class AutoMiner : MonoBehaviour
 
     public List<OreAmount> CalculateClaimRewards()
     {
-        int currentLevel = state.level;
+        int currentLevel = State.level;
         List<OreAmount> result = new();
 
         if (currentLevel <= 0)
             return result;
 
-        float seconds = Mathf.Max(0f, (float)AutoMiningRuntimeData.GetElapsedClaimTime().TotalSeconds);
+        if (autoMiningUpgradeData.levelBasedRewards == null)
+            return result;
+
+        float elapsedSeconds = Mathf.Max(0f, (float)AutoMiningRuntimeData.GetElapsedClaimTime().TotalSeconds);
+        int rewardTickCount = Mathf.FloorToInt(elapsedSeconds / RewardIntervalSeconds);
+
+        if (rewardTickCount <= 0)
+            return result;
 
         foreach (LevelBasedOreReward reward in autoMiningUpgradeData.levelBasedRewards)
         {
@@ -70,8 +79,9 @@ public class AutoMiner : MonoBehaviour
                 continue;
 
             int effectiveLevel = currentLevel - reward.startLevel;
-            float amountPerSecond = reward.amountPerSecond + reward.amountPerLevel * effectiveLevel;
-            int amount = Mathf.RoundToInt(amountPerSecond * seconds);
+            float rewardPerSecond = reward.amountPerSecond + reward.amountPerLevel * effectiveLevel;
+            float rewardPerInterval = rewardPerSecond * RewardIntervalSeconds;
+            int amount = Mathf.RoundToInt(rewardPerInterval * rewardTickCount);
 
             if (amount <= 0)
                 continue;
@@ -80,7 +90,7 @@ public class AutoMiner : MonoBehaviour
         }
 
         return result;
-    } // 현재 레벨 기준 초당 보상에 누적 시간을 곱해 실제 받을 보상을 계산한다.
+    } // 현재 레벨 기준 10초당 보상에 완료된 10초 단위 횟수를 곱해 실제 받을 보상을 계산한다.
 
     public bool TryUpgradeWithClaim()
     {

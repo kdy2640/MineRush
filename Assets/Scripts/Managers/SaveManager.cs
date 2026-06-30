@@ -10,6 +10,7 @@ public class SaveManager : MonoBehaviour
     private void Start()
     {
         LoadGame();
+        AutoMiningRuntimeData.Init();
     }// 게임 시작 시 자동 로드 옵션이 켜져 있으면 저장 파일을 불러온다.
     // 저장 파일이 없으면 아무것도 적용하지 않는다.
 

@@ -39,7 +39,7 @@ public class AudioManager : MonoBehaviour
 {
     [Header("AudioSource")]
     [SerializeField] private AudioSource bgmSource;
-    [SerializeField] private int sfxSourceCount = 10;
+    [SerializeField] private int sfxSourceCount = 20;//10에서 20으로 변경
     [SerializeField] private AudioSource[] sfxSources;
 
     // AudioSource를 순환 관리하기 위한 Queue
@@ -128,14 +128,7 @@ public class AudioManager : MonoBehaviour
                 return source;
             }
         }
-
-        // 모두 사용 중이면
-        // 가장 오래된 AudioSource 하나를 재사용
-        AudioSource oldest = sfxQueue.Dequeue();
-
-        sfxQueue.Enqueue(oldest);
-
-        return oldest;
+        return null; //오디오소스가 10개인 경우 새 SFX효과음은 무시하고 기존 10개만 끝까지 재생
     }
     //배열로 등록한 오디 데이터를 딕셔너리에 저장하는 녀석
     private void InitializeDictionary()
@@ -229,6 +222,7 @@ public class AudioManager : MonoBehaviour
             if (count >= data.maxSimultaneousCount) return;
         }
         AudioSource source = GetSFXSource();
+        if (source == null) return;
 
         float volume = data.volume * sfxVolume * masterVolume;
         // 현재 재생 중인 개수 증가
@@ -267,7 +261,8 @@ public class AudioManager : MonoBehaviour
         lastPlayTimes[type] = Time.time;
 
         AudioSource source = GetSFXSource();
-
+        if (source == null) return;
+        
         float volume = data.volume * sfxVolume * masterVolume;
 
         float pitch = data.pitch;

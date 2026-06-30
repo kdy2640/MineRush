@@ -5,7 +5,8 @@ public class AutoMiner : MonoBehaviour
 {
     [SerializeField] private UpgradeData autoMiningUpgradeData;
     // 인스펙터에서 자동채굴 전용 UpgradeData SO를 넣는다.
-
+    [SerializeField] private OreGainPresenter presenter;
+    [SerializeField] private GameObject minevisual;
     public UpgradeData Data => autoMiningUpgradeData;
     private UpgradeState state;
     public UpgradeState State
@@ -107,6 +108,7 @@ public class AutoMiner : MonoBehaviour
         if (rewards.Count > 0)
         {
             GameManager.Instance.OreManager.AddRange(rewards);
+            StartCoroutine(presenter.OreGainRoutine(rewards, minevisual.transform.position));
         }
 
         AutoMiningRuntimeData.ResetClaimTime();

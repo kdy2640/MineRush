@@ -64,5 +64,9 @@ public class GameLoopManager : MonoBehaviour
     {
         OnTick -= ev;
     }
+    public void Restart()
+    {
+        GameManager.Instance.Scene.RestartScene(SceneType.GameLoop);
+    }
 
 }

@@ -106,6 +106,7 @@ public class AutoMiningPanelController : MonoBehaviour
         if (gaugeTimer >= gaugeInterval)
         {
             gaugeTimer %= gaugeInterval;
+            RefreshInfoPanel();
             chestTween.Restart();
         }
 

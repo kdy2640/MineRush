@@ -80,12 +80,12 @@ public class UI_NodeInfoPanel : MonoBehaviour
 
         if (isMaxLevel)
         {
-            LevelText.text = "<color=#6A4CFF>Level : 최대 레벨</color>";
-            OreCostText.text = "<color=#6A4CFF>최대 레벨</color>";
+            LevelText.text = "<color=#6A4CFF>최대 레벨</color>";
+            OreCostText.text = "<color=#6A4CFF>최대 레벨입니다.</color>";
             return;
         }
 
-        LevelText.text = $"Level : {upgradeState.level} / {upgradeState.data.maxLevel}";
+        LevelText.text = $"{upgradeState.level} / {upgradeState.data.maxLevel}";
         OreCostText.text = UpgradeOreCostTextFormatter.GetAllOreCostText(upgradeState.GetCurrentCost(), GameManager.Instance.OreManager);
     }
 }

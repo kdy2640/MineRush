@@ -129,12 +129,12 @@ TextureImporter:
       name: Icon_MS_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 288
-        height: 350
+        x: 14
+        y: 15
+        width: 255
+        height: 318
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 064def479d5867b4bb846c713441820e
     internalID: 0
     vertices: []
     indices: 

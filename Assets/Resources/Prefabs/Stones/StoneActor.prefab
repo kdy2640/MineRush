@@ -53,6 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StoneActor
   dataSo: {fileID: 0}
   solidRenderer: {fileID: 462782877902812773}
+  collider: {fileID: 6278012945020927732}
   ScaleNoise: 0.15
   CrackHealthRatio: 0.5
 --- !u!114 &7499760446660334649
@@ -80,6 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd38895a13c294d428e236aa6564f74c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StonePresenter
+  solidObject: {fileID: 714251980164549997}
   spawnDuration: 0.4
   spawnEase: 5
   breakParticle: {fileID: 1326452233990491462}

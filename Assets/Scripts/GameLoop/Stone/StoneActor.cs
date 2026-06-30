@@ -24,6 +24,7 @@ public class StonePoolArgs : PoolArgs
 { 
     [SerializeField] private StoneDataSO dataSo;
     [SerializeField] private SpriteRenderer solidRenderer;
+    [SerializeField] private Collider2D collider;
     [SerializeField] private float ScaleNoise = 0.1f;
     [SerializeField] private float CrackHealthRatio = 0.5f;
 
@@ -108,7 +109,8 @@ public class StonePoolArgs : PoolArgs
     }
 
     private void Die()
-    { 
+    {
+        collider.enabled = false;
         manager.GameLoop.Events.Invoke(GameLoopEventType.StoneDestroyed);
         RequestReturn();
     }
@@ -120,6 +122,7 @@ public class StonePoolArgs : PoolArgs
             StonePoolArgs args = obj as StonePoolArgs;
             SetData(args.dataSO, args.gridPos);
             presenter.Initialie();
+            collider.enabled = true;
         } 
     }
 

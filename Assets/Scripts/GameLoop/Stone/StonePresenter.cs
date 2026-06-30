@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class StonePresenter : MonoBehaviour
 {
+    [Header("Target")]
+    [SerializeField] private Transform solidObject;
+
     [Header("Spawn")]
     [SerializeField] private float spawnDuration = 0.2f;
     [SerializeField] private Ease spawnEase = Ease.OutBack;
@@ -12,27 +15,52 @@ public class StonePresenter : MonoBehaviour
 
     private Action OnBreakRouineEnd;
 
-    private Tween currentTween; 
+    private Tween currentTween;
     private Tween spawnTween;
     private Sequence hitSequence;
-    private Sequence breakSequence; 
-    private Vector3 defaultScale;
+    private Sequence breakSequence;
+
+    private Vector3 defaultSolidLocalPosition;
+    private Vector3 defaultSolidLocalScale;
+
     private bool deathSequenceStarted = false;
-   
-    public bool DeathSequenceStarted { get { return deathSequenceStarted; } set { deathSequenceStarted = value; } }
+
+    public bool DeathSequenceStarted
+    {
+        get { return deathSequenceStarted; }
+        set { deathSequenceStarted = value; }
+    }
+
     private void Awake()
     {
-        defaultScale = transform.localScale;
+        if (solidObject == null)
+            solidObject = transform;
+
+        defaultSolidLocalPosition = solidObject.localPosition;
+        defaultSolidLocalScale = solidObject.localScale;
+
         CreateTweens();
     }
+
     public void Initialie()
-    { 
+    {
         DeathSequenceStarted = false;
+
+        StopCurrentTween();
+
+        solidObject.localPosition = defaultSolidLocalPosition;
+        solidObject.localScale = defaultSolidLocalScale;
+
+        if (breakParticle != null)
+        {
+            breakParticle.transform.SetParent(solidObject, false);
+            breakParticle.transform.localPosition = Vector3.zero;
+        }
     }
 
     private void OnDestroy()
     {
-        currentTween?.Kill(); 
+        currentTween?.Kill();
         spawnTween?.Kill();
         hitSequence?.Kill();
         breakSequence?.Kill();
@@ -40,33 +68,36 @@ public class StonePresenter : MonoBehaviour
 
     private void CreateTweens()
     {
-        spawnTween = transform
-            .DOScale(defaultScale, spawnDuration)
+        spawnTween = solidObject
+            .DOScale(defaultSolidLocalScale, spawnDuration)
             .SetEase(spawnEase)
             .SetAutoKill(false)
             .Pause();
 
         hitSequence = DOTween.Sequence()
-            .Append(transform.DOShakePosition(0.12f, 0.08f, 10))
+            .Append(solidObject.DOShakePosition(0.12f, 0.08f, 10))
             .SetAutoKill(false)
             .Pause();
 
         breakSequence = DOTween.Sequence()
-            .Append(transform.DOScale(Vector3.zero, 0.2f).SetEase(Ease.InBack))
+            .Append(solidObject.DOScale(Vector3.zero, 0.2f).SetEase(Ease.InBack))
             .SetAutoKill(false)
             .Pause();
     }
-    //생성용
+
+    // 생성용
     public void PlaySpawnTween()
     {
         StartCoroutine(PlaySpawnRoutine());
     }
+
     // 반환용
     public IEnumerator PlaySpawnRoutine()
     {
         StopCurrentTween();
 
-        transform.localScale = Vector3.zero;
+        solidObject.localPosition = defaultSolidLocalPosition;
+        solidObject.localScale = Vector3.zero;
 
         currentTween = spawnTween;
         spawnTween.Restart();
@@ -81,12 +112,16 @@ public class StonePresenter : MonoBehaviour
     {
         StopCurrentTween();
 
-        GameManager.Instance.AudioManager.PlaySFXRandomPitch(SFXType.StoneHit, 0.2f); 
+        solidObject.localPosition = defaultSolidLocalPosition;
+
+        GameManager.Instance.AudioManager.PlaySFXRandomPitch(SFXType.StoneHit, 0.2f);
 
         currentTween = hitSequence;
         hitSequence.Restart();
-        
+
         yield return hitSequence.WaitForCompletion();
+
+        solidObject.localPosition = defaultSolidLocalPosition;
 
         if (currentTween == hitSequence)
             currentTween = null;
@@ -96,12 +131,7 @@ public class StonePresenter : MonoBehaviour
     {
         StopCurrentTween();
 
-        if (breakParticle != null)
-        {
-            breakParticle.transform.SetParent(null, true);
-        }
-
-        GameManager.Instance.AudioManager.PlaySFXRandomPitch(SFXType.StoneCrush,0.2f);
+        GameManager.Instance.AudioManager.PlaySFXRandomPitch(SFXType.StoneCrush, 0.2f);
 
         currentTween = breakSequence;
         breakSequence.Restart();
@@ -109,7 +139,10 @@ public class StonePresenter : MonoBehaviour
         yield return breakSequence.WaitForCompletion();
 
         if (breakParticle != null)
+        {
+            breakParticle.transform.SetParent(null, true);
             breakParticle.Play();
+        }
 
         if (currentTween == breakSequence)
             currentTween = null;
@@ -125,6 +158,8 @@ public class StonePresenter : MonoBehaviour
         currentTween.Pause();
         currentTween.Rewind();
 
+        solidObject.localPosition = defaultSolidLocalPosition;
+
         currentTween = null;
     }
 
@@ -134,7 +169,7 @@ public class StonePresenter : MonoBehaviour
     }
 
     public void UnSubscribeBreakRoutineEnd(Action ev)
-    { 
+    {
         OnBreakRouineEnd -= ev;
     }
 }

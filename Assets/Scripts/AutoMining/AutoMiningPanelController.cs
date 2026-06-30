@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.Collections.Generic; 
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -26,6 +26,8 @@ public class AutoMiningPanelController : MonoBehaviour
     
     private bool needRefreshNextFrame;
 
+    [SerializeField] private GameObject mineVisual;
+    [SerializeField] private UI_OrePanel orePanel;
     private void Awake()
     {
         if (autoMiner == null)
@@ -63,11 +65,15 @@ public class AutoMiningPanelController : MonoBehaviour
         refreshTimer = 0f;
         gaugeTimer = CalculateGaugeTimerOffset();
         needRefreshNextFrame = true;
+        mineVisual.SetActive(isPanelFocus);
+        orePanel.SetDelayRefresh(isPanelFocus);
     }
 
     private void OnDisable()
     {
         isPanelFocus = false;
+        mineVisual.SetActive(isPanelFocus);
+        orePanel.SetDelayRefresh(isPanelFocus);
     }
 
     private void Update()

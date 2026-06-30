@@ -4,7 +4,9 @@ using UnityEngine;
 public class AutoMiner : MonoBehaviour
 {
     [SerializeField] private UpgradeData autoMiningUpgradeData;
-    // ÀÎ½ºÆåÅÍ¿¡¼­ ÀÚµ¿Ã¤±¼ Àü¿ë UpgradeData SO¸¦ ³Ö´Â´Ù.
+    // ï¿½Î½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ ï¿½Úµï¿½Ã¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ UpgradeData SOï¿½ï¿½ ï¿½Ö´Â´ï¿½.
+    [SerializeField] private OreGainPresenter presenter;
+    [SerializeField] private GameObject minevisual;
 
     private const float RewardIntervalSeconds = 10f;
 
@@ -20,19 +22,19 @@ public class AutoMiner : MonoBehaviour
             return state;
         }
     }
-    // Ä³½ÌÇØµÎ±â. ¾Æ¸¶ ÀÛµ¿ µÉµí.
+    // Ä³ï¿½ï¿½ï¿½ØµÎ±ï¿½. ï¿½Æ¸ï¿½ ï¿½Ûµï¿½ ï¿½Éµï¿½.
 
     private void Start()
     {
         AutoMiningRuntimeData.Init();
         state = GameManager.Instance.Upgrade.GetState(autoMiningUpgradeData);
-    } // ÀÚµ¿Ã¤±¼ ½Ã°£ µ¥ÀÌÅÍ°¡ ÃÊ±âÈ­µÇÁö ¾Ê¾Ò´Ù¸é ÇöÀç ½Ã°£À¸·Î ÃÊ±âÈ­ÇÑ´Ù.
+    } // ï¿½Úµï¿½Ã¤ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½Ê±ï¿½È­ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½Ñ´ï¿½.
 
     public int GetLevel()
     {
         return State.level;
-    } // ÇöÀç ÀÚµ¿Ã¤±¼ ¾÷±×·¹ÀÌµå ·¹º§À» ¹ÝÈ¯ÇÑ´Ù.
-    // ui¿¡µµ ÇöÀç·¹º§ Ç¥»ç¿¡ ¾²ÀÏ ¼öµµ?
+    } // ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½Ã¤ï¿½ï¿½ ï¿½ï¿½ï¿½×·ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ñ´ï¿½.
+    // uiï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ç·¹ï¿½ï¿½ Ç¥ï¿½ç¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½?
 
     public List<OreAmount> GetCurrentCost()
     {
@@ -54,7 +56,7 @@ public class AutoMiner : MonoBehaviour
         }
 
         return result;
-    } // ÇöÀç ·¹º§¿¡¼­ ´ÙÀ½ ·¹º§·Î ¿Ã¸± ¶§ ÇÊ¿äÇÑ ÀÚµ¿Ã¤±¼ ºñ¿ëÀ» °è»êÇÑ´Ù.
+    } // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã¸ï¿½ ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½Úµï¿½Ã¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 
     public List<OreAmount> CalculateClaimRewards()
     {
@@ -90,7 +92,7 @@ public class AutoMiner : MonoBehaviour
         }
 
         return result;
-    } // ÇöÀç ·¹º§ ±âÁØ 10ÃÊ´ç º¸»ó¿¡ ¿Ï·áµÈ 10ÃÊ ´ÜÀ§ È½¼ö¸¦ °öÇØ ½ÇÁ¦ ¹ÞÀ» º¸»óÀ» °è»êÇÑ´Ù.
+    } // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 10ï¿½Ê´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½ï¿½ 10ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 
     public bool TryUpgradeWithClaim()
     {
@@ -108,7 +110,7 @@ public class AutoMiner : MonoBehaviour
         GameManager.Instance.Save.SaveGame();
 
         return true;
-    } // ±âÁ¸ ´©Àû º¸»óÀ» ¸ÕÀú Á¤»êÇÑ µÚ, ºñ¿ëÀ» ÁöºÒÇÏ°í ÀÚµ¿Ã¤±¼ ·¹º§À» 1 ¿Ã¸°´Ù.
+    } // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Úµï¿½Ã¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1 ï¿½Ã¸ï¿½ï¿½ï¿½.
 
     public void Claim()
     {
@@ -117,8 +119,9 @@ public class AutoMiner : MonoBehaviour
         if (rewards.Count > 0)
         {
             GameManager.Instance.OreManager.AddRange(rewards);
+            StartCoroutine(presenter.OreGainRoutine(rewards, minevisual.transform.position));
         }
 
         AutoMiningRuntimeData.ResetClaimTime();
-    } // °è»êµÈ ÀÚµ¿Ã¤±¼ º¸»óÀ» Áö±ÞÇÏ°í ¸¶Áö¸· ¼ö·É ½Ã°£À» ÇöÀç ½Ã°£À¸·Î °»½ÅÇÑ´Ù.
+    } // ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½Ã¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 }

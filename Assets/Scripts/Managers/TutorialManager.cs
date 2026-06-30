@@ -31,6 +31,7 @@ public class TutorialManager : MonoBehaviour
         }
         return TutorialProgressionMap[type];
     }
+    // Enum 값에 해당하는 튜토리얼이 진행됐으면 외부에서 호출해주는 함수.
     public void ResolveTutorial(TutorialType type)
     { 
         if (!TutorialProgressionMap.ContainsKey(type))

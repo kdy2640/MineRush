@@ -46,7 +46,7 @@ public class ResultOreItem : MonoBehaviour
     {
         multiplierText.gameObject.SetActive(true);
 
-        multiplierText.text = $"x{multiplier:0}";
+        multiplierText.text = $"x{multiplier:0.0}";
 
         multiplierText.DOKill();
 

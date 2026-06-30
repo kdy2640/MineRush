@@ -55,7 +55,7 @@ public class OreManager : MonoBehaviour
         return true;
     }
 
-    private void Add(OreType type, int amount)
+    public void Add(OreType type, int amount)
     {
         if (!ores.ContainsKey(type))
             ores[type] = 0;

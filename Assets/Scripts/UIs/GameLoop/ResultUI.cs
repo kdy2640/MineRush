@@ -164,14 +164,9 @@ public class ResultUI : MonoBehaviour
                 item.ShowMultiplier(rewardMultiplier);
 
                 // 지정된 시간 뒤 실제 수량 변경
-                DOVirtual.DelayedCall(0.35f, () =>
+                DOVirtual.DelayedCall(0.8f, () =>
                 {
                     item.SetAmount(bonusAmount);
-
-                    DOVirtual.DelayedCall(0.15f, () =>
-                    {
-                        item.HideMultiplier();
-                    });
 
                     item.transform.DOKill();
 
@@ -180,6 +175,12 @@ public class ResultUI : MonoBehaviour
                     seq.Append(item.transform.DOScale(1.2f, 0.12f));
 
                     seq.Append(item.transform.DOScale(1f, 0.12f));
+
+                    DOVirtual.DelayedCall(0.3f, () =>
+                    {
+                        item.HideMultiplier();
+                    });
+
                 });
             });
         }

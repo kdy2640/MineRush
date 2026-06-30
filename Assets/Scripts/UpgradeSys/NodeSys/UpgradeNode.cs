@@ -29,6 +29,9 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private UpgradeNodePanelController nodePanelController;
     public RectTransform rectTransform { get; private set; }
 
+    [Header("업그레이드 시도 연출")]
+    [SerializeField] private NodeUpgradeEffect upgradeEffect;
+
     private void Awake()
     {
         nodeId = upgradeData != null ? upgradeData.id : string.Empty;
@@ -91,13 +94,17 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     }
 
     public void TryBuy()
-    {
+    {        
         if (!isUnlocked)
         {
             return;
         }
 
-        if (GameManager.Instance.Upgrade.TryBuyUpgrade(upgradeData))
+        bool isUpgraded = GameManager.Instance.Upgrade.TryBuyUpgrade(upgradeData);
+
+        upgradeEffect.DisplayUpgradeEffect(isUpgraded);
+
+        if (isUpgraded)
         {
             nodePanelController.RefreshDescriptionPanel(upgradeData);
             RefreshNodeVisual();

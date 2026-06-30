@@ -189,7 +189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
       propertyPath: sfxClips.Array.size
-      value: 14
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
       propertyPath: bgmClips.Array.data[0].clip
@@ -296,6 +296,30 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
+      propertyPath: sfxClips.Array.data[14].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: f19bb5fe42f624e40a8be8a80d1b4464, type: 3}
+    - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
+      propertyPath: sfxClips.Array.data[14].type
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
+      propertyPath: sfxClips.Array.data[15].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 20dcc867244b02b4593ccbbf0ffdf464, type: 3}
+    - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
+      propertyPath: sfxClips.Array.data[15].type
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
+      propertyPath: sfxClips.Array.data[16].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 050f059c2c6f2fe4abc54b553652437b, type: 3}
+    - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
+      propertyPath: sfxClips.Array.data[16].type
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
       propertyPath: sfxClips.Array.data[2].pitch
       value: 0.8
       objectReference: {fileID: 0}
@@ -325,6 +349,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
       propertyPath: sfxClips.Array.data[13].pitch
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
+      propertyPath: sfxClips.Array.data[14].pitch
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
+      propertyPath: sfxClips.Array.data[15].pitch
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
+      propertyPath: sfxClips.Array.data[16].pitch
       value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
@@ -369,6 +405,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
       propertyPath: sfxClips.Array.data[13].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
+      propertyPath: sfxClips.Array.data[14].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
+      propertyPath: sfxClips.Array.data[15].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
+      propertyPath: sfxClips.Array.data[16].volume
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}

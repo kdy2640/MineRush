@@ -1,4 +1,5 @@
 using NUnit.Framework.Constraints;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement; 
@@ -59,6 +60,7 @@ public class AudioManager : MonoBehaviour
     // Key   : 효과음 종류(SFXType)
     // Value : 마지막 재생 시간(Time.time)
     private Dictionary<SFXType, float> lastPlayTimes;
+    private Dictionary<SFXType, int> playingCounts;
 
     private BGMClipData currentBGMData;
     private float masterVolume = 1.0f;
@@ -71,6 +73,7 @@ public class AudioManager : MonoBehaviour
         CreateAudioSources();
         // 각 효과음의 마지막 재생 시간을 저장하는 Dictionary 생성
         lastPlayTimes = new Dictionary<SFXType, float>();
+        playingCounts = new Dictionary<SFXType, int>();
 
         InitializeDictionary();
     }
@@ -220,14 +223,26 @@ public class AudioManager : MonoBehaviour
             return;
 
         SFXClipData data = sfxDictionary[type];
-
+        // 현재 같은 효과음이 최대 개수 이상 재생 중이면 재생하지 않는다.
+        if (playingCounts.TryGetValue(type, out int count))
+        {
+            if (count >= data.maxSimultaneousCount) return;
+        }
         AudioSource source = GetSFXSource();
 
         float volume = data.volume * sfxVolume * masterVolume;
+        // 현재 재생 중인 개수 증가
+        if (!playingCounts.ContainsKey(type))
+        {
+            playingCounts[type] = 0;
+        }
+        playingCounts[type]++;
 
         source.pitch = data.pitch + Random.Range(-randomRatio, randomRatio);
 
         source.PlayOneShot(data.clip, volume);
+        // 효과음이 끝나면 재생 중 개수를 감소시킨다.
+        StartCoroutine(ReleaseVoice(type, data.clip.length));
     }
     //효과음 재생하는 녀석
     public void PlaySFX(SFXType type)
@@ -235,7 +250,12 @@ public class AudioManager : MonoBehaviour
         if (!sfxDictionary.ContainsKey(type)) return;
 
         SFXClipData data = sfxDictionary[type];
-
+        //최대 개수를 넘으면 재생X
+        if (playingCounts.TryGetValue(type, out int count))
+        {
+            if (count >= data.maxSimultaneousCount)
+                return;
+        }
         // 마지막 재생 시간이 저장되어 있다면
         if (lastPlayTimes.TryGetValue(type, out float lastPlayTime))
         {
@@ -251,9 +271,30 @@ public class AudioManager : MonoBehaviour
         float volume = data.volume * sfxVolume * masterVolume;
 
         float pitch = data.pitch;
+        //재생직전 개수 증가
+        if (!playingCounts.ContainsKey(type))
+        {
+            playingCounts[type] = 0;
+        }
+        playingCounts[type]++;
 
         source.pitch = pitch;
         source.PlayOneShot(data.clip, volume);
+
+        StartCoroutine(ReleaseVoice(type, data.clip.length));
+    }
+    //효과음 종류 후 카운트 감소용 코루틴
+    private IEnumerator ReleaseVoice(SFXType type, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (playingCounts.ContainsKey(type))
+        {
+            playingCounts[type]--;
+
+            if (playingCounts[type] < 0)
+                playingCounts[type] = 0;
+        }
     }
 
     //전체 볼륨을 변경하는 녀석

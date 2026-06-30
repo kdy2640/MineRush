@@ -27,6 +27,6 @@ public class SFXClipData
     // 0    → 제한 없음
     // 0.03 → 0.03초마다 한 번만 재생
     // 0.05 → 0.05초마다 한 번만 재생
-    [Min(0f)]
-    public float minInterval = 0f;
+    [Min(0f)] public float minInterval = 0f;
+    [Min(1f)] public int maxSimultaneousCount = 5;
 }

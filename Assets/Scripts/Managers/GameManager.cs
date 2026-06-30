@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public SkillManager SkillManager { get; private set; }
     public AudioManager AudioManager { get; private set; }
     public SaveManager Save { get; private set; }
+    public TutorialManager Tutorial { get; private set; }
 
     private void Awake()
     {
@@ -34,5 +35,6 @@ public class GameManager : MonoBehaviour
         SkillManager = GetComponent<SkillManager>();
         AudioManager = GetComponentInChildren<AudioManager>();
         Save = GetComponent<SaveManager>();
+        Tutorial = GetComponent<TutorialManager>();
     }
 }

@@ -6,6 +6,7 @@ public class GameSaveData
 {
     public List<UpgradeSaveData> upgrades = new();
     public List<OreAmount> ores = new();
+    public List<TutorialSaveData> tutorials = new();
 }
 
 [Serializable]
@@ -18,5 +19,18 @@ public class UpgradeSaveData
     {
         this.id = id;
         this.level = level;
+    }
+}
+
+[Serializable]
+public class TutorialSaveData
+{
+    public string id;
+    public bool flag;
+
+    public TutorialSaveData(string id, bool flag)
+    {
+        this.id = id;
+        this.flag = flag;
     }
 }

@@ -32,8 +32,7 @@ public class OrePresentor : Poolable
         StopCurrentTween();
 
         transform.position = worldPosition;
-        transform.rotation = Quaternion.identity;
-        transform.localScale = Vector3.one;
+        transform.rotation = Quaternion.identity; 
 
         solidOreRenderer.sprite = OreDataDB.GetOreDataSO(type).OreSprite;
         solidOreRenderer.gameObject.SetActive(false);
@@ -43,8 +42,7 @@ public class OrePresentor : Poolable
     }
 
     private void ResetVisual()
-    {
-        transform.localScale = Vector3.one;
+    { 
         transform.rotation = Quaternion.identity;
 
         solidOreRenderer.transform.localPosition = Vector3.zero;
@@ -79,12 +77,12 @@ public class OrePresentor : Poolable
 
         solidOreRenderer.gameObject.SetActive(true);
 
-        transform.localScale = Vector3.one * popupStartScale;
+        solidOreRenderer.transform.localScale = Vector3.one * popupStartScale;
 
         currentSequence = DOTween.Sequence();
 
         currentSequence.Append(
-            transform
+            solidOreRenderer.transform
                 .DOScale(Vector3.one * popupEndScale, popupDuration)
                 .SetEase(Ease.OutQuad)
         );
@@ -112,7 +110,7 @@ public class OrePresentor : Poolable
         );
 
         currentSequence.Join(
-            transform
+            solidOreRenderer.transform
                 .DOScale(Vector3.one * moveEndScale, moveDuration)
                 .SetEase(Ease.Linear)
         );

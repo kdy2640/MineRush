@@ -42,6 +42,14 @@ public class SceneController : MonoBehaviour
 
         StartCoroutine(ChangeSceneRoutine(nextSceneType));
     }
+    public void RestartScene(SceneType nextSceneType)
+    { 
+        if (isChangingScene)
+            return;
+         
+        if(currentScene.SceneType == SceneType.GameLoop && nextSceneType == SceneType.GameLoop)
+            StartCoroutine(ChangeSceneRoutine(nextSceneType));
+    }
 
     private IEnumerator ChangeSceneRoutine(SceneType nextSceneType)
     {

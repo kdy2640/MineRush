@@ -24,15 +24,26 @@ public class PickAxesPanel : MonoBehaviour
     private int currentIndex = 0; //0에 가까울수록 Left버튼을 많이 누른 상태. 클수록 Right버튼을 많이 누른 상태
     private Tween moveTween;
     private readonly List<RectTransform> pickaxeImageRects = new();
+    private readonly List<Image> pickaxeImages = new();
     private Vector3 originScale = new Vector3(1.3f, 1.3f, 1f);
     private Vector3 selectedPickaxeScale = new Vector3(2f, 2f, 1f);
 
     private void Start()
     {
         InitializePanel();
+        RefreshPickaxeUnlockColors();
         RefreshCurrentPickaxeInfo();
         RefreshEquippedPickaxeInfo();
         RefreshSelectedPickaxeScale(currentIndex, currentIndex);
+    }
+    private void OnEnable()
+    {
+        if (pickaxeImages.Count <= 0)
+            return;
+
+        RefreshPickaxeUnlockColors();
+        RefreshCurrentPickaxeInfo();
+        RefreshEquippedPickaxeInfo();
     }
 
     public void MoveLeft() //왼쪽으로 움직일 때. Button의 Onclick에 등록하여 사용.
@@ -132,11 +143,25 @@ public class PickAxesPanel : MonoBehaviour
         // TODO: 장착 곡괭이 아이콘 갱신
         equippedPickaxeIconImg.sprite = equippedPickaxe.Icon;
     }
+    private void RefreshPickaxeUnlockColors()
+    {
+        int unlockedTier = GameManager.Instance.Upgrade.GetRuntimeStat().PickaxeTier;
+        for (int i = 0; i < pickaxeImages.Count; i++)
+        {
+            PickaxesDataSO pickaxe = GetPickaxeData(i);
+
+            if (pickaxe == null)
+                continue;
+
+            pickaxeImages[i].color = pickaxe.Tier <= unlockedTier ? Color.white : Color.black;
+        }
+    }
 
     public void BuySelectedPickaxe()
     {
         PickaxesDataSO currentPickaxe = GetPickaxeData(currentIndex);
         GameManager.Instance.Upgrade.TryBuyUpgrade(currentPickaxe.UpgradeData);
+        RefreshPickaxeUnlockColors();
         RefreshCurrentPickaxeInfo();
         RefreshEquippedPickaxeInfo();
     }
@@ -192,6 +217,7 @@ public class PickAxesPanel : MonoBehaviour
             imageRect.anchoredPosition = new Vector2(i * moveDistance, 0f);
             imageRect.localScale = originScale;
             pickaxeImageRects.Add(imageRect);
+            pickaxeImages.Add(image);
 
 
             //추가로,

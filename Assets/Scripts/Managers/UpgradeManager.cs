@@ -101,7 +101,8 @@ public class UpgradeManager : MonoBehaviour
         {
             return false;
         }
-        List<OreAmount> cost = data.GetCosts(state.level);
+
+        List<OreAmount> cost = state.GetCurrentCost();
         
         if (!oreManager.TrySpend(cost))
         {

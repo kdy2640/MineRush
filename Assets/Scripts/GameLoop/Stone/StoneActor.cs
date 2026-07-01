@@ -46,11 +46,16 @@ public class StonePoolArgs : PoolArgs
         hpHandler = GetComponent<HPHandler>();  
         hpHandler.SubscribeHPUpdate(Mine);
         presenter.SubscribeBreakRoutineEnd(Die);
+        presenter.SubscribeSpawnRoutineEnd(OnSpawnRoutineEnd);
+
+        presenter.SubscribeBreakRoutineDelay(DelayDie);
     }
     private void OnDestroy()
     {
         hpHandler.UnSubscribeHPUpdate(Mine);
         presenter.UnSubscribeBreakRoutineEnd(Die);
+        presenter.UnSubscribeSpawnRoutineEnd(OnSpawnRoutineEnd);
+        presenter.UnSubscribeBreakRoutineDelay(DelayDie);
     }
 
     public bool TryStartDeathSequence()
@@ -112,9 +117,11 @@ public class StonePoolArgs : PoolArgs
     {
         collider.enabled = false;
         manager.GameLoop.Events.Invoke(GameLoopEventType.StoneDestroyed);
+    }
+    private void DelayDie()
+    { 
         RequestReturn();
     }
-
     public override void Initialize(PoolArgs obj)
     {
         if(obj is StonePoolArgs)
@@ -122,8 +129,11 @@ public class StonePoolArgs : PoolArgs
             StonePoolArgs args = obj as StonePoolArgs;
             SetData(args.dataSO, args.gridPos);
             presenter.Initialize();
-            collider.enabled = true;
         } 
+    }
+    private void OnSpawnRoutineEnd()
+    { 
+        collider.enabled = true;
     }
 
     public override void ResetState()

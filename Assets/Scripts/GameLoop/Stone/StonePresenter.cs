@@ -13,7 +13,9 @@ public class StonePresenter : MonoBehaviour
     [SerializeField] private Ease spawnEase = Ease.OutBack;
     [SerializeField] private ParticleSystem breakParticle;
     [SerializeField] private float ReturnDelay = 2f;
-    private Action OnBreakRouineEnd;
+    private Action OnSpawnRoutineEnd;
+    private Action OnBreakRoutineEnd;
+    private Action OnBreakRoutineDelay;
 
     private Tween currentTween;
     private Tween spawnTween;
@@ -110,6 +112,7 @@ public class StonePresenter : MonoBehaviour
 
         yield return spawnTween.WaitForCompletion();
 
+        OnSpawnRoutineEnd?.Invoke();
         if (currentTween == spawnTween)
             currentTween = null;
     }
@@ -147,13 +150,17 @@ public class StonePresenter : MonoBehaviour
         currentTween = breakSequence;
         breakSequence.Restart();
 
+        yield return breakSequence.WaitForCompletion();
+
+        OnBreakRoutineEnd?.Invoke();
+
         yield return new WaitForSeconds(ReturnDelay);
 
+        OnBreakRoutineDelay?.Invoke();
 
         if (currentTween == breakSequence)
             currentTween = null;
 
-        OnBreakRouineEnd?.Invoke();
     }
 
     public void StopCurrentTween()
@@ -169,13 +176,32 @@ public class StonePresenter : MonoBehaviour
         currentTween = null;
     }
 
+    public void SubscribeSpawnRoutineEnd(Action ev)
+    {
+        OnSpawnRoutineEnd += ev;
+    }
+
+    public void UnSubscribeSpawnRoutineEnd(Action ev)
+    {
+        OnSpawnRoutineEnd -= ev;
+    }
     public void SubscribeBreakRoutineEnd(Action ev)
     {
-        OnBreakRouineEnd += ev;
+        OnBreakRoutineEnd += ev;
     }
 
     public void UnSubscribeBreakRoutineEnd(Action ev)
     {
-        OnBreakRouineEnd -= ev;
+        OnBreakRoutineEnd -= ev;
+    }
+
+    public void SubscribeBreakRoutineDelay(Action ev)
+    {
+        OnBreakRoutineDelay += ev;
+    }
+
+    public void UnSubscribeBreakRoutineDelay(Action ev)
+    {
+        OnBreakRoutineDelay -= ev;
     }
 }

@@ -115,11 +115,12 @@ public class MiningSequence : MonoBehaviour
         // 화면에 광석이 아직 날아가는 중이어도, 데이터는 여기서 확정됨.
         GameManager.Instance.OreManager.AddRange(stone.DataSO.RewardList);
 
+        // 7. 광석 날아가는 연출 + 광석 습득 피드백 반영 -> 7인데 돌 파괴 연출 딜레이를 위해서 먼저 호출.
+        oreGainPresenter.OreGainRoutineCO(stone.DataSO.RewardList, stone.transform.position);
+
         // 6. 돌 파괴 연출
         yield return stone.Presenter.PlayBreakRoutine();
-
-        // 7. 광석 날아가는 연출 + 광석 습득 피드백 반영
-        yield return oreGainPresenter.OreGainRoutine(stone.DataSO.RewardList, stone.transform.position);
+         
     }
 
     private IAttackPresenter GetAttackPresenter(MiningType type)

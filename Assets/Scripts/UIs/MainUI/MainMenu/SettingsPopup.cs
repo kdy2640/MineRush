@@ -57,6 +57,7 @@ public class SettingsPopup : MonoBehaviour
     private void Start()
     {
         audioManager = GameManager.Instance.AudioManager;
+        SyncSlidersFromAudioManager();
     }
     private void OnDestroy()
     {
@@ -78,6 +79,33 @@ public class SettingsPopup : MonoBehaviour
         bgmVolText.text = $"{bgmSlider.value * 100f:f0}%";
         sfxVolText.text = $"{sfxSlider.value * 100:f0}%";
     }
+
+    private void SyncSlidersFromAudioManager()
+    {
+        if (audioManager == null && GameManager.Instance != null)
+        {
+            audioManager = GameManager.Instance.AudioManager;
+        }
+
+        if (audioManager == null) return;
+
+        masterSlider.SetValueWithoutNotify(audioManager.MasterVolume);
+        bgmSlider.SetValueWithoutNotify(audioManager.BGMVolume);
+        sfxSlider.SetValueWithoutNotify(audioManager.SFXVolume);
+
+        isToggleOn = masterSlider.value > 0f || bgmSlider.value > 0f || sfxSlider.value > 0f;
+
+        if (isToggleOn)
+        {
+            prevMaster = masterSlider.value;
+            prevBGM = bgmSlider.value;
+            prevSFX = sfxSlider.value;
+        }
+
+        RefreshToggleText();
+        UpdateVolumeTexts();
+    }
+
     private void OnMasterChanged(float value)
     {
         if (audioManager == null) return;
@@ -109,6 +137,8 @@ public class SettingsPopup : MonoBehaviour
         popupContainer.DOKill();
 
         gameObject.SetActive(true);
+
+        SyncSlidersFromAudioManager();
 
         popupContainer.localScale = Vector3.zero;
 

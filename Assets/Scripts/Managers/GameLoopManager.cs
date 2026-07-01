@@ -23,14 +23,14 @@ public class GameLoopManager : MonoBehaviour
         eventManager = new GameLoopEventManager(); 
         eventProxy = new SkillEventProxy();
     } 
-    public void BeforeStart()
+    public void PrepareReveal()
     {
+        timer = loopDuration + GameManager.Instance.Upgrade.GetRuntimeStat().ExtraDuration;
+        OnTick?.Invoke(Timer);
     }
     public void StartLoop()
     {
-        if (!IsGameLoopScene) return;
-        timer = loopDuration + GameManager.Instance.Upgrade.GetRuntimeStat().ExtraDuration;
-        OnTick?.Invoke(Timer);
+        if (!IsGameLoopScene) return; 
         isRunning = true;
 
         eventManager.Invoke(GameLoopEventType.LoopStarted);

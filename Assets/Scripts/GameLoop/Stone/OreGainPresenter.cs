@@ -28,6 +28,10 @@ public class OreGainPresenter : MonoBehaviour
         }
     }
 
+    public void OreGainRoutineCO(IReadOnlyList<OreAmount> list, Vector3 spawnPoint)
+    {
+        StartCoroutine(OreGainRoutine(list, spawnPoint));
+    }
     public IEnumerator OreGainRoutine(IReadOnlyList<OreAmount> list, Vector3 spawnPoint)
     {
         int amountPerDummy = Mathf.Max(1, OreAmountPerDummy);

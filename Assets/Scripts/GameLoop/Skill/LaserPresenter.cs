@@ -8,6 +8,9 @@ public class LaserPresenter : MonoBehaviour, IAttackPresenter
     {
         transform.position = targetPosition;
 
+
+        GameManager.Instance.AudioManager.PlaySFX(SFXType.LaserBeam);
+
         yield return laserFlipbook.PlayRoutine();
 
         // 여기부터는 플립북 끝난 뒤 로직

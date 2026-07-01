@@ -12,7 +12,7 @@ public class StonePresenter : MonoBehaviour
     [SerializeField] private float spawnDuration = 0.2f;
     [SerializeField] private Ease spawnEase = Ease.OutBack;
     [SerializeField] private ParticleSystem breakParticle;
-
+    [SerializeField] private float ReturnDelay = 2f;
     private Action OnBreakRouineEnd;
 
     private Tween currentTween;
@@ -42,7 +42,7 @@ public class StonePresenter : MonoBehaviour
         CreateTweens();
     }
 
-    public void Initialie()
+    public void Initialize()
     {
         DeathSequenceStarted = false;
 
@@ -96,6 +96,12 @@ public class StonePresenter : MonoBehaviour
     {
         StopCurrentTween();
 
+
+        if (breakParticle != null)
+        {
+            breakParticle.transform.SetParent(null, true); 
+        }
+
         solidObject.localPosition = defaultSolidLocalPosition;
         solidObject.localScale = Vector3.zero;
 
@@ -133,16 +139,16 @@ public class StonePresenter : MonoBehaviour
 
         GameManager.Instance.AudioManager.PlaySFXRandomPitch(SFXType.StoneCrush, 0.2f);
 
+        if (breakParticle != null)
+        {
+            breakParticle.Play();
+        }
+
         currentTween = breakSequence;
         breakSequence.Restart();
 
-        yield return breakSequence.WaitForCompletion();
+        yield return new WaitForSeconds(ReturnDelay);
 
-        if (breakParticle != null)
-        {
-            breakParticle.transform.SetParent(null, true);
-            breakParticle.Play();
-        }
 
         if (currentTween == breakSequence)
             currentTween = null;

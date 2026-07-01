@@ -45,6 +45,7 @@ public class ResultUI : MonoBehaviour
         {
             nextSessionButton.onClick.AddListener(() =>
             {
+                GameManager.Instance.GameLoop.Restart();
                 PlayButtonAnimation(nextSessionButton);
             });
         }

@@ -67,6 +67,10 @@ public class AudioManager : MonoBehaviour
     private float masterVolume = 1.0f;
     private float bgmVolume = 1.0f;
     private float sfxVolume = 1.0f;
+
+    public float MasterVolume => masterVolume;
+    public float BGMVolume => bgmVolume;
+    public float SFXVolume => sfxVolume;
     protected void Awake()
     {  
         sfxQueue = new Queue<AudioSource>();
@@ -308,6 +312,33 @@ public class AudioManager : MonoBehaviour
     public void SetSFXVolume(float volume)
     {
         sfxVolume = Mathf.Clamp01(volume);
+    }
+
+    public AudioSaveData CreateAudioSaveData()
+    {
+        return new AudioSaveData(masterVolume, bgmVolume, sfxVolume);
+    }
+
+    public void LoadAudioSaveData(AudioSaveData saveData)
+    {
+        if (saveData == null)
+        {
+            ResetAudioSaveData();
+            return;
+        }
+
+        masterVolume = Mathf.Clamp01(saveData.masterVolume);
+        bgmVolume = Mathf.Clamp01(saveData.bgmVolume);
+        sfxVolume = Mathf.Clamp01(saveData.sfxVolume);
+        UpdateBGMVolume();
+    }
+
+    public void ResetAudioSaveData()
+    {
+        masterVolume = 1f;
+        bgmVolume = 1f;
+        sfxVolume = 1f;
+        UpdateBGMVolume();
     }
     //현재 재생중인 BGM의 볼륨을 계산
     private void UpdateBGMVolume()

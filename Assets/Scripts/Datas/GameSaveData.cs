@@ -7,6 +7,7 @@ public class GameSaveData
     public List<UpgradeSaveData> upgrades = new();
     public List<OreAmount> ores = new();
     public List<TutorialSaveData> tutorials = new();
+    public AudioSaveData audio = new();
 }
 
 [Serializable]
@@ -32,5 +33,24 @@ public class TutorialSaveData
     {
         this.id = id;
         this.flag = flag;
+    }
+}
+
+[Serializable]
+public class AudioSaveData
+{
+    public float masterVolume = 1f;
+    public float bgmVolume = 1f;
+    public float sfxVolume = 1f;
+
+    public AudioSaveData()
+    {
+    }
+
+    public AudioSaveData(float masterVolume, float bgmVolume, float sfxVolume)
+    {
+        this.masterVolume = masterVolume;
+        this.bgmVolume = bgmVolume;
+        this.sfxVolume = sfxVolume;
     }
 }

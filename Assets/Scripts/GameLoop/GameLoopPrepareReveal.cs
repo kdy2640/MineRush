@@ -10,6 +10,7 @@ public class GameLoopPrepareSequence  : MonoBehaviour
     [SerializeField] int orePrewarmCount = 100;
     public IEnumerator Run()
     {
+        GameManager.Instance.GameLoop.PrepareReveal();
         pickaxePooler.Prewarm(pickaxePrewarmCount);
         orePooler.Prewarm(orePrewarmCount);
         yield return spawner.PrepareRoutine();

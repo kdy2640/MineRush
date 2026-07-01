@@ -70,6 +70,7 @@ public class SaveManager : MonoBehaviour
         GameManager.Instance.Upgrade.ResetUpgradeSaveData();
         GameManager.Instance.OreManager.ResetOreSaveData();
         GameManager.Instance.Tutorial.ResetSaveData();
+        GameManager.Instance.AudioManager.ResetAudioSaveData();
         DeleteSave();
         ApplySaveData(new()); 
     }
@@ -85,6 +86,7 @@ public class SaveManager : MonoBehaviour
         saveData.upgrades = GameManager.Instance.Upgrade.CreateUpgradeSaveData();
         saveData.ores = GameManager.Instance.OreManager.CreateOreSaveData();
         saveData.tutorials = GameManager.Instance.Tutorial.CreateTutorialSaveData();
+        saveData.audio = GameManager.Instance.AudioManager.CreateAudioSaveData();
         return saveData;
     }// 저장할 전체 데이터를 만든다.
 
@@ -93,5 +95,6 @@ public class SaveManager : MonoBehaviour
         GameManager.Instance.Upgrade.LoadUpgradeSaveData(saveData.upgrades);
         GameManager.Instance.OreManager.LoadOreSaveData(saveData.ores);
         GameManager.Instance.Tutorial.LoadTutorialSaveData(saveData.tutorials);
+        GameManager.Instance.AudioManager.LoadAudioSaveData(saveData.audio);
     }// 불러온 저장 데이터를 실제 게임 상태에 반영한다.
 }

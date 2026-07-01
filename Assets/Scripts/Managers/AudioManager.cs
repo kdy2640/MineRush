@@ -32,7 +32,8 @@ public enum SFXType
     PickaxeEnhancing,
     SessionStart,
     SessionEnd,
-    ResultPanelOre
+    ResultPanelOre,
+    UpgradeFail
 
 }
 public class AudioManager : MonoBehaviour

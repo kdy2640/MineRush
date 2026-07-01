@@ -17,7 +17,7 @@ MonoBehaviour:
   displayIcon: {fileID: -4221168193136403804, guid: 094812f2b12eea8439de7110d905b447, type: 3}
   baseOreAmounts:
   - oreType: 0
-    amount: 60
+    amount: 40
   amountMultiplier: 1.2
   maxLevel: 3
   statModifiers:

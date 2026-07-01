@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Copper
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: CopperPickaxeUpgrade
-  displayName: "\uAD6C\uB9AC\uACE1\uAC31\uC774 \uD574\uAE08"
+  displayName: "\uAD6C\uB9AC \uACE1\uAD2D\uC774 \uD574\uAE08"
   displayIcon: {fileID: 0}
   baseOreAmounts:
   - oreType: 0
-    amount: 400
+    amount: 200
   amountMultiplier: 1.2
   maxLevel: 1
   statModifiers:

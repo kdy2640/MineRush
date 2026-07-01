@@ -17,13 +17,13 @@ MonoBehaviour:
   displayIcon: {fileID: -5975515620481192197, guid: a3b22eae21e54944e84cd783f04cb921, type: 3}
   baseOreAmounts:
   - oreType: 3
-    amount: 900
+    amount: 600
   amountMultiplier: 1.2
   maxLevel: 3
   statModifiers:
   - statType: 11
     modifierType: 0
-    value: 0.05
+    value: 0.03
     oreType: 3
   skill: {fileID: 0}
   levelBasedCosts: []

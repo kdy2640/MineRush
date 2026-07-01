@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Iron
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: IronPickaxeUpgrade
-  displayName: "\uCCA0 \uACE1\uAC31\uC774 \uD574\uAE08"
+  displayName: "\uCCA0 \uACE1\uAD2D\uC774 \uD574\uAE08"
   displayIcon: {fileID: 0}
   baseOreAmounts:
   - oreType: 0
-    amount: 600
+    amount: 300
   - oreType: 1
-    amount: 800
+    amount: 400
   amountMultiplier: 1.2
   maxLevel: 1
   statModifiers:

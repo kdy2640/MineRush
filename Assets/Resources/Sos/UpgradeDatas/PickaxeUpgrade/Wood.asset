@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wood
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: WoodPickaxeUpgrade
-  displayName: "\uB098\uBB34 \uACE1\uAC31\uC774 \uD574\uAE08"
+  displayName: "\uB098\uBB34 \uACE1\uAD2D\uC774 \uD574\uAE08"
   displayIcon: {fileID: 0}
   baseOreAmounts: []
   amountMultiplier: 1.2

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Legendary
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: LegendaryPickaxeUpgrade
-  displayName: "\uB808\uC804\uB354\uB9AC \uACE1\uAC31\uC774 \uD574\uAE08"
+  displayName: "\uC804\uC124\uC758 \uACE1\uAD2D\uC774 \uD574\uAE08"
   displayIcon: {fileID: 0}
   baseOreAmounts:
   - oreType: 0

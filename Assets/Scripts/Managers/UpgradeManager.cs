@@ -236,8 +236,17 @@ public class UpgradeManager : MonoBehaviour
     // 스킬을 따로 저장하지 않고 업그레이드 레벨을 기준으로 복구한다.
     public void ResetUpgradeSaveData()
     {
+        foreach (UpgradeState state in upgradeStates)
+        {
+            if (state?.data?.skill == null)
+                continue;
+
+            GameManager.Instance.SkillManager.SetSkillLevel(state.data.skill.id, 0);
+        }
+
         upgradeStates.Clear();
+        upgradeStateMap.Clear();
+
         RecalculateRuntimeStat();
-        ApplyLoadedSkillLevels();
     }
 }

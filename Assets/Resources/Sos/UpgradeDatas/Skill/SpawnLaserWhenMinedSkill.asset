@@ -18,7 +18,7 @@ MonoBehaviour:
   baseOreAmounts:
   - oreType: 1
     amount: 75
-  amountMultiplier: 1.5
+  amountMultiplier: 1.3
   maxLevel: 10
   statModifiers: []
   skill: {fileID: -860146822385286539, guid: 23651ba0a263b3647afb6b45309bbb6b, type: 3}

@@ -72,9 +72,15 @@ public class AutoMiningPanelController : MonoBehaviour
     private void OnDisable()
     {
         isPanelFocus = false;
-        mineVisual.SetActive(isPanelFocus);
-        orePanel.SetDelayRefresh(isPanelFocus);
-        orePanel.RefreshUI();
+
+        if (mineVisual != null)
+            mineVisual.SetActive(false);
+
+        if (orePanel != null)
+        {
+            orePanel.SetDelayRefresh(false);
+            orePanel.RefreshUI();
+        }
     }
 
     private void Update()

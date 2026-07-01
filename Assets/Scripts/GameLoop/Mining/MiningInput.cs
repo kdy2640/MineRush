@@ -54,10 +54,12 @@ public class MiningInput : MonoBehaviour
 
     private void SpawnLaser()
     {
+        if (!GameManager.Instance.GameLoop.IsRunning) return;
         ResolveRandomMining(MiningType.Laser);
     }
     private void SpawnBomb()
     { 
+        if (!GameManager.Instance.GameLoop.IsRunning) return;
         ResolveRandomMining(MiningType.Bomb);
     }
 
@@ -87,7 +89,7 @@ public class MiningInput : MonoBehaviour
     }   
     private void ResolveTargetMining(Vector2 position,MiningType type)
     {
-        List<StoneActor> stones = DetectOre(position);
+        List<StoneActor> stones = DetectOre(position, GetMiningRangeByType(type));
         miningSequence.RequestMines(stones, Vector3.zero, type); 
     }
 
@@ -95,12 +97,12 @@ public class MiningInput : MonoBehaviour
     {
         if (!spawner.GetRandomStonePosition(out Vector2Int position2D)) return;
         Vector3 position = GridCalculator.GridToWorld(position2D);
-        List<StoneActor> stones = DetectOre(position);
+        List<StoneActor> stones = DetectOre(position, GetMiningRangeByType(type));
         miningSequence.RequestMines(stones, position, type);
     }
-    private List<StoneActor> DetectOre(Vector2 position)
+    private List<StoneActor> DetectOre(Vector2 position,float range)
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(position, GetMiningRange(), oreLayer);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(position, range, oreLayer);
 
         Debug.Log($"감지된 광석 수 : {hits.Length}");
 
@@ -112,7 +114,20 @@ public class MiningInput : MonoBehaviour
         }
         return stones;
     }
-      
+    
+    private float GetMiningRangeByType(MiningType type)
+    {
+        switch(type)
+        {
+            case MiningType.Pickaxe:
+                return GetMiningRange();
+            case MiningType.Laser:
+                return 1.5f;
+            case MiningType.Bomb:
+                return GameManager.Instance.Upgrade.GetRuntimeStat().BombRadius;
+        }
+        return 1;
+    }    
 
     private void OnDrawGizmos()
     {

@@ -17,6 +17,7 @@ public class UpgradePanelEntry
 {
     public UpgradePanelType type;
     public GameObject panelObject;
+    public GameObject tutorialPanelObject;
     public Sprite filterImg;
 }
 
@@ -52,6 +53,33 @@ public class UI_UpgradeUIController : MonoBehaviour
         currentPanel = targetPanel;
         SetPanelActive(currentPanel, true);
         filterTargetBG.sprite = targetPanel.filterImg;
+        switch (targetPanel.type)
+        {
+            case UpgradePanelType.UpgradeNode:
+                if (!GameManager.Instance.Tutorial.GetTutorialProgressed(TutorialManager.TutorialType.UpgradeNode))
+                {
+                    targetPanel.tutorialPanelObject.SetActive(true);
+                    GameManager.Instance.Tutorial.ResolveTutorial(TutorialManager.TutorialType.UpgradeNode);
+                    GameManager.Instance.Save.SaveGame();
+                }
+                break;
+            case UpgradePanelType.AutoMining:
+                if (!GameManager.Instance.Tutorial.GetTutorialProgressed(TutorialManager.TutorialType.UpgradeAutoMine))
+                {
+                    targetPanel.tutorialPanelObject.SetActive(true);
+                    GameManager.Instance.Tutorial.ResolveTutorial(TutorialManager.TutorialType.UpgradeAutoMine);
+                    GameManager.Instance.Save.SaveGame();
+                }
+                break;
+            case UpgradePanelType.Forge:
+                if (!GameManager.Instance.Tutorial.GetTutorialProgressed(TutorialManager.TutorialType.UpgradePickaxe))
+                {
+                    targetPanel.tutorialPanelObject.SetActive(true);
+                    GameManager.Instance.Tutorial.ResolveTutorial(TutorialManager.TutorialType.UpgradePickaxe);
+                    GameManager.Instance.Save.SaveGame();
+                }
+                break;
+        }
     } // 원하는 패널 하나만 켜는 함수.
     // 기존에 켜져 있던 패널은 끄고, 인자로 받은 타입의 패널만 켠다.
 

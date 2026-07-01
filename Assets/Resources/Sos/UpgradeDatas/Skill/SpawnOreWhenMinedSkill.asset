@@ -23,7 +23,7 @@ MonoBehaviour:
   levelBasedCosts:
   - oreType: 0
     startLevel: 0
-    baseAmount: 150
+    baseAmount: 100
     amountMultiplier: 1.01
   - oreType: 1
     startLevel: 10

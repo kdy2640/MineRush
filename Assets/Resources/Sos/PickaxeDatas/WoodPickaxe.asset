@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WoodPickaxe
   m_EditorClassIdentifier: Assembly-CSharp::PickaxesDataSO
   tier: 0
-  displayName: "\uB098\uBB34 \uACE1\uAC31\uC774"
+  displayName: "\uB098\uBB34 \uACE1\uAD2D\uC774"
   icon: {fileID: 21300000, guid: 56194fa4cdd1c7d4ab7abeaef7668ef5, type: 3}
   upgradeData: {fileID: 11400000, guid: dc3f90f7199c4764bae5f3de19b92696, type: 2}
   miningPower: 0

@@ -1760,6 +1760,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1726152518479427233, guid: ca860e8da5faf7b439320d00752560cd, type: 3}
+      propertyPath: previousConnectedNodes.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282407255870416708, guid: ca860e8da5faf7b439320d00752560cd, type: 3}
+      propertyPath: previousConnectedNodes.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6243253511003975520, guid: ca860e8da5faf7b439320d00752560cd, type: 3}
+      propertyPath: previousConnectedNodes.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7349725197191725378, guid: ca860e8da5faf7b439320d00752560cd, type: 3}
       propertyPath: maxZoom
       value: 1.5
@@ -1771,10 +1783,6 @@ PrefabInstance:
     - target: {fileID: 9131441707070775071, guid: ca860e8da5faf7b439320d00752560cd, type: 3}
       propertyPath: m_Name
       value: UpgradeNodePanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 9131441707070775071, guid: ca860e8da5faf7b439320d00752560cd, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -12,13 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f17ab4c7a91bd145af47ff207404d92, type: 3}
   m_Name: DemonstrationOnly
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
-  id: 
-  displayName: 
-  displayIcon: {fileID: 0}
-  baseOreAmounts: []
+  id: DemonstrationOnly
+  displayName: "\uC2DC\uC5F0\uC6A9 \uBCF4\uC0C1 \uBC30\uC728 \uC99D\uAC00"
+  displayIcon: {fileID: -8397615044459118022, guid: 664e451dad62dc34bbe1762169e479a7, type: 3}
+  baseOreAmounts:
+  - oreType: 0
+    amount: 0
   amountMultiplier: 1.2
-  maxLevel: 1
-  statModifiers: []
+  maxLevel: 5
+  statModifiers:
+  - statType: 7
+    modifierType: 2
+    value: 10
+    oreType: -1
   skill: {fileID: 0}
   levelBasedCosts: []
   levelBasedRewards: []

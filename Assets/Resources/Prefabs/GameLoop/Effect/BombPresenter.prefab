@@ -175,8 +175,8 @@ MonoBehaviour:
   bombFlipBook: {fileID: 7423127786086976583}
   solidBomb: {fileID: 1986102868929441526}
   popupTime: 0.12
-  pulseInTime: 0.5
-  pulseOutTime: 0.75
+  pulseInTime: 0.25
+  pulseOutTime: 0.375
   startScale: 0.2
   normalScale: 0.5
   pulseScale: 0.6

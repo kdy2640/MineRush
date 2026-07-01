@@ -17,6 +17,9 @@ public class MainMenuUI : MonoBehaviour
 
     [SerializeField] private Button startButtonComponent;
     [SerializeField] private Button exitButtonComponent;
+    
+    [Header("Tutorial")]
+    [SerializeField] private GameObject tutorialPanel;
      
 
     [Header("Animation")]
@@ -73,7 +76,19 @@ public class MainMenuUI : MonoBehaviour
     }
     private void OnClickStart()
     {
+        if (!GameManager.Instance.Tutorial.GetTutorialProgressed(TutorialManager.TutorialType.BeforeGameLoop))
+        {
+            tutorialPanel.SetActive(true);
+            GameManager.Instance.Tutorial.ResolveTutorial(TutorialManager.TutorialType.BeforeGameLoop);
+            GameManager.Instance.Save.SaveGame();
+            return;
+        }
         GameManager.Instance.Scene.ChangeScene(SceneType.Upgrade);
+    }
+
+    public void TutorialBtnClick()
+    {
+        GameManager.Instance.Scene.ChangeScene(SceneType.GameLoop);
     }
     public void OnClickExit()
     {

@@ -43,7 +43,7 @@ public class NodeUpgradeEffect : MonoBehaviour
         }
         else
         {
-            //GameManager.Instance.AudioManager.PlaySFX(SFXType.UpgradeFail);
+            GameManager.Instance.AudioManager.PlaySFX(SFXType.UpgradeFail);
         }
     }
 }

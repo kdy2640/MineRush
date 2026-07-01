@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Gold
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   id: GoldPickaxeUpgrade
-  displayName: "\uAE08 \uACE1\uAC31\uC774 \uD574\uAE08"
+  displayName: "\uAE08 \uACE1\uAD2D\uC774 \uD574\uAE08"
   displayIcon: {fileID: 0}
   baseOreAmounts:
   - oreType: 1
-    amount: 1000
+    amount: 500
   - oreType: 2
-    amount: 1500
+    amount: 800
   amountMultiplier: 1.2
   maxLevel: 1
   statModifiers:

@@ -158,17 +158,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5ea133294bc40d4295bd5b32d9575b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_ButtonClickSound
---- !u!114 &178715778 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7202608512377349442, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
-  m_PrefabInstance: {fileID: 1665736277}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1665736289}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!114 &178715779 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9087948830863054867, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
@@ -283,6 +272,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &710003868 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4294625823316329872, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
+  m_PrefabInstance: {fileID: 1665736277}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665736286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!114 &792309027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1470,7 +1470,7 @@ PrefabInstance:
     - target: {fileID: 8104940527999873247, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
       propertyPath: m_TargetGraphic
       value: 
-      objectReference: {fileID: 178715778}
+      objectReference: {fileID: 710003868}
     - target: {fileID: 8104940527999873247, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
       propertyPath: m_Navigation.m_Mode
       value: 0

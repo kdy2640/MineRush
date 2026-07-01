@@ -25,7 +25,7 @@ public class SkillManager : MonoBehaviour
         skills.Add(skillInstance.id, skillInstance);
     }
 
-    public void SetSkillLevel(string id, float level)
+    public void SetSkillLevel(string id, int level)
     {
         if (skills.TryGetValue(id, out SkillBase skill))
         {

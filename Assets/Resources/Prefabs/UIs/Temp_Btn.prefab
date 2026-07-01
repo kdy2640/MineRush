@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 447767848274273628}
   - component: {fileID: 674577977198750825}
   - component: {fileID: 1184155572337487916}
+  - component: {fileID: 3854640219328302699}
   m_Layer: 5
   m_Name: Temp_Btn
   m_TagString: Untagged
@@ -117,10 +118,23 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 674577977198750825}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3854640219328302699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2313289536565849921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5ea133294bc40d4295bd5b32d9575b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI_ButtonClick
+  button: {fileID: 1184155572337487916}
 --- !u!1 &8854098439014035535
 GameObject:
   m_ObjectHideFlags: 0

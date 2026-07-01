@@ -29,7 +29,14 @@ public class SpawnOreWhenSecondSkill : SkillBase
         else
         {
             float nextTimeInterval = GetTimeInterval(level + 1);
-            desc = $"{currentTimeInterval:0.##}초마다 -> {nextTimeInterval:0.##}초마다";
+            if (level == 0)
+            {
+                desc = $"적용X -> {nextTimeInterval:0.##}초마다";
+            }
+            else
+            {
+                desc = $"{currentTimeInterval:0.##}초마다 -> {nextTimeInterval:0.##}초마다";
+            }
         }
 
         return description.Replace("{계수}", desc);
@@ -37,6 +44,8 @@ public class SpawnOreWhenSecondSkill : SkillBase
 
     public void HandleSecond(float time)
     {
+        if(level == 0)
+            return;
         float currentTimeInterval = GetTimeInterval(level);
 
         if (Time.time - lastActiveTime > currentTimeInterval)
@@ -46,8 +55,12 @@ public class SpawnOreWhenSecondSkill : SkillBase
         }
     }
 
-    private float GetTimeInterval(float targetLevel)
+    private float GetTimeInterval(int targetLevel)
     {
-        return timeIntervalPerLevel / (targetLevel + 1f);
+        if (targetLevel == 0)
+        {
+            return 0f;
+        }
+        return (timeIntervalPerLevel / targetLevel);
     }
 }

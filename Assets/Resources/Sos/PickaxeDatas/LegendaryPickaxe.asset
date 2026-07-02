@@ -18,5 +18,5 @@ MonoBehaviour:
   upgradeData: {fileID: 11400000, guid: a5e45802fa3455947b5fa764cb87979f, type: 2}
   miningPower: 4
   miningSpeed: 4
-  miningRadius: 4
+  miningRadius: 0.4
   criticalChance: 0.5

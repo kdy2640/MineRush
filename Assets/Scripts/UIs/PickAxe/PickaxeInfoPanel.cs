@@ -58,7 +58,7 @@ public class PickaxeInfoPanel : MonoBehaviour
         RightMouseGuidePanel.SetActive(false);
         if (currentPickaxe.Tier == runtimeTier)
         {
-            CostTitle.text = "장착 중인 현재 곡갱이";
+            CostTitle.text = "장착 중인 현재 곡괭이";
         }
         else if (currentPickaxe.Tier < runtimeTier)
         {
@@ -66,7 +66,7 @@ public class PickaxeInfoPanel : MonoBehaviour
         }
         else if (currentPickaxe.Tier > runtimeTier + 1)
         {
-            CostTitle.text = "이전 곡갱이를 먼저 해금해주세요.";
+            CostTitle.text = "이전 곡괭이를 먼저 해금해주세요.";
         }
         else
         {

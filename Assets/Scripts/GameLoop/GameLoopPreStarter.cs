@@ -11,9 +11,13 @@ public class GameLoopPreStart : MonoBehaviour
         startUI.gameObject.SetActive(false);
     }
     public IEnumerator Run()
-    {  
+    {
+        GameManager.Instance.AudioManager.PlaySFX(SFXType.FieldPlacement);
         if (stoneSpawner != null)
            yield return stoneSpawner.PreStartRoutine();
+
+
+        GameManager.Instance.AudioManager.PlaySFX(SFXType.SessionStart);
 
         if (startUI != null)
         {

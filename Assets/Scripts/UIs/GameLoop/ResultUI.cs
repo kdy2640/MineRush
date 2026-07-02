@@ -212,6 +212,7 @@ public class ResultUI : MonoBehaviour
 
             itemSeq.AppendCallback(() =>
             {
+                GameManager.Instance.AudioManager.PlaySFX(SFXType.ResultPanelOre);
                 item.ShowMultiplier(rewardMultiplier);
             });
 
@@ -219,6 +220,7 @@ public class ResultUI : MonoBehaviour
 
             itemSeq.AppendCallback(() =>
             {
+                GameManager.Instance.AudioManager.PlaySFX(SFXType.ResultPanelOre);
                 item.SetAmount(bonusAmount);
                 item.transform.DOKill();
             });

@@ -103,9 +103,7 @@ public class MiningInput : MonoBehaviour
     private List<StoneActor> DetectOre(Vector2 position,float range)
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(position, range, oreLayer);
-
-        Debug.Log($"감지된 광석 수 : {hits.Length}");
-
+         
         List<StoneActor> stones = new List<StoneActor>();
         foreach (Collider2D hit in hits)
         {

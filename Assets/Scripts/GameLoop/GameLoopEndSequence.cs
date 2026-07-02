@@ -47,6 +47,8 @@ public class GameLoopEndSequence : MonoBehaviour
     }
     private IEnumerator EndGameRoutine()
     {
+
+        GameManager.Instance.AudioManager.PlaySFX(SFXType.SessionEnd);
         endUI.gameObject.SetActive(true);
         yield return endUI.PlayRoutine();
         float rewardMultipler = GameManager.Instance.Upgrade.GetRuntimeStat().RewardMultiplier;

@@ -140,6 +140,7 @@ public class StonePresenter : MonoBehaviour
     {
         StopCurrentTween();
 
+        GameManager.Instance.AudioManager.PlaySFXRandomPitch(SFXType.StoneHit, 0.2f);
         GameManager.Instance.AudioManager.PlaySFXRandomPitch(SFXType.StoneCrush, 0.2f);
 
         if (breakParticle != null)

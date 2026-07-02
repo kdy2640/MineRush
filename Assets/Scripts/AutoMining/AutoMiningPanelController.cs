@@ -200,10 +200,18 @@ public class AutoMiningPanelController : MonoBehaviour
 
     private void RefreshCostText()
     {
-        costText.text = UpgradeOreCostTextFormatter.GetAllOreCostText(
-            autoMiner.GetCurrentCost(),
-            GameManager.Instance.OreManager
-        );
+        if (GameManager.Instance.Upgrade.IsMaxLevel(autoMiner.State))
+        {
+            costText.alignment = TextAlignmentOptions.Center;
+            costText.text = "<color=#6A4CFF>최대 레벨</color>";
+        }
+        else
+        {
+            costText.text = UpgradeOreCostTextFormatter.GetAllOreCostText(
+                autoMiner.GetCurrentCost(),
+                GameManager.Instance.OreManager
+            );
+        }
         RebuildLayout();
     }
 
@@ -235,11 +243,12 @@ public class AutoMiningPanelController : MonoBehaviour
         RefreshUpgradeBtnObj();
         RefreshInfoPanel();
         gaugeTimer = 0f;
-        RefreshSlider();
+        RefreshSlider(); 
+        orePanel.RefreshUI();
     }
 
     public void ClaimBtnClick()
-    {
+    { 
         autoMiner.Claim();
         RefreshRewardText();
         gaugeTimer = 0f;

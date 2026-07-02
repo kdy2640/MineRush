@@ -778,6 +778,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ResultUI(Panel)
       objectReference: {fileID: 0}
+    - target: {fileID: 5806847528019101946, guid: 164d89488ea34b043a7086ef12ab0e63, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7041091473974723780, guid: 164d89488ea34b043a7086ef12ab0e63, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1180,6 +1184,10 @@ PrefabInstance:
     - target: {fileID: 6326296583943717364, guid: 81c89fb438d670f418f40532d226e08e, type: 3}
       propertyPath: m_Name
       value: EndUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7913694283182649510, guid: 81c89fb438d670f418f40532d226e08e, type: 3}
+      propertyPath: m_text
+      value: "\uCC44\uAD74 \uC885\uB8CC!"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

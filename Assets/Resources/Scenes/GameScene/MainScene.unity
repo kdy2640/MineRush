@@ -172,6 +172,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
+      propertyPath: sfxClips.Array.data[13].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8a9520591e9b54d43a713a99080f7a25, type: 3}
+    - target: {fileID: 5871787449493510163, guid: 233ea7de9488d52429da75ab203534dd, type: 3}
       propertyPath: sfxClips.Array.data[3].volume
       value: 0.5
       objectReference: {fileID: 0}

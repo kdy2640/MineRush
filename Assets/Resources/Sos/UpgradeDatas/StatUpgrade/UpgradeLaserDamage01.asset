@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f17ab4c7a91bd145af47ff207404d92, type: 3}
-  m_Name: UpgradeMiningRadius02
+  m_Name: UpgradeLaserDamage01
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
-  id: 'UpgradeMiningRadius02 '
-  displayName: "\uCC44\uAD74 \uBC94\uC704 \uC99D\uAC00 II "
-  displayIcon: {fileID: -2179651812193520410, guid: d0777f39bfb105843bee067002335b10, type: 3}
+  id: 'UpgradeLaserDamage01 '
+  displayName: "\uB808\uC774\uC800 \uACF5\uACA9\uB825 \uC99D\uAC00 I"
+  displayIcon: {fileID: 5613571954580720426, guid: e1b46597bd8aaef47b682ddc0da55fd6, type: 3}
   baseOreAmounts:
-  - oreType: 1
-    amount: 60
-  amountMultiplier: 1.3
-  maxLevel: 3
+  - oreType: 2
+    amount: 150
+  amountMultiplier: 1.5
+  maxLevel: 5
   statModifiers:
-  - statType: 3
+  - statType: 12
     modifierType: 0
-    value: 0.15
+    value: 2
     oreType: -1
   skill: {fileID: 0}
   levelBasedCosts: []

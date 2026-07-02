@@ -28,6 +28,9 @@ public class AutoMiningPanelController : MonoBehaviour
 
     [SerializeField] private GameObject mineVisual;
     [SerializeField] private UI_OrePanel orePanel;
+
+
+    [SerializeField] private GameObject upgradeBtnObj;
     private void Awake()
     {
         if (autoMiner == null)
@@ -67,6 +70,7 @@ public class AutoMiningPanelController : MonoBehaviour
         needRefreshNextFrame = true;
         mineVisual.SetActive(isPanelFocus);
         orePanel.SetDelayRefresh(isPanelFocus);
+        RefreshUpgradeBtnObj();
     }
 
     private void OnDisable()
@@ -118,6 +122,11 @@ public class AutoMiningPanelController : MonoBehaviour
         }
 
         RefreshSlider();
+    }
+
+    private void RefreshUpgradeBtnObj()
+    {
+        upgradeBtnObj.SetActive(!GameManager.Instance.Upgrade.IsMaxLevel(autoMiner.State));
     }
 
     private string GetAllOreRewardText()
@@ -223,6 +232,7 @@ public class AutoMiningPanelController : MonoBehaviour
     public void UpgradeBtnClick()
     {
         if(!autoMiner.TryUpgradeWithClaim()) return;
+        RefreshUpgradeBtnObj();
         RefreshInfoPanel();
         gaugeTimer = 0f;
         RefreshSlider();

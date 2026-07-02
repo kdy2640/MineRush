@@ -137,6 +137,7 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         nodePanelController.ShowDescriptionPanel(false);
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         if (connectedNodes == null)
@@ -194,6 +195,8 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         CacheConnectedNodes();
     }
 
+    
+
     [ContextMenu("Refresh Node By UpgradeData")]
     private void RefreshNodeByUpgradeData()
     {
@@ -212,10 +215,7 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 upgradeIcon.sprite = null;
             }
 
-#if UNITY_EDITOR
             RefreshButtonEvent();
-#endif
-
             return;
         }
 
@@ -227,12 +227,9 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             upgradeIcon.sprite = upgradeData.displayIcon;
         }
 
-#if UNITY_EDITOR
         RefreshButtonEvent();
-#endif
-    } // UpgradeData 기준으로 노드 이름, 아이콘, 버튼 OnClick 이벤트를 갱신하는 함수.
+    } // UpgradeData 기준으로 노드 ID, 오브젝트 이름, 아이콘, 버튼 이벤트를 에디터에서 자동 갱신한다.
 
-#if UNITY_EDITOR
     private void RefreshButtonEvent()
     {
         if (button == null)
@@ -254,7 +251,7 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         EditorUtility.SetDirty(button);
         EditorUtility.SetDirty(this);
-    } // 에디터에서 Button OnClick에 TryBuy 함수를 인스펙터 이벤트로 등록하는 함수.
+    } // Button OnClick에 TryBuy가 없으면 에디터 인스펙터 이벤트로 자동 등록한다.
 
     private bool HasPersistentTryBuyEvent()
     {
@@ -270,14 +267,13 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         }
 
         return false;
-    } // Button OnClick에 이미 TryBuy가 등록되어 있는지 확인해서 중복 등록을 막는 함수.
-#endif
+    } // Button OnClick에 이미 TryBuy가 등록되어 있는지 검사해서 중복 등록을 막는다.
 
     private string GetDefaultNodeName()
     {
         int siblingIndex = transform.GetSiblingIndex();
         return $"Node{siblingIndex + 1}";
-    } // UpgradeData가 없을 때 사용하는 기본 노드 이름을 반환하는 함수.
+    } // UpgradeData가 없을 때 형제 순서를 기준으로 기본 노드 이름을 만든다.
 
     private string GetUpgradeNodeName()
     {
@@ -287,7 +283,7 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         }
 
         return upgradeData.name;
-    } // UpgradeData가 있을 때 사용할 노드 이름을 반환하는 함수.
+    } // UpgradeData가 있을 때 displayName을 우선 사용하고, 없으면 SO 이름을 노드 이름으로 사용한다.
 
     private void RemoveInvalidConnectedNodes()
     {
@@ -298,7 +294,7 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 connectedNodes.RemoveAt(i);
             }
         }
-    }
+    } // 자기 자신을 연결 노드 목록에서 제거해서 셀프 연결을 막는다.
 
     private void RemoveDuplicateConnectedNodes()
     {
@@ -320,7 +316,7 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 }
             }
         }
-    }
+    } // 같은 노드가 연결 목록에 여러 번 들어간 경우 중복 항목을 제거한다.
 
     private void RemoveRemovedBidirectionalConnections()
     {
@@ -339,13 +335,10 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             if (previousNode.connectedNodes.Contains(this))
             {
                 previousNode.connectedNodes.Remove(this);
-
-#if UNITY_EDITOR
                 EditorUtility.SetDirty(previousNode);
-#endif
             }
         }
-    }
+    } // 이전에는 연결되어 있었지만 지금은 제거된 노드에서, 반대편 연결도 같이 제거한다.
 
     private void SyncBidirectionalConnections()
     {
@@ -359,13 +352,10 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             if (!connectedNode.connectedNodes.Contains(this))
             {
                 connectedNode.connectedNodes.Add(this);
-
-#if UNITY_EDITOR
                 EditorUtility.SetDirty(connectedNode);
-#endif
             }
         }
-    }
+    } // 현재 노드가 A->B로 연결되면 B->A 연결도 자동으로 맞춰준다.
 
     private void CacheConnectedNodes()
     {
@@ -381,8 +371,8 @@ public class UpgradeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             previousConnectedNodes.Add(connectedNode);
         }
 
-#if UNITY_EDITOR
         EditorUtility.SetDirty(this);
+    } // 현재 연결 상태를 캐싱해서 다음 에디터 갱신 때 삭제된 연결을 비교할 수 있게 한다.
+
 #endif
-    }
 }

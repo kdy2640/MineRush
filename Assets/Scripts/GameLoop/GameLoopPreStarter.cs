@@ -12,7 +12,6 @@ public class GameLoopPreStart : MonoBehaviour
     }
     public IEnumerator Run()
     {
-        GameManager.Instance.AudioManager.PlaySFX(SFXType.FieldPlacement);
         if (stoneSpawner != null)
            yield return stoneSpawner.PreStartRoutine();
 

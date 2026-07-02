@@ -29,6 +29,7 @@ public class UI_UpgradeUIController : MonoBehaviour
 
     private UpgradePanelEntry currentPanel;
 
+    public UpgradePanelType CurrentPanelType => currentPanel?.type ?? defaultPanel;
     private void Awake()
     {
         HideAllPanels();
@@ -116,4 +117,5 @@ public class UI_UpgradeUIController : MonoBehaviour
         panel.panelObject.SetActive(active);
     } // 실제 패널 오브젝트를 켜고 끄는 함수.
     // panel이나 panelObject가 비어있으면 오류 방지를 위해 그냥 return한다.
+
 }

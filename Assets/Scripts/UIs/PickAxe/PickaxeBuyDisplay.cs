@@ -28,6 +28,10 @@ public class PickaxeBuyDisplay : MonoBehaviour
     [SerializeField] private Image pickaxeIconGlowRayImg;
     [SerializeField] private float extraScale = 15f;
     [SerializeField] private UnityEvent onDisplayComplete;
+
+    [SerializeField] private float iconAppearDuration = 0.7f;
+    [SerializeField] private float finalScaleDelay = 1.3f;
+    [SerializeField] private float finalScaleDuration = 0.7f;
     private Vector3 originalScale;
     private Sequence buySequence;
 
@@ -125,19 +129,21 @@ public class PickaxeBuyDisplay : MonoBehaviour
         
         buySequence = DOTween.Sequence();
         Sequence pickaxeIconSeq = DOTween.Sequence();
-        
+
         pickaxeIconSeq.Append(pickaxeIconRect
-            .DOScale(originalScale, 0.7f)
+            .DOScale(originalScale, iconAppearDuration)
             .From(Vector3.zero)
             .SetEase(Ease.OutBack));
         //아이콘 확대
-        
+
         pickaxeIconSeq.Append(pickaxeIconRect
-            .DOScale(originalScale * extraScale, 0.7f)
-            .SetEase(Ease.OutQuad).SetDelay(1.3f));
+            .DOScale(originalScale * extraScale, finalScaleDuration)
+            .SetEase(Ease.OutQuad).SetDelay(finalScaleDelay));
+
         pickaxeIconSeq.Join(pickaxeIconImg
-            .DOFade(0f, 0.7f)
+            .DOFade(0f, finalScaleDuration)
             .From(1f));
+
         //아이콘 확대 및 아이콘 페이드
         pickaxeIconSeq.OnComplete(() =>
         {

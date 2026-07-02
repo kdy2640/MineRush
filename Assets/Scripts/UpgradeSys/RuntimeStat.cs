@@ -31,8 +31,8 @@ public class RuntimeStat
             OreFragmentChanceArr[i] = 0.1f;
             OrePureChanceArr[i] = 0.05f;
         }
-        laserDamage = 10f; 
-        bombDamage = 20f;
+        laserDamage = 5f; 
+        bombDamage = 5f;
         bombRadius = 1f; 
     }
     [Header("채굴 스탯")]

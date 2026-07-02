@@ -581,6 +581,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5ea133294bc40d4295bd5b32d9575b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_ButtonClickSound
+--- !u!114 &1240334792 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3174115785896414293, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
+  m_PrefabInstance: {fileID: 1665736277}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 065c100d0b8e95a41a063bd5ef2e3740, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI_UpgradeUIController
 --- !u!114 &1301241835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -839,6 +850,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 1013076768218624318, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
+      propertyPath: upgradeUIController
+      value: 
+      objectReference: {fileID: 1240334792}
     - target: {fileID: 1039191929790455594, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -918,6 +933,18 @@ PrefabInstance:
     - target: {fileID: 1455634052134440733, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558867381678516290, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
+      propertyPath: finalScaleDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558867381678516290, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
+      propertyPath: finalScaleDuration
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558867381678516290, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
+      propertyPath: iconAppearDuration
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1769451295391452287, guid: 2e1c778cf1c71a946a88df6e58624fc7, type: 3}
       propertyPath: m_AnchorMax.y

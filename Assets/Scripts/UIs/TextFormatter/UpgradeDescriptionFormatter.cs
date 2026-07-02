@@ -84,6 +84,15 @@ public static class UpgradeDescriptionTextFormatter
                 GetStatValueDescription($"{OreTextFormatter.GetDisplayName(modifier.oreType)} 순수 광석 출현 확률 :\n",
                     modifier.value, level, isMaxLevel, ValueFormat.RatioPercent),
 
+            StatType.LaserDamage =>
+                GetStatValueDescription("레이저 공격력 :\n", modifier.value, level, isMaxLevel, ValueFormat.Number),
+
+            StatType.BombDamage =>
+                GetStatValueDescription("폭탄 공격력 :\n", modifier.value, level, isMaxLevel, ValueFormat.Number),
+
+            StatType.BombRadius =>
+                GetStatValueDescription("폭탄 범위 :\n", modifier.value, level, isMaxLevel, ValueFormat.Number),
+
             _ =>
                 "알 수 없는 스탯입니다"
         };

@@ -193,7 +193,7 @@ public class ResultUI : MonoBehaviour
         if (oreAmounts == null)
             yield break;
 
-        float startDelay = 0.8f;
+        float startDelay = 0.2f;
         float interval = 0.2f;
 
         Sequence totalSeq = DOTween.Sequence();
@@ -220,10 +220,10 @@ public class ResultUI : MonoBehaviour
 
             itemSeq.AppendCallback(() =>
             {
-                GameManager.Instance.AudioManager.PlaySFX(SFXType.ResultPanelOre);
                 item.SetAmount(bonusAmount);
                 item.transform.DOKill();
-            });
+                GameManager.Instance.AudioManager.PlaySFX(SFXType.ResultPanelOre);
+            }); 
 
             itemSeq.Append(item.transform.DOScale(1.2f, 0.12f));
             itemSeq.Append(item.transform.DOScale(1f, 0.12f));

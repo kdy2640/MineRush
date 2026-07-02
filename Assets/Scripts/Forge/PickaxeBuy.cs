@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PickaxeBuy : MonoBehaviour
 {
+    [SerializeField] private UI_UpgradeUIController upgradeUIController;
     [SerializeField] private PickAxesPanel pickAxesPanel;
     [SerializeField] private InputActionReference rightClickAction; // 인스펙터에서 인풋액션 할당
     [SerializeField] private float holdDuration = 1.7f; // 누르고 있을 시간.
@@ -15,7 +16,7 @@ public class PickaxeBuy : MonoBehaviour
     private bool isHolding;
     private bool isUpgradeVisualPlaying; // 업그레이드 연출이 끝나기 전까지 입력을 막는 플래그 변수
     private float holdTimer;
-
+    private int holdSfxStep = 0; // 홀드 진행 단계에 따라 SFX를 재생하기 위한 변수
 
     public void Awake()
     {
@@ -52,6 +53,7 @@ public class PickaxeBuy : MonoBehaviour
 
         holdTimer += Time.deltaTime;
 
+        PlayHoldSfxByProgress();
         RefreshHoldUI();
         // 0~1 비율로 계산해서 ui넘김. fill amount에 활용.
 
@@ -64,6 +66,9 @@ public class PickaxeBuy : MonoBehaviour
 
     private void OnRightClickStarted(InputAction.CallbackContext context)
     {
+        if (upgradeUIController.CurrentPanelType != UpgradePanelType.Forge)
+            return;
+
         if (isUpgradeVisualPlaying)
             return;
         //업그레이드 완료후 연출이 끝날때까지 입력을 막기위함.
@@ -72,8 +77,9 @@ public class PickaxeBuy : MonoBehaviour
         // 재료가 부족하거나 이미 구매한 곡괭이면 우클릭 홀드 UI를 시작하지 않는다.
 
         isHolding = true;
-        holdTimer = 0f; // 타이머 초기화
-        
+        holdTimer = 0f; // 타이머 초기화 
+        holdSfxStep = 0;
+
         ShowBuyPanel();
         ShowHoldUI();
         RefreshHoldUI();
@@ -97,6 +103,8 @@ public class PickaxeBuy : MonoBehaviour
 
         HideHoldUI();
         UpgradePickaxe();
+
+        GameManager.Instance.AudioManager.PlaySFX(SFXType.PickaxeEnhancing);
         PlayUpgradeVisual();
     }
 
@@ -104,6 +112,7 @@ public class PickaxeBuy : MonoBehaviour
     {
         isHolding = false;
         holdTimer = 0f;
+        holdSfxStep = 0;
 
         HideHoldUI();
         RefreshHoldUI();
@@ -161,5 +170,30 @@ public class PickaxeBuy : MonoBehaviour
     {
         // TODO: progress 0~1 기준으로 게이지 갱신
         pickaxeBuyDisplay.SetHoldingFillAmount(Mathf.Clamp01(holdTimer / holdDuration));
+    }
+    private void PlayHoldSfxByProgress()
+    {
+        float progress = holdTimer / holdDuration;
+
+        if (holdSfxStep == 0 && progress >= 0f)
+        { 
+            GameManager.Instance.AudioManager.PlaySFX(SFXType.MetalHit);
+            holdSfxStep++;
+        }
+        else if (holdSfxStep == 1 && progress >= 0.33f)
+        { 
+            GameManager.Instance.AudioManager.PlaySFX(SFXType.MetalHit);
+            holdSfxStep++;
+        }
+        else if (holdSfxStep == 2 && progress >= 0.66f)
+        {
+            GameManager.Instance.AudioManager.PlaySFX(SFXType.MetalHit);
+            holdSfxStep++;
+        }
+        else if (holdSfxStep == 3 && progress >= 0.9f)
+        {
+            GameManager.Instance.AudioManager.PlaySFX(SFXType.MetalHit);
+            holdSfxStep++;
+        }
     }
 }

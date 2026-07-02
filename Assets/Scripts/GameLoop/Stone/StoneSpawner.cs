@@ -42,6 +42,7 @@ public class StoneSpawner : MonoBehaviour
         {
             bool hasStoneInLine = false;
 
+            GameManager.Instance.AudioManager.PlaySFX(SFXType.FieldPlacement);
             for (int x = 0; x < GRID_SIZE; x++)
             {
                 Vector2Int gridPos = new Vector2Int(x, y);

@@ -52,7 +52,7 @@ MonoBehaviour:
   bgmClips:
   - type: 1
     clip: {fileID: 8300000, guid: e6e41c1a9a4f45248b1ce0306fd3acbc, type: 3}
-    volume: 0.2
+    volume: 0.15
   sfxClips:
   - type: 1
     clip: {fileID: 8300000, guid: cebf354059ade9545b6737429fb06f43, type: 3}
@@ -62,7 +62,7 @@ MonoBehaviour:
     maxSimultaneousCount: 5
   - type: 2
     clip: {fileID: 8300000, guid: b2eb2e831b5e0bf45af4953435f8a76e, type: 3}
-    volume: 0.3
+    volume: 0.2
     pitch: 1.2
     minInterval: 0
     maxSimultaneousCount: 5
@@ -92,16 +92,16 @@ MonoBehaviour:
     maxSimultaneousCount: 5
   - type: 6
     clip: {fileID: 8300000, guid: 79ddf92e0673b29499787a5f34a89575, type: 3}
-    volume: 1
+    volume: 0.3
     pitch: 1
     minInterval: 0.05
     maxSimultaneousCount: 5
   - type: 7
-    clip: {fileID: 8300000, guid: a731c0be588375f4989c92bdd1ea0ced, type: 3}
-    volume: 1
-    pitch: 0
-    minInterval: 0
-    maxSimultaneousCount: 5
+    clip: {fileID: 8300000, guid: edc47354ae502004c8218f015ec6882a, type: 3}
+    volume: 0.5
+    pitch: 1.5
+    minInterval: 0.1
+    maxSimultaneousCount: 10
   - type: 8
     clip: {fileID: 8300000, guid: 8a9520591e9b54d43a713a99080f7a25, type: 3}
     volume: 1
@@ -122,43 +122,43 @@ MonoBehaviour:
     maxSimultaneousCount: 5
   - type: 13
     clip: {fileID: 8300000, guid: b65b647e63d00e3439293f8520a592e3, type: 3}
-    volume: 1
+    volume: 0.2
     pitch: 1.2
     minInterval: 0
     maxSimultaneousCount: 5
   - type: 14
     clip: {fileID: 8300000, guid: 3b64534b0e5b0d2468f08768b6964014, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 0.8
     minInterval: 0
     maxSimultaneousCount: 5
   - type: 15
     clip: {fileID: 8300000, guid: 8aa5bbf9de1fbdd4c8fcdb333f97572e, type: 3}
-    volume: 1
-    pitch: 0.8
+    volume: 0.5
+    pitch: 1.2
     minInterval: 0
     maxSimultaneousCount: 5
   - type: 16
-    clip: {fileID: 8300000, guid: 20dcc867244b02b4593ccbbf0ffdf464, type: 3}
-    volume: 1
-    pitch: 2
+    clip: {fileID: 8300000, guid: 4eac135ac29fa334292a9d5f75d2e0cb, type: 3}
+    volume: 0.5
+    pitch: 1
     minInterval: 0
     maxSimultaneousCount: 5
   - type: 17
     clip: {fileID: 8300000, guid: 20dcc867244b02b4593ccbbf0ffdf464, type: 3}
-    volume: 1
-    pitch: 0.8
+    volume: 0.5
+    pitch: 1.2
     minInterval: 0
     maxSimultaneousCount: 5
   - type: 18
     clip: {fileID: 8300000, guid: 608dc8dd6149384449bedae6d356ffb8, type: 3}
-    volume: 0.5
-    pitch: 0.8
+    volume: 0.3
+    pitch: 1.2
     minInterval: 0
     maxSimultaneousCount: 5
   - type: 19
     clip: {fileID: 8300000, guid: e016da220e7631c45b71be027e62c0e5, type: 3}
-    volume: 1
+    volume: 0.6
     pitch: 1.2
     minInterval: 0
     maxSimultaneousCount: 5

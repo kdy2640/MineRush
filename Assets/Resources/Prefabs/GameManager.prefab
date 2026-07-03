@@ -62,7 +62,7 @@ MonoBehaviour:
     maxSimultaneousCount: 5
   - type: 2
     clip: {fileID: 8300000, guid: b2eb2e831b5e0bf45af4953435f8a76e, type: 3}
-    volume: 0.2
+    volume: 0.15
     pitch: 1.2
     minInterval: 0
     maxSimultaneousCount: 5
@@ -74,7 +74,7 @@ MonoBehaviour:
     maxSimultaneousCount: 5
   - type: 4
     clip: {fileID: 8300000, guid: ef3cf0d4f951d9e4aa70df3bce7e2fe6, type: 3}
-    volume: 0.7
+    volume: 0.5
     pitch: 1.35
     minInterval: 0.02
     maxSimultaneousCount: 5
@@ -133,7 +133,7 @@ MonoBehaviour:
     minInterval: 0
     maxSimultaneousCount: 5
   - type: 15
-    clip: {fileID: 8300000, guid: 8aa5bbf9de1fbdd4c8fcdb333f97572e, type: 3}
+    clip: {fileID: 8300000, guid: 8a9520591e9b54d43a713a99080f7a25, type: 3}
     volume: 0.5
     pitch: 1.2
     minInterval: 0

@@ -21,7 +21,7 @@ public class UpgradeData : ScriptableObject
     public List<StatModifier> statModifiers;
     public SkillBase skill;
     
-    [Header("레벨 기반 광물용(근데 그냥 base대신 써도 되긴함.)")]
+    [Header("레벨 기반 광물용(base대신 사용 가능.)")]
     public List<LevelBasedOreCost> levelBasedCosts;
     [Header("일단은 자동채굴용")]
     public List<LevelBasedOreReward> levelBasedRewards;

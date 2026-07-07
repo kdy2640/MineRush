@@ -8,7 +8,7 @@ public class GameLoopPrepareSequence  : MonoBehaviour
     [SerializeField] OrePooler orePooler; 
     [SerializeField] int pickaxePrewarmCount = 100;
     [SerializeField] int orePrewarmCount = 100;
-    public IEnumerator Run()
+    public IEnumerator PrepareReveal()
     {
         GameManager.Instance.GameLoop.PrepareReveal();
         pickaxePooler.Prewarm(pickaxePrewarmCount);

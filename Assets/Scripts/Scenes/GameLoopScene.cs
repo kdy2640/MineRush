@@ -16,7 +16,7 @@ public class GameLoopScene : SceneBase
             yield break;
         }
 
-        yield return PrepareReveal.Run();
+        yield return PrepareReveal.PrepareReveal();
         yield return null;
     }
 

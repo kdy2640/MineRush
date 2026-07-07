@@ -98,8 +98,10 @@ public class StoneSpawner : MonoBehaviour
     private void SpawnStone(StoneDataSO data, Vector2Int gridPos, bool isImmediate)
     {
         Vector3 worldPos = GridCalculator.GridToWorld(gridPos);
+        StonePoolArgs args = new StonePoolArgs(data, gridPos);
+        StoneActor stone = pooler.Get(args);
 
-        StoneActor stone = pooler.Get(new StonePoolArgs(data, gridPos));
+
         stone.transform.position = worldPos;
 
         stone.gameObject.SetActive(isImmediate);
@@ -142,14 +144,16 @@ public class StoneSpawner : MonoBehaviour
             aliveStones.Remove(stoneActor.GridPos);
         }
     }
-
     public bool GetRandomStonePosition(out Vector2Int position)
     {
-        int count = aliveStones.Keys.Count;
+        int count = aliveStones.Count;
         position = Vector2Int.zero;
+
         if (count == 0) return false;
+
         int random = Random.Range(0, count);
-        position =  aliveStones.Keys.ToList()[random];
+        position = aliveStones.Keys.ElementAt(random);
+
         return true;
     }
 }
